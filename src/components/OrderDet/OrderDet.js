@@ -13,7 +13,7 @@ function OrderDet({ allProducts }) {
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCommandesByClefUser/${a.id}`)
+      .get(`https://chagona.onrender.com/getCommandesByClefUser/${a.id}`)
       .then((res) => {
         setProduits(res.data.commandes[+params.id - 1].nbrProduits);
         setDetails(res.data.commandes[+params.id - 1]);
@@ -24,7 +24,7 @@ function OrderDet({ allProducts }) {
 
   const deletComm = () => {
     axios
-      .delete(`http://localhost:8080/deleteCommandeById/${id}`)
+      .delete(`https://chagona.onrender.com/deleteCommandeById/${id}`)
       .then((res) => {
         alert(res.data.message);
       })

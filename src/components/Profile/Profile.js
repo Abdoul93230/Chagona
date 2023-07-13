@@ -30,7 +30,7 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/user", {
+      .get("https://chagona.onrender.com/user", {
         params: {
           id: a.id,
         },
@@ -49,7 +49,7 @@ function Profile() {
       });
 
     axios
-      .get("http://localhost:8080/getUserProfile", {
+      .get("https://chagona.onrender.com/getUserProfile", {
         params: {
           id: a.id,
         },
@@ -58,7 +58,7 @@ function Profile() {
         // console.log(Profiler);
         if (
           Profiler.data.data.image !==
-          "http://localhost:8080/images/image-1688253105925-0.jpeg"
+          "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
         ) {
           setImageP(Profiler.data.data.image);
           // console.log(Profiler.data.data);

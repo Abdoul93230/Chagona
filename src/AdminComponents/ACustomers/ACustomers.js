@@ -17,14 +17,14 @@ function ACustomers() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getAllCommandes")
+      .get("https://chagona.onrender.com/getAllCommandes")
       .then((commandes) => {
         setAllcommandes(commandes.data.commandes);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost:8080/getUsers")
+      .get("https://chagona.onrender.com/getUsers")
       .then((users) => {
         setAllUsers(users.data.data);
         // console.log(users.data.data);
@@ -32,13 +32,13 @@ function ACustomers() {
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost:8080/getUserProfiles")
+      .get("https://chagona.onrender.com/getUserProfiles")
       .then((users) => {
         setallprofiles(users.data.data);
       })
       .catch((error) => console.log(error));
     axios
-      .get("http://localhost:8080/getAllAddressByUser")
+      .get("https://chagona.onrender.com/getAllAddressByUser")
       .then((users) => {
         setallAdress(users.data.data);
       })

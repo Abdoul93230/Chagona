@@ -20,7 +20,7 @@ function AFournisseurUpdate() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/fournisseur/${params.id}`)
+      .get(`https://chagona.onrender.com/fournisseur/${params.id}`)
       .then((res) => {
         setFournisseur(res.data.data);
         if (nom.length <= 0) {
@@ -88,7 +88,10 @@ function AFournisseurUpdate() {
     formData.set("image", photo);
 
     axios
-      .put(`http://localhost:8080/updateFournisseur/${params.id}`, formData)
+      .put(
+        `https://chagona.onrender.com/updateFournisseur/${params.id}`,
+        formData
+      )
       .then((res) => {
         // console.log(res);
         alert(res.data.message);

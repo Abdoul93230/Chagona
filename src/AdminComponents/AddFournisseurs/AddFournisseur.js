@@ -54,7 +54,7 @@ function AddFournisseur() {
     }
 
     axios
-      .post("http://localhost:8080/fournisseur", formData)
+      .post("https://chagona.onrender.com/fournisseur", formData)
       .then((res) => {
         // console.log(res);
         alert(res.data.message);

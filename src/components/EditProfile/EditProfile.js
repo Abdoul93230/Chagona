@@ -20,7 +20,7 @@ function EditProfile() {
     if (a) {
       // axios.defaults.headers.common["Authorization"] = `Bearer ${a.token}`;
       axios
-        .get("http://localhost:8080/user", {
+        .get("https://chagona.onrender.com/user", {
           params: {
             id: a.id,
           },
@@ -39,7 +39,7 @@ function EditProfile() {
         });
 
       axios
-        .get("http://localhost:8080/getUserProfile", {
+        .get("https://chagona.onrender.com/getUserProfile", {
           params: {
             id: a.id,
           },
@@ -48,7 +48,7 @@ function EditProfile() {
           // console.log(Profiler);
           if (
             Profiler.data.data.image !==
-            "http://localhost:8080/images/image-1688253105925-0.jpeg"
+            "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
           ) {
             setImageP(Profiler.data.data.image);
           }
@@ -86,13 +86,13 @@ function EditProfile() {
     formData.append("id", a.id);
 
     axios
-      .post("http://localhost:8080/createProfile", formData)
+      .post("https://chagona.onrender.com/createProfile", formData)
       .then((user) => {
         if (user.status === 200) {
           alert(user.data.message);
 
           axios
-            .get("http://localhost:8080/getUserProfile", {
+            .get("https://chagona.onrender.com/getUserProfile", {
               params: {
                 id: a.id,
               },
@@ -101,7 +101,7 @@ function EditProfile() {
               console.log(Profiler);
               if (
                 Profiler.data.data.image !==
-                "http://localhost:8080/images/image-1688253105925-0.jpeg"
+                "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
               ) {
                 setImageP(Profiler.data.data.image);
               }

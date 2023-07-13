@@ -28,7 +28,7 @@ function CategorieProduct({ allCategories, allProducts }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getAllType")
+      .get("https://chagona.onrender.com/getAllType")
       .then((types) => {
         setAllTypes(types.data.data);
       })
@@ -37,7 +37,7 @@ function CategorieProduct({ allCategories, allProducts }) {
       });
 
     axios
-      .get(`http://localhost:8080/getAllCommenteProduit`)
+      .get(`https://chagona.onrender.com/getAllCommenteProduit`)
       .then((coments) => {
         setAllCommente(coments.data);
         // console.log(coments.data);

@@ -25,7 +25,7 @@ function LogIn({ chg }) {
   const connect = async () => {
     axios
       .post(
-        "http://localhost:8080/login",
+        "https://chagona.onrender.com/login",
 
         {
           email: email,

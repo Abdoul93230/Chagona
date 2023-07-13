@@ -44,7 +44,7 @@ function AProductUpdat() {
     const id = params.id;
 
     axios
-      .get(`http://localhost:8080/Product/${id}`)
+      .get(`https://chagona.onrender.com/Product/${id}`)
       .then((res) => {
         setProduct(res.data.data);
         if (!imgP) setImgP(res.data.data.image1);
@@ -69,7 +69,7 @@ function AProductUpdat() {
         const cFournisseur = res.data.data.Clefournisseur;
 
         axios
-          .get(`http://localhost:8080/fournisseur/${cFournisseur}`)
+          .get(`https://chagona.onrender.com/fournisseur/${cFournisseur}`)
           .then((res) => {
             setDescription((prevDescription) => {
               const updatedDescription = {
@@ -81,7 +81,7 @@ function AProductUpdat() {
             });
 
             axios
-              .get(`http://localhost:8080/fournisseurs`)
+              .get(`https://chagona.onrender.com/fournisseurs`)
               .then((values) => {
                 setFournisseur(values.data.data);
               })
@@ -97,7 +97,7 @@ function AProductUpdat() {
           });
 
         axios
-          .get(`http://localhost:8080/getAllType/`)
+          .get(`https://chagona.onrender.com/getAllType/`)
           .then((res) => {
             setTypes(res.data.data);
             const param = res.data.data.find((param) => param._id === ctype);
@@ -111,7 +111,7 @@ function AProductUpdat() {
                 return updatedDescription;
               });
               axios
-                .get("http://localhost:8080/getAllCategories")
+                .get("https://chagona.onrender.com/getAllCategories")
                 .then((re) => {
                   setcategorie(re.data.data);
                   const para = re.data.data.find(
@@ -214,7 +214,7 @@ function AProductUpdat() {
     formData.append("marque", description.marque);
 
     axios
-      .put(`http://localhost:8080/product/${params.id}`, formData)
+      .put(`https://chagona.onrender.com/product/${params.id}`, formData)
       .then((res) => {
         alert(res.data.message);
         navigue(`/Admin/ProductDet/${params.id}`);

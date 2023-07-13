@@ -73,7 +73,7 @@ function ProductDet({ product, allCategories, allProducts }) {
       return;
     }
     axios
-      .post("http://localhost:8080/createCommenteProduit", {
+      .post("https://chagona.onrender.com/createCommenteProduit", {
         description: commente,
         clefProduct: product?._id,
         clefType: product?.ClefType,
@@ -88,7 +88,7 @@ function ProductDet({ product, allCategories, allProducts }) {
 
         axios
           .get(
-            `http://localhost:8080/getAllCommenteProduitById/${product?._id}`
+            `https://chagona.onrender.com/getAllCommenteProduitById/${product?._id}`
           )
           .then((coments) => {
             setAllCommente(coments.data);
@@ -178,7 +178,7 @@ function ProductDet({ product, allCategories, allProducts }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getAllType")
+      .get("https://chagona.onrender.com/getAllType")
       .then((types) => {
         setAllTypes(types.data.data);
       })
@@ -187,7 +187,9 @@ function ProductDet({ product, allCategories, allProducts }) {
       });
 
     axios
-      .get(`http://localhost:8080/getAllCommenteProduitById/${product?._id}`)
+      .get(
+        `https://chagona.onrender.com/getAllCommenteProduitById/${product?._id}`
+      )
       .then((coments) => {
         setAllCommente(coments.data);
         // console.log(coments.data);

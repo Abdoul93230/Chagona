@@ -33,7 +33,7 @@ function CartCheckout({ op }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getAddressByUserKey/${a.id}`)
+      .get(`https://chagona.onrender.com/getAddressByUserKey/${a.id}`)
       .then((shippingAd) => {
         setEmail(shippingAd.data.address.email);
         setNom(shippingAd.data.address.name);
@@ -47,7 +47,7 @@ function CartCheckout({ op }) {
       });
 
     axios
-      .get(`http://localhost:8080/getMoyentPaymentByClefUser/${a.id}`)
+      .get(`https://chagona.onrender.com/getMoyentPaymentByClefUser/${a.id}`)
       .then((res) => {
         if (res.data.paymentMethod.type) {
           setChoix(res.data.paymentMethod.type);
@@ -125,7 +125,7 @@ function CartCheckout({ op }) {
       };
 
       axios
-        .post("http://localhost:8080/createCommande", data)
+        .post("https://chagona.onrender.com/createCommande", data)
         .then((res) => {
           // alert(res.data.message);
         })

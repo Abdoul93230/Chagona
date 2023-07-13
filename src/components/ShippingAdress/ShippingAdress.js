@@ -18,7 +18,7 @@ function ShippingAdress() {
   useEffect(() => {
     const a = JSON.parse(localStorage.getItem(`userEcomme`));
     axios
-      .get(`http://localhost:8080/getAddressByUserKey/${a.id}`)
+      .get(`https://chagona.onrender.com/getAddressByUserKey/${a.id}`)
       .then((shippingAd) => {
         setEmail(shippingAd.data.address.email);
         setNom(shippingAd.data.address.name);
@@ -70,11 +70,11 @@ function ShippingAdress() {
     }
 
     axios
-      .post("http://localhost:8080/createOrUpdateAddress", obj)
+      .post("https://chagona.onrender.com/createOrUpdateAddress", obj)
       .then((shipping) => {
         alert(shipping.data.message);
         axios
-          .get(`http://localhost:8080/getAddressByUserKey/${a.id}`)
+          .get(`https://chagona.onrender.com/getAddressByUserKey/${a.id}`)
           .then((shippingAd) => {
             setEmail(shippingAd.data.address.email);
             setNom(shippingAd.data.address.name);

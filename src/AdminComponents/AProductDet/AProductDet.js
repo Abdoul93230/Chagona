@@ -20,7 +20,7 @@ function AProductDet() {
     const id = params.id;
 
     axios
-      .get(`http://localhost:8080/Product/${id}`)
+      .get(`https://chagona.onrender.com/Product/${id}`)
       .then((res) => {
         setProduct(res.data.data);
         if (!imgP) setImgP(res.data.data.image1);
@@ -29,7 +29,7 @@ function AProductDet() {
         const cFournisseur = res.data.data.Clefournisseur;
 
         axios
-          .get(`http://localhost:8080/fournisseur/${cFournisseur}`)
+          .get(`https://chagona.onrender.com/fournisseur/${cFournisseur}`)
           .then((res) => {
             setFournisseur(res.data.data);
           })
@@ -41,13 +41,13 @@ function AProductDet() {
           });
 
         axios
-          .get(`http://localhost:8080/getAllType/`)
+          .get(`https://chagona.onrender.com/getAllType/`)
           .then((res) => {
             const param = res.data.data.find((param) => param._id === ctype);
             if (param) {
               setTypes(param);
               axios
-                .get("http://localhost:8080/getAllCategories")
+                .get("https://chagona.onrender.com/getAllCategories")
                 .then((re) => {
                   const para = re.data.data.find(
                     (para) => para._id === param.clefCategories
@@ -75,7 +75,7 @@ function AProductDet() {
 
   const SupprimerProduct = () => {
     axios
-      .delete(`http://localhost:8080/Product/${params.id}`)
+      .delete(`https://chagona.onrender.com/Product/${params.id}`)
       .then((rep) => {
         alert(rep.data.message);
         navigue("/Admin/Products");

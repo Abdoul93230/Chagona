@@ -16,7 +16,7 @@ function AFournisseurs() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/fournisseurs")
+      .get("https://chagona.onrender.com/fournisseurs")
       .then((res) => {
         setFournisseurs(res.data.data);
       })
@@ -31,7 +31,7 @@ function AFournisseurs() {
       return;
     }
     axios
-      .get(`http://localhost:8080/findFournisseurByName/${searchName}`)
+      .get(`https://chagona.onrender.com/findFournisseurByName/${searchName}`)
       .then((res) => {
         setFournisseurs(res.data.data);
       })
@@ -42,7 +42,7 @@ function AFournisseurs() {
 
   const AllF = () => {
     axios
-      .get("http://localhost:8080/fournisseurs")
+      .get("https://chagona.onrender.com/fournisseurs")
       .then((res) => {
         setFournisseurs(res.data.data);
         setSearchName("");

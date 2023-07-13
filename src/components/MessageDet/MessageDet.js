@@ -17,7 +17,7 @@ function MessageDet({ chg }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getUserMessagesByClefUser/${a.id}`)
+      .get(`https://chagona.onrender.com/getUserMessagesByClefUser/${a.id}`)
       .then((res) => {
         setAllMessage(res.data);
       })
@@ -31,7 +31,7 @@ function MessageDet({ chg }) {
       return;
     }
     axios
-      .post("http://localhost:8080/createUserMessage", {
+      .post("https://chagona.onrender.com/createUserMessage", {
         message: message,
         clefUser: a.id,
         provenance: provenance,
@@ -40,7 +40,7 @@ function MessageDet({ chg }) {
         // alert(res.data);
         setMessage("");
         axios
-          .get(`http://localhost:8080/getUserMessagesByClefUser/${a.id}`)
+          .get(`https://chagona.onrender.com/getUserMessagesByClefUser/${a.id}`)
           .then((re) => {
             setAllMessage(re.data);
           })
@@ -53,14 +53,17 @@ function MessageDet({ chg }) {
 
   const deletmessage = (param) => {
     axios
-      .put(`http://localhost:8080/updateUserMessageAttributeById/${param}`, {
-        use: false,
-      })
+      .put(
+        `https://chagona.onrender.com/updateUserMessageAttributeById/${param}`,
+        {
+          use: false,
+        }
+      )
       .then((res) => {
         console.log(res.data);
 
         axios
-          .get(`http://localhost:8080/getUserMessagesByClefUser/${a.id}`)
+          .get(`https://chagona.onrender.com/getUserMessagesByClefUser/${a.id}`)
           .then((re) => {
             setAllMessage(re.data);
           })

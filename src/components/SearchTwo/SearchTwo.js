@@ -22,7 +22,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
       return;
     }
     axios
-      .get(`http://localhost:8080/searchProductByName/${searchName}`)
+      .get(`https://chagona.onrender.com/searchProductByName/${searchName}`)
       .then((res) => {
         setProduct(res.data.products);
         setSh(false);
@@ -41,7 +41,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
     }
 
     axios
-      .get("http://localhost:8080/getAllType")
+      .get("https://chagona.onrender.com/getAllType")
       .then((types) => {
         setAllTypes(types.data.data);
       })

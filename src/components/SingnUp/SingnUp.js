@@ -34,7 +34,7 @@ function SingnUp({ chg }) {
       return false;
     } else {
       axios
-        .post("http://localhost:8080/user", {
+        .post("https://chagona.onrender.com/user", {
           name: name,
           password: password,
           email: email,

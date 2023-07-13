@@ -11,7 +11,7 @@ function AllCategories({ allCategories }) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getAllType")
+      .get("https://chagona.onrender.com/getAllType")
       .then((types) => {
         setAllTypes(types.data.data);
         // console.log(allCategories[0].name);

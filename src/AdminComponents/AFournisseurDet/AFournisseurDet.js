@@ -14,7 +14,7 @@ function AFournisseurDet() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/fournisseur/${params.id}`)
+      .get(`https://chagona.onrender.com/fournisseur/${params.id}`)
       .then((res) => {
         setFournisseur(res.data.data);
       })
@@ -23,7 +23,7 @@ function AFournisseurDet() {
       });
 
     axios
-      .get(`http://localhost:8080/searchProductBySupplier/${params.id}`)
+      .get(`https://chagona.onrender.com/searchProductBySupplier/${params.id}`)
       .then((res) => {
         setProduct(res.data.data);
       })
@@ -34,7 +34,7 @@ function AFournisseurDet() {
       });
 
     axios
-      .get(`http://localhost:8080/getAllType/`)
+      .get(`https://chagona.onrender.com/getAllType/`)
       .then((res) => {
         setCategorie(res.data.data);
       })
@@ -47,7 +47,7 @@ function AFournisseurDet() {
     e.preventDefault();
     const email = fournisseur.email;
     axios
-      .post(`http://localhost:8080/sendMail/`, { email: email })
+      .post(`https://chagona.onrender.com/sendMail/`, { email: email })
       .then((res) => {
         console.log(res.data.data);
       })

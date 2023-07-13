@@ -38,7 +38,7 @@ function AddProductA() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/fournisseurs")
+      .get("https://chagona.onrender.com/fournisseurs")
       .then((res) => {
         setFournisseur(res.data.data);
       })
@@ -47,7 +47,7 @@ function AddProductA() {
       });
 
     axios
-      .get("http://localhost:8080/getAllCategories")
+      .get("https://chagona.onrender.com/getAllCategories")
       .then((res) => {
         setCategorie(res.data.data);
       })
@@ -56,7 +56,7 @@ function AddProductA() {
       });
 
     axios
-      .get("http://localhost:8080/getAllType")
+      .get("https://chagona.onrender.com/getAllType")
       .then((res) => {
         setTypeProduit(res.data.data);
       })
@@ -143,7 +143,7 @@ function AddProductA() {
     formData.append("marque", description.marque);
 
     axios
-      .post("http://localhost:8080/product", formData)
+      .post("https://chagona.onrender.com/product", formData)
       .then((res) => {
         alert(res.data.message);
       })

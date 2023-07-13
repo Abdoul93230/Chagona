@@ -34,7 +34,7 @@ function App() {
     if (user) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
       axios
-        .get("http://localhost:8080/verify", { withCredentials: true })
+        .get("https://chagona.onrender.com/verify", { withCredentials: true })
         .then((response) => {
           setAcces("oui");
           // console.log({ local: user.token });
@@ -47,7 +47,7 @@ function App() {
     }
 
     axios
-      .get("http://localhost:8080/getAllCategories")
+      .get("https://chagona.onrender.com/getAllCategories")
       .then((Categories) => {
         setAllCategories(Categories.data.data);
       })
@@ -56,7 +56,7 @@ function App() {
       });
 
     axios
-      .get("http://localhost:8080/products")
+      .get("https://chagona.onrender.com/products")
       .then((Categories) => {
         setAllProducts(Categories.data.data);
       })
@@ -164,18 +164,42 @@ function App() {
           ></Route>
           <Route
             path="/Admin"
-            element={acces === "oui" ? <Admin  allCategories={allCategories}
-            allProducts={allProducts} /> : <Connection chg={changeA} />}
+            element={
+              acces === "oui" ? (
+                <Admin
+                  allCategories={allCategories}
+                  allProducts={allProducts}
+                />
+              ) : (
+                <Connection chg={changeA} />
+              )
+            }
           ></Route>
           <Route
             path="/Admin/:op"
-            element={acces === "oui" ? <Admin  allCategories={allCategories}
-            allProducts={allProducts} /> : <Connection chg={changeA} />}
+            element={
+              acces === "oui" ? (
+                <Admin
+                  allCategories={allCategories}
+                  allProducts={allProducts}
+                />
+              ) : (
+                <Connection chg={changeA} />
+              )
+            }
           ></Route>
           <Route
             path="/Admin/:op/:id"
-            element={acces === "oui" ? <Admin  allCategories={allCategories}
-            allProducts={allProducts}/> : <Connection chg={changeA} />}
+            element={
+              acces === "oui" ? (
+                <Admin
+                  allCategories={allCategories}
+                  allProducts={allProducts}
+                />
+              ) : (
+                <Connection chg={changeA} />
+              )
+            }
           ></Route>
           <Route
             path="/Profile/:op"

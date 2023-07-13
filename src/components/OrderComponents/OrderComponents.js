@@ -43,7 +43,7 @@ function OrderComponents() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCommandesByClefUser/${a.id}`)
+      .get(`https://chagona.onrender.com/getCommandesByClefUser/${a.id}`)
       .then((res) => {
         setMyAllCommandes(res.data.commandes);
         // console.log(res.data.commandes[0].nbrProduits.length);

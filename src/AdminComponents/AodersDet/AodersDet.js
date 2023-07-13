@@ -13,7 +13,7 @@ function AodersDet({ allCategories, allProducts }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getCommandesById/${id}`)
+      .get(`https://chagona.onrender.com/getCommandesById/${id}`)
       .then((res) => {
         setCommandes(res.data.commande);
         // console.log(res.data.commande);
@@ -22,14 +22,14 @@ function AodersDet({ allCategories, allProducts }) {
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost:8080/getUsers")
+      .get("https://chagona.onrender.com/getUsers")
       .then((users) => {
         setAllUsers(users.data.data);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost:8080/fournisseurs")
+      .get("https://chagona.onrender.com/fournisseurs")
       .then((res) => {
         setFournisseurs(res.data.data);
       })

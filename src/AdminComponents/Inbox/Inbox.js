@@ -15,14 +15,14 @@ function Inbox() {
   const provenance = false;
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getUsers")
+      .get("https://chagona.onrender.com/getUsers")
       .then((users) => {
         setAllUsers(users.data.data);
         // console.log(users.data.data);
       })
       .catch((error) => console.log(error));
     axios
-      .get("http://localhost:8080/getUserProfiles")
+      .get("https://chagona.onrender.com/getUserProfiles")
       .then((users) => {
         setallprofiles(users.data.data);
       })
@@ -33,7 +33,9 @@ function Inbox() {
     setIstrue(param);
 
     axios
-      .get(`http://localhost:8080/getUserMessagesByClefUser/${param._id}`)
+      .get(
+        `https://chagona.onrender.com/getUserMessagesByClefUser/${param._id}`
+      )
       .then((res) => {
         setAllMessage(res.data);
       })
@@ -48,7 +50,7 @@ function Inbox() {
       return;
     }
     axios
-      .post("http://localhost:8080/createUserMessage", {
+      .post("https://chagona.onrender.com/createUserMessage", {
         message: message,
         clefUser: istrue?._id,
         provenance: provenance,
@@ -57,7 +59,9 @@ function Inbox() {
         // alert(res.data);
         setMessage("");
         axios
-          .get(`http://localhost:8080/getUserMessagesByClefUser/${istrue?._id}`)
+          .get(
+            `https://chagona.onrender.com/getUserMessagesByClefUser/${istrue?._id}`
+          )
           .then((re) => {
             setAllMessage(re.data);
           })
@@ -73,7 +77,7 @@ function Inbox() {
       return;
     }
     axios
-      .get(`http://localhost:8080/getUserByName/${name}`)
+      .get(`https://chagona.onrender.com/getUserByName/${name}`)
       .then((res) => {
         setUserSearch(res.data.users);
       })
@@ -85,12 +89,14 @@ function Inbox() {
 
   const deletmessage = (param) => {
     axios
-      .delete(`http://localhost:8080/deleteUserMessageById/${param}`)
+      .delete(`https://chagona.onrender.com/deleteUserMessageById/${param}`)
       .then((res) => {
         // alert(res.data.message);
 
         axios
-          .get(`http://localhost:8080/getUserMessagesByClefUser/${istrue?._id}`)
+          .get(
+            `https://chagona.onrender.com/getUserMessagesByClefUser/${istrue?._id}`
+          )
           .then((re) => {
             setAllMessage(re.data);
           })

@@ -21,7 +21,7 @@ function Products() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/Products")
+      .get("https://chagona.onrender.com/Products")
       .then((res) => {
         if (titel === "All") {
           if (res.data.data.length > 0) {
@@ -36,7 +36,7 @@ function Products() {
       });
 
     axios
-      .get("http://localhost:8080/getAllType/")
+      .get("https://chagona.onrender.com/getAllType/")
       .then((res) => {
         setTypes(res.data.data);
       })
@@ -47,7 +47,7 @@ function Products() {
 
   const searchProductByType = (param) => {
     axios
-      .get(`http://localhost:8080/searchProductByType/${param}`)
+      .get(`https://chagona.onrender.com/searchProductByType/${param}`)
       .then((res) => {
         setProduct(res.data.products);
         setTotalPage(Math.ceil(res.data.products.length / perPage));
@@ -65,7 +65,7 @@ function Products() {
       return;
     }
     axios
-      .get(`http://localhost:8080/searchProductByName/${param}`)
+      .get(`https://chagona.onrender.com/searchProductByName/${param}`)
       .then((res) => {
         setProduct(res.data.products);
         setTotalPage(Math.ceil(res.data.products.length / perPage));
@@ -79,7 +79,7 @@ function Products() {
 
   const AllProducts = () => {
     axios
-      .get("http://localhost:8080/Products")
+      .get("https://chagona.onrender.com/Products")
       .then((res) => {
         if (res.data.data.length > 0) {
           setProduct(res.data.data);

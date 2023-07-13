@@ -14,7 +14,7 @@ function PaymentMethode() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/getMoyentPaymentByClefUser/${a.id}`)
+      .get(`https://chagona.onrender.com/getMoyentPaymentByClefUser/${a.id}`)
       .then((res) => {
         if (res.data.paymentMethod.type) {
           setChoix(res.data.paymentMethod.type);
@@ -110,7 +110,7 @@ function PaymentMethode() {
     }
 
     axios
-      .post("http://localhost:8080/createMoyentPayment", data)
+      .post("https://chagona.onrender.com/createMoyentPayment", data)
       .then((res) => {
         alert(res.data.message);
       })
@@ -284,8 +284,6 @@ function PaymentMethode() {
       </div>
 
       {options}
-
-      {/* <Elements stripe={stripePromise}></Elements> */}
     </div>
   );
 }
