@@ -37,11 +37,11 @@ function LogIn({ chg }) {
         }
       )
       .then((user) => {
+        console.log(user);
         if (user.status === 200) {
           alert(user.data.message);
           chg("oui");
           navigue("/Home");
-          // console.log(user.data);
           localStorage.setItem(`userEcomme`, JSON.stringify(user.data));
         } else {
           alert(user.data.message);
