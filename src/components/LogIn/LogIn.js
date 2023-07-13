@@ -33,7 +33,7 @@ function LogIn({ chg }) {
         },
         {
           headers: {
-            "Access-Control-Allow-Credentials": true,
+            // "Access-Control-Allow-Credentials": true,
             "Content-Type": "application/json",
           },
           withCredentials: true,
