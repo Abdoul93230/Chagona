@@ -32,10 +32,10 @@ function LogIn({ chg }) {
           password: password,
         },
         {
-          // headers: {
-          //   "Access-Control-Allow-Credentials": true,
-          //   "Content-Type": "application/json",
-          // },
+          headers: {
+            "Access-Control-Allow-Credentials": true,
+            "Content-Type": "application/json",
+          },
           withCredentials: true,
         }
       )
