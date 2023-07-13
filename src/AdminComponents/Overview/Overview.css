@@ -1,0 +1,403 @@
+
+.adminHome .ConteCarde{
+    width: 98%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px auto;
+    margin-top: 20px;
+}
+.adminHome .ConteCarde .carde{
+    width: 30%;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 150px;
+    border-radius: 5px;
+}
+.adminHome .ConteCarde .carde .det{
+    width: 50%;
+    height: auto;
+}
+.adminHome .ConteCarde .carde .det h4{
+    font-weight: lighter;
+    text-align: left;
+    color: #7E84A3;
+}
+.adminHome .ConteCarde .carde .det h2{
+    text-align: left;
+    font-weight: bolder;
+}
+.adminHome .ConteCarde .carde .det h6{
+    text-align: left;
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: space-between;
+    color: #7E84A3;
+}
+
+.adminHome .ConteCarde .carde .det h6 span{
+    color: red;
+    display: flex;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: space-between;
+    width: 50px;
+}
+
+.adminHome .ConteCarde .carde img{
+    width: 40%;
+    object-fit: cover;
+    height: 100%;
+}
+
+
+.adminHome .graphe1{
+    width: 98%;
+    height: 450px;
+    background-color: white;
+    border-radius: 5px;
+    margin: 0px auto;
+    margin-top: 20px;
+    padding: 10px;
+}
+.adminHome .graphe1 .top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.adminHome .graphe1 .top h2{
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+
+.adminHome .graphe1 .top h3{
+    color: #7E84A3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: lighter;
+}
+.adminHome .graphe1 .graphe{
+    width: 100%;
+    height: 90%;
+    margin-top: 17px;
+}
+
+.adminHome .graphe2{
+    width: 98%;
+    height: auto;
+    margin: 15px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.adminHome .graphe2 .left{
+    width: 72%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adminHome .graphe2 .left .l{
+    width: 50%;
+    height: auto;
+    padding: 10px;
+}
+
+.adminHome .graphe2 .left .l .im {
+    width: 100%;
+    height: 350px;
+}
+
+.adminHome .graphe2 .left .l .im img{
+    width: 100%;
+    height: 100%;
+}
+
+.adminHome .graphe2 .left .l h3{
+    color: #30333f;
+    text-align: left;
+}
+
+
+
+
+
+.adminHome .graphe2 .left .r{
+    width: 50%;
+    height: auto;
+    border-left: 2px solid #7E84A3;
+    padding: 15px;
+}
+
+
+.adminHome .graphe2 .left .r table{
+    width: 100%;
+}
+
+.adminHome .graphe2 .left .r table thead tr th{
+    border-bottom: 1px solid #7E84A3;
+    padding: 12px 0px;
+    color: #7E84A3;
+    font-weight: 600;
+}
+
+.adminHome .graphe2 .left .r table tbody tr td{
+    border-bottom: 1px solid #7E84A3;
+    padding: 12px 0px;
+}
+
+
+.adminHome .graphe2 .right{
+    width: 26%;
+    height: auto;
+    border-radius: 5px;
+    background-color: white;
+    padding: 15px;
+}
+
+.adminHome .graphe2 .right h4{
+    text-align: left;
+    margin-bottom: 8px;
+    color: #30333f;
+
+}
+
+.adminHome .graphe2 .right h3{
+    font-weight: bolder;
+    text-align: left;
+}
+.adminHome .graphe2 .right h5{
+    color: #7E84A3;
+    text-align: left;
+    display: flex;
+    margin: 8px 0px;
+
+}
+
+.adminHome .graphe2 .right h5 span{
+    color: aqua;
+    display: flex;
+    align-items: center;
+}
+
+.adminHome .graphe2 .right img{
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.adminHome .graphe2 .right h2{
+    text-align: left;
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    font-size: 15px;
+    color: #0058FF;
+    cursor: pointer;
+}
+
+.adminHome .graphe3{
+    width: 98%;
+    height: auto;
+    margin: 15px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.adminHome .graphe3 .left{
+    width: 68%;
+    height: auto;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+}
+
+.adminHome .graphe3 .left h3{
+    text-align: left;
+}
+
+.adminHome .graphe3 .left .graphe{
+    width: 100%;
+    height: 350px;
+    margin-top: 10px;
+}
+
+.adminHome .graphe3 .right{
+    width: 30%;
+    height: auto;
+    border-radius: 5px;
+    background-color: white;
+    padding: 10px;
+}
+
+.adminHome .graphe3 .right h4{
+    text-align: left;
+    color: #30333f;
+}
+
+
+.adminHome .graphe3 .right .graphe{
+    width: 100%;
+    height: 165px;
+    margin-top: 10;
+}
+
+.adminHome .graphe3 .right ul{
+    width: 100%;
+    height: auto;
+}
+.adminHome .graphe3 .right ul li{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.adminHome .graphe3 .right ul li .c{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.adminHome .graphe3 .right ul li .t{
+    margin-left: -38%;
+    width: 40%;
+    text-align: left;
+    color: #7E84A3;
+    font-weight: bold;
+}
+
+.adminHome .graphe3 .right ul li .p{
+    margin-right: 5px;
+    color: #30333f;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width:900px) {
+    .adminHome .ConteCarde .carde{
+        width: 32.5%;
+    }
+}
+
+
+@media screen and (max-width:820px){
+    .adminHome .ConteCarde .carde .det h2{
+        font-size: 14px;
+    }
+    .adminHome .ConteCarde .carde .det h4{
+        font-size: 14px;
+    }
+    .adminHome .ConteCarde .carde .det{
+        width: 53%;
+    }
+    .adminHome .ConteCarde .carde img{
+        width: 45%;
+    }
+}
+
+@media screen and (max-width:850px){
+    .adminHome .graphe3{
+        flex-direction: column;
+    }
+
+    .adminHome .graphe3 .left{
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .adminHome .graphe3 .right{
+        width: 100%;
+        margin: 10px auto;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .adminHome .graphe2{
+        flex-direction: column-reverse;
+    }
+    .adminHome .graphe2 .right{
+        width: 99%;
+        margin: 0px auto;
+    }
+    .adminHome .graphe2 .left{
+        width: 99%;
+        margin-top: 10px;
+    }
+}
+
+
+@media screen and (max-width:685px){
+    .adminHome .ConteCarde{
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .adminHome .ConteCarde .carde{
+        width: 45%;
+        margin: 10px 0px;
+    }
+    .adminHome .graphe1{
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width:600px){
+    .adminHome .ConteCarde{
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .adminHome .ConteCarde .carde{
+        width: 90%;
+        margin: 10px 0px;
+    }
+    .adminHome .ConteCarde .carde h6{
+        width: 120px;
+    }
+}
+
+@media screen and (max-width:510px) {
+    .adminHome .graphe2{
+        width: 100%;
+    }
+    .adminHome .graphe2 .right{
+        width: 100%;
+        margin: 0px auto;
+    }
+    .adminHome .graphe2 .left{
+        width: 100%;
+        margin-top: 10px;
+        /* display: none; */
+    }
+
+    .adminHome .graphe2 .left .l{
+        display: none;
+    }
+    .adminHome .graphe2 .left .r{
+        width: 100%;
+    }
+   
+}
+
+
+@media screen and (max-width:450px){
+    .adminHome .ConteCarde .carde{
+        width: 98%;
+        margin: 10px 0px;
+    }
+   
+}

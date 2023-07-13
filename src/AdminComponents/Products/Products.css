@@ -1,0 +1,279 @@
+.AdminProducts{
+    /* border: 2px solid crimson; */
+    height: auto;
+}
+.AdminProducts h2{
+    color: black;
+    text-align: left;
+    font-weight: bolder;
+    font-family: serif;
+}
+.AdminProducts .top{
+    width: 100%;
+    height: auto;
+    /* border: 1px solid crimson; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.AdminProducts .top ul{
+    /* border: 1px solid crimson; */
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    margin: auto 0px;
+}
+.AdminProducts .top ul li{
+    cursor: pointer;
+    text-align: center;
+    padding: 2px 4px;
+    font-weight: bold;
+    border-bottom: 2px solid rgb(3,3,88);
+    list-style-type: none;
+}
+.AdminProducts .top .search{
+    border: 2px solid rgb(3,3,88);
+    border-radius: 5px;
+    margin-left: 5px;
+    /* border: 2px solid crimson; */
+}
+
+.AdminProducts .top .search input[type="search"]{
+    padding: 5px;
+    width: 300px;
+    background: transparent;
+    outline: none;
+    border: none;
+}
+.AdminProducts .top .search input[type="submit"]{
+    padding: 5px 20px;
+    font-weight: bold;
+    color: rgb(3,3,88);
+    background-color: rgb(3,3,88);
+    color: white;
+    transition: all .8s;
+    border: none;
+}
+.AdminProducts .top .search input[type="submit"]:hover{
+    transition: all .8s;
+    color: black;
+    background-color: transparent;
+    border-left: 2px solid rgb(3,3,88);
+}
+.AdminProducts .midel{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    padding: 10px 0px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.AdminProducts .midel .carde{
+    background-color: white;
+    color: black;
+    width: 250px;
+    box-shadow: 0px 0px 10px rgba(3,3,88,.6);
+    padding: 10px;
+    text-align: left;
+    margin: 10px ;
+    
+}
+.AdminProducts .midel .carde h5{
+    color: rgb(3,3,88);
+    text-align: left;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.AdminProducts .midel .carde h3{
+    text-align: left;
+    margin-top: -10px;
+    font-size: 17px;
+    margin-bottom: 5px;
+    
+}
+.AdminProducts .midel .carde h6{
+    text-align: left;
+color: rgb(6, 117, 117);  
+font-weight: bolder; 
+margin-top: -5px; 
+}
+.AdminProducts .midel .carde h4{
+    text-align: left;
+    margin-top: 10px;
+    
+}
+.AdminProducts .midel .carde p{
+    text-align: left;
+    margin-top: -7px;
+}
+
+.AdminProducts .midel .carde button{
+    margin-left: 10px;
+    padding: 3px 8px;
+    transition: all .5s;
+    font-weight: bold;
+}
+.AdminProducts .midel .carde button .button{
+    text-decoration: none;
+    color: gray;
+
+}
+.AdminProducts .midel .carde button .button:hover{
+    transition: all .5s;
+    color: rgba(3,3,88,.6);
+}
+.AdminProducts .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .AdminProducts .pagination li {
+    display: inline-block;
+    margin: 0 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #eaeaea;
+  }
+  
+  .AdminProducts .pagination li.active {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .AdminProducts .pagination li:hover {
+    background-color: #ccc;
+  }
+  
+  .AdminProducts .pagination li.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+
+@media screen and (max-width:865px) {
+    .AdminProducts .top ul{
+        width: 45%;
+        padding: 0px;
+    }
+    .AdminProducts .top ul li{
+        font-size: 12px;
+    }
+    .AdminProducts .top .search{
+        width: 45%;
+    }
+    .AdminProducts .top .search input[type="search"]{
+        width: 65%;
+    }
+    .AdminProducts .top .search input[type="submit"]{
+        width: 35%;
+    }
+    .AdminProducts .midel .carde{
+        width: 220px;
+        margin: 10px 5px;
+    }
+}
+@media screen and (max-width:730px) {
+    .AdminProducts .top ul{
+        width: 45%;
+        padding: 0px;
+    }
+    .AdminProducts .top ul li{
+        font-size: 11px;
+    }
+    .AdminProducts .top .search{
+        width: 45%;
+    }
+    .AdminProducts .top .search input[type="search"]{
+        width: 65%;
+    }
+    .AdminProducts .top .search input[type="submit"]{
+        width: 35%;
+    }
+    .AdminProducts .midel .carde{
+        width: 200px;
+        margin: 10px 2px;
+        height: auto !important;
+    }
+    .AdminProducts .midel .carde h3{
+        font-size: 15px;
+    }
+    .AdminProducts .midel .carde h4 .etoil{
+        width: 14px;
+        margin-top: -10px;
+    }
+    .AdminProducts .midel .carde p{
+        font-size: 15px;
+    }
+    .AdminProducts .midel .carde button{
+        display: block;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width:645px){
+    .AdminProducts .top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .AdminProducts .top .search{
+        width: 300px;
+        margin: 10px;
+    }
+    .AdminProducts .top ul{
+        width: 90%;
+    }
+    .AdminProducts .top ul li{
+        font-size: 14px;
+    }
+    .AdminProducts .midel .carde h4 .etoil{
+        margin-top: 0px;
+    }
+    .AdminProducts .midel .carde p{
+        margin-top: 0px;
+    }
+    .AdminProducts .midel .carde{
+        width: 180px;
+    }
+}
+
+
+@media screen and (max-width:588px){
+    .AdminProducts .top ul{
+        width: 98%;
+    }
+    .AdminProducts .midel{
+        justify-content: space-around;
+    }
+    .AdminProducts .midel .carde{
+        width: 45%;
+    }
+}
+@media screen and (max-width:445px){
+    .AdminProducts .top ul{
+        width: 99%;
+    }
+    .AdminProducts .midel .carde{
+        width: 48%;
+    }
+}
+@media screen and (max-width:375px){
+    .AdminProducts .top .search{
+        width: 99%;
+        margin: 10px 2px;
+        margin-top: 15px;
+    } 
+    .AdminProducts .top ul li{
+        font-size: 12px;
+    }
+    .AdminProducts .midel .carde{
+        width: 48%;
+    }
+}

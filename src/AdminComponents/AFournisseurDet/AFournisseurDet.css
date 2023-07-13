@@ -1,0 +1,160 @@
+.AFournisseurDet{
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.AFournisseurDet .left{
+    width: 49%;
+}
+
+.AFournisseurDet .left img{
+    width: 200px;
+    height: 200px;
+    border: 5px solid cadetblue;
+    border-radius: 50%;
+}
+
+.AFournisseurDet .left .lisrProduit{
+    margin-top: 18px;
+}
+
+.AFournisseurDet .left .lisrProduit h2{
+    font-size: 16px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.AFournisseurDet .left .lisrProduit table{
+    width: 95%;
+    height: auto;
+    margin: 10px auto;
+}
+
+.AFournisseurDet .left .lisrProduit table thead tr th{
+    border-bottom: 2px solid gray;
+    padding: 5px 0px;
+    text-transform: capitalize;
+}
+
+.AFournisseurDet .left .lisrProduit table tbody tr td{
+    padding: 5px 0px;
+    border: 2px solid gray;
+}
+
+.AFournisseurDet .right{
+    width: 50%;
+}
+
+.AFournisseurDet .right table{
+    width: 100%;
+}
+.AFournisseurDet .right table tr{
+    border: 2px solid black;
+}
+
+.AFournisseurDet .right table tr th{
+    color: rgba(22, 22, 22, 0.897);
+    padding:10px;
+    border-bottom: 2px solid black;
+    font-size: 12px;
+}
+
+.AFournisseurDet .right table tr td{
+    text-align: center;
+    padding: 8px 0px;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.AFournisseurDet .right form{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.AFournisseurDet .right form textarea{
+    display: block;
+    width: 80%;
+    height: 150px;
+    border: 2px solid rgba(0, 0, 0, 0.623);
+    font-size: 15px;
+}
+.AFournisseurDet .right form label{
+    margin-left: 5px ;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+}
+
+.AFournisseurDet .right form input[type="submit"]{
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: rgb(37, 37, 233);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width:980px) {
+    .AFournisseurDet{
+        flex-direction: column;
+        align-items: center;
+    }
+    .AFournisseurDet .left{
+        width: 90%;
+        margin: 10px auto;
+    }
+    .AFournisseurDet .right{
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+
+@media screen and (max-width:780px){
+    .AFournisseurDet .left{
+        width: 99%;
+       
+    }
+    .AFournisseurDet .right{
+        width: 99%;
+    }
+}
+
+@media screen and (max-width:585px){
+   
+    .AFournisseurDet .right table tr th{
+        font-size: 11px;
+    }
+    .AFournisseurDet .right table tr td{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:480px){
+    .AFournisseurDet .right table tr th{
+        font-size: 10px;
+    }
+    .AFournisseurDet .right table tr td{
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width:375px){
+    .AFournisseurDet .right table tr th{
+        font-size: 9px;
+    }
+    .AFournisseurDet .right table tr td{
+        font-size: 10px;
+    }
+}

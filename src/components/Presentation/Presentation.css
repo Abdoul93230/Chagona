@@ -1,0 +1,153 @@
+.Presentation{
+    padding: 0px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: -10px;
+}
+.Presentation h2{
+    text-align: left;
+    /* margin-top: -10px; */
+    color: #515C6F;
+}
+.Presentation .Con{
+    height: auto;
+    width: 100%;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+.Presentation .Con .pub{
+    display: none;
+    /* border: 2px solid crimson; */
+}
+
+.Presentation .Con .carousel-container{
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+}
+.Presentation .Con .carousel-container .slide{
+    width: 100%;
+    height: 250px;
+    position: relative;
+}
+.Presentation .Con .carousel-container .slide img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.Presentation .Con .carousel-container .slide .button{
+    position: absolute;
+    bottom: 5%;
+    left: 2%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 9px;
+    border-radius: 20px;
+}
+.Presentation .Con .carousel-container .slide .button span{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FF6969;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 8px;
+}
+.Presentation .Con .carousel-container .slide .button h6{
+    font-size: 15px;
+}
+
+
+
+
+
+@media screen and (min-width:690px){
+    .Presentation .Con .carousel-container{
+        height: 390px;
+        width: 100%;
+        margin-top: 20px;
+        
+    }
+    .Presentation .Con .carousel-container .slide{
+        height: 400px;
+    }
+}
+
+@media screen and (min-width:1000px)  {
+    .Presentation .Con .carousel-container{
+        height: 370px;
+        width: 100%;
+        margin-top: 20px;
+        
+    }
+    .Presentation .Con .carousel-container .slide{
+        height: 370px;
+    }
+}
+
+@media screen and (min-width:1100px){
+
+    .Presentation .Con{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .Presentation .Con .carousel-container{
+        width: 70%;
+    }
+
+    .Presentation .Con .pub{
+        display: block;
+        width: 29%;
+        height: 100%;
+        margin-top: 24px;
+    }
+    .Presentation .Con .pub form{
+        width: 100%;
+        height: auto;
+    }
+    .Presentation .Con .pub input[type="search"]{
+        padding: 8px;
+        width: 70%;
+        background-color: rgba(240, 204, 204, 0.568);
+        border: 2px solid #FF6969;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    .Presentation .Con .pub input[type="submit"]{
+        padding: 8px 16px;
+        color: white;
+        background-color: #FF6969;
+        border: none;
+        margin-left: 4px;
+        border-radius: 5px;
+        cursor: pointer;
+
+    }
+    .Presentation .Con .pub .contPub{
+        width: 100%;
+        height: auto;
+        margin-top: 15px;
+    }
+    .Presentation .Con .pub .contPub .section{
+        width: 100%;
+        height: 148px;
+        margin: 10px 0px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .Presentation .Con .pub .contPub .section img{
+        width: 48%;
+        height: 100%;
+        object-fit: contain;
+        box-shadow: 0px 0px 3px #ff69698f;
+        border-radius: 5px;
+    }
+}

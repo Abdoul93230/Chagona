@@ -1,0 +1,91 @@
+.Mores{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+.Mores .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Mores .top .l{
+    position: relative;
+    margin: 5px 10px;
+    cursor: pointer;
+}
+.Mores .top .l span{
+    color: white;
+    padding: 1px 2px;
+    border-radius: 10px;
+    background-color: #FF6969;
+    position: absolute;
+    bottom: -8px;
+    left: -8px;
+}
+
+.Mores h2{
+    color: #515C6F;
+    text-align: left;
+    margin-bottom: 38px;
+}
+
+
+
+.Mores ul{
+    width: 100%;
+    height: auto;
+    padding: 8px 10px;
+    background-color: white;
+    list-style-type: none;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+.Mores ul .li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    color: #515C6F;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.Mores ul .li ol{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    border-bottom: 1px solid #515c6f60;
+    padding: 5px 0px;
+}
+.Mores ul .li ol span{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #515c6f2c;
+    color: #515C6F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Mores h3{
+    color: #FF6969;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 14px;
+    font-weight: lighter;
+}
+
+@media screen and (min-width:700px) {
+    .Mores ul{
+        width: 50%;
+    }
+}
+@media screen and (min-width:900px) {
+    .Mores ul{
+        width: 40%;
+    }
+}

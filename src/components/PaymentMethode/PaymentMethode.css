@@ -1,0 +1,232 @@
+.PaymentMethode{
+    width: 100%;
+    height: auto;
+    padding: 8px;
+}
+
+.PaymentMethode .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.PaymentMethode .top .i{
+    color: #FF6969;
+    width: 45px;
+    height: 45px;
+}
+
+.PaymentMethode h2{
+    color: #515C6F;
+    text-align: left;
+    margin: 10px 0px;
+}
+
+
+.PaymentMethode .cardeCont{
+    width: 100%;
+    display: flex;
+    height: auto;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.PaymentMethode .cardeCont .carde{
+    width: 140px;
+    height: 80px;
+    box-shadow: 0px 0px 7px #310f0f;
+    padding: 8px;
+    border-radius: 8px;
+    margin: 8px 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+
+}
+
+.PaymentMethode .cardeCont .carde .i{
+    width: 50px;
+    height: 50px;
+    color: #FF6969;
+}
+
+
+.PaymentMethode .carte{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.PaymentMethode .carte form{
+    width: 100%;
+    height: auto;
+}
+
+.PaymentMethode .carte form h3{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 13px;
+    color: #515C6F;
+    padding: 10px;
+    background-color: #515c6f31;
+    text-transform: uppercase;
+}
+
+.PaymentMethode .carte form .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.PaymentMethode .carte form .top input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    border: 2px solid #515C6F;
+    background-color: transparent;
+    outline: none;
+}
+
+.PaymentMethode .carte form .top label{
+    color: #515C6F;
+    font-weight: bold;
+    margin: 5px 0px;
+}
+
+.PaymentMethode .carte form .bottom{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.PaymentMethode .carte form .bottom .e{
+    width: 50%;
+}
+
+.PaymentMethode .carte form .bottom .e label{
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    color: #515C6F;
+}
+
+.PaymentMethode .carte form .bottom .e input{
+    widows: 97%;
+    display: block;
+    padding: 8px 2px;
+    border: 2px solid #515C6F;
+    border-radius: 4px;
+    background-color: transparent;
+    
+}
+
+.PaymentMethode .carte form input[type="submit"]{
+    padding: 14px;
+    width: 60%;
+    margin-top: 15px;
+    font-weight: bolder;
+    color: white;
+    background-color: #FF6969;
+    border: none;
+    border-radius: 7px;
+}
+
+.PaymentMethode .domicile{
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    margin-top: 24px;
+}
+
+.PaymentMethode .domicile h3{
+    width: 50%;
+    padding: 20px 20px;
+    color: white;
+    border-radius: 50%;
+    background-color: #FF6969;
+    margin: 10px auto;
+    
+}
+
+.PaymentMethode .domicile button{
+    background-color: #FF6969;color: white;
+    font-weight: bolder;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 50px;
+}
+
+.PaymentMethode .mobile{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.PaymentMethode .mobile h3{
+    color: #515C6F;
+    font-weight: bolder;
+    margin: 15px auto;    
+}
+
+.PaymentMethode .mobile  form{
+    width: 100%;
+    height: auto;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+}
+
+.PaymentMethode .mobile  form label{
+    display: block;
+    width: 100%;
+    text-align: left;
+    color: #515C6F;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.PaymentMethode .mobile  form input{
+    padding: 8px;
+    background-color: transparent;
+    border: 2px solid #515C6F;
+    border-radius: 4px;
+}
+
+.PaymentMethode .mobile  form select{
+    border: 2px solid #515C6F;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+
+.PaymentMethode .mobile  form .btn{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.PaymentMethode .mobile  form .btn input{
+    padding: 10px 20px;
+    background-color: #FF6969;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}

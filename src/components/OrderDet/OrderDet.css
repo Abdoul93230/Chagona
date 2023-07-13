@@ -1,0 +1,96 @@
+.OrderDet{
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 10px;
+    position: relative;
+
+}
+
+.OrderDet .ret{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.OrderDet .ret .i{
+    color: #FF6969;
+    width: 35px;
+    height: 38px;
+}
+
+.OrderDet h1{
+    text-align: left;
+    color: #515C6F;
+    text-transform: capitalize;
+    font-size: 27px;
+}
+.OrderDet h2{
+    text-align: right;
+    color: #515C6F;
+    text-transform: capitalize;
+    
+}
+
+.OrderDet .conteneur{
+    width: 100%;
+    height: auto;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.OrderDet .conteneur .carde{
+    width: 295px;
+    height: auto;
+    display: flex;
+    box-shadow: 0px 0px 7px #515c6f60;
+    align-items: center;
+    justify-content: space-between;
+    border-radius:8px ;
+    margin: 7px 0px;
+}
+.OrderDet .conteneur .carde img{
+    width: 40%;
+    height: 120px;
+    background-color: white;
+    border-radius:8px ;
+    
+}
+
+.OrderDet .conteneur .carde .det{
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.OrderDet .conteneur .carde .det h6{
+    color: #515C6F;
+    font-size: 15px;
+    margin: 5px 0px;
+}
+
+.OrderDet .conteneur .carde .det .num{
+    font-size: 20px;
+    font-weight: bolder;
+    color: #FF6969;
+}
+
+.OrderDet .btnS{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    font-weight: bolder;
+    background-color: #FF6969;
+    border: none;
+}

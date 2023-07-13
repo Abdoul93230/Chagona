@@ -1,0 +1,85 @@
+.AdminTop{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.AdminTop h2{
+    color: #171725;
+    font-weight: bolder;
+}
+.AdminTop .right{
+    display: flex;
+    padding: 5px;
+}
+.AdminTop .right .un{
+display: flex;
+align-items: center;
+margin: 0px 10px;
+}
+
+.AdminTop .right .un span{
+    background-color: white;
+    color: #171725;
+    padding: 5px 8px;
+    border-radius: 5px;
+    margin: 0px 1px;
+    cursor: pointer;
+}
+.AdminTop .right .un span:nth-child(3){
+    background-color: blue;
+    color: white;
+}
+
+.AdminTop .right .deux input{
+    width: 200px;
+    font-weight: bolder;
+    font-size: 17px;
+    border:1px solid #17172544;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px;
+    letter-spacing: 2px;
+}
+
+@media screen and (max-width:570px) {
+    .AdminTop .right .un span{
+        padding: 4px;
+    }
+    .AdminTop .right .deux input{
+        width: 110px;
+        letter-spacing: 1px;
+        font-size: 13px;
+    }
+    .AdminTop h2{
+        font-size: 15px;
+    }
+}
+@media screen and (max-width:410px) {
+    .AdminTop{
+        padding: 10px 0px;
+    }
+    .AdminTop .right .un span{
+        padding: 4px 2px;
+        font-size: 12px;
+    }
+
+    .AdminTop .right .un{
+        margin: 0px 3px;
+    }
+
+    .AdminTop .right .deux input{
+        width: 95px;
+        letter-spacing: 1px;
+        font-size: 10px;
+    }
+    .AdminTop h2{
+        font-size: 15px;
+    }
+    .AdminTop .right{
+        padding-right: 1px;
+    }
+}

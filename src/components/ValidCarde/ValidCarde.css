@@ -1,0 +1,65 @@
+.ValidCarde{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ValidCarde .carde{
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px 8%;
+}
+.ValidCarde .carde span{
+    
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: white;
+    color: #FF6969;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ValidCarde .carde h2{
+    color: #515C6F;
+    font-weight: lighter;
+    font-size: 30px;
+    margin: 10px auto;
+    text-transform: capitalize;
+}
+
+.ValidCarde .carde p{
+    color: #515C6F;
+}
+
+
+.ValidCarde .carde button{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin-top: 100px;
+    padding: 7px 10px;
+    background-color: #FF6969;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 15%;
+}
+
+.ValidCarde .carde button span{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: auto 0px;
+    
+}

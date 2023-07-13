@@ -1,0 +1,178 @@
+.SearchOne{
+    width: 100%;
+    height: auto;
+    padding: 0px;
+}
+.SearchOne .top{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 13px;
+    padding-top: 15px;
+}
+
+.SearchOne .top .i{
+    margin: 5px 10px;
+    position: relative;
+}
+.SearchOne .top .i span{
+    color: white;
+    background-color: #FF6969;
+    border-radius:10px ;
+    padding: 2px 3px;
+    position: absolute;
+    left: -10px;
+    bottom: -10px;
+}
+.SearchOne .top1{
+    padding: 10px;
+
+}
+.SearchOne .top1 h2{
+    color:#515C6F;
+    text-align: left;
+    font-weight: bolder;
+    font-size: 30px;
+}
+.SearchOne .top1 .sear{
+    width:100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 40px;
+    border-radius:10px ;
+}
+
+.SearchOne .top1 .sear input{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 30px;
+    /* outline: none; */
+    font-size: 15px;
+}
+
+.SearchOne .top1 .sear span{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.SearchOne .top1 .det{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #515C6F;
+    margin: 15px 10px;
+}
+.SearchOne .top1 .det h5{
+    margin-right: 10px;
+    color: #FF6969;
+    text-transform: uppercase;
+}
+.SearchOne .top1 .det h4{
+    text-transform: uppercase;
+    font-weight: lighter;
+}
+
+.SearchOne .prod {
+    width: 90%;
+    margin: 1px auto;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5358610c;
+    overflow-x: auto;
+  }
+  
+  .SearchOne .prod .carde {
+    background-color: white;
+    width: 150px;
+    flex-shrink: 0;
+    height: 80px;
+    border-radius: 15px;
+    margin: 0px 5px;
+    display: flex;
+  }
+  
+.SearchOne .prod .carde img{
+    width: 35%;
+    height: 100%;
+    object-fit: contain;
+}
+.SearchOne .prod .carde .right{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.SearchOne .prod .carde .right h4{
+    font-weight: lighter;
+    font-size: 13px;
+}
+.SearchOne .prod .carde .right h5{
+    margin-bottom: 0px;
+}
+
+.SearchOne .recommended{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+.SearchOne .recommended .top{
+    width:100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.SearchOne .recommended .top h4{
+    color: #515C6F;
+    font-weight: lighter;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.SearchOne .recommended .top h5{
+    color: #FF6969;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.SearchOne .recommended .elements{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.SearchOne .recommended .elements h6{
+    cursor: pointer;
+    background-color: white;
+    padding: 5px;
+    margin: 5px 0px;
+    color: #515C6F;
+    font-weight: lighter;
+    font-size: 15px;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+@media screen and (min-width:700px) {
+    .SearchOne .prod .carde{
+        width: 200px;
+    }
+    .SearchOne .top1 .sear{
+        width: 300px;
+    }
+    .SearchOne .recommended{
+        width: 60%;
+    }
+}
