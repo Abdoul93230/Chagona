@@ -5,6 +5,7 @@ import "./ProductDet.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import image from "../../Images/sac2.png";
 import {
   ChevronLeft,
   ShoppingCart,
@@ -410,13 +411,13 @@ function ProductDet({ product, allCategories, allProducts }) {
         <div className="midel carousel-container">
           <Slider {...settings}>
             <div className="slide">
-              <img src={product.image1} alt="loading" />
+              <img src={image} alt="loading" />
             </div>
             <div className="slide">
-              <img src={product.image2} alt="loading" />
+              <img src={image} alt="loading" />
             </div>
             <div className="slide">
-              <img src={product.image1} alt="loading" />
+              <img src={image} alt="loading" />
             </div>
           </Slider>
         </div>
