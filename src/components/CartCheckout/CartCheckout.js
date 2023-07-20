@@ -3,6 +3,8 @@ import "./CartCheckout.css";
 import { ChevronRight, X, CreditCard, Minus, Plus } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function CartCheckout({ op }) {
   const [choix, setChoix] = useState("");
@@ -33,7 +35,7 @@ function CartCheckout({ op }) {
 
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/getAddressByUserKey/${a.id}`)
+      .get(`${BackendUrl}/getAddressByUserKey/${a.id}`)
       .then((shippingAd) => {
         setEmail(shippingAd.data.address.email);
         setNom(shippingAd.data.address.name);
@@ -43,11 +45,11 @@ function CartCheckout({ op }) {
         setPlus(shippingAd.data.address.description);
       })
       .catch((error) => {
-        console.log(error.response);
+        // console.log(error.response);
       });
 
     axios
-      .get(`https://chagona.onrender.com/getMoyentPaymentByClefUser/${a.id}`)
+      .get(`${BackendUrl}/getMoyentPaymentByClefUser/${a.id}`)
       .then((res) => {
         if (res.data.paymentMethod.type) {
           setChoix(res.data.paymentMethod.type);
@@ -65,7 +67,7 @@ function CartCheckout({ op }) {
           setOperateur(res.data.paymentMethod.operateur);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {});
   }, []);
 
   const calculateTotalPrice = () => {
@@ -105,7 +107,14 @@ function CartCheckout({ op }) {
 
   const Plasser = () => {
     const local = localStorage.getItem("panier");
-
+    if (choix.length <= 0) {
+      navigue("/More/shipping_address");
+      return;
+    }
+    if (phone.length <= 0) {
+      navigue("/More/payment_method");
+      return;
+    }
     if (local) {
       const pane = JSON.parse(local);
       let prod = [];
@@ -125,7 +134,7 @@ function CartCheckout({ op }) {
       };
 
       axios
-        .post("https://chagona.onrender.com/createCommande", data)
+        .post(`${BackendUrl}/createCommande`, data)
         .then((res) => {
           // alert(res.data.message);
         })
@@ -137,121 +146,139 @@ function CartCheckout({ op }) {
   const navigue = useNavigate();
   return (
     <div className="CartCheckout">
-      <div className="top">
-        <X onClick={() => op("un")} style={{ width: "40px", height: "40px" }} />
-      </div>
-      <h2>Checkout</h2>
-      <h5>Shipping Address</h5>
-
-      <div className="ul">
-        <ul onClick={() => navigue("/More/shipping_address")}>
-          <li>{nom}</li>
-          <li>{region}</li>
-          <li>{Quartier}</li>
-          <li>{plus}</li>
-          <li>{email}</li>
-          <li>{phone}</li>
-        </ul>
-        <div className="sp">
-          <ChevronRight />
+      <LoadingIndicator time={2000}>
+        <div className="top">
+          <X
+            onClick={() => op("un")}
+            style={{ width: "40px", height: "40px" }}
+          />
         </div>
-      </div>
+        <h2>Checkout</h2>
+        <h5>Shipping Address</h5>
 
-      <div className="payment" onClick={() => navigue("/More/payment_method")}>
-        <div className="left">
-          <h4>payment method</h4>
-          <h2>
-            <CreditCard style={{ color: "#FF6969" }} />
-            {choix} {choix === "Mobile Money" ? phone : ""}{" "}
-            {choix === "master Card" || choix === "Visa"
-              ? `ending **${String(numeroCard).slice(-2)}`
-              : ""}
-          </h2>
+        <div className="ul">
+          <ul onClick={() => navigue("/More/shipping_address")}>
+            <li>{nom}</li>
+            <li>{region}</li>
+            <li>{Quartier}</li>
+            <li>{plus}</li>
+            <li>{email}</li>
+            <li>{phone}</li>
+            {nom.length <= 0 ? (
+              <li>veuiller configurere votre Address</li>
+            ) : (
+              <></>
+            )}
+          </ul>
+          <div className="sp">
+            <ChevronRight />
+          </div>
         </div>
-        <span>
-          <ChevronRight className="c" />
-        </span>
-      </div>
 
-      <h3 className="i">Items</h3>
-
-      <div style={{ width: "100%", height: "auto" }}>
-        {produits?.map((param, index) => {
-          if (param.quantity === 0) {
-            return null; // Ne pas afficher le produit si la quantité est 0
-          }
-
-          price = param.prixPromo > 0 ? param.prixPromo : param.prix;
-          totalPrice = price * param.quantity;
-          return (
-            <div key={index} className="items">
-              <img src={param.image1} alt="loading" />
-              <div className="det">
-                <h4>{param.name}</h4>
-                <h6>
-                  $ {totalPrice}
-                  <button>
-                    <span onClick={() => decrementQuantity(index)}>
-                      <Minus />
-                    </span>
-                    {param.quantity}
-                    <span onClick={() => incrementQuantity(index)}>
-                      <Plus />
-                    </span>
-                  </button>
-                </h6>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="codePro" onClick={() => setPoppup(!poppup)}>
-        <h2>
-          <CreditCard /> Add Promo Code
-        </h2>
-        <span>
-          <ChevronRight />
-        </span>
-      </div>
-
-      <div className="place">
-        <div className="left">
-          <h4>Total</h4>
-          <h3>${prix} F</h3>
-          <h5>Free Domestic Shipping</h5>
-        </div>
-        <button
-          onClick={() => {
-            op("trois");
-            Plasser();
-          }}
+        <div
+          className="payment"
+          onClick={() => navigue("/More/payment_method")}
         >
-          Place order{" "}
+          <div className="left">
+            <h4>payment method</h4>
+            <h2>
+              <CreditCard style={{ color: "#FF6969" }} />
+              {choix} {choix === "Mobile Money" ? phone : ""}{" "}
+              {choix === "master Card" || choix === "Visa"
+                ? `ending **${String(numeroCard).slice(-2)}`
+                : ""}
+              {choix.length <= 0 ? (
+                "veuiller configurere votre moyen de payment"
+              ) : (
+                <></>
+              )}
+            </h2>
+          </div>
+          <span>
+            <ChevronRight className="c" />
+          </span>
+        </div>
+
+        <h3 className="i">Items</h3>
+
+        <div style={{ width: "100%", height: "auto" }}>
+          {produits?.map((param, index) => {
+            if (param.quantity === 0) {
+              return null; // Ne pas afficher le produit si la quantité est 0
+            }
+
+            price = param.prixPromo > 0 ? param.prixPromo : param.prix;
+            totalPrice = price * param.quantity;
+            return (
+              <div key={index} className="items">
+                <img src={param.image1} alt="loading" />
+                <div className="det">
+                  <h4>{param.name}</h4>
+                  <h6>
+                    $ {totalPrice}
+                    <button>
+                      <span onClick={() => decrementQuantity(index)}>
+                        <Minus />
+                      </span>
+                      {param.quantity}
+                      <span onClick={() => incrementQuantity(index)}>
+                        <Plus />
+                      </span>
+                    </button>
+                  </h6>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="codePro" onClick={() => setPoppup(!poppup)}>
+          <h2>
+            <CreditCard /> Add Promo Code
+          </h2>
           <span>
             <ChevronRight />
           </span>
-        </button>
-      </div>
+        </div>
 
-      {poppup ? (
-        <div className="poppupConte">
-          <div className="poppup">
-            <div className="top">
-              <h3>Add Promo Code</h3>
-              <span>
-                <X onClick={() => setPoppup(!poppup)} />
-              </span>
-            </div>
-            <div className="CodeClef">
-              <input type="text" placeholder="tape the code here" />
-              <button>Valider</button>
+        <div className="place">
+          <div className="left">
+            <h4>Total</h4>
+            <h3>${prix} F</h3>
+            <h5>Free Domestic Shipping</h5>
+          </div>
+          <button
+            onClick={() => {
+              op("trois");
+              Plasser();
+            }}
+          >
+            Place order{" "}
+            <span>
+              <ChevronRight />
+            </span>
+          </button>
+        </div>
+
+        {poppup ? (
+          <div className="poppupConte">
+            <div className="poppup">
+              <div className="top">
+                <h3>Add Promo Code</h3>
+                <span>
+                  <X onClick={() => setPoppup(!poppup)} />
+                </span>
+              </div>
+              <div className="CodeClef">
+                <input type="text" placeholder="tape the code here" />
+                <button>Valider</button>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <></>
-      )}
+        ) : (
+          <></>
+        )}
+      </LoadingIndicator>
     </div>
   );
 }

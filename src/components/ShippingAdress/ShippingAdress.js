@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ShippingAdress.css";
 import { ChevronLeft } from "react-feather";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function ShippingAdress() {
   const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -18,7 +19,7 @@ function ShippingAdress() {
   useEffect(() => {
     const a = JSON.parse(localStorage.getItem(`userEcomme`));
     axios
-      .get(`https://chagona.onrender.com/getAddressByUserKey/${a.id}`)
+      .get(`${BackendUrl}/getAddressByUserKey/${a.id}`)
       .then((shippingAd) => {
         setEmail(shippingAd.data.address.email);
         setNom(shippingAd.data.address.name);
@@ -28,7 +29,7 @@ function ShippingAdress() {
         setPlus(shippingAd.data.address.description);
       })
       .catch((error) => {
-        console.log(error.response);
+        // console.log(error.response);
       });
   }, []);
 
@@ -70,11 +71,11 @@ function ShippingAdress() {
     }
 
     axios
-      .post("https://chagona.onrender.com/createOrUpdateAddress", obj)
+      .post(`${BackendUrl}/createOrUpdateAddress`, obj)
       .then((shipping) => {
         alert(shipping.data.message);
         axios
-          .get(`https://chagona.onrender.com/getAddressByUserKey/${a.id}`)
+          .get(`${BackendUrl}/getAddressByUserKey/${a.id}`)
           .then((shippingAd) => {
             setEmail(shippingAd.data.address.email);
             setNom(shippingAd.data.address.name);

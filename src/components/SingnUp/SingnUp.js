@@ -3,6 +3,7 @@ import "./SingnUp.css";
 import axios from "axios";
 import { ChevronRight, Menu, MessageSquare, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function SingnUp({ chg }) {
   const navigue = useNavigate();
@@ -34,7 +35,7 @@ function SingnUp({ chg }) {
       return false;
     } else {
       axios
-        .post("https://chagona.onrender.com/user", {
+        .post(`${BackendUrl}/user`, {
           name: name,
           password: password,
           email: email,

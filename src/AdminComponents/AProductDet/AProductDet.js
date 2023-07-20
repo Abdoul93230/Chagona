@@ -3,6 +3,7 @@ import axios from "axios";
 import "./AProductDet.css";
 import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AProductDet() {
   const navigue = useNavigate();
   const params = useParams();
@@ -20,7 +21,7 @@ function AProductDet() {
     const id = params.id;
 
     axios
-      .get(`https://chagona.onrender.com/Product/${id}`)
+      .get(`${BackendUrl}/Product/${id}`)
       .then((res) => {
         setProduct(res.data.data);
         if (!imgP) setImgP(res.data.data.image1);
@@ -29,7 +30,7 @@ function AProductDet() {
         const cFournisseur = res.data.data.Clefournisseur;
 
         axios
-          .get(`https://chagona.onrender.com/fournisseur/${cFournisseur}`)
+          .get(`${BackendUrl}/fournisseur/${cFournisseur}`)
           .then((res) => {
             setFournisseur(res.data.data);
           })
@@ -41,13 +42,13 @@ function AProductDet() {
           });
 
         axios
-          .get(`https://chagona.onrender.com/getAllType/`)
+          .get(`${BackendUrl}/getAllType/`)
           .then((res) => {
             const param = res.data.data.find((param) => param._id === ctype);
             if (param) {
               setTypes(param);
               axios
-                .get("https://chagona.onrender.com/getAllCategories")
+                .get(`${BackendUrl}/getAllCategories`)
                 .then((re) => {
                   const para = re.data.data.find(
                     (para) => para._id === param.clefCategories
@@ -75,7 +76,7 @@ function AProductDet() {
 
   const SupprimerProduct = () => {
     axios
-      .delete(`https://chagona.onrender.com/Product/${params.id}`)
+      .delete(`${BackendUrl}/Product/${params.id}`)
       .then((rep) => {
         alert(rep.data.message);
         navigue("/Admin/Products");

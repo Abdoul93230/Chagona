@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProductDet from "../components/ProductDet/ProductDet";
 import axios from "axios";
+import LoadingIndicator from "./LoadingIndicator ";
 
 import { useParams } from "react-router-dom";
 
@@ -18,11 +19,13 @@ function Productdetails({ allCategories, allProducts }) {
 
   return (
     <>
-      <ProductDet
-        product={product}
-        allCategories={allCategories ? allCategories : null}
-        allProducts={allProducts}
-      />
+      <LoadingIndicator time={2000}>
+        <ProductDet
+          product={product}
+          allCategories={allCategories ? allCategories : null}
+          allProducts={allProducts}
+        />
+      </LoadingIndicator>
     </>
   );
 }

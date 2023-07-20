@@ -3,6 +3,7 @@ import "./AFournisseurDet.css";
 import image1 from "../../Images/sac2.png";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function AFournisseurDet() {
   const navigue = useNavigate();
@@ -14,7 +15,7 @@ function AFournisseurDet() {
 
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/fournisseur/${params.id}`)
+      .get(`${BackendUrl}/fournisseur/${params.id}`)
       .then((res) => {
         setFournisseur(res.data.data);
       })
@@ -23,7 +24,7 @@ function AFournisseurDet() {
       });
 
     axios
-      .get(`https://chagona.onrender.com/searchProductBySupplier/${params.id}`)
+      .get(`${BackendUrl}/searchProductBySupplier/${params.id}`)
       .then((res) => {
         setProduct(res.data.data);
       })
@@ -34,7 +35,7 @@ function AFournisseurDet() {
       });
 
     axios
-      .get(`https://chagona.onrender.com/getAllType/`)
+      .get(`${BackendUrl}/getAllType/`)
       .then((res) => {
         setCategorie(res.data.data);
       })
@@ -47,7 +48,7 @@ function AFournisseurDet() {
     e.preventDefault();
     const email = fournisseur.email;
     axios
-      .post(`https://chagona.onrender.com/sendMail/`, { email: email })
+      .post(`${BackendUrl}/sendMail/`, { email: email })
       .then((res) => {
         console.log(res.data.data);
       })

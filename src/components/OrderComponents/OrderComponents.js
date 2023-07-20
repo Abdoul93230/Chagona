@@ -3,6 +3,7 @@ import "./OrderComponents.css";
 import { ChevronLeft } from "react-feather";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function OrderComponents() {
   const navigue = useNavigate();
@@ -43,7 +44,7 @@ function OrderComponents() {
 
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/getCommandesByClefUser/${a.id}`)
+      .get(`${BackendUrl}/getCommandesByClefUser/${a.id}`)
       .then((res) => {
         setMyAllCommandes(res.data.commandes);
         // console.log(res.data.commandes[0].nbrProduits.length);

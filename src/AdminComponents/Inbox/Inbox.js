@@ -3,6 +3,7 @@ import "./Inbox.css";
 import image1 from "../../Images/sac2.png";
 import { ChevronRight, Search, Delete } from "react-feather";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function Inbox() {
   const [allUsers, setAllUsers] = useState(null);
@@ -15,14 +16,14 @@ function Inbox() {
   const provenance = false;
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getUsers")
+      .get(`${BackendUrl}/getUsers`)
       .then((users) => {
         setAllUsers(users.data.data);
         // console.log(users.data.data);
       })
       .catch((error) => console.log(error));
     axios
-      .get("https://chagona.onrender.com/getUserProfiles")
+      .get(`${BackendUrl}/getUserProfiles`)
       .then((users) => {
         setallprofiles(users.data.data);
       })
@@ -33,9 +34,7 @@ function Inbox() {
     setIstrue(param);
 
     axios
-      .get(
-        `https://chagona.onrender.com/getUserMessagesByClefUser/${param._id}`
-      )
+      .get(`${BackendUrl}/getUserMessagesByClefUser/${param._id}`)
       .then((res) => {
         setAllMessage(res.data);
       })
@@ -50,7 +49,7 @@ function Inbox() {
       return;
     }
     axios
-      .post("https://chagona.onrender.com/createUserMessage", {
+      .post(`${BackendUrl}/createUserMessage`, {
         message: message,
         clefUser: istrue?._id,
         provenance: provenance,
@@ -59,9 +58,7 @@ function Inbox() {
         // alert(res.data);
         setMessage("");
         axios
-          .get(
-            `https://chagona.onrender.com/getUserMessagesByClefUser/${istrue?._id}`
-          )
+          .get(`${BackendUrl}/getUserMessagesByClefUser/${istrue?._id}`)
           .then((re) => {
             setAllMessage(re.data);
           })
@@ -77,7 +74,7 @@ function Inbox() {
       return;
     }
     axios
-      .get(`https://chagona.onrender.com/getUserByName/${name}`)
+      .get(`${BackendUrl}/getUserByName/${name}`)
       .then((res) => {
         setUserSearch(res.data.users);
       })
@@ -89,14 +86,12 @@ function Inbox() {
 
   const deletmessage = (param) => {
     axios
-      .delete(`https://chagona.onrender.com/deleteUserMessageById/${param}`)
+      .delete(`${BackendUrl}/deleteUserMessageById/${param}`)
       .then((res) => {
         // alert(res.data.message);
 
         axios
-          .get(
-            `https://chagona.onrender.com/getUserMessagesByClefUser/${istrue?._id}`
-          )
+          .get(`${BackendUrl}/getUserMessagesByClefUser/${istrue?._id}`)
           .then((re) => {
             setAllMessage(re.data);
           })

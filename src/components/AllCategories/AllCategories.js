@@ -4,6 +4,7 @@ import { X, ChevronRight } from "react-feather";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function AllCategories({ allCategories }) {
   const [allTypes, setAllTypes] = useState([]);
@@ -11,7 +12,7 @@ function AllCategories({ allCategories }) {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getAllType")
+      .get(`${BackendUrl}/getAllType`)
       .then((types) => {
         setAllTypes(types.data.data);
         // console.log(allCategories[0].name);

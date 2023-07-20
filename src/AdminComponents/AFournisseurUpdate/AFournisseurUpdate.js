@@ -3,6 +3,7 @@ import "./AFournisseurUpdate.css";
 import axios from "axios";
 import image1 from "../../Images/sac2.png";
 import { useParams, useNavigate } from "react-router-dom";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AFournisseurUpdate() {
   const params = useParams();
   const navigue = useNavigate();
@@ -20,7 +21,7 @@ function AFournisseurUpdate() {
 
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/fournisseur/${params.id}`)
+      .get(`${BackendUrl}/fournisseur/${params.id}`)
       .then((res) => {
         setFournisseur(res.data.data);
         if (nom.length <= 0) {
@@ -88,10 +89,7 @@ function AFournisseurUpdate() {
     formData.set("image", photo);
 
     axios
-      .put(
-        `https://chagona.onrender.com/updateFournisseur/${params.id}`,
-        formData
-      )
+      .put(`${BackendUrl}/updateFournisseur/${params.id}`, formData)
       .then((res) => {
         // console.log(res);
         alert(res.data.message);

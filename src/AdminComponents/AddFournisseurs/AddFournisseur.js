@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AddFournisseurs.css";
 import axios from "axios";
 import image1 from "../../Images/sac2.png";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AddFournisseur() {
   const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const regexPhone = /^[0-9]{8,}$/;
@@ -54,13 +55,14 @@ function AddFournisseur() {
     }
 
     axios
-      .post("https://chagona.onrender.com/fournisseur", formData)
+      .post(`${BackendUrl}/fournisseur`, formData)
       .then((res) => {
         // console.log(res);
         alert(res.data.message);
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        // alert(error.response.data.message);
+        console.log(error);
       });
     // console.log(photo);
   };

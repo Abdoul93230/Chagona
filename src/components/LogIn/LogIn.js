@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { ChevronRight, Menu, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import "./LogIn.css";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function LogIn({ chg }) {
   const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ function LogIn({ chg }) {
   const connect = async () => {
     axios
       .post(
-        "https://chagona.onrender.com/login",
+        `${BackendUrl}/login`,
 
         {
           email: email,

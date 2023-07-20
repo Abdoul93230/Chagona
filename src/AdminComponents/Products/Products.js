@@ -4,6 +4,7 @@ import { Star } from "react-feather";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function Products() {
   const [products, setProduct] = useState([]);
@@ -21,7 +22,7 @@ function Products() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/Products")
+      .get(`${BackendUrl}/Products`)
       .then((res) => {
         if (titel === "All") {
           if (res.data.data.length > 0) {
@@ -36,7 +37,7 @@ function Products() {
       });
 
     axios
-      .get("https://chagona.onrender.com/getAllType/")
+      .get(`${BackendUrl}/getAllType/`)
       .then((res) => {
         setTypes(res.data.data);
       })
@@ -47,7 +48,7 @@ function Products() {
 
   const searchProductByType = (param) => {
     axios
-      .get(`https://chagona.onrender.com/searchProductByType/${param}`)
+      .get(`${BackendUrl}/searchProductByType/${param}`)
       .then((res) => {
         setProduct(res.data.products);
         setTotalPage(Math.ceil(res.data.products.length / perPage));
@@ -65,7 +66,7 @@ function Products() {
       return;
     }
     axios
-      .get(`https://chagona.onrender.com/searchProductByName/${param}`)
+      .get(`${BackendUrl}/searchProductByName/${param}`)
       .then((res) => {
         setProduct(res.data.products);
         setTotalPage(Math.ceil(res.data.products.length / perPage));
@@ -79,7 +80,7 @@ function Products() {
 
   const AllProducts = () => {
     axios
-      .get("https://chagona.onrender.com/Products")
+      .get(`${BackendUrl}/Products`)
       .then((res) => {
         if (res.data.data.length > 0) {
           setProduct(res.data.data);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AodersDet.css";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function AodersDet({ allCategories, allProducts }) {
   const [allUsers, setAllUsers] = useState(null);
@@ -13,7 +14,7 @@ function AodersDet({ allCategories, allProducts }) {
 
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/getCommandesById/${id}`)
+      .get(`${BackendUrl}/getCommandesById/${id}`)
       .then((res) => {
         setCommandes(res.data.commande);
         // console.log(res.data.commande);
@@ -22,14 +23,14 @@ function AodersDet({ allCategories, allProducts }) {
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getUsers")
+      .get(`${BackendUrl}/getUsers`)
       .then((users) => {
         setAllUsers(users.data.data);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/fournisseurs")
+      .get(`${BackendUrl}/fournisseurs`)
       .then((res) => {
         setFournisseurs(res.data.data);
       })

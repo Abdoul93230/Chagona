@@ -49,3 +49,9 @@
     color: gray;
     padding: 3px;
 }
+
+@media screen and (min-width:775px) {
+    .Footer{
+        margin-bottom: 0px;
+    }
+}

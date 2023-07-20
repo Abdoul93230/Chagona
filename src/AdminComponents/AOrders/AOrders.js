@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function AOrders() {
   const navigue = useNavigate();
@@ -15,28 +16,28 @@ function AOrders() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getAllCommandes")
+      .get(`${BackendUrl}/getAllCommandes`)
       .then((commandes) => {
         setAllcommandes(commandes.data.commandes);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getUsers")
+      .get(`${BackendUrl}/getUsers`)
       .then((users) => {
         setAllUsers(users.data.data);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getUserProfiles")
+      .get(`${BackendUrl}/getUserProfiles`)
       .then((users) => {
         setallprofiles(users.data.data);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getAllAddressByUser")
+      .get(`${BackendUrl}/getAllAddressByUser`)
       .then((users) => {
         setallAdress(users.data.data);
       })

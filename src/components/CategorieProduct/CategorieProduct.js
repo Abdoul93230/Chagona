@@ -9,7 +9,9 @@ import { ChevronLeft, Search, ChevronRight, Star } from "react-feather";
 import ConteProduits from "../ConteProduits/ConteProduits";
 import image1 from "../../Images/sac.png";
 import axios from "axios";
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import { shuffle } from "lodash";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function CategorieProduct({ allCategories, allProducts }) {
   function goBack() {
@@ -28,7 +30,7 @@ function CategorieProduct({ allCategories, allProducts }) {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getAllType")
+      .get(`${BackendUrl}/getAllType`)
       .then((types) => {
         setAllTypes(types.data.data);
       })
@@ -37,7 +39,7 @@ function CategorieProduct({ allCategories, allProducts }) {
       });
 
     axios
-      .get(`https://chagona.onrender.com/getAllCommenteProduit`)
+      .get(`${BackendUrl}/getAllCommenteProduit`)
       .then((coments) => {
         setAllCommente(coments.data);
         // console.log(coments.data);
@@ -231,7 +233,7 @@ function CategorieProduct({ allCategories, allProducts }) {
         <div className="promo">
           <h2>{params.product ? params.product : params.Cat}</h2>
 
-          <div className="contCarde">
+          {/* <div className="contCarde">
             <div className="conteneur">
               {Pt1.map((param, index) => {
                 return (
@@ -247,7 +249,7 @@ function CategorieProduct({ allCategories, allProducts }) {
                 );
               })}
             </div>
-          </div>
+          </div> */}
           {pt2?.length > 0 ? (
             <ConteProduits
               products={pt2}
@@ -268,6 +270,7 @@ function CategorieProduct({ allCategories, allProducts }) {
                   >
                     <img src={param.image2} alt="loading" />
                     <h5>{param.name}</h5>
+                    <p>{param.description.slice(0, 17)}...</p>
                     <h6>
                       $ <s>{param.prix}</s> <span>{param.prixPromo}</span>
                     </h6>
@@ -295,6 +298,7 @@ function CategorieProduct({ allCategories, allProducts }) {
                     onClick={() => navigue(`/ProductDet/${param._id}`)}
                   >
                     <img src={param.image1} alt="loading" />
+                    <p>{param.description.slice(0, 17)}...</p>
                     <h5>{param.name}</h5>
                     <h6>${param.prix}</h6>
                   </div>
@@ -391,29 +395,31 @@ function CategorieProduct({ allCategories, allProducts }) {
 
   return (
     <div className="CategorieProduct">
-      <div className="head">
-        <span className="r">
-          <ChevronLeft onClick={goBack} />
-        </span>
-        <span className="s">
-          <Search />
-        </span>
-        {ClefCate ? <img src={ClefCate.image} alt="loadin" /> : ""}
-        <div className="det">
-          <h4>{ClefCate?.name}</h4>
-          <p>All your fashion needs under one roof</p>
+      <LoadingIndicator time={3000}>
+        <div className="head">
+          <span className="r">
+            <ChevronLeft onClick={goBack} />
+          </span>
+          <span className="s">
+            <Search />
+          </span>
+          {ClefCate ? <img src={ClefCate.image} alt="loadin" /> : ""}
+          <div className="det">
+            <h4>{ClefCate?.name}</h4>
+            <p>All your fashion needs under one roof</p>
+          </div>
         </div>
-      </div>
-      <div className="menu">
-        <ul>
-          <li onClick={() => changeChoix("Home")}>Home</li>
-          <li onClick={() => changeChoix("Products")}>Products</li>
-          <li onClick={() => changeChoix("Reviews")}>Reviews</li>
-        </ul>
-      </div>
-      {option}
+        <div className="menu">
+          <ul>
+            <li onClick={() => changeChoix("Home")}>Home</li>
+            <li onClick={() => changeChoix("Products")}>Products</li>
+            <li onClick={() => changeChoix("Reviews")}>Reviews</li>
+          </ul>
+        </div>
+        {option}
 
-      <Navbar />
+        <Navbar />
+      </LoadingIndicator>
     </div>
   );
 }

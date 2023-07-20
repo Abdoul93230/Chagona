@@ -4,6 +4,7 @@ import image1 from "../../Images/sac2.png";
 import image2 from "../../Images/cosme2.png";
 import image3 from "../../Images/tallon2.png";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function AddProductA() {
   const [imgP, setImgP] = useState(image1);
@@ -38,7 +39,7 @@ function AddProductA() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/fournisseurs")
+      .get(`${BackendUrl}/fournisseurs`)
       .then((res) => {
         setFournisseur(res.data.data);
       })
@@ -47,7 +48,7 @@ function AddProductA() {
       });
 
     axios
-      .get("https://chagona.onrender.com/getAllCategories")
+      .get(`${BackendUrl}/getAllCategories`)
       .then((res) => {
         setCategorie(res.data.data);
       })
@@ -56,7 +57,7 @@ function AddProductA() {
       });
 
     axios
-      .get("https://chagona.onrender.com/getAllType")
+      .get(`${BackendUrl}/getAllType`)
       .then((res) => {
         setTypeProduit(res.data.data);
       })
@@ -143,7 +144,7 @@ function AddProductA() {
     formData.append("marque", description.marque);
 
     axios
-      .post("https://chagona.onrender.com/product", formData)
+      .post(`${BackendUrl}/product`, formData)
       .then((res) => {
         alert(res.data.message);
       })

@@ -2,14 +2,15 @@ import image1 from "../../Images/sac.png";
 import image2 from "../../Images/pub3.jpg";
 import image3 from "../../Images/pub2.jpg";
 import "./Presentation.css";
-import { ChevronRight } from "react-feather";
+import { ChevronRight, Menu } from "react-feather";
 import "swiper/swiper-bundle.css";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from "react-router-dom";
 
-function Presentation() {
+function Presentation({ categories }) {
   const settings = {
     dots: true,
     infinite: true,
@@ -24,6 +25,27 @@ function Presentation() {
     <div className="Presentation">
       <h2>Latest</h2>
       <div className="Con">
+        <div className="pub">
+          <h5>
+            <Menu /> Categories
+          </h5>
+          <ul>
+            {categories?.map((param, index) => {
+              return (
+                <Link
+                  key={index}
+                  className="li"
+                  to={`/Categorie/${param.name}`}
+                >
+                  <Menu
+                    style={{ width: "10px", height: "10px", marginRight: 8 }}
+                  />
+                  {param.name}
+                </Link>
+              );
+            })}
+          </ul>
+        </div>
         <div className="carousel-container">
           <Slider {...settings}>
             <div className="slide">
@@ -57,19 +79,13 @@ function Presentation() {
           </Slider>
         </div>
 
-        <div className="pub">
-          <form>
-            <input type="search" placeholder="Search" />
-            <input type="submit" value="Search" />
-          </form>
+        <div className="pub1">
           <div className="contPub">
             <div className="section">
               <img src={image3} alt="loadin" />
-              <img src={image2} alt="loadin" />
             </div>
             <div className="section">
               <img src={image2} alt="loadin" />
-              <img src={image3} alt="loadin" />
             </div>
           </div>
         </div>

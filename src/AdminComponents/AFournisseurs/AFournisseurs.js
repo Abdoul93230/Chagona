@@ -3,6 +3,7 @@ import "./AFournisseurs.css";
 import { User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function AFournisseurs() {
   const navigue = useNavigate();
@@ -16,7 +17,7 @@ function AFournisseurs() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/fournisseurs")
+      .get(`${BackendUrl}/fournisseurs`)
       .then((res) => {
         setFournisseurs(res.data.data);
       })
@@ -31,7 +32,7 @@ function AFournisseurs() {
       return;
     }
     axios
-      .get(`https://chagona.onrender.com/findFournisseurByName/${searchName}`)
+      .get(`${BackendUrl}/findFournisseurByName/${searchName}`)
       .then((res) => {
         setFournisseurs(res.data.data);
       })
@@ -42,7 +43,7 @@ function AFournisseurs() {
 
   const AllF = () => {
     axios
-      .get("https://chagona.onrender.com/fournisseurs")
+      .get(`${BackendUrl}/fournisseurs`)
       .then((res) => {
         setFournisseurs(res.data.data);
         setSearchName("");

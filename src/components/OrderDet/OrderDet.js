@@ -3,6 +3,7 @@ import "./OrderDet.css";
 import { ChevronLeft } from "react-feather";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function OrderDet({ allProducts }) {
   const navigue = useNavigate();
@@ -13,7 +14,7 @@ function OrderDet({ allProducts }) {
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/getCommandesByClefUser/${a.id}`)
+      .get(`${BackendUrl}/getCommandesByClefUser/${a.id}`)
       .then((res) => {
         setProduits(res.data.commandes[+params.id - 1].nbrProduits);
         setDetails(res.data.commandes[+params.id - 1]);
@@ -24,7 +25,7 @@ function OrderDet({ allProducts }) {
 
   const deletComm = () => {
     axios
-      .delete(`https://chagona.onrender.com/deleteCommandeById/${id}`)
+      .delete(`${BackendUrl}/deleteCommandeById/${id}`)
       .then((res) => {
         alert(res.data.message);
       })

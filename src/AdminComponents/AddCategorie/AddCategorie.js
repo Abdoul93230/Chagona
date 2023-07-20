@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AddCategorie.css";
 import { XCircle } from "react-feather";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AddCategorie() {
   const [categorie, setCategorie] = useState("");
   const [categories, setCategories] = useState([]);
@@ -18,7 +19,7 @@ function AddCategorie() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getAllCategories")
+      .get(`${BackendUrl}/getAllCategories`)
       .then((All) => {
         if (All.data.data) {
           setCategories(All.data.data);
@@ -29,7 +30,7 @@ function AddCategorie() {
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getAllType")
+      .get(`${BackendUrl}/getAllType`)
       .then((All) => {
         if (All.data.data) {
           setTypes(All.data.data);
@@ -66,12 +67,23 @@ function AddCategorie() {
     formData.append("image", ImgCat);
 
     axios
-      .post("https://chagona.onrender.com/categorie", formData)
+      .post(`${BackendUrl}/categorie`, formData)
       .then((response) => {
         alert(response.data.message);
         // console.log(response);
         setCategorie("");
         setImgCat(null);
+
+        axios
+          .get(`${BackendUrl}/getAllCategories`)
+          .then((All) => {
+            if (All.data.data) {
+              setCategories(All.data.data);
+            } else {
+              console.log("rien");
+            }
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => {
         if (error.response.status === 400) alert(error.response.data);
@@ -79,7 +91,7 @@ function AddCategorie() {
       });
 
     axios
-      .get("https://chagona.onrender.com/getAllCategories")
+      .get(`${BackendUrl}/getAllCategories`)
       .then((All) => {
         if (All.data.data) {
           setCategories(All.data.data);
@@ -92,10 +104,10 @@ function AddCategorie() {
 
   const supCategorie = (id) => {
     axios
-      .delete("https://chagona.onrender.com/supCategorie", { data: { id: id } })
+      .delete(`${BackendUrl}/supCategorie`, { data: { id: id } })
       .then((res) => {
         axios
-          .get("https://chagona.onrender.com/getAllCategories")
+          .get(`${BackendUrl}/getAllCategories`)
           .then((All) => {
             if (All.data.data) {
               setCategories(All.data.data);
@@ -120,7 +132,7 @@ function AddCategorie() {
       return alert("veuiller choisir une categorie du type");
     }
     axios
-      .post("https://chagona.onrender.com/createProductType", {
+      .post(`${BackendUrl}/createProductType`, {
         name: typeProduit,
         nameCate: choixCat,
       })
@@ -136,7 +148,7 @@ function AddCategorie() {
 
   const suppType = (id) => {
     axios
-      .delete("https://chagona.onrender.com/suppType", { data: { id: id } })
+      .delete(`${BackendUrl}/suppType`, { data: { id: id } })
       .then((param) => {
         alert(param.data.message);
       })
@@ -159,14 +171,11 @@ function AddCategorie() {
       formData.append("image", isShowD.image);
     }
     axios
-      .put(
-        `https://chagona.onrender.com/updateCategorie/${isShowD.id}`,
-        formData
-      )
+      .put(`${BackendUrl}/updateCategorie/${isShowD.id}`, formData)
       .then((param) => {
         alert(param.data.message);
         axios
-          .get("https://chagona.onrender.com/getAllCategories")
+          .get(`${BackendUrl}/getAllCategories`)
           .then((All) => {
             if (All.data.data) {
               setCategories(All.data.data);

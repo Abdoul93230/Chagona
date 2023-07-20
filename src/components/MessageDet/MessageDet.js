@@ -2,12 +2,17 @@ import React, { useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import "./MessageDet.css";
 import { ChevronLeft, Plus, ChevronUp, Delete } from "react-feather";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function MessageDet({ chg }) {
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
   const [message, setMessage] = useState("");
   const [allMessage, setAllMessage] = useState([]);
   const provenance = true;
+
+  function goBack() {
+    window.history.back();
+  }
 
   function formatDate(date) {
     const options = { weekday: "long", hour: "numeric", minute: "numeric" };
@@ -17,7 +22,7 @@ function MessageDet({ chg }) {
 
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/getUserMessagesByClefUser/${a.id}`)
+      .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
       .then((res) => {
         setAllMessage(res.data);
       })
@@ -31,7 +36,7 @@ function MessageDet({ chg }) {
       return;
     }
     axios
-      .post("https://chagona.onrender.com/createUserMessage", {
+      .post(`${BackendUrl}/createUserMessage`, {
         message: message,
         clefUser: a.id,
         provenance: provenance,
@@ -40,7 +45,7 @@ function MessageDet({ chg }) {
         // alert(res.data);
         setMessage("");
         axios
-          .get(`https://chagona.onrender.com/getUserMessagesByClefUser/${a.id}`)
+          .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
           .then((re) => {
             setAllMessage(re.data);
           })
@@ -53,17 +58,14 @@ function MessageDet({ chg }) {
 
   const deletmessage = (param) => {
     axios
-      .put(
-        `https://chagona.onrender.com/updateUserMessageAttributeById/${param}`,
-        {
-          use: false,
-        }
-      )
+      .put(`${BackendUrl}/updateUserMessageAttributeById/${param}`, {
+        use: false,
+      })
       .then((res) => {
         console.log(res.data);
 
         axios
-          .get(`https://chagona.onrender.com/getUserMessagesByClefUser/${a.id}`)
+          .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
           .then((re) => {
             setAllMessage(re.data);
           })
@@ -80,7 +82,10 @@ function MessageDet({ chg }) {
         <div className="left">
           <span>
             <ChevronLeft
-              onClick={() => chg("All")}
+              onClick={() => {
+                // chg("All")
+                goBack();
+              }}
               style={{ width: "40px", height: "40px" }}
             />
           </span>

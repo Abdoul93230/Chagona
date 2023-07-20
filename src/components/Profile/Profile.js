@@ -5,6 +5,7 @@ import { ChevronRight, Menu, MessageCircle, ShoppingCart } from "react-feather";
 import image1 from "../../Images/costume-homme-1.jpg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function Profile() {
   const navigue = new useNavigate();
@@ -30,7 +31,7 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/user", {
+      .get(`${BackendUrl}/user`, {
         params: {
           id: a.id,
         },
@@ -49,7 +50,7 @@ function Profile() {
       });
 
     axios
-      .get("https://chagona.onrender.com/getUserProfile", {
+      .get(`${BackendUrl}/getUserProfile`, {
         params: {
           id: a.id,
         },
@@ -58,7 +59,7 @@ function Profile() {
         // console.log(Profiler);
         if (
           Profiler.data.data.image !==
-          "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
+          `${BackendUrl}/images/image-1688253105925-0.jpeg`
         ) {
           setImageP(Profiler.data.data.image);
           // console.log(Profiler.data.data);
@@ -70,9 +71,9 @@ function Profile() {
         // }
       })
       .catch((erro) => {
-        if (erro.response.status === 404)
-          console.log(erro.response.data.message);
-        console.log(erro.response);
+        // if (erro.response.status === 404)
+        //   console.log(erro.response.data.message);
+        // console.log(erro.response);
       });
   });
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./PaymentMethode.css";
 import { ChevronLeft, CreditCard } from "react-feather";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function PaymentMethode() {
   const [choix, setChoix] = useState("");
   const [numero, setNumero] = useState("");
@@ -14,7 +15,7 @@ function PaymentMethode() {
 
   useEffect(() => {
     axios
-      .get(`https://chagona.onrender.com/getMoyentPaymentByClefUser/${a.id}`)
+      .get(`${BackendUrl}/getMoyentPaymentByClefUser/${a.id}`)
       .then((res) => {
         if (res.data.paymentMethod.type) {
           setChoix(res.data.paymentMethod.type);
@@ -35,7 +36,7 @@ function PaymentMethode() {
           setExpiredCard(res.data.paymentMethod.expire);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {});
   }, []);
 
   function goBack() {
@@ -110,7 +111,7 @@ function PaymentMethode() {
     }
 
     axios
-      .post("https://chagona.onrender.com/createMoyentPayment", data)
+      .post(`${BackendUrl}/createMoyentPayment`, data)
       .then((res) => {
         alert(res.data.message);
       })

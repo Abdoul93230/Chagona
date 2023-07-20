@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./SearchTwo.css";
 import { ChevronLeft, ChevronRight, Filter, Star, X } from "react-feather";
-import image1 from "../../Images/chemise1.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function SearchTwo({ op, allCategories, allProducts }) {
   const navigue = useNavigate();
@@ -15,14 +15,16 @@ function SearchTwo({ op, allCategories, allProducts }) {
   const [erreur, setErreur] = useState(null);
   const [searchName, setSearchName] = useState("");
   const [sh, setSh] = useState(true);
+  const Categories = [];
+  const [Brands, setBrands] = useState([]);
 
   const searchProductByName = () => {
-    if (searchName.length < 2) {
-      alert("le produit à rechercher doit avoir au moins 2 caractères");
+    if (searchName.length <= 1) {
+      // alert("le produit à rechercher doit avoir au moins 2 caractères");
       return;
     }
     axios
-      .get(`https://chagona.onrender.com/searchProductByName/${searchName}`)
+      .get(`${BackendUrl}/searchProductByName/${searchName}`)
       .then((res) => {
         setProduct(res.data.products);
         setSh(false);
@@ -30,7 +32,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
       })
       .catch((error) => {
         setProduct(null);
-        setSh(false);
+        setSh(true);
         setErreur(error.response.data.message);
       });
   };
@@ -41,7 +43,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
     }
 
     axios
-      .get("https://chagona.onrender.com/getAllType")
+      .get(`${BackendUrl}/getAllType`)
       .then((types) => {
         setAllTypes(types.data.data);
       })
@@ -49,6 +51,22 @@ function SearchTwo({ op, allCategories, allProducts }) {
         console.log(error);
       });
   }, [show]);
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/getMarqueClusters`)
+      .then((res) => {
+        const bran = [];
+        for (let i = 0; i < res.data.clusters.length; i++) {
+          const marque = res.data.clusters[i].marque;
+          if (!bran.includes(marque)) {
+            bran.push(marque);
+          }
+        }
+        setBrands(bran);
+      })
+      .catch((error) => {});
+  }, []);
 
   const menu = () => {
     const a = document.getElementsByClassName("fil")[0].classList;
@@ -69,9 +87,9 @@ function SearchTwo({ op, allCategories, allProducts }) {
     "2500f -> 3500f",
     "3500f -> 10000f",
   ];
-  const Brands = ["Balenciaga", "Dior", "Louis Vuitton", "Sony", "Versace"];
+  // const Brands = ["Balenciaga", "Dior", "Louis Vuitton", "Sony", "Versace"];
   const views = ["2 etoiles", "3 etoiles", "4 etoiles", "5 etoiles"];
-  const Categories = ["Homme", "Femme", "Enfants", "cuisine"];
+
   const [choix, setChoix] = useState(null);
 
   const chargeChoix = (param) => {
@@ -120,7 +138,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
     <div className="SearchTwo">
       <div className="top">
         <div className="left">
-          <span className="l" onClick={() => op("un")}>
+          <span className="l" onClick={() => goBack()}>
             <ChevronLeft />
           </span>
           <form
@@ -132,22 +150,25 @@ function SearchTwo({ op, allCategories, allProducts }) {
             <input
               type="search"
               defaultValue={searchName}
-              onChange={(e) => setSearchName(e.target.value)}
+              onChange={(e) => {
+                setSearchName(e.target.value);
+                searchProductByName();
+              }}
               placeholder="Shirts"
             />
-            <input type="submit" value="search" />
+            {/* <input type="submit" value="search" /> */}
           </form>
           <span className="r">
-            <Filter onClick={menu} />
+            <Filter onClick={menu} style={{ display: "none" }} />
           </span>
         </div>
 
         <div className="right">
           <ul>
             {allCategories?.map((param, index) => {
-              if (index > 3) {
-                return null;
-              }
+              // if (index > 3) {
+              //   return null;
+              // }
               return (
                 <li
                   key={index}
@@ -212,25 +233,18 @@ function SearchTwo({ op, allCategories, allProducts }) {
             <h5>clear</h5>
           </div>
           <ul>
-            {[
-              "view",
-              "category",
-              "condition",
-              "material",
-              "colour",
-              "brand",
-              "size",
-              "price range",
-            ].map((param, index) => {
-              return (
-                <li key={index} onClick={() => chargeChoix(param)}>
-                  {param}
-                  <span>
-                    <ChevronRight />
-                  </span>
-                </li>
-              );
-            })}
+            {["category", "colour", "brand", "size", "price range"].map(
+              (param, index) => {
+                return (
+                  <li key={index} onClick={() => chargeChoix(param)}>
+                    {param}
+                    <span>
+                      <ChevronRight />
+                    </span>
+                  </li>
+                );
+              }
+            )}
           </ul>
           <button onClick={menu}>
             Apply filtres{" "}
@@ -251,9 +265,17 @@ function SearchTwo({ op, allCategories, allProducts }) {
               </span>
             </div>
             <ul>
-              {filtre.map((param, index) => {
-                return <li key={index}>{param}</li>;
-              })}
+              {choix === "brand" ? (
+                Brands.map((param, index) => {
+                  return <li key={index}>{param}</li>;
+                })
+              ) : choix === "category" ? (
+                allCategories.map((param, index) => {
+                  return <li key={index}>{param.name}</li>;
+                })
+              ) : (
+                <>sds</>
+              )}
             </ul>
           </div>
         </div>

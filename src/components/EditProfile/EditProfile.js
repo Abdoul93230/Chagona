@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./EditProfile.css";
 import axios from "axios";
 import image from "../../Images/costume-homme-1.jpg";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function EditProfile() {
   const navigue = useNavigate();
   const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -20,7 +21,7 @@ function EditProfile() {
     if (a) {
       // axios.defaults.headers.common["Authorization"] = `Bearer ${a.token}`;
       axios
-        .get("https://chagona.onrender.com/user", {
+        .get(`${BackendUrl}/user`, {
           params: {
             id: a.id,
           },
@@ -39,7 +40,7 @@ function EditProfile() {
         });
 
       axios
-        .get("https://chagona.onrender.com/getUserProfile", {
+        .get(`${BackendUrl}/getUserProfile`, {
           params: {
             id: a.id,
           },
@@ -48,7 +49,7 @@ function EditProfile() {
           // console.log(Profiler);
           if (
             Profiler.data.data.image !==
-            "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
+            `${BackendUrl}/images/image-1688253105925-0.jpeg`
           ) {
             setImageP(Profiler.data.data.image);
           }
@@ -61,7 +62,7 @@ function EditProfile() {
         .catch((erro) => {
           if (erro.response.status === 404)
             setMessageEr(erro.response.data.message);
-          console.log(erro.response);
+          // console.log(erro.response);
         });
     }
   });
@@ -86,13 +87,13 @@ function EditProfile() {
     formData.append("id", a.id);
 
     axios
-      .post("https://chagona.onrender.com/createProfile", formData)
+      .post(`${BackendUrl}/createProfile`, formData)
       .then((user) => {
         if (user.status === 200) {
           alert(user.data.message);
 
           axios
-            .get("https://chagona.onrender.com/getUserProfile", {
+            .get(`${BackendUrl}/getUserProfile`, {
               params: {
                 id: a.id,
               },
@@ -101,7 +102,7 @@ function EditProfile() {
               console.log(Profiler);
               if (
                 Profiler.data.data.image !==
-                "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
+                `${BackendUrl}/images/image-1688253105925-0.jpeg`
               ) {
                 setImageP(Profiler.data.data.image);
               }

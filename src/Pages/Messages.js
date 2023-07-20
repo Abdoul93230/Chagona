@@ -1,21 +1,24 @@
-import React, { useState } from 'react'
-import AllMessages from '../components/AllMessages/AllMessages'
-import MessageDet from '../components/MessageDet/MessageDet'
+import React, { useState } from "react";
+import AllMessages from "../components/AllMessages/AllMessages";
+import MessageDet from "../components/MessageDet/MessageDet";
 
 function Messages() {
-
-  const [option,setOption] = useState("All")
-  const changeOption = (param)=>{
-    setOption(param)
-  }
+  const [option, setOption] = useState("det");
+  const changeOption = (param) => {
+    setOption(param);
+  };
 
   return (
     <>
-        {
-          option === "All"?<AllMessages chg = {changeOption}/>:option==="det"?<MessageDet chg = {changeOption}/>:<></>
-        }
+      {option === "All" ? (
+        <AllMessages chg={changeOption} />
+      ) : option === "det" ? (
+        <MessageDet chg={changeOption} />
+      ) : (
+        <></>
+      )}
     </>
-  )
+  );
 }
 
-export default Messages
+export default Messages;

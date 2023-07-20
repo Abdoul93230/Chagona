@@ -15,6 +15,7 @@ import {
   X,
 } from "react-feather";
 
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function ProductDet({ product, allCategories, allProducts }) {
   const [poppup, setPoppup] = useState(false);
   const [commente, setCommente] = useState("");
@@ -73,7 +74,7 @@ function ProductDet({ product, allCategories, allProducts }) {
       return;
     }
     axios
-      .post("https://chagona.onrender.com/createCommenteProduit", {
+      .post(`${BackendUrl}/createCommenteProduit`, {
         description: commente,
         clefProduct: product?._id,
         clefType: product?.ClefType,
@@ -87,9 +88,7 @@ function ProductDet({ product, allCategories, allProducts }) {
         setCommente("");
 
         axios
-          .get(
-            `https://chagona.onrender.com/getAllCommenteProduitById/${product?._id}`
-          )
+          .get(`${BackendUrl}/getAllCommenteProduitById/${product?._id}`)
           .then((coments) => {
             setAllCommente(coments.data);
             // console.log(coments.data);
@@ -178,7 +177,7 @@ function ProductDet({ product, allCategories, allProducts }) {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getAllType")
+      .get(`${BackendUrl}/getAllType`)
       .then((types) => {
         setAllTypes(types.data.data);
       })
@@ -187,9 +186,7 @@ function ProductDet({ product, allCategories, allProducts }) {
       });
 
     axios
-      .get(
-        `https://chagona.onrender.com/getAllCommenteProduitById/${product?._id}`
-      )
+      .get(`${BackendUrl}/getAllCommenteProduitById/${product?._id}`)
       .then((coments) => {
         setAllCommente(coments.data);
         // console.log(coments.data);

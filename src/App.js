@@ -19,6 +19,8 @@ import Myorders from "./Pages/Myorders";
 import { useState, useEffect } from "react";
 import "reactjs-popup/dist/index.css";
 
+const BackendUrl = process.env.REACT_APP_Backend_Url;
+
 function App() {
   const [allCategories, setAllCategories] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
@@ -34,7 +36,7 @@ function App() {
     if (user) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
       axios
-        .get("https://chagona.onrender.com/verify", { withCredentials: true })
+        .get(`${BackendUrl}/verify`, { withCredentials: true })
         .then((response) => {
           setAcces("oui");
           // console.log({ local: user.token });
@@ -47,7 +49,7 @@ function App() {
     }
 
     axios
-      .get("https://chagona.onrender.com/getAllCategories")
+      .get(`${BackendUrl}/getAllCategories`)
       .then((Categories) => {
         setAllCategories(Categories.data.data);
       })
@@ -56,12 +58,12 @@ function App() {
       });
 
     axios
-      .get("https://chagona.onrender.com/products")
+      .get(`${BackendUrl}/products`)
       .then((Categories) => {
         setAllProducts(Categories.data.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.message);
       });
   }, []);
 

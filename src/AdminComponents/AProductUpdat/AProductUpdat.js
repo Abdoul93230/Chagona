@@ -3,6 +3,7 @@ import "./AProductUpdat.css";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AProductUpdat() {
   const navigue = useNavigate();
   const [imgP, setImgP] = useState(null);
@@ -44,7 +45,7 @@ function AProductUpdat() {
     const id = params.id;
 
     axios
-      .get(`https://chagona.onrender.com/Product/${id}`)
+      .get(`${BackendUrl}/Product/${id}`)
       .then((res) => {
         setProduct(res.data.data);
         if (!imgP) setImgP(res.data.data.image1);
@@ -69,7 +70,7 @@ function AProductUpdat() {
         const cFournisseur = res.data.data.Clefournisseur;
 
         axios
-          .get(`https://chagona.onrender.com/fournisseur/${cFournisseur}`)
+          .get(`${BackendUrl}/fournisseur/${cFournisseur}`)
           .then((res) => {
             setDescription((prevDescription) => {
               const updatedDescription = {
@@ -81,7 +82,7 @@ function AProductUpdat() {
             });
 
             axios
-              .get(`https://chagona.onrender.com/fournisseurs`)
+              .get(`${BackendUrl}/fournisseurs`)
               .then((values) => {
                 setFournisseur(values.data.data);
               })
@@ -97,7 +98,7 @@ function AProductUpdat() {
           });
 
         axios
-          .get(`https://chagona.onrender.com/getAllType/`)
+          .get(`${BackendUrl}/getAllType/`)
           .then((res) => {
             setTypes(res.data.data);
             const param = res.data.data.find((param) => param._id === ctype);
@@ -111,7 +112,7 @@ function AProductUpdat() {
                 return updatedDescription;
               });
               axios
-                .get("https://chagona.onrender.com/getAllCategories")
+                .get(`${BackendUrl}/getAllCategories`)
                 .then((re) => {
                   setcategorie(re.data.data);
                   const para = re.data.data.find(
@@ -214,7 +215,7 @@ function AProductUpdat() {
     formData.append("marque", description.marque);
 
     axios
-      .put(`https://chagona.onrender.com/product/${params.id}`, formData)
+      .put(`${BackendUrl}/product/${params.id}`, formData)
       .then((res) => {
         alert(res.data.message);
         navigue(`/Admin/ProductDet/${params.id}`);

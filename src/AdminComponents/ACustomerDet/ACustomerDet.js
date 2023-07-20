@@ -4,6 +4,7 @@ import image1 from "../../Images/sac2.png";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Delete } from "react-feather";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function ACustomerDet() {
   const [allUsers, setAllUsers] = useState(null);
@@ -23,14 +24,14 @@ function ACustomerDet() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getAllCommandes")
+      .get(`${BackendUrl}/getAllCommandes`)
       .then((commandes) => {
         setAllcommandes(commandes.data.commandes);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getUsers")
+      .get(`${BackendUrl}/getUsers`)
       .then((users) => {
         setAllUsers(users.data.data);
         // console.log(users.data.data);
@@ -38,20 +39,20 @@ function ACustomerDet() {
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getUserProfiles")
+      .get(`${BackendUrl}/getUserProfiles`)
       .then((users) => {
         setallprofiles(users.data.data);
       })
       .catch((error) => console.log(error));
     axios
-      .get("https://chagona.onrender.com/getAllAddressByUser")
+      .get(`${BackendUrl}/getAllAddressByUser`)
       .then((users) => {
         setallAdress(users.data.data);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get(`https://chagona.onrender.com/getCodePromoByClefUser/${params.id}`)
+      .get(`${BackendUrl}/getCodePromoByClefUser/${params.id}`)
       .then((code) => {
         setAllCode(code.data.data);
       })
@@ -70,7 +71,7 @@ function ACustomerDet() {
       return;
     }
     axios
-      .post("https://chagona.onrender.com/createCodePromo", {
+      .post(`${BackendUrl}/createCodePromo`, {
         dateExpirate: dateExpired,
         prixReduiction: reduction,
         clefUser: params.id,
@@ -80,9 +81,7 @@ function ACustomerDet() {
         setReduction(0);
         setDateExpired(null);
         axios
-          .get(
-            `https://chagona.onrender.com/getCodePromoByClefUser/${params.id}`
-          )
+          .get(`${BackendUrl}/getCodePromoByClefUser/${params.id}`)
           .then((code) => {
             setAllCode(code.data.data);
           })
@@ -95,13 +94,11 @@ function ACustomerDet() {
 
   const deleCode = (id) => {
     axios
-      .delete(`https://chagona.onrender.com/deleteCodePromo/${id}`)
+      .delete(`${BackendUrl}/deleteCodePromo/${id}`)
       .then((message) => {
         alert(message.data.message);
         axios
-          .get(
-            `https://chagona.onrender.com/getCodePromoByClefUser/${params.id}`
-          )
+          .get(`${BackendUrl}/getCodePromoByClefUser/${params.id}`)
           .then((code) => {
             setAllCode(code.data.data);
           })

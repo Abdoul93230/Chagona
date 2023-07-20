@@ -5,37 +5,10 @@
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0px -10px 10px #F5F6F8 inset;
-    
+    margin-top: 100px;
 }
 
-.HeaderOne .one{
-    display: flex;
-    justify-content: flex-end;
-   
-}
 
-.HeaderOne .one .h .l{
-    text-decoration: none;
-    position: relative;
-    margin: 2px 10px;
-    color: #727C8E;
-
-}
-.HeaderOne .one .h .l span{
-    background-color: #FF6969;
-    color: white;
-    width: 20px;
-    height: 20px;
-    padding: 2px ;
-    border-radius: 50%;
-    position: absolute;
-    bottom: -5px;
-    left: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
 .HeaderOne .two{
     display: flex;
     flex-direction: column;
@@ -51,7 +24,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 600px;
+    width: 100%;
+    padding: 20px 2%;
+    flex-wrap: wrap;
+
 
 }
 .HeaderOne .two .cardeCont .li{
@@ -78,6 +54,7 @@
     justify-content: center;
     align-items: center;
     font-weight: bolder;
+    margin: 5px;
 }
 
 .HeaderOne .two .cardeCont .carde  img{
@@ -87,34 +64,9 @@
     object-fit: cover;
 }
 
-.HeaderOne .search{
-    padding: 2px;
-    width: 100%;
-    height: auto;
-    margin-top: 8px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 10px;
-}
 
-.HeaderOne .search input[type="search"]{
-    padding: 7.5px;
-    width: 250px;
-    border: 2px solid #FF6969;
-    outline: none;
-    border-radius: 4px;
-    background-color: #ff696915;
-}
 
-.HeaderOne .search input[type="submit"]{
-    padding: 9.2px 10px;
-    margin-left: 2px;
-    background-color: #FF6969;
-    color: white;
-    border: none;
-    border-radius: 4px;
-}
+
 
 
 @media screen and (max-width:600px) {
@@ -126,12 +78,32 @@
         margin-top: -20px;
     }
     .HeaderOne .two{
-        height: 180px;
+        height: auto;
+    }
+    .HeaderOne .two .cardeCont .li span{
+        font-size: 12px;
     }
 }
 
-@media screen and (min-width:1100px){
-    .HeaderOne .search{
+@media screen and (max-width:400px){
+    .HeaderOne .two .cardeCont .carde{
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media screen and (max-width:300px){
+    .HeaderOne .two .cardeCont .carde{
+        width: 50px;
+        height: 50px;
+    }
+    .HeaderOne .two .cardeCont .li span{
+        font-size: 10px;
+    }
+}
+
+@media screen and (min-width:775px) {
+    .HeaderOne{
         display: none;
     }
 }

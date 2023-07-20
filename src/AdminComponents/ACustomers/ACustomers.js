@@ -3,6 +3,7 @@ import "./ACustomers.css";
 import { User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function ACustomers() {
   const navigue = useNavigate();
@@ -17,14 +18,14 @@ function ACustomers() {
 
   useEffect(() => {
     axios
-      .get("https://chagona.onrender.com/getAllCommandes")
+      .get(`${BackendUrl}/getAllCommandes`)
       .then((commandes) => {
         setAllcommandes(commandes.data.commandes);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getUsers")
+      .get(`${BackendUrl}/getUsers`)
       .then((users) => {
         setAllUsers(users.data.data);
         // console.log(users.data.data);
@@ -32,13 +33,13 @@ function ACustomers() {
       .catch((error) => console.log(error));
 
     axios
-      .get("https://chagona.onrender.com/getUserProfiles")
+      .get(`${BackendUrl}/getUserProfiles`)
       .then((users) => {
         setallprofiles(users.data.data);
       })
       .catch((error) => console.log(error));
     axios
-      .get("https://chagona.onrender.com/getAllAddressByUser")
+      .get(`${BackendUrl}/getAllAddressByUser`)
       .then((users) => {
         setallAdress(users.data.data);
       })
