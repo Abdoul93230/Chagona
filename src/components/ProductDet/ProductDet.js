@@ -5,6 +5,7 @@ import "./ProductDet.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useParams } from "react-router-dom";
 import image from "../../Images/sac2.png";
 import {
   ChevronLeft,
@@ -18,7 +19,9 @@ import {
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function ProductDet({ product, allCategories, allProducts }) {
+  const params = useParams();
   const [poppup, setPoppup] = useState(false);
+  const [VP, setVp] = useState(null);
   const [commente, setCommente] = useState("");
   const [Allcommente, setAllCommente] = useState([]);
   const [etoil, setEtoil] = useState(5);
@@ -59,6 +62,17 @@ function ProductDet({ product, allCategories, allProducts }) {
 
   // Utilise la fonction selectRandomComments pour obtenir une liste de commentaires aléatoires
   const randomComments = selectRandomComments(Allcommente, 10);
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/Product/${params.id}`)
+      .then((res) => {
+        setVp(res.data.data);
+      })
+      .catch((error) => {
+        // console.log(error)
+      });
+  }, []);
 
   const envoyer = () => {
     const regexNumber = /^[0-5]$/;
@@ -411,13 +425,13 @@ function ProductDet({ product, allCategories, allProducts }) {
         <div className="midel carousel-container">
           <Slider {...settings}>
             <div className="slide">
-              <img src={image} alt="loading" />
+              <img src={VP?.image1} alt="loading" />
             </div>
             <div className="slide">
-              <img src={image} alt="loading" />
+              <img src={VP?.image2} alt="loading" />
             </div>
             <div className="slide">
-              <img src={image} alt="loading" />
+              <img src={VP?.image1} alt="loading" />
             </div>
           </Slider>
         </div>
