@@ -18,9 +18,11 @@ import {
 } from "react-feather";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
-function ProductDet({ product, allCategories, allProducts }) {
+function ProductDet({ product }) {
   const params = useParams();
   const [poppup, setPoppup] = useState(false);
+  const [allCategories, setAllCategories] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [VP, setVp] = useState(null);
   const [commente, setCommente] = useState("");
   const [Allcommente, setAllCommente] = useState([]);
@@ -71,6 +73,24 @@ function ProductDet({ product, allCategories, allProducts }) {
       })
       .catch((error) => {
         // console.log(error)
+      });
+
+    axios
+      .get(`${BackendUrl}/getAllCategories`)
+      .then((Categories) => {
+        setAllCategories(Categories.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get(`${BackendUrl}/products`)
+      .then((Categories) => {
+        setAllProducts(Categories.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
       });
   }, []);
 
@@ -252,7 +272,7 @@ function ProductDet({ product, allCategories, allProducts }) {
         <div className="color">
           <h3>SELECT COLOR : {color ? color : ""}</h3>
           <div className="col">
-            {product?.couleur[0].split(",").map((param, index) => (
+            {VP?.couleur[0].split(",").map((param, index) => (
               <span
                 key={index}
                 style={{
@@ -267,7 +287,7 @@ function ProductDet({ product, allCategories, allProducts }) {
         <div className="size">
           <h3>SELECT SIZE (US) : {taille ? taille : ""}</h3>
           <div className="siz">
-            {product?.taille[0].split(",").map((param, index) => {
+            {VP?.taille[0].split(",").map((param, index) => {
               return (
                 <span key={index} onClick={() => setTaille(param)}>
                   {param}
@@ -283,7 +303,7 @@ function ProductDet({ product, allCategories, allProducts }) {
           <tr>
             <td style={{ textAlign: "left" }}>
               <h2>Brand</h2>
-              <p>{product?.marque}</p>
+              <p>{VP?.marque}</p>
             </td>
             <td style={{ textAlign: "right" }}>
               <h2>Categoriy</h2>
@@ -302,7 +322,7 @@ function ProductDet({ product, allCategories, allProducts }) {
           </tr>
         </table>
         <div className="detplus" onClick={plust}>
-          <p>{product.description}</p>
+          <p>{VP?.description}</p>
           <span onClick={plust}>
             {plus ? (
               <ChevronUp onClick={plust} />
