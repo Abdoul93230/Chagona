@@ -307,7 +307,11 @@ function ProductDet({ product }) {
             </td>
             <td style={{ textAlign: "right" }}>
               <h2>Categoriy</h2>
-              <p>{Categorie ? Categorie : ""}</p>
+              <p>
+                {allCategories
+                  ? allCategories.find((item) => item?._id === CVCate)?.name
+                  : null}
+              </p>
             </td>
           </tr>
           <tr>
@@ -428,9 +432,9 @@ function ProductDet({ product }) {
               <ChevronLeft style={{ width: "30px", height: "30px" }} />
             </li>
             <li className="NP">
-              <h6>{product?.name}</h6>
+              <h6>{VP?.name}</h6>
               <h5>
-                ${product?.prix}{" "}
+                ${VP?.prix}{" "}
                 <span>
                   <Star style={{ width: "12px" }} />
                   4.9
