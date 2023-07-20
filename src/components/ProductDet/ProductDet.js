@@ -410,13 +410,13 @@ function ProductDet({ product, allCategories, allProducts }) {
         <div className="midel carousel-container">
           <Slider {...settings}>
             <div className="slide">
-              <img src={product?.image1} alt="loading" />
+              <img src={product.image1} alt="loading" />
             </div>
             <div className="slide">
-              <img src={product?.image2} alt="loading" />
+              <img src={product.image2} alt="loading" />
             </div>
             <div className="slide">
-              <img src={product?.image1} alt="loading" />
+              <img src={product.image1} alt="loading" />
             </div>
           </Slider>
         </div>
