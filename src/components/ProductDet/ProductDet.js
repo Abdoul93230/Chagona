@@ -188,6 +188,7 @@ function ProductDet({ product }) {
       ...existingProducts,
       {
         ...product,
+        // id:pro
         colors: [color], // Ajouter la couleur sélectionnée comme tableau
         sizes: [taille], // Ajouter la taille sélectionnée comme tableau
         quantity: 1,
