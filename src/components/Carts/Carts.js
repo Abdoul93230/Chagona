@@ -67,6 +67,18 @@ function Carts({ op }) {
     updatedProducts[index].quantity += 1;
     setProduits(updatedProducts);
     localStorage.setItem("panier", JSON.stringify(updatedProducts));
+    const local = localStorage.getItem("panier");
+    if (local) {
+      setProduits(JSON.parse(local));
+      // console.log(JSON.parse(local).filter((param) => param.id));
+      const a = JSON.parse(local).map((para) => para.id);
+      setProduitIds(a);
+      // console.log(produitIds);
+    } else {
+      setVide(
+        "Aucune produits selectionner veuiller vous rendre dans la section Orders pour vos commandes !"
+      );
+    }
   };
 
   const decrementQuantity = (index) => {
@@ -79,6 +91,18 @@ function Carts({ op }) {
       updatedProducts.splice(index, 1); // Supprimer le produit du panier
       setProduits(updatedProducts);
       localStorage.setItem("panier", JSON.stringify(updatedProducts));
+    }
+    const local = localStorage.getItem("panier");
+    if (local) {
+      setProduits(JSON.parse(local));
+      // console.log(JSON.parse(local).filter((param) => param.id));
+      const a = JSON.parse(local).map((para) => para.id);
+      setProduitIds(a);
+      // console.log(produitIds);
+    } else {
+      setVide(
+        "Aucune produits selectionner veuiller vous rendre dans la section Orders pour vos commandes !"
+      );
     }
   };
 

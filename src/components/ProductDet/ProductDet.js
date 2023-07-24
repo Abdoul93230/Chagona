@@ -172,6 +172,12 @@ function ProductDet({ product }) {
 
       localStorage.setItem("panier", JSON.stringify(updatedProducts));
       alert("La quantité du produit a été incrémentée dans le panier !");
+      const local = localStorage.getItem("panier");
+      if (local) {
+        setProduitsL(JSON.parse(local));
+      } else {
+        setProduitsL(0);
+      }
       return;
     }
 
@@ -199,6 +205,12 @@ function ProductDet({ product }) {
 
     localStorage.setItem("panier", JSON.stringify(updatedProducts));
     alert("Produit ajouté au panier !");
+    const local = localStorage.getItem("panier");
+    if (local) {
+      setProduitsL(JSON.parse(local));
+    } else {
+      setProduitsL(0);
+    }
   };
 
   const [allTypes, setAllTypes] = useState(null);
