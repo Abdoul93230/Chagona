@@ -164,6 +164,7 @@ function ProductDet({ product }) {
             colors: updatedColors,
             sizes: updatedSizes,
             quantity: p.quantity + 1,
+            id: params.id,
           };
         }
         return p;

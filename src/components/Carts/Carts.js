@@ -106,7 +106,7 @@ function Carts({ op }) {
                     <span onClick={() => incrementQuantity(index)}>+</span>
                   </button>
                   <h5 style={{ display: "inline-block", fontWeight: "bold" }}>
-                    TT {totalPrice} f
+                    TT {totalPrice} f {param.id}
                   </h5>
                 </div>
               </div>
