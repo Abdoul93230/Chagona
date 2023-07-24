@@ -131,7 +131,7 @@ function CartCheckout({ op }) {
       let prod = [];
       for (let i = 0; i < pane.length; i++) {
         let ob = {
-          produit: pane[i]?._id,
+          produit: pane[i]?.id,
           quantite: pane[i]?.quantity,
           tailles: pane[i]?.sizes,
           couleurs: pane[i]?.colors,
