@@ -148,10 +148,10 @@ function CartCheckout({ op }) {
         .post(`${BackendUrl}/createCommande`, data)
         .then((res) => {
           // alert(res.data.message);
+          localStorage.removeItem("panier");
         })
         .catch((error) => console.log(error));
     }
-    localStorage.removeItem("panier");
   };
 
   const navigue = useNavigate();
