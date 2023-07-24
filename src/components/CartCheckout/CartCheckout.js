@@ -92,8 +92,7 @@ function CartCheckout({ op }) {
   };
 
   let prix = calculateTotalPrice();
-  let price;
-  let totalPrice;
+
   let pric = 0;
   let total = 0;
 
@@ -225,8 +224,6 @@ function CartCheckout({ op }) {
                 : allProducts?.find((item) => item._id === param.id).prix;
             total += pric * param.quantity;
 
-            price = param.prixPromo > 0 ? param.prixPromo : param.prix;
-            totalPrice = price * param.quantity;
             return (
               <div key={index} className="items">
                 <img
@@ -244,8 +241,9 @@ function CartCheckout({ op }) {
                     {allProducts?.find((item) => item._id === param.id)
                       .prixPromo > 0
                       ? allProducts?.find((item) => item._id === param.id)
-                          .prixPromo
-                      : allProducts?.find((item) => item._id === param.id).prix}
+                          .prixPromo * param.quantity
+                      : allProducts?.find((item) => item._id === param.id)
+                          .prix * param.quantity}
                     <button>
                       <span onClick={() => decrementQuantity(index)}>
                         <Minus />
