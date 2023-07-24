@@ -141,7 +141,7 @@ function CartCheckout({ op }) {
       const data = {
         clefUser: a.id,
         nbrProduits: prod,
-        prix: prix,
+        prix: total,
       };
 
       axios
