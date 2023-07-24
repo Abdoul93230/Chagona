@@ -22,6 +22,7 @@ function CartCheckout({ op }) {
   const [region, setRegion] = useState("");
   const [Quartier, setQuartier] = useState("");
   const [plus, setPlus] = useState("");
+  const [allProducts, setAllProduits] = useState(null);
 
   const [produits, setProduits] = useState(null);
 
@@ -68,6 +69,15 @@ function CartCheckout({ op }) {
         }
       })
       .catch((error) => {});
+
+    axios
+      .get(`${BackendUrl}/products`)
+      .then((products) => {
+        setAllProduits(products.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
   }, []);
 
   const calculateTotalPrice = () => {
@@ -84,6 +94,8 @@ function CartCheckout({ op }) {
   let prix = calculateTotalPrice();
   let price;
   let totalPrice;
+  let pric = 0;
+  let total = 0;
 
   const incrementQuantity = (index) => {
     const updatedProducts = [...produits];
@@ -207,15 +219,33 @@ function CartCheckout({ op }) {
               return null; // Ne pas afficher le produit si la quantité est 0
             }
 
+            pric =
+              allProducts?.find((item) => item._id === param.id).prixPromo > 0
+                ? allProducts?.find((item) => item._id === param.id).prixPromo
+                : allProducts?.find((item) => item._id === param.id).prix;
+            total += pric * param.quantity;
+
             price = param.prixPromo > 0 ? param.prixPromo : param.prix;
             totalPrice = price * param.quantity;
             return (
               <div key={index} className="items">
-                <img src={param.image1} alt="loading" />
+                <img
+                  src={
+                    allProducts?.find((item) => item._id === param.id).image1
+                  }
+                  alt="loading"
+                />
                 <div className="det">
-                  <h4>{param.name}</h4>
+                  <h4>
+                    {allProducts?.find((item) => item._id === param.id).name}
+                  </h4>
                   <h6>
-                    $ {totalPrice}
+                    ${" "}
+                    {allProducts?.find((item) => item._id === param.id)
+                      .prixPromo > 0
+                      ? allProducts?.find((item) => item._id === param.id)
+                          .prixPromo
+                      : allProducts?.find((item) => item._id === param.id).prix}
                     <button>
                       <span onClick={() => decrementQuantity(index)}>
                         <Minus />
@@ -244,7 +274,7 @@ function CartCheckout({ op }) {
         <div className="place">
           <div className="left">
             <h4>Total</h4>
-            <h3>${prix} F</h3>
+            <h3>${total} F</h3>
             <h5>Free Domestic Shipping</h5>
           </div>
           <button
