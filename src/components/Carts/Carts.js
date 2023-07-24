@@ -5,8 +5,10 @@ import Navbar from "../NaveBar/Navbar";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function Carts({ op }) {
   const navigue = new useNavigate();
   const message = () => {
@@ -14,6 +16,8 @@ function Carts({ op }) {
   };
 
   const [produits, setProduits] = useState(null);
+  const [produitIds, setProduitIds] = useState(null);
+  const [allProducts, setAllProduits] = useState(null);
   const [Vide, setVide] = useState(null);
 
   const calculateTotalPrice = () => {
@@ -27,19 +31,35 @@ function Carts({ op }) {
     return total;
   };
 
-  let prix = calculateTotalPrice();
+  // let prix = calculateTotalPrice();
+  let prix;
   let price;
   let totalPrice;
+  let pric = 0;
+  let total = 0;
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
     if (local) {
       setProduits(JSON.parse(local));
+      // console.log(JSON.parse(local).filter((param) => param.id));
+      const a = JSON.parse(local).map((para) => para.id);
+      setProduitIds(a);
+      // console.log(produitIds);
     } else {
       setVide(
         "Aucune produits selectionner veuiller vous rendre dans la section Orders pour vos commandes !"
       );
     }
+
+    axios
+      .get(`${BackendUrl}/products`)
+      .then((products) => {
+        setAllProduits(products.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
+      });
   }, []);
 
   const incrementQuantity = (index) => {
@@ -82,22 +102,56 @@ function Carts({ op }) {
               return null; // Ne pas afficher le produit si la quantité est 0
             }
 
-            price = param.prixPromo > 0 ? param.prixPromo : param.prix;
+            pric =
+              allProducts?.find((item) => item._id === param.id).prixPromo > 0
+                ? allProducts?.find((item) => item._id === param.id).prixPromo
+                : allProducts?.find((item) => item._id === param.id).prix;
+            total += pric * param.quantity;
+
+            price =
+              allProducts?.find((item) => item._id === param.id).prixPromo > 0
+                ? allProducts?.find((item) => item._id === param.id).prixPromo
+                : allProducts?.find((item) => item._id === param.id).prix;
             totalPrice = price * param.quantity;
 
             return (
               <div key={index} className="carde">
-                <img src={param.image1} alt="loading" />
+                <img
+                  src={
+                    allProducts?.find((item) => item._id === param.id).image1
+                  }
+                  alt="loading"
+                />
                 <div className="det">
-                  <h3>{param.name}</h3>
+                  <h3>
+                    {allProducts?.find((item) => item._id === param.id).name}
+                  </h3>
                   {param.prixPromo > 0 ? (
                     <>
-                      <h4 className="Lh">$ {param.prix}</h4>
-                      <h5>$$ {param.prixPromo}</h5>
+                      <h4 className="Lh">
+                        ${" "}
+                        {
+                          allProducts?.find((item) => item._id === param.id)
+                            .prix
+                        }
+                      </h4>
+                      <h5>
+                        $${" "}
+                        {
+                          allProducts?.find((item) => item._id === param.id)
+                            .prixPromo
+                        }
+                      </h5>
                     </>
                   ) : (
                     <>
-                      <h5>$ {param.prix}</h5>
+                      <h5>
+                        ${" "}
+                        {
+                          allProducts?.find((item) => item._id === param.id)
+                            .prix
+                        }
+                      </h5>
                     </>
                   )}
                   <button>
@@ -106,7 +160,7 @@ function Carts({ op }) {
                     <span onClick={() => incrementQuantity(index)}>+</span>
                   </button>
                   <h5 style={{ display: "inline-block", fontWeight: "bold" }}>
-                    TT {totalPrice} f {param.id}
+                    TT {totalPrice} f
                   </h5>
                 </div>
               </div>
@@ -127,7 +181,7 @@ function Carts({ op }) {
           <div className="bottom">
             <div className="left">
               <h2>Total</h2>
-              <h3>${prix}</h3>
+              <h3>${total}</h3>
               <h4>Free Bomestic shipping</h4>
             </div>
             <div className="right">

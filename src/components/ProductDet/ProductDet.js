@@ -193,6 +193,7 @@ function ProductDet({ product }) {
         colors: [color], // Ajouter la couleur sélectionnée comme tableau
         sizes: [taille], // Ajouter la taille sélectionnée comme tableau
         quantity: 1,
+        id: params.id,
       },
     ];
 
