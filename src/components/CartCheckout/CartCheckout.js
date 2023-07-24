@@ -129,12 +129,12 @@ function CartCheckout({ op }) {
     if (local) {
       const pane = JSON.parse(local);
       let prod = [];
-      for (let i = 0; i < pane.length; i++) {
+      for (let i = 0; i < produits.length; i++) {
         let ob = {
-          produit: pane[i]?.id,
-          quantite: pane[i]?.quantity,
-          tailles: pane[i]?.sizes,
-          couleurs: pane[i]?.colors,
+          produit: produits[i]?.id,
+          quantite: produits[i]?.quantity,
+          tailles: produits[i]?.sizes,
+          couleurs: produits[i]?.colors,
         };
         prod.push(ob);
       }
@@ -143,6 +143,8 @@ function CartCheckout({ op }) {
         nbrProduits: prod,
         prix: total,
       };
+
+      console.log(data);
 
       axios
         .post(`${BackendUrl}/createCommande`, data)
