@@ -151,11 +151,11 @@ function ProductDet({ product }) {
   const AddProduct = () => {
     const existingProducts = JSON.parse(localStorage.getItem("panier")) || [];
 
-    const isProductInCart = existingProducts.some((p) => p._id === product._id);
+    const isProductInCart = existingProducts.some((p) => p.id === product._id);
 
     if (isProductInCart) {
       const updatedProducts = existingProducts.map((p) => {
-        if (p._id === product._id) {
+        if (p.id === product._id) {
           const updatedColors = [...p.colors, color]; // Ajouter la nouvelle couleur
           const updatedSizes = [...p.sizes, taille]; // Ajouter la nouvelle taille
 
