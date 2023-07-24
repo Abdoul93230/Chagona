@@ -436,13 +436,29 @@ function ProductDet({ product }) {
             </li>
             <li className="NP">
               <h6>{VP?.name}</h6>
-              <h5>
-                ${VP?.prix}{" "}
-                <span>
-                  <Star style={{ width: "12px" }} />
-                  4.9
-                </span>
-              </h5>
+              {VP?.prixPromo > 0 ? (
+                <>
+                  <span>
+                    <s>$ {VP?.prix}</s>
+                  </span>
+                  <br />
+                  <h5>
+                    ${VP?.prixPromo}{" "}
+                    <span>
+                      <Star style={{ width: "12px" }} />
+                      4.9
+                    </span>
+                  </h5>
+                </>
+              ) : (
+                <h5>
+                  ${VP?.prix}{" "}
+                  <span>
+                    <Star style={{ width: "12px" }} />
+                    4.9
+                  </span>
+                </h5>
+              )}
             </li>
             <li className="Scarde" onClick={() => navigue("/Cart")}>
               <ShoppingCart /> <span>{produitsL ? produitsL.length : 0}</span>

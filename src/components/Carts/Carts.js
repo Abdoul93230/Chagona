@@ -126,7 +126,8 @@ function Carts({ op }) {
                   <h3>
                     {allProducts?.find((item) => item._id === param.id).name}
                   </h3>
-                  {param.prixPromo > 0 ? (
+                  {allProducts?.find((item) => item._id === param.id)
+                    .prixPromo > 0 ? (
                     <>
                       <h4 className="Lh">
                         ${" "}
