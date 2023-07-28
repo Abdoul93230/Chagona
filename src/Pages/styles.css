@@ -12,3 +12,27 @@
     z-index: 9999; /* Ensure the loading indicator is on top of everything */
   }
   
+.home{
+  position: relative;
+}
+  .home .scroll-to-top-button{
+    color: #FF6969;
+    position: fixed;
+    bottom: 60px;
+    right: 5px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50% ;
+    border: none;
+    background-color: #FF6969;
+    color: white;
+    z-index: 100;
+}
+
+.home .scroll-to-top-button .i{
+    width: 40px;
+    height: 40px;
+}

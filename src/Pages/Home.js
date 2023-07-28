@@ -8,11 +8,15 @@ import Galeries from "../components/Galeries/Galeries";
 import ConteProduits from "../components/ConteProduits/ConteProduits";
 import Footer from "../components/Footer/Footer";
 import axios from "axios";
+import { animateScroll as scroll } from "react-scroll";
 import HomeTop from "../components/HomeTop/HomeTop";
 import LoadingIndicator from "./LoadingIndicator ";
 import { shuffle } from "lodash";
+import { ChevronUp } from "react-feather";
+import "./styles.css";
 
 function Home({ allCategories, allProducts }) {
+  const [showButton, setShowButton] = useState(false);
   const [allTypes, setAllTypes] = useState([]);
   function getRandomElements(array) {
     const shuffledArray = shuffle(array);
@@ -40,8 +44,36 @@ function Home({ allCategories, allProducts }) {
     ? allCategories.find((item) => item.name === "electronics")
     : null;
 
+  // Gestionnaire pour faire défiler vers le haut de la page
+  const scrollToTop = () => {
+    scroll.scrollToTop({
+      smooth: true, // Faire défiler en douceur
+      duration: 1000, // Durée de l'animation en millisecondes
+    });
+  };
+
+  // Gestionnaire d'effet pour contrôler l'affichage du bouton en fonction du défilement de la page
+  useEffect(() => {
+    const handleScroll = () => {
+      // Afficher le bouton lorsque l'utilisateur a fait défiler plus de 50 pixels
+      if (window.scrollY > 50) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    // Ajouter un écouteur d'événement de défilement
+    window.addEventListener("scroll", handleScroll);
+
+    // Nettoyage de l'écouteur d'événement lorsque le composant est démonté
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <>
+    <div className="home">
       <LoadingIndicator time={3000}>
         <HomeTop />
         <HeaderOne categories={allCategories} />
@@ -120,10 +152,16 @@ function Home({ allCategories, allProducts }) {
             );
           else return null;
         })}
-        <Footer />
+        <Footer scroll={scrollToTop} />
         <Navbar />
       </LoadingIndicator>
-    </>
+
+      {showButton && (
+        <button onClick={scrollToTop} className="scroll-to-top-button">
+          <ChevronUp className="i" />
+        </button>
+      )}
+    </div>
   );
 }
 

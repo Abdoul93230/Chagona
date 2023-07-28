@@ -17,6 +17,7 @@ import OrderDet from "./components/OrderDet/OrderDet";
 import axios from "axios";
 import Myorders from "./Pages/Myorders";
 import { useState, useEffect } from "react";
+import ContactUs from "./components/ContactUs/ContactUs";
 import "reactjs-popup/dist/index.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -71,7 +72,16 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Connection chg={changeA} />} />
+          <Route
+            path="/"
+            element={
+              acces === "oui" ? (
+                <Home allCategories={allCategories} allProducts={allProducts} />
+              ) : (
+                <Connection chg={changeA} />
+              )
+            }
+          />
           <Route
             path="/Home"
             element={
@@ -82,6 +92,14 @@ function App() {
               )
             }
           />
+
+          <Route
+            path="/ContactUs"
+            element={
+              acces === "oui" ? <ContactUs /> : <Connection chg={changeA} />
+            }
+          />
+
           <Route
             path="/Messages"
             element={

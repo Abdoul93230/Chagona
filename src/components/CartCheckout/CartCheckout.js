@@ -144,7 +144,7 @@ function CartCheckout({ op }) {
         prix: total,
       };
 
-      console.log(data);
+      // console.log(data);
 
       axios
         .post(`${BackendUrl}/createCommande`, data)

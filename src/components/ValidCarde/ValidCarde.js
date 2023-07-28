@@ -1,8 +1,10 @@
 import React from "react";
 import "./ValidCarde.css";
+import { useNavigate } from "react-router-dom";
 import { Check, ChevronRight } from "react-feather";
 
 function ValidCarde({ op }) {
+  const navigue = useNavigate();
   return (
     <div className="ValidCarde">
       <div className="carde">
@@ -14,7 +16,7 @@ function ValidCarde({ op }) {
           Your order was placed successfully. For more details, check All My
           Orders page under Profile tab
         </p>
-        <button onClick={() => op("un")}>
+        <button onClick={() => navigue("/Order")}>
           my Orders{" "}
           <span>
             <ChevronRight />

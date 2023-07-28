@@ -1,0 +1,57 @@
+.Frequestion{
+    width: 100%;
+    height: auto;
+}
+
+.Frequestion h2{
+    color: #515C6F;
+    text-align: left;
+    padding-left: 10px;
+    margin-top: 50px;
+}
+
+.Frequestion span{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #FF6969;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Frequestion span .i{
+    width: 40px ;
+    height: 40px;
+}
+
+
+.Frequestion ul{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding: 8px;
+
+}
+.Frequestion ul li{
+    list-style-type: none;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(255, 72, 0, 0.397);
+}
+
+.Frequestion ul p{
+    text-align: left;
+    border: 1px solid rgba(255, 72, 0, 0.397);
+    padding: 8px;
+    color: #515C6F;
+    font-weight: 600;
+}

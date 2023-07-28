@@ -3,9 +3,34 @@ import "./SingnUp.css";
 import axios from "axios";
 import { ChevronRight, Menu, MessageSquare, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function SingnUp({ chg }) {
+  const handleAlert = (message) => {
+    toast.success(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const handleAlertwar = (message) => {
+    toast.warn(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
   const navigue = useNavigate();
   //////////////// verification des information et creation de l'utilisateur  ///////////////////////////
 
@@ -25,13 +50,15 @@ function SingnUp({ chg }) {
     const password = passwordInput.value.trim();
 
     if (name === "" || name.length < 3) {
-      alert("Veuillez entrer un nom valide au moins 3 string.");
+      handleAlertwar("Veuillez entrer un nom valide au moins 3 string.");
       return false;
     } else if (email === "" || !validateEmail(email)) {
-      alert("Veuillez entrer une adresse e-mail valide.");
+      handleAlertwar("Veuillez entrer une adresse e-mail valide.");
       return false;
     } else if (password === "" || password.length < 6) {
-      alert("Veuillez entrer un mot de passe valide au moins 6 carracters.");
+      handleAlertwar(
+        "Veuillez entrer un mot de passe valide au moins 6 carracters."
+      );
       return false;
     } else {
       axios
@@ -41,17 +68,17 @@ function SingnUp({ chg }) {
           email: email,
         })
         .then((response) => {
-          alert(response.data.message);
+          handleAlert(response.data.message);
           chg("oui");
           navigue("/Home");
         })
         .catch((error) => {
           if (error.response.status === 400) {
-            alert(error.response.data.error);
+            handleAlertwar(error.response.data.error);
             return;
           }
           if (error.response.status === 409) {
-            alert(error.response.data.message);
+            handleAlertwar(error.response.data.message);
             return;
           }
           // console.log(error.response.data.message);
@@ -112,6 +139,9 @@ function SingnUp({ chg }) {
         By creating an account, you agree to our <span>Terms of Service</span>{" "}
         and <span>Privacy Policy</span>
       </p>
+      <div>
+        <ToastContainer />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,91 @@
+.ContactUs{
+    width: 100%;
+    height: 100vh;
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(49,9,121,1) 26%, rgba(0,212,255,0.9009978991596639) 100%);
+}
+
+.ContactUs h2{
+    color: #d6e1f5;
+    padding-top: 10px;
+
+}
+
+.ContactUs form{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    padding: 10px;
+    position: relative;
+}
+.ContactUs form .formGroup{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items:  center;
+    margin-bottom: 15px;
+}
+.ContactUs form .formGroup input{
+    width: 48%;
+    border: 2px solid #515C6F;
+    padding: 10px 4px;
+    background: rgb(0,36,32);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 5px;
+
+}
+
+.ContactUs form textarea{
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    border: 2px solid #515C6F;
+    background-color: transparent;
+    background: rgb(0,36,32);
+    color: white;
+    border-radius: 5px;
+}
+
+.ContactUs form input[type="submit"]{
+    padding: 10px 20px;
+    border: none;
+    font-weight: bold;
+    background: rgb(0,36,32);
+background: linear-gradient(90deg, rgba(0,36,32,0.8169642857142857) 0%, rgba(23,121,9,1) 38%, rgba(0,255,190,0.9009978991596639) 100%);
+color: white;
+margin-top: 10px;
+cursor: pointer;
+position: absolute;
+bottom: -30px;
+right: 5px;
+    
+}
+
+.ContactUs ul{
+    width: 100%;
+    height: auto;
+    margin-top: 60px;
+}
+.ContactUs ul li{
+    font-weight: bold;
+}
+.ContactUs ul li:last-child{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.ContactUs ul li:last-child a{
+    margin: 0px 10px;
+    cursor: pointer;
+}

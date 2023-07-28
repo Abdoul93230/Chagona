@@ -44,7 +44,7 @@ function Mores() {
             name: "Notification settings",
             link: "/More/Notification_settings",
           },
-          { name: "privacy policy", link: "/More/privacy_policy" },
+          { name: "privacy notice", link: "/More/privacy_notice" },
           {
             name: "frequently asked questions",
             link: "/More/frequently_asked_questions",

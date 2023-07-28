@@ -3,9 +3,34 @@ import { ChevronRight, Menu, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LogIn.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function LogIn({ chg }) {
+  const handleAlert = (message) => {
+    toast.success(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const handleAlertwar = (message) => {
+    toast.warn(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -39,16 +64,17 @@ function LogIn({ chg }) {
       .then((user) => {
         console.log(user);
         if (user.status === 200) {
-          alert(user.data.message);
+          handleAlert(user.data.message);
           chg("oui");
           navigue("/Home");
           localStorage.setItem(`userEcomme`, JSON.stringify(user.data));
         } else {
-          alert(user.data.message);
+          handleAlertwar(user.data.message);
         }
       })
       .catch((error) => {
-        if (error.response.status === 400) alert(error.response.data.message);
+        if (error.response.status === 400)
+          handleAlertwar(error.response.data.message);
         else console.log(error.response);
       });
   };
@@ -95,6 +121,9 @@ function LogIn({ chg }) {
       <p>
         Don't have an account? Swipe right to <span>create a new account</span>
       </p>
+      <div>
+        <ToastContainer />
+      </div>
     </div>
   );
 }

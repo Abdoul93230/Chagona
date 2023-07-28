@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import "./SearchTwo.css";
-import { ChevronLeft, ChevronRight, Filter, Star, X } from "react-feather";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
+  Filter,
+  Star,
+  X,
+} from "react-feather";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { animateScroll as scroll } from "react-scroll";
 import axios from "axios";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function SearchTwo({ op, allCategories, allProducts }) {
+  const [showButton, setShowButton] = useState(false);
   const navigue = useNavigate();
   const [poppup, setPoppup] = useState(false);
   const [show, setShow] = useState(null);
@@ -17,6 +26,34 @@ function SearchTwo({ op, allCategories, allProducts }) {
   const [sh, setSh] = useState(true);
   const Categories = [];
   const [Brands, setBrands] = useState([]);
+
+  // Gestionnaire pour faire défiler vers le haut de la page
+  const scrollToTop = () => {
+    scroll.scrollToTop({
+      smooth: true, // Faire défiler en douceur
+      duration: 500, // Durée de l'animation en millisecondes
+    });
+  };
+
+  // Gestionnaire d'effet pour contrôler l'affichage du bouton en fonction du défilement de la page
+  useEffect(() => {
+    const handleScroll = () => {
+      // Afficher le bouton lorsque l'utilisateur a fait défiler plus de 50 pixels
+      if (window.scrollY > 50) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    };
+
+    // Ajouter un écouteur d'événement de défilement
+    window.addEventListener("scroll", handleScroll);
+
+    // Nettoyage de l'écouteur d'événement lorsque le composant est démonté
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const searchProductByName = () => {
     if (searchName.length <= 1) {
@@ -152,11 +189,10 @@ function SearchTwo({ op, allCategories, allProducts }) {
               defaultValue={searchName}
               onChange={(e) => {
                 setSearchName(e.target.value);
-                searchProductByName();
               }}
               placeholder="Shirts"
             />
-            {/* <input type="submit" value="search" /> */}
+            <input type="submit" value="search" />
           </form>
           <span className="r">
             <Filter onClick={menu} style={{ display: "none" }} />
@@ -175,6 +211,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
                   onClick={() => {
                     setShow(param);
                     setSh(true);
+                    setErreur(null);
                   }}
                 >
                   {param.name}
@@ -221,7 +258,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
                 </div>
               );
             })}
-        {erreur ? <h2>{erreur}</h2> : ""}
+        {erreur && !products ? <h2>{erreur}</h2> : ""}
       </div>
 
       {/* filtre */}
@@ -281,6 +318,12 @@ function SearchTwo({ op, allCategories, allProducts }) {
         </div>
       ) : (
         <></>
+      )}
+
+      {showButton && (
+        <button onClick={scrollToTop} className="scroll-to-top-button">
+          <ChevronUp className="i" />
+        </button>
       )}
     </div>
   );

@@ -16,6 +16,8 @@ import {
   ChevronDown,
   X,
 } from "react-feather";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function ProductDet({ product }) {
@@ -36,6 +38,30 @@ function ProductDet({ product }) {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     return `${year}/${month}/${day}`;
+  };
+
+  const handleAlert = (message) => {
+    toast.success(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const handleAlertwar = (message) => {
+    toast.warn(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const [produitsL, setProduitsL] = useState(0);
@@ -96,16 +122,16 @@ function ProductDet({ product }) {
 
   const envoyer = () => {
     const regexNumber = /^[0-5]$/;
-    if (commente.trim().length < 5) {
-      alert("votre commentaire doit contenire au moin 5 carracteres.");
+    if (commente.trim().length < 3) {
+      handleAlertwar("votre commentaire doit contenire au moin 3 carracteres.");
       return;
     }
     if (!etoil) {
-      alert("veuiller noter ce produit s'il vous plait.");
+      handleAlertwar("veuiller noter ce produit s'il vous plait.");
       return;
     }
     if (!regexNumber.test(etoil.toString())) {
-      alert("forma de note non valid de 1 a 5 s'il vous plait!");
+      handleAlertwar("forma non valid de 1 a 5 s'il vous plait!");
       return;
     }
     axios
@@ -171,7 +197,7 @@ function ProductDet({ product }) {
       });
 
       localStorage.setItem("panier", JSON.stringify(updatedProducts));
-      alert("La quantité du produit a été incrémentée dans le panier !");
+      handleAlert("La quantité du produit a été incrémentée dans le panier !");
       const local = localStorage.getItem("panier");
       if (local) {
         setProduitsL(JSON.parse(local));
@@ -182,12 +208,12 @@ function ProductDet({ product }) {
     }
 
     if (!color) {
-      alert("Veuillez choisir une couleur !");
+      handleAlertwar("Veuillez choisir une couleur !");
       return;
     }
 
     if (!taille) {
-      alert("Veuillez choisir une taille !");
+      handleAlertwar("Veuillez choisir une taille !");
       return;
     }
 
@@ -195,7 +221,6 @@ function ProductDet({ product }) {
       ...existingProducts,
       {
         ...product,
-        // id:pro
         colors: [color], // Ajouter la couleur sélectionnée comme tableau
         sizes: [taille], // Ajouter la taille sélectionnée comme tableau
         quantity: 1,
@@ -204,7 +229,7 @@ function ProductDet({ product }) {
     ];
 
     localStorage.setItem("panier", JSON.stringify(updatedProducts));
-    alert("Produit ajouté au panier !");
+    handleAlert("Produit ajouté au panier !");
     const local = localStorage.getItem("panier");
     if (local) {
       setProduitsL(JSON.parse(local));
@@ -440,6 +465,7 @@ function ProductDet({ product }) {
 
   return (
     <div className="ProductDet">
+      <ToastContainer />
       <div className="conte">
         <div className="top">
           <ul>
