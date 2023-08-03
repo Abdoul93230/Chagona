@@ -71,28 +71,22 @@ function ProductDet({ product }) {
     productURL,
     productImageURL
   ) => {
-    // Ajouter l'image du produit à la fin du message WhatsApp
     const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
     const encodedMessage = encodeURIComponent(message);
 
-    // Générer le lien de partage sur WhatsApp
     const whatsappWebURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
 
-    // Vérifier si le navigateur prend en charge les schémas personnalisés
     const isCustomSchemeSupported =
       /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
         navigator.userAgent
       );
 
-    // Vérifier si WhatsApp est installé sur l'appareil
     const isWhatsAppInstalled =
       isCustomSchemeSupported && window.open(whatsappWebURL, "_blank");
 
     if (isWhatsAppInstalled) {
-      // Ouvrir l'application WhatsApp sur l'appareil mobile
       window.location.href = whatsappWebURL;
     } else {
-      // Afficher un message d'erreur ou une alternative
       alert(
         "WhatsApp n'est pas installé. Veuillez copier le lien et l'envoyer manuellement."
       );
