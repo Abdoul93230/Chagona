@@ -75,35 +75,22 @@ function ProductDet({ product }) {
     const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
     const encodedMessage = encodeURIComponent(message);
 
-    // Générer le lien de partage sur WhatsApp pour la version web
-    const whatsappWebURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
-
-    // Vérifier si le navigateur prend en charge les schémas personnalisés (mobile)
-    const isCustomSchemeSupported =
+    // Vérifier si l'utilisateur est sur mobile
+    const isMobile =
       /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
         navigator.userAgent
       );
-    // alert(isCustomSchemeSupported);
 
-    if (isCustomSchemeSupported) {
-      // Si c'est sur mobile
-      const isWhatsAppInstalled = window.open(whatsappWebURL, "_blank");
-      alert(isWhatsAppInstalled);
-      if (isWhatsAppInstalled) {
-        // Ouvrir l'application WhatsApp sur l'appareil mobile
-        window.location.href = whatsappWebURL;
-      } else {
-        // Redirection vers la version web si WhatsApp n'est pas installé
-        window.location.href = whatsappWebURL;
-      }
+    // Générer le lien de partage sur WhatsApp pour le Web
+    const whatsappWebURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
+
+    if (isMobile) {
+      // Si sur mobile, utiliser le schéma whatsapp:// pour ouvrir WhatsApp
+      const whatsappAppURL = `whatsapp://send?text=${encodedMessage}`;
+      window.location.href = whatsappAppURL;
     } else {
-      // Si c'est sur desktop
-      const isWhatsAppInstalled = window.open(whatsappWebURL, "_blank");
-
-      if (!isWhatsAppInstalled) {
-        // Redirection vers la version web si WhatsApp n'est pas installé sur desktop
-        window.location.href = whatsappWebURL;
-      }
+      // Si sur desktop, simplement afficher le lien
+      window.open(whatsappWebURL, "_blank");
     }
   };
 
