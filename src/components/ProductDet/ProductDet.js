@@ -550,6 +550,12 @@ function ProductDet({ product }) {
     <div className="ProductDet">
       <Helmet>
         <title>{VP?.name}</title>
+        {/* <link rel="icon" href="/chemin/vers/votre/nouveau/favicon.ico" /> */}
+        {/* <link
+          rel="icon"
+          type="image/png"
+          href="https://th.bing.com/th/id/R.07634369c265cb9c87761ae5ec77aac6?rik=yEai0DxVsc3%2bWA&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_250767.png&ehk=Yl85h2TaR4cKtYZI3C3sPViX6XzEYR7CD5TRQECDHQU%3d&risl=&pid=ImgRaw&r=0"
+        /> */}
         <meta property="og:title" content={VP?.name} />
         <meta property="og:description" content={VP?.description} />
         <meta property="og:image" content={VP?.image1} />
