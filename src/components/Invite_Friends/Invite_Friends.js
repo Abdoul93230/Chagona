@@ -79,15 +79,15 @@ function InviteFriends() {
           subject: "Sujet de l'e-mail",
           message: message,
           friendEmail: email,
+          clientName: name,
         };
 
         axios
           .post(`${BackendUrl}/Send_email_freind`, emailData)
-          .then((response) => {
+          .then(async (response) => {
             // alert(response.data.message);
-            handleAlert(`${response.data.message} Email`);
-            setMessage("");
-            console.log(response);
+            await handleAlert(`${response.data.message} Email`);
+            // navigue("/Profile");
           })
           .catch((error) => {
             console.error("Erreur lors de la requête:", error);

@@ -51,6 +51,7 @@ function AodersDet({ allCategories, allProducts }) {
         IdClient : {commandes?.clefUser}
       </h2>
       <h4>Prix Total:{commandes?.prix}</h4>
+      <h4>Code Promo : {commandes?.codePro ? "oui" : "auccun"}</h4>
       <h4>Produits commander</h4>
       <table>
         <thead>
@@ -90,6 +91,7 @@ function AodersDet({ allCategories, allProducts }) {
                     allProducts?.find((item) => item._id === param.produit)
                       .prix}
                 </td>
+
                 <td>
                   {(allProducts?.find((item) => item._id === param.produit)
                     .prixPromo ||

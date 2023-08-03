@@ -47,91 +47,18 @@ function OrderComponents() {
       .get(`${BackendUrl}/getCommandesByClefUser/${a.id}`)
       .then((res) => {
         setMyAllCommandes(res.data.commandes);
-        // console.log(res.data.commandes[0].nbrProduits.length);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  const option =
-    options === "En cours" ? (
-      <div className="Encours">
-        {myAllComande?.length !== 0 ? (
-          myAllComande?.map((param, index) => {
-            if (param.statusLivraison !== "en cours") {
-              return null;
-            }
-            return (
-              <div
-                key={index}
-                className="carde"
-                onClick={() => details(index + 1)}
-              >
-                <div className="top">
-                  <h4>{getFormattedDay(new Date(param.date))}</h4>
-                  <h4>{formatDate(new Date(param.date))}</h4>
-                </div>
-                <div className="bottom">
-                  <div className="left">
-                    <h5>Nbrs Produits</h5>
-                    <h6>
-                      <span>{param.nbrProduits.length}</span> Produits
-                    </h6>
-                  </div>
-                  <div className="right">
-                    <h5>Prix Total</h5>
-                    <h6>
-                      <span>{param.prix}</span> fcfa
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <div className="vide">Auccune Commande!</div>
-        )}
-      </div>
-    ) : options === "Recu" ? (
-      <div className="Recu">
-        {myAllComande?.length !== 0 ? (
-          myAllComande?.map((param, index) => {
-            if (param.statusLivraison !== "recu") {
-              return null;
-            }
-            return (
-              <div
-                key={index}
-                className="carde"
-                onClick={() => details(index + 1)}
-              >
-                <div className="top">
-                  <h4>{getFormattedDay(new Date(param.date))}</h4>
-                  <h4>{formatDate(new Date(param.date))}</h4>
-                </div>
-                <div className="bottom">
-                  <div className="left">
-                    <h5>Nbrs Produits</h5>
-                    <h6>
-                      <span>{param.nbrProduits.length}</span> Produits
-                    </h6>
-                  </div>
-                  <div className="right">
-                    <h5>Prix Total</h5>
-                    <h6>
-                      <span>{param.prix}</span> fcfa
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <div className="vide">Auccune Commande Recu!</div>
-        )}
-      </div>
-    ) : (
-      <></>
-    );
+  // Variables pour compter le nombre de commandes correspondantes pour chaque option
+  const nbrCommandesEnCours = myAllComande?.filter(
+    (param) => param.statusLivraison === "en cours"
+  )?.length;
+  const nbrCommandesRecues = myAllComande?.filter(
+    (param) => param.statusLivraison === "recu"
+  )?.length;
+  // ... (ajoutez des variables pour les autres options ici, si nécessaire)
 
   return (
     <div className="OrderComponents">
@@ -141,34 +68,102 @@ function OrderComponents() {
       <h1>My Orders</h1>
       <ul>
         <li
-          className="op d"
+          className={`op ${options === "En cours" ? "d" : ""}`}
           onClick={() => {
             setoptions("En cours");
             changeOption(0);
           }}
         >
-          En cours
+          En cours ({nbrCommandesEnCours})
         </li>
         <li
-          className="op"
+          className={`op ${options === "Recu" ? "d" : ""}`}
           onClick={() => {
             setoptions("Recu");
             changeOption(1);
           }}
         >
-          Recu
+          Recu ({nbrCommandesRecues})
         </li>
-        <li
-          className="op"
-          onClick={() => {
-            setoptions("autres");
-            changeOption(2);
-          }}
-        >
-          Recu
-        </li>
+        {/* Ajoutez ici le contenu pour les autres options */}
       </ul>
-      <div className="conteneur">{option}</div>
+      <div className="conteneur">
+        {/* Affichage de l'option "En cours" */}
+        {options === "En cours" ? (
+          <div className="Encours">
+            {nbrCommandesEnCours === 0 ? (
+              <div className="vide">Aucune Commande En cours!</div>
+            ) : (
+              myAllComande
+                ?.filter((param) => param.statusLivraison === "en cours")
+                ?.map((param, index) => (
+                  <div
+                    key={index}
+                    className="carde"
+                    onClick={() => details(index + 1)}
+                  >
+                    <div className="top">
+                      <h4>{getFormattedDay(new Date(param.date))}</h4>
+                      <h4>{formatDate(new Date(param.date))}</h4>
+                    </div>
+                    <div className="bottom">
+                      <div className="left">
+                        <h5>Nbrs Produits</h5>
+                        <h6>
+                          <span>{param.nbrProduits.length}</span> Produits
+                        </h6>
+                      </div>
+                      <div className="right">
+                        <h5>Prix Total</h5>
+                        <h6>
+                          <span>{param.prix}</span> fcfa
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                ))
+            )}
+          </div>
+        ) : options === "Recu" ? (
+          <div className="Recu">
+            {nbrCommandesRecues === 0 ? (
+              <div className="vide">Aucune Commande Recue!</div>
+            ) : (
+              myAllComande
+                ?.filter((param) => param.statusLivraison === "recu")
+                ?.map((param, index) => (
+                  <div
+                    key={index}
+                    className="carde"
+                    onClick={() => details(index + 1)}
+                  >
+                    <div className="top">
+                      <h4>{getFormattedDay(new Date(param.date))}</h4>
+                      <h4>{formatDate(new Date(param.date))}</h4>
+                    </div>
+                    <div className="bottom">
+                      <div className="left">
+                        <h5>Nbrs Produits</h5>
+                        <h6>
+                          <span>{param.nbrProduits.length}</span> Produits
+                        </h6>
+                      </div>
+                      <div className="right">
+                        <h5>Prix Total</h5>
+                        <h6>
+                          <span>{param.prix}</span> fcfa
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                ))
+            )}
+          </div>
+        ) : (
+          <></>
+        )}
+        {/* Ajoutez ici le contenu pour les autres options */}
+      </div>
     </div>
   );
 }

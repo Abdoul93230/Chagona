@@ -20,6 +20,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
 }
 .SearchTwo .top .left .l{
     color: #FF6969;
@@ -362,8 +363,12 @@
 
 
 @media screen and (min-width:700px) {
+    /* .SearchTwo .top .left{
+        border: 2px solid black;
+    } */
     .SearchTwo .top .left input[type="search"]{
         width: 300px;
+        margin-left: 50%;
     }
     .SearchTwo .bottom .carde{
         width: 200px;
@@ -383,6 +388,10 @@
         width: 90%;
         margin: 0px auto;
         margin-top: 15px;
+    }
+    .SearchTwo .top .left input[type="search"]{
+        width: 300px;
+        margin-left: 65%;
     }
     .SearchTwo .fil{
         width: 100%;

@@ -13,6 +13,8 @@ function CartCheckout({ op }) {
   const [expiredCard, setExpiredCard] = useState("");
   const [operateur, setOperateur] = useState("");
   const [cvc, setCvc] = useState("");
+  const [codePro, setCodPro] = useState("");
+  const [codeValide, setCodeValide] = useState(null);
 
   const [poppup, setPoppup] = useState(false);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
@@ -80,6 +82,33 @@ function CartCheckout({ op }) {
       });
   }, []);
 
+  const ValidCode = () => {
+    if (codePro.length === 0) {
+      alert("code invalide.");
+      return;
+    }
+    // const encodedHashedCode = encodeURIComponent(codePro);
+    axios
+      .get(`${BackendUrl}/getCodePromoByHashedCode`, {
+        params: {
+          hashedCode: codePro,
+        },
+      })
+      .then((code) => {
+        console.log(code);
+        if (code.data.data.isValide) {
+          setCodeValide(code.data.data);
+          setPoppup(!poppup);
+        } else {
+          alert("ce code la a expire.");
+          setPoppup(!poppup);
+        }
+      })
+      .catch((error) => {
+        alert("ce code de promo n'exite pas");
+      });
+  };
+
   const calculateTotalPrice = () => {
     let total = 0;
 
@@ -138,11 +167,14 @@ function CartCheckout({ op }) {
         };
         prod.push(ob);
       }
-      const data = {
+      let data = {
         clefUser: a.id,
         nbrProduits: prod,
         prix: total,
       };
+      if (codeValide) {
+        if (codeValide.isValide) data.codePro = true;
+      }
 
       // console.log(data);
 
@@ -151,8 +183,19 @@ function CartCheckout({ op }) {
         .then((res) => {
           // alert(res.data.message);
           localStorage.removeItem("panier");
+          if (codeValide) {
+            if (codeValide.isValide) {
+              axios
+                .put(`${BackendUrl}/updateCodePromo`, {
+                  codePromoId: codeValide._id,
+                  isValide: false,
+                })
+                .then(() => console.log("fait"))
+                .catch((error) => console.log(error));
+            }
+          }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log("errrr", error));
     }
   };
 
@@ -275,6 +318,13 @@ function CartCheckout({ op }) {
           <div className="left">
             <h4>Total</h4>
             <h3>${total} F</h3>
+            {codeValide ? (
+              <h5 style={{ marginTop: -5 }}>
+                reduction: {codeValide.prixReduiction} f
+              </h5>
+            ) : (
+              ""
+            )}
             <h5>Free Domestic Shipping</h5>
           </div>
           <button
@@ -300,8 +350,13 @@ function CartCheckout({ op }) {
                 </span>
               </div>
               <div className="CodeClef">
-                <input type="text" placeholder="tape the code here" />
-                <button>Valider</button>
+                <input
+                  type="text"
+                  placeholder="tape the code here"
+                  value={codePro}
+                  onChange={(e) => setCodPro(e.target.value)}
+                />
+                <button onClick={ValidCode}>Valider</button>
               </div>
             </div>
           </div>

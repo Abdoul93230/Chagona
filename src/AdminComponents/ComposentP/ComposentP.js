@@ -38,6 +38,7 @@ import AddFournisseur from "../AddFournisseurs/AddFournisseur";
 import AddCategorie from "../AddCategorie/AddCategorie";
 import { useParams } from "react-router-dom";
 
+const admin = JSON.parse(localStorage.getItem("AdminEcomme"));
 function ComposentP({ allCategories, allProducts }) {
   const params = new useParams();
   // console.log(params.op);
@@ -127,7 +128,7 @@ function ComposentP({ allCategories, allProducts }) {
                     }}
                   >
                     {" "}
-                    <h5>Abdoul Razak</h5>{" "}
+                    <h5>{admin.name}</h5>{" "}
                     <ChevronDown style={{ marginLeft: "8px" }} />
                   </button>
                 }

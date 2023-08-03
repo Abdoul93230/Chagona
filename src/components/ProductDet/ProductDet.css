@@ -128,11 +128,28 @@
     align-items: center;
     margin-top: 5px;
 }
+.ProductDet .color .coli{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
 .ProductDet .color .col span{
     width: 40px;
     height: 40px;
     cursor: pointer;
     border-radius: 50%;
+}
+.ProductDet .color .coli span{
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+    /* border-radius: 50%; */
+}
+.ProductDet .color .coli span img{
+    border-radius: 10px;
 }
 
 .ProductDet .size{
@@ -254,6 +271,17 @@
 .PLUS{
     height: auto !important;
     
+}
+.ProductDet .ImgPlus{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.ProductDet .ImgPlus img{
+    width: 100%;
 }
 
 .ProductDet .Details .detplus{

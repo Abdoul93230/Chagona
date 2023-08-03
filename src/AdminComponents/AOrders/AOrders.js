@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import image from "../../Images/sac2.png";
 import { useEffect } from "react";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -87,17 +88,17 @@ function AOrders() {
             </thead>
             <tbody>
               {allcomandes?.map((param, index) => {
+                let profile = allProfiles?.find(
+                  (prof) => prof.clefUser === param.clefUser
+                );
+                let imageUrl = profile ? profile.image : image;
                 return (
                   <tr key={index} onClick={() => orderDet(param._id)}>
                     <td>
                       <div className="img">
                         {/* <User /> */}
                         <img
-                          src={
-                            allProfiles?.find(
-                              (prof) => prof.clefUser === param.clefUser
-                            ).image
-                          }
+                          src={imageUrl}
                           style={{
                             width: "50px",
                             height: "50px",

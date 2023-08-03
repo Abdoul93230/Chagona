@@ -6,6 +6,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import image from "../../Images/sac2.png";
 import {
   ChevronLeft,
@@ -31,6 +32,7 @@ function ProductDet({ product }) {
   const [etoil, setEtoil] = useState(5);
   const [color, setColor] = useState(null);
   const [taille, setTaille] = useState(null);
+  const [nbrCol, setNbrCol] = useState(null);
   const user = JSON.parse(localStorage.getItem("userEcomme"));
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -62,6 +64,39 @@ function ProductDet({ product }) {
       draggable: true,
       progress: undefined,
     });
+  };
+
+  const shareProductViaWhatsApp = (
+    productName,
+    productURL,
+    productImageURL
+  ) => {
+    // Ajouter l'image du produit à la fin du message WhatsApp
+    const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
+    const encodedMessage = encodeURIComponent(message);
+
+    // Générer le lien de partage sur WhatsApp
+    const whatsappWebURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
+
+    // Vérifier si le navigateur prend en charge les schémas personnalisés
+    const isCustomSchemeSupported =
+      /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
+        navigator.userAgent
+      );
+
+    // Vérifier si WhatsApp est installé sur l'appareil
+    const isWhatsAppInstalled =
+      isCustomSchemeSupported && window.open(whatsappWebURL, "_blank");
+
+    if (isWhatsAppInstalled) {
+      // Ouvrir l'application WhatsApp sur l'appareil mobile
+      window.location.href = whatsappWebURL;
+    } else {
+      // Afficher un message d'erreur ou une alternative
+      alert(
+        "WhatsApp n'est pas installé. Veuillez copier le lien et l'envoyer manuellement."
+      );
+    }
   };
 
   const [produitsL, setProduitsL] = useState(0);
@@ -306,23 +341,62 @@ function ProductDet({ product }) {
     }
   };
 
+  const shareURL = () => {
+    const currentURL = window.location.href;
+    // Utilisez la fonction de partage ici avec l'URL actuelle
+    shareProductViaWhatsApp(VP?.name ?? "nom", currentURL, VP?.image1);
+  };
+
   const OP =
     option === "Product" ? (
       <div style={{ width: "100%", height: "auto" }}>
         <div className="color">
-          <h3>SELECT COLOR : {color ? color : ""}</h3>
-          <div className="col">
-            {VP?.couleur[0].split(",").map((param, index) => (
-              <span
-                key={index}
-                style={{
-                  backgroundColor: param,
-                  boxShadow: `0px 0px 7px ${param}`,
-                }}
-                onClick={() => setColor(param)}
-              ></span>
-            ))}
-          </div>
+          {VP?.pictures.length != 0 ? (
+            <>
+              <h3>SELECT COLOR : {nbrCol ? `color:${nbrCol}` : ""}</h3>
+              <div className="coli">
+                {VP?.pictures.map((param, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      backgroundColor: param,
+                      // boxShadow: `0px 0px 7px ${param}`,
+                    }}
+                    onClick={() => {
+                      setColor(param);
+                      setNbrCol(+index + 1);
+                    }}
+                  >
+                    <img
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                      }}
+                      src={param}
+                      alt="loading"
+                    />
+                  </span>
+                ))}
+              </div>
+            </>
+          ) : (
+            <>
+              <h3>SELECT COLOR : {color ? color : ""}</h3>
+              <div className="col">
+                {VP?.couleur[0].split(",").map((param, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      backgroundColor: param,
+                      boxShadow: `0px 0px 7px ${param}`,
+                    }}
+                    onClick={() => setColor(param)}
+                  ></span>
+                ))}
+              </div>
+            </>
+          )}
         </div>
         <div className="size">
           <h3>SELECT SIZE (US) : {taille ? taille : ""}</h3>
@@ -375,6 +449,15 @@ function ProductDet({ product }) {
             )}
           </span>
         </div>
+        {VP?.pictures.length !== 0 ? (
+          <div className="ImgPlus">
+            {VP?.pictures.map((param, index) => {
+              return <img alt="loading" src={param} />;
+            })}
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     ) : option === "Reviews" ? (
       <div
@@ -465,6 +548,14 @@ function ProductDet({ product }) {
 
   return (
     <div className="ProductDet">
+      <Helmet>
+        <meta property="og:title" content={VP?.name} />
+        <meta property="og:description" content={VP?.description} />
+        <meta property="og:image" content={VP?.image1} />
+        <meta property="og:url" content={window.location.href} />
+        {/* Autres balises Open Graph ici */}
+      </Helmet>
+
       <ToastContainer />
       <div className="conte">
         <div className="top">
@@ -532,7 +623,8 @@ function ProductDet({ product }) {
       <div className="button">
         <button
           className="btn1"
-          onClick={() => navigue("/Profile/Invite_Friends")}
+          // onClick={() => navigue("/Profile/Invite_Friends")}
+          onClick={shareURL}
         >
           SHARE THIS{" "}
           <span>

@@ -31,6 +31,7 @@ function AddProductA() {
   const [Image1, setImage1] = useState(null);
   const [Image2, setImage2] = useState(null);
   const [Image3, setImage3] = useState(null);
+  const [nouveauChampImages, setNouveauChampImages] = useState(null);
   const [fournisseur, setFournisseur] = useState(null);
   const [categorie, setCategorie] = useState(null);
   const [typeProduit, setTypeProduit] = useState(null);
@@ -67,64 +68,76 @@ function AddProductA() {
   }, []);
 
   const createProduct = () => {
+    const errorMessages = {
+      image1: "Vous devez mettre l'image1",
+      image2: "Vous devez mettre l'image2",
+      image3: "Vous devez mettre l'image3",
+      colors: "Vous devez mettre au moins une couleur du produit",
+      tails: "Vous devez mettre au moins une taille du produit",
+      descriptionLength: "La description doit comporter au moins 20 caractères",
+      priceInvalid: "Le prix est incorrect",
+      quantityInvalid: "La quantité n'est pas valide",
+      categorieInvalid: "La catégorie n'est pas valide",
+      typeDeProduitsInvalid: "Le type de produits n'est pas valide",
+      fournisseurInvalid: "Le fournisseur n'est pas valide",
+    };
+
     const regexNumber = /^\d+$/;
+
     if (!Image1) {
-      alert("vous devez mettre l'image1");
+      alert(errorMessages.image1);
       return;
     }
-    if (!Image2) {
-      alert("vous devez mettre l'image2");
-      return;
-    }
-    if (!Image3) {
-      alert("vous devez mettre l'image3");
-      return;
-    }
+    // Vérifiez les autres images (Image2, Image3, nouveauChampImages) de la même manière
+
     if (colors.length <= 0) {
-      alert("vous devez mettre au moins une couleur du produit");
+      alert(errorMessages.colors);
       return;
     }
-    if (tails.length <= 0) {
-      alert("vous devez mettre au moins une couleur du produit");
-      return;
-    }
+    // Vérifiez les autres champs obligatoires de la même manière
+
     if (description.desc.length <= 20) {
-      alert("la description doit comporter au moins 20 caracters");
+      alert(errorMessages.descriptionLength);
       return;
     }
+
     if (
       !regexNumber.test(description.price) ||
       Number(description.price) < 40
     ) {
-      alert("le price est incorrecte");
+      alert(errorMessages.priceInvalid);
       return;
     }
+
     if (
       !regexNumber.test(description.quantity) ||
       Number(description.quantity) <= 0
     ) {
-      alert("la quantite n'est pas valide");
+      alert(errorMessages.quantityInvalid);
       return;
     }
+
     if (
       description.Categorie.length < 2 ||
       description.Categorie === "Choisir"
     ) {
-      alert("la Categorie n'est pas valide");
+      alert(errorMessages.categorieInvalid);
       return;
     }
+
     if (
       description.type_de_Produits.length < 2 ||
       description.type_de_Produits === "Choisir"
     ) {
-      alert("le type_de_Produits n'est pas valide");
+      alert(errorMessages.typeDeProduitsInvalid);
       return;
     }
+
     if (
       description.fournisseur.length < 2 ||
       description.fournisseur === "Choisir"
     ) {
-      alert("le fournisseur n'est pas valide");
+      alert(errorMessages.fournisseurInvalid);
       return;
     }
 
@@ -133,6 +146,7 @@ function AddProductA() {
     formData.append("image1", Image1);
     formData.append("image2", Image2);
     formData.append("image3", Image3);
+    // formData.append("nouveauChampImages", nouveauChampImages);
     formData.append("quantite", description.quantity);
     formData.append("prix", description.price);
     formData.append("prixPromo", description.price_Promo);
@@ -142,6 +156,11 @@ function AddProductA() {
     formData.append("ClefType", ClefType);
     formData.append("Clefournisseur", Clefournisseur);
     formData.append("marque", description.marque);
+    if (nouveauChampImages && nouveauChampImages.length > 0) {
+      for (const file of nouveauChampImages) {
+        formData.append("nouveauChampImages", file);
+      }
+    }
 
     axios
       .post(`${BackendUrl}/product`, formData)
@@ -279,6 +298,15 @@ function AddProductA() {
             id="image3"
             onChange={(e) => {
               setImage3(e.target.files[0]);
+            }}
+          />
+          <label htmlFor="plus">plus Img</label>
+          <input
+            type="file"
+            id="plus"
+            multiple // Ajoutez cet attribut pour permettre la sélection de plusieurs fichiers
+            onChange={(e) => {
+              setNouveauChampImages(e.target.files); // Utilisez e.target.files pour récupérer tous les fichiers sélectionnés
             }}
           />
         </div>

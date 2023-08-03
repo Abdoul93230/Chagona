@@ -18,6 +18,7 @@ import axios from "axios";
 import Myorders from "./Pages/Myorders";
 import { useState, useEffect } from "react";
 import ContactUs from "./components/ContactUs/ContactUs";
+import AdminConnection from "./AdminComponents/AdminConnection/AdminConnection";
 import "reactjs-popup/dist/index.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -26,6 +27,11 @@ function App() {
   const [allCategories, setAllCategories] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [acces, setAcces] = useState("non");
+  const [adminConnection, setAdminConnection] = useState(false);
+
+  const changeAdminConnection = () => {
+    setAdminConnection(true);
+  };
 
   const changeA = (param) => {
     setAcces(param);
@@ -46,6 +52,23 @@ function App() {
         .catch((error) => {
           setAcces("non");
           console.log(error.response);
+        });
+    }
+
+    const admin = JSON.parse(localStorage.getItem("AdminEcomme"));
+    if (admin) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${admin.token}`;
+      axios
+        .get(`${BackendUrl}/verifyAdmin`, { withCredentials: true })
+        .then((response) => {
+          setAdminConnection(true);
+          // console.log({ local: user.token });
+          // console.log(response.data);
+          // console.log(response);
+        })
+        .catch((error) => {
+          setAdminConnection(false);
+          // console.log(error);
         });
     }
 
@@ -185,39 +208,39 @@ function App() {
           <Route
             path="/Admin"
             element={
-              acces === "oui" ? (
+              adminConnection ? (
                 <Admin
                   allCategories={allCategories}
                   allProducts={allProducts}
                 />
               ) : (
-                <Connection chg={changeA} />
+                <AdminConnection chg={changeAdminConnection} />
               )
             }
           ></Route>
           <Route
             path="/Admin/:op"
             element={
-              acces === "oui" ? (
+              adminConnection ? (
                 <Admin
                   allCategories={allCategories}
                   allProducts={allProducts}
                 />
               ) : (
-                <Connection chg={changeA} />
+                <AdminConnection chg={changeAdminConnection} />
               )
             }
           ></Route>
           <Route
             path="/Admin/:op/:id"
             element={
-              acces === "oui" ? (
+              adminConnection ? (
                 <Admin
                   allCategories={allCategories}
                   allProducts={allProducts}
                 />
               ) : (
-                <Connection chg={changeA} />
+                <AdminConnection chg={changeAdminConnection} />
               )
             }
           ></Route>
