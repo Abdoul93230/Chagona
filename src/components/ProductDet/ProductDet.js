@@ -187,10 +187,12 @@ function ProductDet({ product }) {
             // console.log(coments.data);
           })
           .catch((error) => {
+            alert(error.response.data);
             console.log(error);
           });
       })
       .catch((error) => {
+        alert(error.response.data);
         console.log(error);
       });
   };
