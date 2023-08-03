@@ -71,25 +71,39 @@ function ProductDet({ product }) {
     productURL,
     productImageURL
   ) => {
+    // Ajouter l'image du produit à la fin du message WhatsApp
     const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
     const encodedMessage = encodeURIComponent(message);
 
+    // Générer le lien de partage sur WhatsApp pour la version web
     const whatsappWebURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
 
+    // Vérifier si le navigateur prend en charge les schémas personnalisés (mobile)
     const isCustomSchemeSupported =
       /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
         navigator.userAgent
       );
+    // alert(isCustomSchemeSupported);
 
-    const isWhatsAppInstalled =
-      isCustomSchemeSupported && window.open(whatsappWebURL, "_blank");
-
-    if (isWhatsAppInstalled) {
-      window.location.href = whatsappWebURL;
+    if (isCustomSchemeSupported) {
+      // Si c'est sur mobile
+      const isWhatsAppInstalled = window.open(whatsappWebURL, "_blank");
+      alert(isWhatsAppInstalled);
+      if (isWhatsAppInstalled) {
+        // Ouvrir l'application WhatsApp sur l'appareil mobile
+        window.location.href = whatsappWebURL;
+      } else {
+        // Redirection vers la version web si WhatsApp n'est pas installé
+        window.location.href = whatsappWebURL;
+      }
     } else {
-      alert(
-        "WhatsApp n'est pas installé. Veuillez copier le lien et l'envoyer manuellement."
-      );
+      // Si c'est sur desktop
+      const isWhatsAppInstalled = window.open(whatsappWebURL, "_blank");
+
+      if (!isWhatsAppInstalled) {
+        // Redirection vers la version web si WhatsApp n'est pas installé sur desktop
+        window.location.href = whatsappWebURL;
+      }
     }
   };
 
