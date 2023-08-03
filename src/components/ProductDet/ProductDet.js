@@ -169,8 +169,8 @@ function ProductDet({ product }) {
     axios
       .post(`${BackendUrl}/createCommenteProduit`, {
         description: commente,
-        clefProduct: product?._id,
-        clefType: product?.ClefType,
+        clefProduct: VP?._id,
+        clefType: VP?.ClefType,
         etoil: etoil,
         userName: user.name,
       })
@@ -181,7 +181,7 @@ function ProductDet({ product }) {
         setCommente("");
 
         axios
-          .get(`${BackendUrl}/getAllCommenteProduitById/${product?._id}`)
+          .get(`${BackendUrl}/getAllCommenteProduitById/${VP?._id}`)
           .then((coments) => {
             setAllCommente(coments.data);
             // console.log(coments.data);
