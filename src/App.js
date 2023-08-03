@@ -26,7 +26,7 @@ const BackendUrl = process.env.REACT_APP_Backend_Url;
 function App() {
   const [allCategories, setAllCategories] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
-  const [acces, setAcces] = useState("oui");
+  const [acces, setAcces] = useState("non");
   const [adminConnection, setAdminConnection] = useState(false);
 
   const changeAdminConnection = () => {

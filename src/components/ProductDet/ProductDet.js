@@ -72,7 +72,9 @@ function ProductDet({ product }) {
     productImageURL
   ) => {
     // Ajouter l'image du produit à la fin du message WhatsApp
-    const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
+    // const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
+
+    const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}}`;
     const encodedMessage = encodeURIComponent(message);
 
     // Vérifier si l'utilisateur est sur mobile
