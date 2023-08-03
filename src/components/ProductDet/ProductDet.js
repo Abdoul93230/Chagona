@@ -549,6 +549,7 @@ function ProductDet({ product }) {
   return (
     <div className="ProductDet">
       <Helmet>
+        <title>{VP?.name}</title>
         <meta property="og:title" content={VP?.name} />
         <meta property="og:description" content={VP?.description} />
         <meta property="og:image" content={VP?.image1} />
