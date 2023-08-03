@@ -549,10 +549,16 @@ function ProductDet({ product }) {
   return (
     <div className="ProductDet">
       <Helmet>
-        <meta property="og:title" content="titre1" />
+        <title>{VP?.name}</title>
+        <meta property="og:title" content={VP?.name} />
         <meta property="og:description" content={VP?.description} />
         <meta property="og:image" content={VP?.image1} />
         <meta property="og:url" content={window.location.href} />
+        {/* Ajoutez les autres balises Open Graph ici */}
+        <meta property="og:type" content="product" />
+        <meta property="og:site_name" content="Votre site" />
+        <meta property="og:locale" content="fr_FR" />
+        {/* Et d'autres balises que vous souhaitez définir */}
       </Helmet>
 
       <ToastContainer />
