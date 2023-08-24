@@ -21,7 +21,12 @@ function AProductUpdat() {
     image1: null,
     image2: null,
     image3: null,
+    nouveauChampImages: null,
   });
+
+  function goBack() {
+    window.history.back();
+  }
 
   const [colors, setColor] = useState(null);
 
@@ -213,6 +218,15 @@ function AProductUpdat() {
     formData.append("ClefType", description.type_de_Produits._id);
     formData.append("Clefournisseur", description.fournisseur._id);
     formData.append("marque", description.marque);
+    // formData.append("setNouveauChampImages", description.setNouveauChampImages);
+    if (
+      description.nouveauChampImages &&
+      description.nouveauChampImages.length > 0
+    ) {
+      for (const file of description.nouveauChampImages) {
+        formData.append("nouveauChampImages", file);
+      }
+    }
 
     axios
       .put(`${BackendUrl}/product/${params.id}`, formData)
@@ -374,6 +388,18 @@ function AProductUpdat() {
               })
             }
           />
+          <label htmlFor="image3">Plus IMG</label>
+          <input
+            type="file"
+            id="image3"
+            multiple
+            onChange={(e) =>
+              setDescription({
+                ...description,
+                nouveauChampImages: e.target.files,
+              })
+            }
+          />
         </div>
       </div>
       <div className="right">
@@ -515,8 +541,22 @@ function AProductUpdat() {
             </tr>
           </tbody>
         </table>
+
+        <div className="plusImg">
+          <h3>Color Image :</h3>
+          <div className="img">
+            {product?.pictures ? (
+              product?.pictures.map((param, index) => {
+                return <img key={index} alt="loading" src={param} />;
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+
         <div className="SM">
-          <button>Annuller !</button>
+          <button onClick={goBack}>Annuller !</button>
           <button
             onClick={createProduct}
             style={{ textDecoration: "none", color: "white" }}

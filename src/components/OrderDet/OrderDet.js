@@ -16,9 +16,12 @@ function OrderDet({ allProducts }) {
     axios
       .get(`${BackendUrl}/getCommandesByClefUser/${a.id}`)
       .then((res) => {
-        setProduits(res.data.commandes[+params.id - 1].nbrProduits);
-        setDetails(res.data.commandes[+params.id - 1]);
-        setId(res.data.commandes[+params.id - 1]._id);
+        // setProduits(res.data.commandes[+params.id - 1].nbrProduits);
+        setProduits(
+          res.data.commandes.find((item) => item._id === params.id).nbrProduits
+        );
+        setDetails(res.data.commandes.find((item) => item._id === params.id));
+        setId(res.data.commandes.find((item) => item._id === params.id)._id);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -37,7 +40,10 @@ function OrderDet({ allProducts }) {
       <span className="ret">
         <ChevronLeft onClick={() => navigue("/Order")} className="i" />
       </span>
-      <h1>Order N^ {+params.id} Details</h1>
+      <h1>
+        Order : <span style={{ fontSize: 15 }}>{params.id}</span> <br /> Details
+        :
+      </h1>
       <h2>
         Total <span>{details?.prix}</span> fcfa
       </h2>

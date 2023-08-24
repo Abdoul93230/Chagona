@@ -1,7 +1,9 @@
+import React, { useState, useEffect } from "react";
 import image1 from "../../Images/sac.png";
 import image2 from "../../Images/pub3.jpg";
 import image3 from "../../Images/pub2.jpg";
 import "./Presentation.css";
+import axios from "axios";
 import { ChevronRight, Menu } from "react-feather";
 import "swiper/swiper-bundle.css";
 
@@ -10,7 +12,11 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function Presentation({ categories }) {
+  const [allPub, setAllPub] = useState(null);
+  // const [allCategories, setAllCategories] = useState([]);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -20,6 +26,33 @@ function Presentation({ categories }) {
     autoplay: true,
     autoplaySpeed: 5000,
   };
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/productPubget`)
+      .then((pub) => {
+        // console.log(pub);
+        if (pub.data.length > 0) {
+          setAllPub(pub.data);
+        } else {
+          setAllPub(null);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    // axios
+    //   .get(`${BackendUrl}/getAllCategories`)
+    //   .then((All) => {
+    //     if (All.data.data) {
+    //       setAllCategories(All.data.data);
+    //     } else {
+    //       console.log("rien");
+    //     }
+    //   })
+    //   .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div className="Presentation">
@@ -48,33 +81,24 @@ function Presentation({ categories }) {
         </div>
         <div className="carousel-container">
           <Slider {...settings}>
-            <div className="slide">
-              <img src={image1} alt="loading" />
-              <div className="button">
-                <h6>SEE MORE</h6>
-                <span>
-                  <ChevronRight />
-                </span>
-              </div>
-            </div>
-            <div className="slide">
-              <img src={image1} alt="loading" />
-              <div className="button">
-                <h6>SEE MORE</h6>
-                <span>
-                  <ChevronRight />
-                </span>
-              </div>
-            </div>
-            <div className="slide">
-              <img src={image1} alt="loading" />
-              <div className="button">
-                <h6>SEE MORE</h6>
-                <span>
-                  <ChevronRight />
-                </span>
-              </div>
-            </div>
+            {allPub && allPub.length > 0 ? (
+              allPub.map((param, index) => {
+                return (
+                  <div className="slide" key={index}>
+                    <img src={param.image} alt="loading" />
+                    <div className="button">
+                      <h6>SEE MORE</h6>
+                      <span>
+                        <ChevronRight />
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <></>
+            )}
+
             {/* Ajoutez d'autres éléments de diapositives ici */}
           </Slider>
         </div>

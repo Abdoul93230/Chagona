@@ -470,6 +470,7 @@ function AddProductA() {
             </tr>
           </tbody>
         </table>
+
         <div className="SM">
           <button>Annuller !</button>
           <button onClick={createProduct}>Ajouter !</button>

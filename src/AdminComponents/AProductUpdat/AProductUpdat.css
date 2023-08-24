@@ -14,7 +14,7 @@
     width: 59%;
     padding: 5px;
     position: relative;
-    height: 100%;
+    height: auto;
 }
 .AProductUpdat .left .carde{
 background-color: white;
@@ -166,6 +166,37 @@ align-items: flex-start;
 }
 
 
+
+.AProductUpdat .right .plusImg{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    /* border: 2px solid crimson; */
+}
+
+.AProductUpdat .right .plusImg h3{
+    color: #1e2225;
+    text-align: left;
+
+}
+
+.AProductUpdat .right .plusImg .img{
+    width: 100%;
+    display: flex;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.AProductUpdat .right .plusImg .img img{
+    width: 100px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+
+
+
 .AProductUpdat .right .SM{
     width: 100%;
     height: auto;
@@ -173,9 +204,9 @@ align-items: flex-start;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    position: absolute;
+    /* position: absolute;
     bottom: 0px;
-    left: 0px;
+    left: 0px; */
 }
 
 .AProductUpdat .right .SM button{

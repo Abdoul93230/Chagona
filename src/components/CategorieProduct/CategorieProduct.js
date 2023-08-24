@@ -22,11 +22,28 @@ function CategorieProduct({ allCategories, allProducts }) {
   const [choix, setChoix] = useState("Home");
   const params = useParams();
   const navigue = useNavigate();
-
+  const [allPub, setAllPub] = useState(null);
+  // console.log(params.Cat);
   function getRandomElementsSix(array, nbr) {
     const shuffledArray = shuffle(array);
     return shuffledArray.slice(0, nbr);
   }
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/productPubget`)
+      .then((pub) => {
+        // console.log(pub);
+        if (pub.data.length > 0) {
+          setAllPub(pub.data);
+        } else {
+          setAllPub(null);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -67,6 +84,13 @@ function CategorieProduct({ allCategories, allProducts }) {
   };
 
   let vf = true;
+  function formatDate(date) {
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+
+    return `${day}/${month}/${year}`;
+  }
 
   const Home1 = params.product
     ? getRandomElementsSix(
@@ -169,21 +193,35 @@ function CategorieProduct({ allCategories, allProducts }) {
             style={{ overflow: "hidden" }}
           >
             <Slider className="c" {...settings}>
-              {[1, 2, 3].map((param, index) => {
-                return (
-                  <div key={index} style={{ width: "100%", height: "auto" }}>
-                    <div className="slide">
-                      <div className="sup">
-                        <p>Colection</p>
-                        <span>
-                          <ChevronRight />
-                        </span>
+              {allPub && allPub.length > 0 ? (
+                allPub.map((param, index) => {
+                  if (
+                    param.clefCategorie ===
+                    allCategories?.find((item) => item.name === params.Cat)._id
+                  ) {
+                    return (
+                      <div
+                        key={index}
+                        style={{ width: "100%", height: "auto" }}
+                      >
+                        <div className="slide">
+                          <div className="sup">
+                            <p>Colection</p>
+                            <span>
+                              <ChevronRight />
+                            </span>
+                          </div>
+                          <img src={param.image} alt="loading" />
+                        </div>
                       </div>
-                      <img src={image1} alt="loading" />
-                    </div>
-                  </div>
-                );
-              })}
+                    );
+                  } else {
+                    return null;
+                  }
+                })
+              ) : (
+                <></>
+              )}
             </Slider>
           </div>
           <div className="produits">
@@ -342,7 +380,7 @@ function CategorieProduct({ allCategories, allProducts }) {
                     <h3>{param.userName}</h3>
                   </div>
 
-                  <h5>10 Oct 2018</h5>
+                  <h5>{formatDate(new Date(param.date))}</h5>
                 </div>
                 <div className="bottom">
                   <p

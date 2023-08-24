@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { ChevronRight, Menu, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./LogIn.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
-function LogIn({ chg }) {
+function LogIn({ chg, creer }) {
   const handleAlert = (message) => {
     toast.success(`${message} !`, {
       position: toast.POSITION.TOP_RIGHT,
@@ -62,7 +63,7 @@ function LogIn({ chg }) {
         }
       )
       .then((user) => {
-        console.log(user);
+        // console.log(user);
         if (user.status === 200) {
           handleAlert(user.data.message);
           chg("oui");
@@ -119,7 +120,14 @@ function LogIn({ chg }) {
         </span>
       </button>
       <p>
-        Don't have an account? Swipe right to <span>create a new account</span>
+        Don't have an account? Swipe right to{" "}
+        <span
+          onClick={() => {
+            creer("SingnUp");
+          }}
+        >
+          create a new account
+        </span>
       </p>
       <div>
         <ToastContainer />

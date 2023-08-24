@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Inbox.css";
 import image1 from "../../Images/sac2.png";
 import { ChevronRight, Search, Delete } from "react-feather";
@@ -9,11 +9,20 @@ function Inbox() {
   const [allUsers, setAllUsers] = useState(null);
   const [allProfiles, setallprofiles] = useState(null);
   const [allMessage, setAllMessage] = useState([]);
+  const [allMessages, setAllMessages] = useState([]);
   const [userSearch, setUserSearch] = useState(null);
   const [message, setMessage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [istrue, setIstrue] = useState(false);
+  const messageContainerRef = useRef(null);
   const provenance = false;
+
+  useEffect(() => {
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop =
+        messageContainerRef.current.scrollHeight;
+    }
+  }, [allMessage]);
   useEffect(() => {
     axios
       .get(`${BackendUrl}/getUsers`)
@@ -28,6 +37,16 @@ function Inbox() {
         setallprofiles(users.data.data);
       })
       .catch((error) => console.log(error));
+
+    axios
+      .get(`${BackendUrl}/getAllUserMessages`)
+      .then((res) => {
+        setAllMessages(res.data);
+        // console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   const getMessages = (param) => {
@@ -41,8 +60,16 @@ function Inbox() {
       .catch((error) => {
         console.log(error);
       });
+    axios
+      .put(`${BackendUrl}/lecturAdminMessage`, { userKey: param._id })
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((erro) => {
+        console.log(erro);
+      });
   };
-
+  // getAllUserMessages
   const envoyer = (e) => {
     e.preventDefault();
     if (message.length <= 0) {
@@ -125,10 +152,15 @@ function Inbox() {
                     key={index}
                     onClick={() => getMessages(param)}
                   >
+                    {/* https://chagona.onrender.com/images/image-1688253105925-0.jpeg */}
+
                     <img
                       src={
                         allProfiles?.find((prof) => prof.clefUser === param._id)
-                          ?.image
+                          ?.image &&
+                        allProfiles?.find((prof) => prof.clefUser === param._id)
+                          ?.image !=
+                          "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
                           ? allProfiles?.find(
                               (prof) => prof.clefUser === param._id
                             )?.image
@@ -148,6 +180,16 @@ function Inbox() {
                           : "none"}{" "}
                         <span> Bonjour...</span>
                       </p>
+                      <span className="nbr">
+                        {
+                          allMessages.filter(
+                            (item) =>
+                              item.clefUser === param._id &&
+                              item.lusAdmin === false &&
+                              item.provenance === true
+                          ).length
+                        }
+                      </span>
                     </div>
                   </div>
                 );
@@ -162,7 +204,10 @@ function Inbox() {
                     <img
                       src={
                         allProfiles?.find((prof) => prof.clefUser === param._id)
-                          ?.image
+                          ?.image &&
+                        allProfiles?.find((prof) => prof.clefUser === param._id)
+                          ?.image !=
+                          "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
                           ? allProfiles?.find(
                               (prof) => prof.clefUser === param._id
                             )?.image
@@ -196,7 +241,10 @@ function Inbox() {
                 <img
                   src={
                     allProfiles?.find((prof) => prof.clefUser === istrue._id)
-                      ?.image
+                      ?.image &&
+                    allProfiles?.find((prof) => prof.clefUser === istrue._id)
+                      ?.image !=
+                      "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
                       ? allProfiles?.find(
                           (prof) => prof.clefUser === istrue._id
                         )?.image
@@ -213,7 +261,7 @@ function Inbox() {
                           (prof) => prof.clefUser === istrue?._id
                         )?.numero
                       : "none"}{" "}
-                    <span> Bonjour...</span>
+                    {/* <span> Bonjour...</span> */}
                   </p>
                 </div>
               </div>
@@ -223,7 +271,7 @@ function Inbox() {
               </div>
             </div>
             <div className="main">
-              <div className="top">
+              <div className="top" ref={messageContainerRef}>
                 {allMessage?.map((param, index) => {
                   return (
                     <div className="carde" key={index}>

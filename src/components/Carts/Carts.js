@@ -19,6 +19,8 @@ function Carts({ op }) {
   const [produitIds, setProduitIds] = useState(null);
   const [allProducts, setAllProduits] = useState(null);
   const [Vide, setVide] = useState(null);
+  const [allMessage, setAllMessage] = useState([]);
+  const a = JSON.parse(localStorage.getItem(`userEcomme`));
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -37,6 +39,21 @@ function Carts({ op }) {
   let totalPrice;
   let pric = 0;
   let total = 0;
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
+      .then((res) => {
+        setAllMessage(
+          res.data.filter(
+            (item) => item.lusUser == false && item.provenance === false
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
@@ -87,7 +104,8 @@ function Carts({ op }) {
       <LoadingIndicator time={3000}>
         <div className="top">
           <div className="i" onClick={message}>
-            <MessageCircle /> <span>5</span>
+            <MessageCircle style={{ width: "40px" }} />{" "}
+            <span>{allMessage.length > 0 ? allMessage.length : 0}</span>
           </div>
           <div className="i">
             <ShoppingCart /> <span>{produits ? produits.length : 0}</span>

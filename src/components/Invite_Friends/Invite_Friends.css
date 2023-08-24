@@ -59,3 +59,14 @@
     border: none;
     border-radius: 5px;
 }
+
+.whatsapp{
+    width: 100px;
+    height: 80px;
+}
+
+.whatsapp img{
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}

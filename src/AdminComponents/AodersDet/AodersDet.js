@@ -84,7 +84,20 @@ function AodersDet({ allCategories, allProducts }) {
                   }
                 </td>
                 <td>{param.quantite}</td>
-                <td>{param?.couleurs}</td>
+                <td>
+                  {
+                    /* {param?.couleurs */
+                    /^(http|https):\/\/\S+$/.test(param?.couleurs) ? (
+                      <div className="img">
+                        {param?.couleurs.map((para, index) => {
+                          return <img key={index} src={para} alt="loading" />;
+                        })}
+                      </div>
+                    ) : (
+                      param?.couleurs
+                    )
+                  }
+                </td>
                 <td>
                   {allProducts?.find((item) => item._id === param.produit)
                     .prixPromo ||

@@ -19,6 +19,7 @@ import Myorders from "./Pages/Myorders";
 import { useState, useEffect } from "react";
 import ContactUs from "./components/ContactUs/ContactUs";
 import AdminConnection from "./AdminComponents/AdminConnection/AdminConnection";
+import GaleriesComponent from "./components/GaleriesComponent/GaleriesComponent";
 import "reactjs-popup/dist/index.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -184,7 +185,13 @@ function App() {
           ></Route>
           <Route
             path="/More"
-            element={acces === "oui" ? <More /> : <Connection chg={changeA} />}
+            element={
+              acces === "oui" ? (
+                <More chg={changeA} />
+              ) : (
+                <Connection chg={changeA} />
+              )
+            }
           ></Route>
           <Route
             path="/Search"
@@ -277,6 +284,16 @@ function App() {
               )
             }
           ></Route>
+          <Route
+            path="/Galeries"
+            element={
+              acces === "oui" ? (
+                <GaleriesComponent />
+              ) : (
+                <Connection chg={changeA} />
+              )
+            }
+          />
           <Route
             path="/Order/:id"
             element={

@@ -68,9 +68,35 @@ function SingnUp({ chg }) {
           email: email,
         })
         .then((response) => {
-          handleAlert(response.data.message);
-          chg("oui");
-          navigue("/Home");
+          axios
+            .post(
+              `${BackendUrl}/login`,
+
+              {
+                email: email,
+                password: password,
+              },
+              {
+                withCredentials: true,
+                credentials: "include",
+              }
+            )
+            .then((user) => {
+              // console.log(user);
+              if (user.status === 200) {
+                handleAlert(user.data.message);
+                chg("oui");
+                navigue("/Home");
+                localStorage.setItem(`userEcomme`, JSON.stringify(user.data));
+              } else {
+                handleAlertwar(user.data.message);
+              }
+            })
+            .catch((error) => {
+              if (error.response.status === 400)
+                handleAlertwar(error.response.data.message);
+              else console.log(error.response);
+            });
         })
         .catch((error) => {
           if (error.response.status === 400) {

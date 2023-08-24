@@ -14,11 +14,27 @@ function Profile() {
   };
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
   const [nom, setNom] = useState("");
+  const [allMessage, setAllMessage] = useState([]);
   const [email, setEmail] = useState("");
 
   const [imageP, setImageP] = useState(null);
 
   const [produits, setProduits] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
+      .then((res) => {
+        setAllMessage(
+          res.data.filter(
+            (item) => item.lusUser === false && item.provenance === false
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
@@ -58,8 +74,9 @@ function Profile() {
       .then((Profiler) => {
         // console.log(Profiler);
         if (
+          Profiler.data.data.image &&
           Profiler.data.data.image !==
-          `${BackendUrl}/images/image-1688253105925-0.jpeg`
+            `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
         ) {
           setImageP(Profiler.data.data.image);
           // console.log(Profiler.data.data);
@@ -81,8 +98,8 @@ function Profile() {
     <div className="Profile">
       <div className="top">
         <div className="l" onClick={message}>
-          <MessageCircle />
-          <span>5</span>
+          <MessageCircle style={{ width: "40px" }} />{" "}
+          <span>{allMessage.length > 0 ? allMessage.length : 0}</span>
         </div>
         <div
           className="l"

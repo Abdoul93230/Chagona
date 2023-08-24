@@ -49,7 +49,7 @@ function EditProfile() {
           // console.log(Profiler);
           if (
             Profiler.data.data.image !==
-            `${BackendUrl}/images/image-1688253105925-0.jpeg`
+            `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
           ) {
             setImageP(Profiler.data.data.image);
           }
@@ -102,7 +102,7 @@ function EditProfile() {
               console.log(Profiler);
               if (
                 Profiler.data.data.image !==
-                `${BackendUrl}/images/image-1688253105925-0.jpeg`
+                `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
               ) {
                 setImageP(Profiler.data.data.image);
               }

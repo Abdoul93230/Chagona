@@ -36,6 +36,7 @@ import AFournisseurs from "../AFournisseurs/AFournisseurs";
 import AFournisseurDet from "../AFournisseurDet/AFournisseurDet";
 import AddFournisseur from "../AddFournisseurs/AddFournisseur";
 import AddCategorie from "../AddCategorie/AddCategorie";
+import ProductPub from "../ProductPub/ProductPub";
 import { useParams } from "react-router-dom";
 
 const admin = JSON.parse(localStorage.getItem("AdminEcomme"));
@@ -58,35 +59,42 @@ function ComposentP({ allCategories, allProducts }) {
     <div className="ComposentP">
       <div className="sidBar">
         <div className="sb cache">
-          <X onClick={show} className="show heid" />
+          <X
+            onClick={show}
+            className="show heid style"
+            style={{ width: 40, height: 40 }}
+          />
           <h2>LOGO</h2>
           <ul>
-            <Link to="/Admin" className="li">
+            <Link to="/Admin" className="li" onClick={show}>
               <Home className="i" /> Home
             </Link>
-            <Link to="/Admin/Analytics" className="li">
+            <Link to="/Admin/Analytics" className="li" onClick={show}>
               <BarChart2 className="i" /> Analytics
             </Link>
-            <Link to="/Admin/Imbox" className="li">
+            <Link to="/Admin/Imbox" className="li" onClick={show}>
               <MessageSquare className="i" /> Imbox <span>5</span>
             </Link>
-            <Link to="/Admin/Products" className="li">
+            <Link to="/Admin/Products" className="li" onClick={show}>
               <Folder className="i" /> Products
             </Link>
-            <Link to="/Admin/ACustomers" className="li">
+            <Link to="/Admin/ACustomers" className="li" onClick={show}>
               <Users className="i" /> customers
             </Link>
-            <Link to="/Admin/AOrders" className="li">
+            <Link to="/Admin/AOrders" className="li" onClick={show}>
               <MessageCircle className="i" /> Orders
             </Link>
-            <Link to="/Admin/AddProductA" className="li">
+            <Link to="/Admin/AddProductA" className="li" onClick={show}>
               <Plus className="i" /> Add Product
             </Link>
-            <Link to="/Admin/AFournisseurs" className="li">
+            <Link to="/Admin/AFournisseurs" className="li" onClick={show}>
               <HelpCircle className="i" /> Fournisseurs
             </Link>
-            <Link className="li" to="/Admin/AddCategorie">
+            <Link className="li" to="/Admin/AddCategorie" onClick={show}>
               <Settings className="i" /> Add Categorie
+            </Link>
+            <Link className="li" to="/Admin/ProductPub" onClick={show}>
+              <Settings className="i" /> ProductPub
             </Link>
           </ul>
           <button>
@@ -128,7 +136,7 @@ function ComposentP({ allCategories, allProducts }) {
                     }}
                   >
                     {" "}
-                    <h5>{admin.name}</h5>{" "}
+                    <h5>{admin?.name}</h5>{" "}
                     <ChevronDown style={{ marginLeft: "8px" }} />
                   </button>
                 }
@@ -174,6 +182,8 @@ function ComposentP({ allCategories, allProducts }) {
           <AddCategorie />
         ) : params.op === "AFournisseurUpdate" ? (
           <AFournisseurUpdate />
+        ) : params.op === "ProductPub" ? (
+          <ProductPub />
         ) : (
           <Overview />
         )}

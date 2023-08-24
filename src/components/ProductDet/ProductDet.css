@@ -132,9 +132,10 @@
     width: 100%;
     padding: 5px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin-top: 5px;
+    flex-wrap: wrap;
 }
 .ProductDet .color .col span{
     width: 40px;
@@ -193,9 +194,18 @@
     padding: 10px 16px;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     border-top: 1px solid #5762773f;   
 }
+
+.ProductDet .button .top{
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+}
+
 .ProductDet .button button{
     padding: 10px;
     display: flex;
@@ -467,6 +477,21 @@
     outline: none;
     color: white;
 }
+.ProductDet .poppupConte .poppup .CodeClef  .T{
+    color: white;
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.ProductDet .poppupConte .poppup .CodeClef section{
+    width: 100%;
+    /* color: #FF6969; */
+}
+.ProductDet .poppupConte .poppup .CodeClef section .i{
+    margin: 0px 5px;
+}
+
 .ProductDet .poppupConte .poppup .CodeClef button{
     margin-top: 20px;
     padding: 10px 20px;

@@ -8,21 +8,33 @@ function HeaderOne({ categories }) {
       <div className="two">
         <h2>Categories</h2>
         <div className="cardeCont">
-          {categories.map((param, index) => {
-            return (
-              <Link key={index} to={`/Categorie/${param.name}`} className="li">
-                <div
-                  className="carde"
-                  style={{
-                    boxShadow: `0px 0px 10px #FF6262`,
-                  }}
-                >
-                  <img src={param.image} alt="loading" />
-                </div>
-                <span>{param.name}</span>
-              </Link>
-            );
-          })}
+          {categories && categories.length > 0 ? (
+            categories.map((param, index) => {
+              if (index < 6) {
+                return (
+                  <Link
+                    key={index}
+                    to={`/Categorie/${param.name}`}
+                    className="li"
+                  >
+                    <div
+                      className="carde"
+                      style={{
+                        boxShadow: `0px 0px 10px #FF6262`,
+                      }}
+                    >
+                      <img src={param.image} alt="loading" />
+                    </div>
+                    <span>{param.name}</span>
+                  </Link>
+                );
+              } else {
+                return null;
+              }
+            })
+          ) : (
+            <></>
+          )}
 
           <Link to="/Categories" className="li">
             <div

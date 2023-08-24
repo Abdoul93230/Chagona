@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, Fragment, useRef } from "react";
 import axios from "axios";
 import "./MessageDet.css";
 import { ChevronLeft, Plus, ChevronUp, Delete } from "react-feather";
@@ -9,6 +9,7 @@ function MessageDet({ chg }) {
   const [message, setMessage] = useState("");
   const [allMessage, setAllMessage] = useState([]);
   const provenance = true;
+  const messageContainerRef = useRef(null);
 
   function goBack() {
     window.history.back();
@@ -21,6 +22,13 @@ function MessageDet({ chg }) {
   }
 
   useEffect(() => {
+    if (messageContainerRef.current) {
+      messageContainerRef.current.scrollTop =
+        messageContainerRef.current.scrollHeight;
+    }
+  }, [allMessage]);
+
+  useEffect(() => {
     axios
       .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
       .then((res) => {
@@ -28,6 +36,14 @@ function MessageDet({ chg }) {
       })
       .catch((error) => {
         console.log(error);
+      });
+    axios
+      .put(`${BackendUrl}/lecturUserMessage`, { userKey: a.id })
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((erro) => {
+        console.log(erro);
       });
   }, []);
 
@@ -98,7 +114,7 @@ function MessageDet({ chg }) {
         <h2>ss</h2>
       </div>
 
-      <div className="main">
+      <div className="main" ref={messageContainerRef}>
         {allMessage.map((param, index) => {
           if (!param.use) {
             return null;

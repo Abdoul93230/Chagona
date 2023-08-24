@@ -100,7 +100,7 @@ function OrderComponents() {
                   <div
                     key={index}
                     className="carde"
-                    onClick={() => details(index + 1)}
+                    onClick={() => details(param._id)}
                   >
                     <div className="top">
                       <h4>{getFormattedDay(new Date(param.date))}</h4>
@@ -135,7 +135,7 @@ function OrderComponents() {
                   <div
                     key={index}
                     className="carde"
-                    onClick={() => details(index + 1)}
+                    onClick={() => details(param._id)}
                   >
                     <div className="top">
                       <h4>{getFormattedDay(new Date(param.date))}</h4>

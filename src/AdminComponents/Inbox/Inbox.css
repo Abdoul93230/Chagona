@@ -49,6 +49,7 @@
     justify-content: space-between;
     margin-bottom: 8px;
     cursor: pointer;
+    position: relative;
 }
 
 .AInbox .left .carde img{
@@ -63,6 +64,20 @@
 .AInbox .left .carde .det{
     width: 75%;
     text-align: left;
+}
+.AInbox .left .carde .det .nbr{
+    position: absolute;
+    bottom: 4px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(23, 56, 56);
+    color: white;
+    /* width: 30px;
+    height: 30px; */
+    padding: 0px 4px;
+    border-radius: 50%;
 }
 .AInbox .left .carde .det p{
     font-size: 13px;

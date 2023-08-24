@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import image from "../../Images/produit4.jpg";
+import whatsapp from "../../Images/whatsapp.png";
 
 function InviteFriends() {
   const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -99,6 +100,42 @@ function InviteFriends() {
     }
   };
 
+  const shareProductViaWhatsApp = (productName, productURL, messages) => {
+    // Ajouter l'image du produit à la fin du message WhatsApp
+    // const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
+
+    const message = `Découvrez ce site incroyable : ${productName} \n\n ${messages} \n\n${productURL}}`;
+    const encodedMessage = encodeURIComponent(message);
+
+    // Vérifier si l'utilisateur est sur mobile
+    const isMobile =
+      /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
+        navigator.userAgent
+      );
+
+    // Générer le lien de partage sur WhatsApp pour le Web
+    const whatsappWebURL = `https://web.whatsapp.com/send?text=${encodedMessage}`;
+
+    if (isMobile) {
+      // Si sur mobile, utiliser le schéma whatsapp:// pour ouvrir WhatsApp
+      const whatsappAppURL = `whatsapp://send?text=${encodedMessage}`;
+      window.location.href = whatsappAppURL;
+    } else {
+      // Si sur desktop, simplement afficher le lien
+      window.open(whatsappWebURL, "_blank");
+    }
+  };
+
+  const shareURL = () => {
+    const currentURL = window.location.href;
+    // Utilisez la fonction de partage ici avec l'URL actuelle
+    shareProductViaWhatsApp(
+      "Chagona-ne",
+      "https://chagona-ne.onrender.com",
+      message
+    );
+  };
+
   return (
     <div className="InviteFriends">
       <img src={image} alt="loading" />
@@ -120,7 +157,7 @@ function InviteFriends() {
             setEmail(e.target.value);
           }}
         />
-        <label htmlFor="num">OU Numero de votre ami</label>
+        {/* <label htmlFor="num">OU Numero de votre ami</label>
         <input
           required
           type="number"
@@ -129,9 +166,12 @@ function InviteFriends() {
           onChange={(e) => {
             setNumber(e.target.value);
           }}
-        />
+        /> */}
       </form>
       <button onClick={envoyer}>Submit</button>
+      <div className="whatsapp">
+        <img alt="loadin" src={whatsapp} onClick={shareURL} />
+      </div>
       <ToastContainer />
     </div>
   );

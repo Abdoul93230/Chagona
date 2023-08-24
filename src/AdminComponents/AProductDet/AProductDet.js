@@ -171,6 +171,18 @@ function AProductDet() {
             </tr>
           </tbody>
         </table>
+        <div className="plusImg">
+          <h3>Color Image :</h3>
+          <div className="img">
+            {product?.pictures ? (
+              product?.pictures.map((param, index) => {
+                return <img key={index} alt="loading" src={param} />;
+              })
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
         <div className="SM">
           <button onClick={SupprimerProduct}>Supprimer !</button>
           <button>

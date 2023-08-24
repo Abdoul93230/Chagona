@@ -550,20 +550,10 @@ function ProductDet({ product }) {
       <Helmet>
         <title>{VP?.name}</title>
         {/* <link rel="icon" href="/chemin/vers/votre/nouveau/favicon.ico" /> */}
-        {/* <link
-          rel="icon"
-          type="image/png"
-          href="https://th.bing.com/th/id/R.07634369c265cb9c87761ae5ec77aac6?rik=yEai0DxVsc3%2bWA&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_250767.png&ehk=Yl85h2TaR4cKtYZI3C3sPViX6XzEYR7CD5TRQECDHQU%3d&risl=&pid=ImgRaw&r=0"
-        /> */}
+        <link rel="icon" type="image" href={VP?.image1} />
         <meta property="og:title" content={VP?.name} />
         <meta property="og:description" content={VP?.description} />
         <meta property="og:image" content={VP?.image1} />
-        <meta property="og:url" content={window.location.href} />
-        {/* Ajoutez les autres balises Open Graph ici */}
-        <meta property="og:type" content="product" />
-        <meta property="og:site_name" content="Votre site" />
-        <meta property="og:locale" content="fr_FR" />
-        {/* Et d'autres balises que vous souhaitez définir */}
       </Helmet>
 
       <ToastContainer />
@@ -613,7 +603,7 @@ function ProductDet({ product }) {
               <img src={VP?.image2} alt="loading" />
             </div>
             <div className="slide">
-              <img src={VP?.image1} alt="loading" />
+              <img src={VP?.image3} alt="loading" />
             </div>
           </Slider>
         </div>
@@ -631,22 +621,27 @@ function ProductDet({ product }) {
       </div>
       {OP}
       <div className="button">
-        <button
-          className="btn1"
-          // onClick={() => navigue("/Profile/Invite_Friends")}
-          onClick={shareURL}
-        >
-          SHARE THIS{" "}
-          <span>
-            <ChevronUp />
-          </span>
-        </button>
-        <button className="btn2" onClick={AddProduct}>
-          ADD TO CART{" "}
-          <span>
-            <ChevronRight />
-          </span>
-        </button>
+        <div className="top">
+          <button
+            className="btn1"
+            // onClick={() => navigue("/Profile/Invite_Friends")}
+            onClick={shareURL}
+          >
+            SHARE THIS{" "}
+            <span>
+              <ChevronUp />
+            </span>
+          </button>
+          <button className="btn2" onClick={AddProduct}>
+            ADD TO CART{" "}
+            <span>
+              <ChevronRight />
+            </span>
+          </button>
+        </div>
+        <div className="bottom">
+          {/* A faire : Un button pour La possibilite de pouvoir commander via Whatsapp */}
+        </div>
       </div>
       <div
         className="comment"
@@ -671,25 +666,75 @@ function ProductDet({ product }) {
                 onChange={(e) => setCommente(e.target.value)}
                 placeholder="tape the code here"
               ></textarea>
-              <label
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  color: "white",
+              <label className="T">Notez ce produit</label>
+              <section
+                onChange={(e) => {
+                  setEtoil(Number(e.target.value));
                 }}
               >
-                Note le produit de 1-5
-                <input
-                  style={{ padding: 3, width: 50 }}
-                  type="number"
-                  onChange={(e) => {
-                    setEtoil(e.target.value);
-                  }}
-                  min={0}
-                  max={5}
-                  defaultValue={5}
-                />
-              </label>
+                <label for="un">
+                  <input
+                    style={{ display: "none" }}
+                    type="radio"
+                    id="un"
+                    name="etoille"
+                    value={1}
+                  />
+                  <Star
+                    style={{ color: etoil === 1 ? "#FF6969" : "white" }}
+                    className="i"
+                  />
+                </label>
+                <label for="deux">
+                  <input
+                    style={{ display: "none" }}
+                    type="radio"
+                    id="deux"
+                    name="etoille"
+                    value={2}
+                  />
+                  <Star
+                    style={{ color: etoil === 2 ? "#FF6969" : "white" }}
+                    className="i"
+                  />
+                </label>
+                <label for="trois">
+                  <input
+                    style={{ display: "none" }}
+                    type="radio"
+                    id="trois"
+                    name="etoille"
+                    value={3}
+                  />
+                  <Star
+                    style={{ color: etoil === 3 ? "#FF6969" : "white" }}
+                    className="i"
+                  />
+                </label>
+                <label for="quatre">
+                  <input
+                    style={{ display: "none" }}
+                    type="radio"
+                    id="quatre"
+                    name="etoille"
+                    value={4}
+                  />
+                  <Star
+                    style={{ color: etoil === 4 ? "#FF6969" : "white" }}
+                    className="i"
+                  />
+                </label>
+                <label for="cinq">
+                  <input
+                    style={{ display: "none" }}
+                    type="radio"
+                    id="cinq"
+                    name="etoille"
+                    value={5}
+                  />
+                  <Star style={{ color: etoil === 5 ? "#FF6969" : "white" }} />
+                </label>
+              </section>
               <button onClick={envoyer}>Envoyer</button>
             </div>
           </div>

@@ -8,12 +8,31 @@ import {
   Home,
 } from "react-feather";
 import { Link, useNavigate, NavLink } from "react-router-dom";
+import axios from "axios";
 
 import "./HomeTop.css";
 
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function HomeTop() {
   const [produits, setProduits] = useState(0);
   const navigue = useNavigate();
+  const [allMessage, setAllMessage] = useState([]);
+  const a = JSON.parse(localStorage.getItem(`userEcomme`));
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
+      .then((res) => {
+        setAllMessage(
+          res.data.filter(
+            (item) => item.lusUser == false && item.provenance === false
+          )
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
@@ -24,12 +43,15 @@ function HomeTop() {
     }
   }, []);
 
+  // lecturUserMessage
+
   return (
     <div className="HomeTop">
       <div className="one">
         <div className="h">
           <Link className="l" to="/Messages">
-            <MessageCircle style={{ width: "40px" }} /> <span>5</span>
+            <MessageCircle style={{ width: "40px" }} />{" "}
+            <span>{allMessage.length > 0 ? allMessage.length : 0}</span>
           </Link>
           <Link className="l" to="/Cart">
             <ShoppingCart style={{ width: "40px" }} />

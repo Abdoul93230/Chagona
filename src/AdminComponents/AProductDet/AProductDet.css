@@ -135,6 +135,35 @@ align-items: flex-start;
     padding: 5px 0px;
     text-transform: capitalize;
 }
+
+
+.AProductDet .right .plusImg{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    /* border: 2px solid crimson; */
+}
+
+.AProductDet .right .plusImg h3{
+    color: #1e2225;
+    text-align: left;
+
+}
+
+.AProductDet .right .plusImg .img{
+    width: 100%;
+    display: flex;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.AProductDet .right .plusImg .img img{
+    width: 150px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
 .AProductDet .right .SM{
     width: 100%;
     height: auto;
