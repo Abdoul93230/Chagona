@@ -551,6 +551,7 @@ function ProductDet({ product }) {
         <title>{VP?.name}</title>
         {/* <link rel="icon" href="/chemin/vers/votre/nouveau/favicon.ico" /> */}
         <link rel="icon" type="image" href={VP?.image1} />
+        <link rel="apple-touch-icon" href={VP?.image1} />
         <meta property="og:title" content={VP?.name} />
         <meta property="og:description" content={VP?.description} />
         <meta property="og:image" content={VP?.image1} />
