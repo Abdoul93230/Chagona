@@ -95,12 +95,14 @@ function CartCheckout({ op }) {
         },
       })
       .then((code) => {
-        console.log(code);
+        // console.log(code);
         if (code.data.data.isValide) {
           setCodeValide(code.data.data);
+          // console.log(code.data.data);
           setPoppup(!poppup);
         } else {
           alert("ce code la a expire.");
+          // console.log(code.data.data);
           setPoppup(!poppup);
         }
       })
@@ -147,11 +149,11 @@ function CartCheckout({ op }) {
 
   const Plasser = () => {
     const local = localStorage.getItem("panier");
-    if (choix.length <= 0) {
+    if (phone.length <= 0) {
       navigue("/More/shipping_address");
       return;
     }
-    if (phone.length <= 0) {
+    if (choix.length <= 0) {
       navigue("/More/payment_method");
       return;
     }
@@ -173,7 +175,10 @@ function CartCheckout({ op }) {
         prix: total,
       };
       if (codeValide) {
-        if (codeValide.isValide) data.codePro = true;
+        if (codeValide.isValide) {
+          data.codePro = true;
+          data.idCodePro = codeValide?._id;
+        }
       }
 
       // console.log(data);
@@ -190,10 +195,13 @@ function CartCheckout({ op }) {
                   codePromoId: codeValide._id,
                   isValide: false,
                 })
-                .then(() => console.log("fait"))
+                .then(() => {
+                  // console.log("fait")
+                })
                 .catch((error) => console.log(error));
             }
           }
+          op("trois");
         })
         .catch((error) => console.log("errrr", error));
     }
@@ -239,7 +247,7 @@ function CartCheckout({ op }) {
             <h4>payment method</h4>
             <h2>
               <CreditCard style={{ color: "#FF6969" }} />
-              {choix} {choix === "Mobile Money" ? phone : ""}{" "}
+              {choix} {choix === "Mobile Money" ? numero : ""}{" "}
               {choix === "master Card" || choix === "Visa"
                 ? `ending **${String(numeroCard).slice(-2)}`
                 : ""}
@@ -329,7 +337,6 @@ function CartCheckout({ op }) {
           </div>
           <button
             onClick={() => {
-              op("trois");
               Plasser();
             }}
           >

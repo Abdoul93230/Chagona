@@ -70,7 +70,8 @@ function Mores({ chg }) {
           { name: "payment method", link: "/More/payment_method" },
           {
             name: "Notification settings",
-            link: "/More/Notification_settings",
+            // link: "/More/Notification_settings",
+            link: "/PageNotRady",
           },
           { name: "privacy notice", link: "/More/privacy_notice" },
           {

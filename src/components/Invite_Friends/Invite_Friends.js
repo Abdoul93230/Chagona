@@ -65,38 +65,39 @@ function InviteFriends() {
     }
   });
 
-  const envoyer = (e) => {
+  const envoyer = async (e) => {
     e.preventDefault();
 
     if (!regexMail.test(email) && number.length < 8) {
-      handleAlertwar("forma du mail non valid!");
+      handleAlertwar("Format de l'email non valide !");
       return;
     }
-
+    handleAlert("Envoi en cours...");
     if (regexMail.test(email) || number.length >= 8) {
       if (regexMail.test(email)) {
         const emailData = {
-          senderEmail: emailP, // L'expéditeur de l'e-mail (adresse e-mail du client)
+          senderEmail: emailP,
           subject: "Sujet de l'e-mail",
           message: message,
           friendEmail: email,
           clientName: name,
         };
 
-        axios
-          .post(`${BackendUrl}/Send_email_freind`, emailData)
-          .then(async (response) => {
-            // alert(response.data.message);
-            await handleAlert(`${response.data.message} Email`);
-            // navigue("/Profile");
-          })
-          .catch((error) => {
-            console.error("Erreur lors de la requête:", error);
-          });
+        try {
+          await axios.post(`${BackendUrl}/Send_email_freind`, emailData);
+          handleAlert("Email envoyé !");
+          // Attendre quelques secondes avant de naviguer
+          setTimeout(() => {
+            navigue("/Profile");
+          }, 3000);
+        } catch (error) {
+          console.error("Erreur lors de la requête:", error);
+        }
       }
-      if (regexPhone.test(number.toString())) {
-        handleAlert("Invitation envoyée avec succès phone !");
-      }
+
+      // if (regexPhone.test(number.toString())) {
+      //   handleAlert("Invitation envoyée avec succès par téléphone !");
+      // }
     }
   };
 

@@ -42,10 +42,34 @@ function Footer({ scroll }) {
           >
             COOKIE NOTICE
           </li>
-          <li>BECOME A SELLER</li>
-          <li>REPORT A PRODUCT</li>
-          <li>SHIP YOUR PACKAGE ANYWHERE IN NIGER</li>
-          <li>Habou ANNIVERSARY 2023</li>
+          <li
+            onClick={() => {
+              navigue("/PageNotRady");
+            }}
+          >
+            BECOME A SELLER
+          </li>
+          <li
+            onClick={() => {
+              navigue("/PageNotRady");
+            }}
+          >
+            REPORT A PRODUCT
+          </li>
+          <li
+            onClick={() => {
+              navigue("/PageNotRady");
+            }}
+          >
+            SHIP YOUR PACKAGE ANYWHERE IN NIGER
+          </li>
+          <li
+            onClick={() => {
+              navigue("/PageNotRady");
+            }}
+          >
+            Habou ANNIVERSARY 2023
+          </li>
         </ul>
       </div>
       <div className="bottom">

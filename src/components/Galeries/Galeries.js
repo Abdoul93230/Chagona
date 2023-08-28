@@ -34,7 +34,10 @@ function Galeries({ products }) {
                 onMouseDown={() => chg1(index)}
               >
                 <div className={index === 0 ? "hover show" : "hover"}>
-                  <p>kodtighritgt wleirjroeixhkiyt ,ktkdjor xzlkdo</p>
+                  <p style={{ padding: 3 }}>
+                    {param?.description.substring(0, 80)}
+                    <span style={{ fontSize: 30, color: "#FF6969" }}>...</span>
+                  </p>
                 </div>
                 <img src={param.image1} alt="loading" />
               </div>

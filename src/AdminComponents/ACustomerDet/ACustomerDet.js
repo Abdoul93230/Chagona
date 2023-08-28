@@ -55,7 +55,7 @@ function ACustomerDet() {
       .get(`${BackendUrl}/getCodePromoByClefUser/${params.id}`)
       .then((code) => {
         setAllCode(code.data.data);
-        console.log(code.data);
+        // console.log(code.data);
       })
       .catch((error) => console.log(error));
   }, []);

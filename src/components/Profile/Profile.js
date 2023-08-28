@@ -156,7 +156,15 @@ function Profile() {
           { name: "make suggestion", link: "make_suggestion" },
         ].map((param, index) => {
           return (
-            <Link to={`/Profile/${param.link}`} className="li" key={index}>
+            <Link
+              to={
+                param.name === "rate our app"
+                  ? `/PageNotRady`
+                  : `/Profile/${param.link}`
+              }
+              className="li"
+              key={index}
+            >
               <span>
                 <Menu />
               </span>

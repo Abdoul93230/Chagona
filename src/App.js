@@ -20,6 +20,7 @@ import { useState, useEffect } from "react";
 import ContactUs from "./components/ContactUs/ContactUs";
 import AdminConnection from "./AdminComponents/AdminConnection/AdminConnection";
 import GaleriesComponent from "./components/GaleriesComponent/GaleriesComponent";
+import PageNotRady from "./components/PageNotRady/PageNotRady";
 import "reactjs-popup/dist/index.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -305,6 +306,15 @@ function App() {
               ) : (
                 <Connection chg={changeA} />
               )
+            }
+          ></Route>
+          <Route
+            path="/PageNotRady"
+            element={
+              <PageNotRady
+                allCategories={allCategories}
+                allProducts={allProducts}
+              />
             }
           ></Route>
         </Routes>

@@ -40,7 +40,7 @@ function MessageDet({ chg }) {
     axios
       .put(`${BackendUrl}/lecturUserMessage`, { userKey: a.id })
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
       })
       .catch((erro) => {
         console.log(erro);

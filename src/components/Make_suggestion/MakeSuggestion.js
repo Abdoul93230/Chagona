@@ -40,29 +40,35 @@ function MakeSuggestion() {
     });
   };
 
-  const envoyer = () => {
+  const envoyer = async () => {
     if (comment.length < 8) {
-      handleAlertwar("Veuiller entre un commantaire valide!");
+      handleAlertwar("Veuillez entrer un commentaire valide !");
       return;
     }
-    const emailData = {
-      senderEmail: "abdoulrazak9323@gmail.com", // L'expéditeur de l'e-mail (adresse e-mail du client)
-      subject: "Commantaire Chagona-ne.onrender.com",
-      message: comment,
-      friendEmail: "abdoulrazak9323@gmail.com",
-      clientName: "un Client",
-    };
 
-    axios
-      .post(`${BackendUrl}/Send_email_freind`, emailData)
-      .then(async (response) => {
-        handleAlert(`Commantaire envoyer !`);
-        setAlertClosed(true);
-        // navigue("/Profile");
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la requête:", error);
-      });
+    handleAlert("Envoi en cours...");
+
+    try {
+      const emailData = {
+        senderEmail: "abdoulrazak9323@gmail.com",
+        subject: "Commentaire Chagona-ne.onrender.com",
+        message: comment,
+        friendEmail: "abdoulrazak9323@gmail.com",
+        clientName: "un Client",
+      };
+
+      await axios.post(`${BackendUrl}/Send_email_freind`, emailData);
+
+      handleAlert("Commentaire envoyé !");
+      // setAlertClosed(true);
+
+      // Attendez un peu avant de naviguer
+      setTimeout(() => {
+        navigue("/Profile");
+      }, 2000);
+    } catch (error) {
+      console.error("Erreur lors de la requête :", error);
+    }
   };
 
   const navigue = useNavigate();
