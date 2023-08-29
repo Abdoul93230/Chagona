@@ -285,6 +285,19 @@ function PaymentMethode() {
       </div>
 
       {options}
+      {/* <button
+        type="button"
+        className="ipaymoney-button"
+        data-amount="100"
+        data-environement="live" // Notez la correction de "environement" à "environment"
+        data-key="pk_f83a240bd0df4393b35a819925863e16"
+        data-transaction-id="unique par compte"
+        data-redirect-url="/home" //lien de redirection après paiement
+        data-callback-url="/profile"
+        // onClick={handlePayment}
+      >
+        CheckOut
+      </button> */}
     </div>
   );
 }
