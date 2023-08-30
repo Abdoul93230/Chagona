@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import image from "../../Images/sac2.png";
+import whatsapp from "../../Images/whatsapp.png";
 import {
   ChevronLeft,
   ShoppingCart,
@@ -24,6 +25,7 @@ const BackendUrl = process.env.REACT_APP_Backend_Url;
 function ProductDet({ product }) {
   const params = useParams();
   const [poppup, setPoppup] = useState(false);
+  const [poppup2, setPoppup2] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [VP, setVp] = useState(null);
@@ -63,6 +65,12 @@ function ProductDet({ product }) {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+    });
+  };
+
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      handleAlert("Url Copier");
     });
   };
 
@@ -626,7 +634,10 @@ function ProductDet({ product }) {
           <button
             className="btn1"
             // onClick={() => navigue("/Profile/Invite_Friends")}
-            onClick={shareURL}
+
+            onClick={() => {
+              setPoppup2(true);
+            }}
           >
             SHARE THIS{" "}
             <span>
@@ -665,7 +676,7 @@ function ProductDet({ product }) {
               <textarea
                 type="text"
                 onChange={(e) => setCommente(e.target.value)}
-                placeholder="tape the code here"
+                placeholder="tape the commente here"
               ></textarea>
               <label className="T">Notez ce produit</label>
               <section
@@ -673,7 +684,7 @@ function ProductDet({ product }) {
                   setEtoil(Number(e.target.value));
                 }}
               >
-                <label for="un">
+                <label htmlFor="un">
                   <input
                     style={{ display: "none" }}
                     type="radio"
@@ -686,7 +697,7 @@ function ProductDet({ product }) {
                     className="i"
                   />
                 </label>
-                <label for="deux">
+                <label htmlFor="deux">
                   <input
                     style={{ display: "none" }}
                     type="radio"
@@ -699,7 +710,7 @@ function ProductDet({ product }) {
                     className="i"
                   />
                 </label>
-                <label for="trois">
+                <label htmlFor="trois">
                   <input
                     style={{ display: "none" }}
                     type="radio"
@@ -712,7 +723,7 @@ function ProductDet({ product }) {
                     className="i"
                   />
                 </label>
-                <label for="quatre">
+                <label htmlFor="quatre">
                   <input
                     style={{ display: "none" }}
                     type="radio"
@@ -725,7 +736,7 @@ function ProductDet({ product }) {
                     className="i"
                   />
                 </label>
-                <label for="cinq">
+                <label htmlFor="cinq">
                   <input
                     style={{ display: "none" }}
                     type="radio"
@@ -737,6 +748,32 @@ function ProductDet({ product }) {
                 </label>
               </section>
               <button onClick={envoyer}>Envoyer</button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+      {/* ///////////////////////////////////////////////////////// */}
+
+      {poppup2 ? (
+        <div className="poppupConte">
+          <div className="poppup">
+            <div className="top">
+              <h3>Partagez ce Lien</h3>
+              <span>
+                <X onClick={() => setPoppup2(!poppup2)} />
+              </span>
+            </div>
+            <div className="CodeClef">
+              <div className="group">
+                <span onClick={handleCopyClick}>Copier :</span>
+                <input type="text" defaultValue={window.location.href} />
+              </div>
+              <div className="group">
+                <span>Via whatsapp :</span>
+                <img src={whatsapp} alt="loading" onClick={shareURL} />
+              </div>
             </div>
           </div>
         </div>

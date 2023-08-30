@@ -4,14 +4,12 @@
     width: 100%;
     position: fixed;
     top: 0px;
+    height: 70px;
     z-index: 100000;
 }
 .HomeTop .one{
-    
     display: flex;
     flex-direction: column;
-    
-   
 }
 
 .HomeTop .one .h{
@@ -26,6 +24,16 @@
     color: #727C8E;
 
 }
+
+.HomeTop .one .h img{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: -45px;
+    left: -39px;
+    z-index: 100;
+}
+
 .HomeTop .one .h .l span{
     background-color: #FF6969;
     color: white;
@@ -53,6 +61,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    display: none;
 }
 
 .HomeTop .search form{

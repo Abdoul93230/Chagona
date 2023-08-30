@@ -453,7 +453,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 5px 10px;
+    margin-top: 0px;
     background-color: white;
     border-radius: 5px;
 }
@@ -500,6 +501,29 @@
     color: white;
     font-weight: bold;
     border-radius: 4px;
+}
+
+.ProductDet .poppupConte .poppup .group{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ProductDet .poppupConte .poppup .group img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.ProductDet .poppupConte .poppup .group span{
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+.ProductDet .poppupConte .poppup .group input{
+    padding: 3px;
 }
 
 

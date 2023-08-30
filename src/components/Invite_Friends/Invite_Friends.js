@@ -105,7 +105,7 @@ function InviteFriends() {
     // Ajouter l'image du produit à la fin du message WhatsApp
     // const message = `Découvrez ce produit incroyable : ${productName} \n\n${productURL}\n\n${productImageURL}`;
 
-    const message = `Découvrez ce site incroyable : ${productName} \n\n ${messages} \n\n${productURL}}`;
+    const message = `Découvrez ce site incroyable : ${productName} \n\n ${messages} \n\n${productURL}`;
     const encodedMessage = encodeURIComponent(message);
 
     // Vérifier si l'utilisateur est sur mobile
@@ -131,8 +131,8 @@ function InviteFriends() {
     const currentURL = window.location.href;
     // Utilisez la fonction de partage ici avec l'URL actuelle
     shareProductViaWhatsApp(
-      "Chagona-ne",
-      "https://chagona-ne.onrender.com",
+      "habou227",
+      "https://habou227.onrender.com",
       message
     );
   };

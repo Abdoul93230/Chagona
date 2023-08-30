@@ -3,6 +3,8 @@ import "./CartCheckout.css";
 import { ChevronRight, X, CreditCard, Minus, Plus } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -27,6 +29,30 @@ function CartCheckout({ op }) {
   const [allProducts, setAllProduits] = useState(null);
 
   const [produits, setProduits] = useState(null);
+
+  const handleAlert = (message) => {
+    toast.success(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const handleAlertwar = (message) => {
+    toast.warn(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
@@ -101,13 +127,14 @@ function CartCheckout({ op }) {
           // console.log(code.data.data);
           setPoppup(!poppup);
         } else {
-          alert("ce code la a expire.");
+          handleAlertwar("ce code la a expire.");
           // console.log(code.data.data);
           setPoppup(!poppup);
         }
       })
       .catch((error) => {
-        alert("ce code de promo n'exite pas");
+        handleAlertwar("ce code de promo n'exite pas");
+        setPoppup(!poppup);
       });
   };
 
@@ -370,6 +397,7 @@ function CartCheckout({ op }) {
         ) : (
           <></>
         )}
+        <ToastContainer />
       </LoadingIndicator>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   Home,
 } from "react-feather";
 import { Link, useNavigate, NavLink } from "react-router-dom";
+import logo from "../../Images/logo2.png";
 import axios from "axios";
 
 import "./HomeTop.css";
@@ -49,6 +50,7 @@ function HomeTop() {
     <div className="HomeTop">
       <div className="one">
         <div className="h">
+          <img src={logo} alt="loadin" />
           <Link className="l" to="/Messages">
             <MessageCircle style={{ width: "40px" }} />{" "}
             <span>{allMessage.length > 0 ? allMessage.length : 0}</span>

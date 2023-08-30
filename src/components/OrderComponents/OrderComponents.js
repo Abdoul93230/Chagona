@@ -96,6 +96,7 @@ function OrderComponents() {
             ) : (
               myAllComande
                 ?.filter((param) => param.statusLivraison === "en cours")
+                .reverse()
                 ?.map((param, index) => (
                   <div
                     key={index}
@@ -131,6 +132,7 @@ function OrderComponents() {
             ) : (
               myAllComande
                 ?.filter((param) => param.statusLivraison === "recu")
+                .reverse()
                 ?.map((param, index) => (
                   <div
                     key={index}

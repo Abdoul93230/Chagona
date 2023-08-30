@@ -223,6 +223,13 @@ function SearchTwo({ op, allCategories, allProducts }) {
       </div>
 
       <div className="bottom">
+        {erreur && !products ? (
+          <h2 style={{ fontSize: 10, width: "100%", marginTop: -15 }}>
+            {erreur}
+          </h2>
+        ) : (
+          ""
+        )}
         {sh
           ? shuffledProducts.map((param, index) => {
               return (
@@ -258,7 +265,6 @@ function SearchTwo({ op, allCategories, allProducts }) {
                 </div>
               );
             })}
-        {erreur && !products ? <h2>{erreur}</h2> : ""}
       </div>
 
       {/* filtre */}
