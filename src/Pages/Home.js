@@ -35,7 +35,7 @@ function Home() {
   }
   useEffect(() => {
     axios
-      .get("http://localhost:8080/getAllType")
+      .get(`BackendUrl/getAllType`)
       .then((types) => {
         setAllTypes(types.data.data);
       })
