@@ -62,7 +62,7 @@ function Home() {
       });
   }, []);
   const clefElectronique = allCategories
-    ? allCategories.find((item) => item.name === "electronics")
+    ? allCategories.find((item) => item.name === "électroniques")
     : null;
 
   // Gestionnaire pour faire défiler vers le haut de la page
@@ -114,7 +114,7 @@ function Home() {
               )
             )
           )}
-          name={"Electronics"}
+          name={"électroniques"}
         />
         <ProductsSli
           products={getRandomElements(
@@ -126,7 +126,7 @@ function Home() {
                   )?._id ?? ""
             )
           )}
-          name={"electronics"}
+          name={"électroniques"}
         />
 
         <Galeries products={allProducts} />
