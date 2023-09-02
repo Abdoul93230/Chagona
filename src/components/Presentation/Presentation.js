@@ -57,68 +57,78 @@ function Presentation({ categories }) {
   }, []);
 
   return (
-    <div className="Presentation">
-      <h2>Latest</h2>
-      <div className="Con">
-        <div className="pub">
-          <h5>
-            <Menu /> Categories
-          </h5>
-          <ul>
-            {categories?.map((param, index) => {
-              return (
-                <Link
-                  key={index}
-                  className="li"
-                  to={`/Categorie/${param.name}`}
-                >
-                  <Menu
-                    style={{ width: "10px", height: "10px", marginRight: 8 }}
-                  />
-                  {param.name}
-                </Link>
-              );
-            })}
-          </ul>
-        </div>
-        <div className="carousel-container">
-          <Slider {...settings}>
-            {allPub && allPub.length > 0 ? (
-              allPub.map((param, index) => {
-                return (
-                  <div className="slide" key={index}>
-                    <img src={param.image} alt="loading" />
-                    <div className="button">
-                      <h6 onClick={() => navigue(`/PubDet/${param._id}`)}>
-                        SEE MORE
-                      </h6>
-                      <span>
-                        <ChevronRight />
-                      </span>
-                    </div>
-                  </div>
-                );
-              })
-            ) : (
-              <></>
-            )}
-
-            {/* Ajoutez d'autres éléments de diapositives ici */}
-          </Slider>
-        </div>
-
-        <div className="pub1">
-          <div className="contPub">
-            <div className="section">
-              <img src={image3} alt="loadin" />
+    <>
+      {allPub && allPub.length > 0 ? (
+        <div className="Presentation">
+          <h2>Latest</h2>
+          <div className="Con">
+            <div className="pub">
+              <h5>
+                <Menu /> Categories
+              </h5>
+              <ul>
+                {categories?.map((param, index) => {
+                  return (
+                    <Link
+                      key={index}
+                      className="li"
+                      to={`/Categorie/${param.name}`}
+                    >
+                      <Menu
+                        style={{
+                          width: "10px",
+                          height: "10px",
+                          marginRight: 8,
+                        }}
+                      />
+                      {param.name}
+                    </Link>
+                  );
+                })}
+              </ul>
             </div>
-            <div className="section">
-              <img src={image2} alt="loadin" />
+            <div className="carousel-container">
+              <Slider {...settings}>
+                {allPub && allPub.length > 0 ? (
+                  allPub.map((param, index) => {
+                    return (
+                      <div className="slide" key={index}>
+                        <img src={param.image} alt="loading" />
+                        <div className="button">
+                          <h6 onClick={() => navigue(`/PubDet/${param._id}`)}>
+                            SEE MORE
+                          </h6>
+                          <span>
+                            <ChevronRight />
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <></>
+                )}
+
+                {/* Ajoutez d'autres éléments de diapositives ici */}
+              </Slider>
+            </div>
+
+            <div className="pub1">
+              <div className="contPub">
+                <div className="section">
+                  <img src={image3} alt="loadin" />
+                </div>
+                <div className="section">
+                  <img src={image2} alt="loadin" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 
