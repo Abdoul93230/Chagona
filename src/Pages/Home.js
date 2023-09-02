@@ -15,9 +15,12 @@ import { shuffle } from "lodash";
 import { ChevronUp } from "react-feather";
 import "./styles.css";
 
-function Home({ allCategories, allProducts }) {
+function Home() {
+  const BackendUrl = process.env.REACT_APP_Backend_Url;
   const [showButton, setShowButton] = useState(false);
   const [allTypes, setAllTypes] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   function getRandomElements(array) {
     const shuffledArray = shuffle(array);
     return shuffledArray.slice(0, 10);
@@ -38,6 +41,24 @@ function Home({ allCategories, allProducts }) {
       })
       .catch((error) => {
         console.log(error);
+      });
+
+    axios
+      .get(`${BackendUrl}/getAllCategories`)
+      .then((Categories) => {
+        setAllCategories(Categories.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get(`${BackendUrl}/products`)
+      .then((Categories) => {
+        setAllProducts(Categories.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response.data.message);
       });
   }, []);
   const clefElectronique = allCategories

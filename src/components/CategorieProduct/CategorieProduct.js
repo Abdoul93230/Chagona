@@ -17,12 +17,19 @@ function CategorieProduct({ allCategories, allProducts }) {
   function goBack() {
     window.history.back();
   }
+
   const [allTypes, setAllTypes] = useState([]);
   const [Allcommente, setAllCommente] = useState([]);
   const [choix, setChoix] = useState("Home");
   const params = useParams();
   const navigue = useNavigate();
   const [allPub, setAllPub] = useState(null);
+  let Pub =
+    allPub?.filter(
+      (item) =>
+        item.clefCategorie ===
+        allCategories?.find((item) => item.name === params.Cat)._id
+    ) || [];
   // console.log(params.Cat);
   function getRandomElementsSix(array, nbr) {
     const shuffledArray = shuffle(array);
@@ -188,17 +195,14 @@ function CategorieProduct({ allCategories, allProducts }) {
       <div style={{ marginBottom: "50px" }}>
         <div className="home">
           <h3>Trending</h3>
-          <div
-            className="carde carousel-container"
-            style={{ overflow: "hidden" }}
-          >
-            <Slider className="c" {...settings}>
-              {allPub && allPub.length > 0 ? (
-                allPub.map((param, index) => {
-                  if (
-                    param.clefCategorie ===
-                    allCategories?.find((item) => item.name === params.Cat)._id
-                  ) {
+          {Pub.length > 0 ? (
+            <>
+              <div
+                className="carde carousel-container"
+                style={{ overflow: "hidden" }}
+              >
+                <Slider className="c" {...settings}>
+                  {Pub.map((param, index) => {
                     return (
                       <div
                         key={index}
@@ -215,15 +219,13 @@ function CategorieProduct({ allCategories, allProducts }) {
                         </div>
                       </div>
                     );
-                  } else {
-                    return null;
-                  }
-                })
-              ) : (
-                <></>
-              )}
-            </Slider>
-          </div>
+                  })}
+                </Slider>
+              </div>
+            </>
+          ) : (
+            <></>
+          )}
           <div className="produits">
             {Home1.map((param, index) => {
               return (

@@ -21,6 +21,7 @@ import ContactUs from "./components/ContactUs/ContactUs";
 import AdminConnection from "./AdminComponents/AdminConnection/AdminConnection";
 import GaleriesComponent from "./components/GaleriesComponent/GaleriesComponent";
 import PageNotRady from "./components/PageNotRady/PageNotRady";
+import PubDet from "./components/PubDet/PubDet";
 import "reactjs-popup/dist/index.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -315,6 +316,12 @@ function App() {
                 allCategories={allCategories}
                 allProducts={allProducts}
               />
+            }
+          ></Route>
+          <Route
+            path="/PubDet/:id"
+            element={
+              acces === "oui" ? <PubDet /> : <Connection chg={changeA} />
             }
           ></Route>
         </Routes>

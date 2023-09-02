@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useNavigation } from "react-router-dom";
 import image1 from "../../Images/sac.png";
 import image2 from "../../Images/pub3.jpg";
 import image3 from "../../Images/pub2.jpg";
@@ -16,6 +17,7 @@ const BackendUrl = process.env.REACT_APP_Backend_Url;
 function Presentation({ categories }) {
   const [allPub, setAllPub] = useState(null);
   // const [allCategories, setAllCategories] = useState([]);
+  const navigue = useNavigate();
 
   const settings = {
     dots: true,
@@ -87,7 +89,9 @@ function Presentation({ categories }) {
                   <div className="slide" key={index}>
                     <img src={param.image} alt="loading" />
                     <div className="button">
-                      <h6>SEE MORE</h6>
+                      <h6 onClick={() => navigue(`/PubDet/${param._id}`)}>
+                        SEE MORE
+                      </h6>
                       <span>
                         <ChevronRight />
                       </span>
