@@ -35,7 +35,7 @@ function Home() {
   }
   useEffect(() => {
     axios
-      .get(`BackendUrl/getAllType`)
+      .get(`${BackendUrl}/getAllType`)
       .then((types) => {
         setAllTypes(types.data.data);
       })
@@ -137,8 +137,7 @@ function Home() {
               allProducts.filter(
                 (item) =>
                   item.ClefType ===
-                    allTypes.find((i) => i.clefCategories === param?._id ?? "")
-                      ?._id ?? ""
+                  allTypes.find((i) => i.clefCategories === param._id)?._id
               )
             ).length > 0 &&
             param._id !== clefElectronique?._id
