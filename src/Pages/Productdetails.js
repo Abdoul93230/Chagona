@@ -4,13 +4,13 @@ import axios from "axios";
 import LoadingIndicator from "./LoadingIndicator ";
 
 import { useParams } from "react-router-dom";
-
+const BackendUrl = process.env.REACT_APP_Backend_Url;
 function Productdetails({ allCategories, allProducts }) {
   const [product, setProduct] = useState(null);
   const params = useParams();
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/Product/${params.id}`)
+      .get(`BackendUrl/Product/${params.id}`)
       .then((res) => {
         setProduct(res.data.data);
       })

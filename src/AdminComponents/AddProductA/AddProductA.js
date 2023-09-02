@@ -529,6 +529,7 @@ function AddProductA() {
           <h1>Patientez Creation En Encours....</h1>
         </div>
       )}
+      <ToastContainer />
     </>
   );
 }

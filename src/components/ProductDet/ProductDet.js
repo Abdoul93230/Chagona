@@ -428,17 +428,13 @@ function ProductDet({ product }) {
             </td>
             <td style={{ textAlign: "right" }}>
               <h2>Categoriy</h2>
-              <p>
-                {allCategories
-                  ? allCategories.find((item) => item?._id === CVCate)?.name
-                  : null}
-              </p>
+              <p>{Categorie}</p>
             </td>
           </tr>
           <tr>
             <td style={{ textAlign: "left" }}>
               <h2>Livraison</h2>
-              <p>500F(Niamey)</p>
+              <p>750F(Niamey)</p>
             </td>
             <td style={{ textAlign: "right" }}>
               <h2>fitting</h2>
