@@ -285,7 +285,7 @@ function ProductDet({ product }) {
   const [option, setOption] = useState("Product");
 
   const CVCate = allTypes
-    ? allTypes.find((item) => item?._id === product?.ClefType)?.clefCategories
+    ? allTypes.find((item) => item?._id === VP?.ClefType)?.clefCategories
     : null;
 
   const Categorie = allCategories
@@ -303,7 +303,7 @@ function ProductDet({ product }) {
       });
 
     axios
-      .get(`${BackendUrl}/getAllCommenteProduitById/${product?._id}`)
+      .get(`${BackendUrl}/getAllCommenteProduitById/${VP?._id}`)
       .then((coments) => {
         setAllCommente(coments.data);
         // console.log(coments.data);
@@ -311,7 +311,7 @@ function ProductDet({ product }) {
       .catch((error) => {
         console.log(error);
       });
-  }, [product]);
+  }, []);
 
   const chgOption = (param, index) => {
     setOption(param);
