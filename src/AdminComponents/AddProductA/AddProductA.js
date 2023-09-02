@@ -6,10 +6,13 @@ import image3 from "../../Images/tallon2.png";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function AddProductA() {
   const [imgP, setImgP] = useState(image1);
+  const [value, setValue] = useState("");
   const [description, setDescription] = useState({
     desc: "La description du produit",
     name: "Le Nom du Produit",
@@ -24,6 +27,25 @@ function AddProductA() {
   function goBack() {
     window.history.back();
   }
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ font: [] }],
+      [{ size: [] }],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "video", "image"],
+      [{ color: [] }, { background: [] }],
+    ],
+  };
+
+  // const formats = ["font", "size", "color", "background"];
 
   const handleAlert = (message) => {
     toast.success(`${message} !`, {
@@ -203,7 +225,6 @@ function AddProductA() {
       .catch((error) => {
         console.log(error);
       });
-    // console.log(description, ClefType);
   };
 
   return (
@@ -349,12 +370,14 @@ function AddProductA() {
           </div>
           <div className="right">
             <h6>description</h6>
-            <textarea
-              onChange={(e) =>
-                setDescription({ ...description, desc: e.target.value })
-              }
-              className="desc"
+
+            <ReactQuill
+              theme="snow"
               value={description.desc}
+              onChange={(data) =>
+                setDescription({ ...description, desc: data })
+              }
+              modules={modules}
             />
 
             <table>
@@ -513,6 +536,9 @@ function AddProductA() {
             <div className="SM">
               <button onClick={goBack}>Annuller !</button>
               <button onClick={createProduct}>Ajouter !</button>
+              {/* <button onClick={() => console.log(description)}>
+                Ajouter !
+              </button> */}
             </div>
           </div>
         </div>

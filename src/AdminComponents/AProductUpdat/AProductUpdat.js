@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AProductUpdat() {
   const navigue = useNavigate();
@@ -29,6 +31,23 @@ function AProductUpdat() {
   function goBack() {
     window.history.back();
   }
+
+  const modules = {
+    toolbar: [
+      [{ header: [1, 2, 3, 4, 5, 6] }],
+      ["bold", "italic", "underline", "strike", "blockquote"],
+      [{ font: [] }],
+      [{ size: [] }],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
+      ["link", "video", "image"],
+      [{ color: [] }, { background: [] }],
+    ],
+  };
 
   const [colors, setColor] = useState(null);
 
@@ -434,7 +453,7 @@ function AProductUpdat() {
           </div>
           <div className="right">
             <h6>description</h6>
-            <textarea
+            {/* <textarea
               onChange={(e) =>
                 setDescription({ ...description, desc: e.target.value })
               }
@@ -442,6 +461,14 @@ function AProductUpdat() {
               value={
                 description.desc ? description.desc : "Auccune description."
               }
+            /> */}
+            <ReactQuill
+              theme="snow"
+              value={description.desc}
+              onChange={(data) =>
+                setDescription({ ...description, desc: data })
+              }
+              modules={modules}
             />
 
             <table>

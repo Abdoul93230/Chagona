@@ -189,7 +189,7 @@ function ProductDet({ product }) {
         setCommente("");
 
         axios
-          .get(`${BackendUrl}/getAllCommenteProduitById/${VP?._id}`)
+          .get(`${BackendUrl}/getAllCommenteProduitById/${params.id}`)
           .then((coments) => {
             setAllCommente(coments.data);
             // console.log(coments.data);
@@ -303,7 +303,7 @@ function ProductDet({ product }) {
       });
 
     axios
-      .get(`${BackendUrl}/getAllCommenteProduitById/${VP?._id}`)
+      .get(`${BackendUrl}/getAllCommenteProduitById/${params.id}`)
       .then((coments) => {
         setAllCommente(coments.data);
         // console.log(coments.data);
@@ -442,16 +442,26 @@ function ProductDet({ product }) {
             </td>
           </tr>
         </table>
-        <div className="detplus" onClick={plust}>
-          <p>{VP?.description}</p>
-          <span onClick={plust}>
+        {/* <div className="detplus" onClick={plust}> */}
+        {/* <p>{VP?.description}</p> */}
+        <div className="ddet"
+          style={{
+            // display: "flex",
+            textAlign: "left",
+            padding: "2px 7px",
+          }}
+          dangerouslySetInnerHTML={{
+            __html: VP?.description,
+          }}
+        ></div>
+        {/* <span onClick={plust}>
             {plus ? (
               <ChevronUp onClick={plust} />
             ) : (
               <ChevronDown onClick={plust} />
             )}
           </span>
-        </div>
+        </div> */}
         {VP?.pictures.length !== 0 ? (
           <div className="ImgPlus">
             {VP?.pictures.map((param, index) => {

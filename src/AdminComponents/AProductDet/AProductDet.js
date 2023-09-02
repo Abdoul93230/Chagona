@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AProductDet() {
   const navigue = useNavigate();
@@ -146,8 +148,17 @@ function AProductDet() {
           </div>
           <div className="right">
             <h6>description</h6>
-            <p className="desc">{product.description}</p>
-
+            {/* <p className="desc">{product.description}</p> */}
+            <div
+              style={{
+                listStyleType: "inherit",
+                // display: "flex",
+                textAlign: "left",
+              }}
+              dangerouslySetInnerHTML={{
+                __html: product.description,
+              }}
+            ></div>
             <table>
               <thead>
                 <tr>
