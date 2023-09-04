@@ -495,7 +495,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={product?.price}
+                      defaultValue={product?.prix}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -507,7 +507,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={product?.quantity}
+                      defaultValue={product?.quantite}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -533,7 +533,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={product?.price_Promo}
+                      defaultValue={product?.prixPromo}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -564,7 +564,7 @@ function AProductUpdat() {
                     </select>
                   </td>
                   <td>
-                    <input type="text" defaultValue={product?.ID} />
+                    <input type="text" defaultValue={product?._id} />
                   </td>
                   <td colSpan={2}>
                     <select
