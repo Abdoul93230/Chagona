@@ -117,7 +117,7 @@ function AProductUpdat() {
           return updatedDescription;
         });
 
-        console.log(description);
+        console.log(res.data.data);
 
         const ctype = res.data.data.ClefType;
         const cFournisseur = res.data.data.Clefournisseur;
@@ -488,7 +488,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="text"
-                      defaultValue={description.name}
+                      defaultValue={product.name}
                       onChange={(e) =>
                         setDescription({ ...description, name: e.target.value })
                       }
@@ -497,7 +497,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={description.price}
+                      defaultValue={product.price}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -509,7 +509,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={description.quantity}
+                      defaultValue={product.quantity}
                       onChange={(e) =>
                         setDescription({
                           ...description,
