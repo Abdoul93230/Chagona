@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import image from "../../Images/sac2.png";
 import whatsapp from "../../Images/whatsapp.png";
+import { ArrowDownRight } from "react-feather";
 import {
   ChevronLeft,
   ShoppingCart,
@@ -136,6 +137,7 @@ function ProductDet({ product }) {
       .get(`${BackendUrl}/Product/${params.id}`)
       .then((res) => {
         setVp(res.data.data);
+        // console.log(res.data.data);
       })
       .catch((error) => {
         // console.log(error)
@@ -282,7 +284,12 @@ function ProductDet({ product }) {
 
   const [allTypes, setAllTypes] = useState(null);
 
-  const [option, setOption] = useState("Product");
+  const [option, setOption] = useState(
+    VP?.taille[0].split(",").length >= 2 ||
+      VP?.couleur[0].split(",").length >= 2
+      ? "Product"
+      : "Details"
+  );
 
   const CVCate = allTypes
     ? allTypes.find((item) => item?._id === VP?.ClefType)?.clefCategories
@@ -357,66 +364,75 @@ function ProductDet({ product }) {
   const OP =
     option === "Product" ? (
       <div style={{ width: "100%", height: "auto" }}>
-        <div className="color">
-          {VP?.pictures.length != 0 ? (
-            <>
-              <h3>SELECT COLOR : {nbrCol ? `color:${nbrCol}` : ""}</h3>
-              <div className="coli">
-                {VP?.pictures.map((param, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      backgroundColor: param,
-                      // boxShadow: `0px 0px 7px ${param}`,
-                    }}
-                    onClick={() => {
-                      setColor(param);
-                      setNbrCol(+index + 1);
-                    }}
-                  >
-                    <img
+        {VP?.taille[0].split(",").length >= 2 ? (
+          <div className="color">
+            {VP?.pictures.length !== 0 ? (
+              <>
+                <h3>SELECT COLOR : {nbrCol ? `color:${nbrCol}` : ""}</h3>
+                <div className="coli">
+                  {VP?.pictures.map((param, index) => (
+                    <span
+                      key={index}
                       style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
+                        backgroundColor: param,
+                        // boxShadow: `0px 0px 7px ${param}`,
                       }}
-                      src={param}
-                      alt="loading"
-                    />
-                  </span>
-                ))}
-              </div>
-            </>
-          ) : (
-            <>
-              <h3>SELECT COLOR : {color ? color : ""}</h3>
-              <div className="col">
-                {VP?.couleur[0].split(",").map((param, index) => (
-                  <span
-                    key={index}
-                    style={{
-                      backgroundColor: param,
-                      boxShadow: `0px 0px 7px ${param}`,
-                    }}
-                    onClick={() => setColor(param)}
-                  ></span>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-        <div className="size">
-          <h3>SELECT SIZE (US) : {taille ? taille : ""}</h3>
-          <div className="siz">
-            {VP?.taille[0].split(",").map((param, index) => {
-              return (
-                <span key={index} onClick={() => setTaille(param)}>
-                  {param}
-                </span>
-              );
-            })}
+                      onClick={() => {
+                        setColor(param);
+                        setNbrCol(+index + 1);
+                      }}
+                    >
+                      <img
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "contain",
+                        }}
+                        src={param}
+                        alt="loading"
+                      />
+                    </span>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <h3>SELECT COLOR : {color ? color : ""}</h3>
+                <div className="col">
+                  {VP?.couleur[0].split(",").map((param, index) => (
+                    <span
+                      key={index}
+                      style={{
+                        backgroundColor: param,
+                        boxShadow: `0px 0px 7px ${param}`,
+                      }}
+                      onClick={() => setColor(param)}
+                    ></span>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
+
+        {VP?.taille[0].split(",").length >= 2 ? (
+          <div className="size">
+            <h3>SELECT SIZE (US) : {taille ? taille : ""}</h3>
+            <div className="siz">
+              {VP?.taille[0].split(",").map((param, index) => {
+                return (
+                  <span key={index} onClick={() => setTaille(param)}>
+                    {param}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     ) : option === "Details" ? (
       <div className="Details">
@@ -444,7 +460,8 @@ function ProductDet({ product }) {
         </table>
         {/* <div className="detplus" onClick={plust}> */}
         {/* <p>{VP?.description}</p> */}
-        <div className="ddet"
+        <div
+          className="ddet"
           style={{
             // display: "flex",
             textAlign: "left",
@@ -624,14 +641,37 @@ function ProductDet({ product }) {
         </div>
       </div>
       <div className="menu">
-        <h5 className="x d" onClick={() => chgOption("Product", 0)}>
-          Product
-        </h5>
-        <h5 className="x" onClick={() => chgOption("Details", 1)}>
-          Details
+        {VP?.taille[0].split(",").length >= 2 ||
+        VP?.couleur[0].split(",").length >= 2 ? (
+          <>
+            <h5
+              className={
+                VP?.taille[0].split(",").length >= 2 ||
+                VP?.couleur[0].split(",").length >= 2
+                  ? `x d`
+                  : "x"
+              }
+              onClick={() => chgOption("Product", 0)}
+            >
+              Product <ArrowDownRight style={{ width: 15 }} />
+            </h5>
+          </>
+        ) : (
+          <></>
+        )}
+        <h5
+          className={
+            VP?.taille[0].split(",").length < 2 ||
+            VP?.couleur[0].split(",").length < 2
+              ? "x d"
+              : "x"
+          }
+          onClick={() => chgOption("Details", 1)}
+        >
+          Details <ArrowDownRight style={{ width: 15 }} />
         </h5>
         <h5 className="x" onClick={() => chgOption("Reviews", 2)}>
-          Reviews
+          Reviews <ArrowDownRight style={{ width: 15 }} />
         </h5>
       </div>
       {OP}

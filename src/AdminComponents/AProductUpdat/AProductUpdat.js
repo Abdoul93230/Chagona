@@ -200,14 +200,14 @@ function AProductUpdat() {
   const createProduct = () => {
     const regexNumber = /^\d+$/;
 
-    if (colors.length <= 0) {
-      handleAlertwar("vous devez mettre au moins une couleur du produit");
-      return;
-    }
-    if (tails.length <= 0) {
-      handleAlertwar("vous devez mettre au moins une couleur du produit");
-      return;
-    }
+    // if (colors.length <= 0) {
+    //   handleAlertwar("vous devez mettre au moins une couleur du produit");
+    //   return;
+    // }
+    // if (tails.length <= 0) {
+    //   handleAlertwar("vous devez mettre au moins une couleur du produit");
+    //   return;
+    // }
     if (description.desc.length <= 20) {
       handleAlertwar("la description doit comporter au moins 20 caracters");
       return;
