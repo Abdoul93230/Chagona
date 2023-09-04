@@ -11,22 +11,19 @@ const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AProductUpdat() {
   const navigue = useNavigate();
   const [imgP, setImgP] = useState(null);
-  const [description, setDescription] = useState({
-    desc: null,
-    name: null,
-    price: null,
-    quantity: null,
-    fournisseur: null,
-    price_Promo: null,
-    Categorie: null,
-    ID: null,
-    marque: null,
-    type_de_Produits: null,
-    image1: null,
-    image2: null,
-    image3: null,
-    nouveauChampImages: null,
-  });
+  const [name, setName] = useState("");
+  const [prix, setPrix] = useState("");
+  const [prixPromo, setPriPromo] = useState("");
+  const [marque, setMarque] = useState("");
+  const [quantite, setQuantite] = useState("");
+  const [fournisseure, setFournisseure] = useState("");
+  const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
+  const [imagePlus, setImagePlus] = useState(null);
+  const [typeProduit, setTypeProduit] = useState("");
+  const [descrip, setDescrip] = useState("");
+  const [cate, setCate] = useState("");
 
   function goBack() {
     window.history.back();
@@ -95,105 +92,53 @@ function AProductUpdat() {
   useEffect(() => {
     const id = params.id;
 
-    axios
-      .get(`${BackendUrl}/Product/${id}`)
-      .then((res) => {
-        setProduct(res.data.data);
-        if (!imgP) setImgP(res.data.data.image1);
-        if (!colors) setColor(res.data.data.couleur[0].split(","));
-        if (!tails) setTails(res.data.data.taille[0].split(","));
-        setDescription((prevDescription) => {
-          const updatedDescription = {
-            ...prevDescription,
-            name: prevDescription.name || res.data.data.name,
-            price: prevDescription.price || res.data.data.prix,
-            quantity: prevDescription.quantity || res.data.data.quantite,
-            ID: prevDescription.ID || res.data.data._id,
-            price_Promo: prevDescription.price_Promo || res.data.data.prixPromo,
-            marque: prevDescription.marque || res.data.data.marque,
-            desc: prevDescription.desc || res.data.data.description,
-          };
+    axios.get(`${BackendUrl}/Product/${id}`).then((res) => {
+      setProduct(res.data.data);
+      if (!imgP) setImgP(res.data.data.image1);
+      if (!colors) setColor(res.data.data.couleur[0].split(","));
+      if (!tails) setTails(res.data.data.taille[0].split(","));
 
-          return updatedDescription;
+      setName(res.data.data.name);
+      setPrix(res.data.data.prix);
+      setQuantite(res.data.data.quantite);
+      setMarque(res.data.data.marque);
+      setPriPromo(res.data.data.prixPromo);
+      setFournisseure(res.data.data.Clefournisseur);
+      setTypeProduit(res.data.data.ClefType);
+      setDescrip(res.data.data.description);
+
+      const ctype = res.data.data.ClefType;
+      const cFournisseur = res.data.data.Clefournisseur;
+
+      axios
+        .get(`${BackendUrl}/fournisseurs`)
+        .then((values) => {
+          setFournisseur(values.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
+    });
 
-        const ctype = res.data.data.ClefType;
-        const cFournisseur = res.data.data.Clefournisseur;
+    axios
+      .get(`${BackendUrl}/getAllType/`)
+      .then((res) => {
+        setTypes(res.data.data);
 
         axios
-          .get(`${BackendUrl}/fournisseur/${cFournisseur}`)
-          .then((res) => {
-            setDescription((prevDescription) => {
-              const updatedDescription = {
-                ...prevDescription,
-                fournisseur: prevDescription.fournisseur || res.data.data,
-              };
-
-              return updatedDescription;
-            });
-
-            axios
-              .get(`${BackendUrl}/fournisseurs`)
-              .then((values) => {
-                setFournisseur(values.data.data);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
+          .get(`${BackendUrl}/getAllCategories`)
+          .then((re) => {
+            setcategorie(re.data.data);
           })
           .catch((error) => {
             console.log(
-              "Erreur lors de la requête vers le fournisseur :",
+              "Erreur lors de la requête vers les catégories :",
               error
             );
           });
-
-        axios
-          .get(`${BackendUrl}/getAllType/`)
-          .then((res) => {
-            setTypes(res.data.data);
-            const param = res.data.data.find((param) => param._id === ctype);
-            if (param) {
-              setDescription((prevDescription) => {
-                const updatedDescription = {
-                  ...prevDescription,
-                  type_de_Produits: prevDescription.type_de_Produits || param,
-                };
-
-                return updatedDescription;
-              });
-              axios
-                .get(`${BackendUrl}/getAllCategories`)
-                .then((re) => {
-                  setcategorie(re.data.data);
-                  const para = re.data.data.find(
-                    (para) => para._id === param.clefCategories
-                  );
-                  if (para) {
-                    setDescription((prevDescription) => {
-                      const updatedDescription = {
-                        ...prevDescription,
-                        Categorie: prevDescription.Categorie || para.name,
-                      };
-
-                      return updatedDescription;
-                    });
-                  }
-                })
-                .catch((error) => {
-                  console.log(
-                    "Erreur lors de la requête vers les catégories :",
-                    error
-                  );
-                });
-            }
-          })
-          .catch((error) => {
-            console.log("Erreur lors de la requête vers les types :", error);
-          });
       })
       .catch((error) => {
-        console.log("Erreur lors de la requête vers le produit :", error);
+        console.log("Erreur lors de la requête vers les types :", error);
       });
   }, []);
 
@@ -208,68 +153,60 @@ function AProductUpdat() {
     //   handleAlertwar("vous devez mettre au moins une taille du produit");
     //   return;
     // }
-    if (description.desc.length <= 20) {
+    if (descrip.length <= 20) {
       handleAlertwar("la description doit comporter au moins 20 caracters");
       return;
     }
-    if (
-      !regexNumber.test(description.price) ||
-      Number(description.price) < 40
-    ) {
+    if (!regexNumber.test(prix) || Number(prix) < 40) {
       handleAlertwar("le price est incorrecte");
       return;
     }
-    if (
-      !regexNumber.test(description.quantity) ||
-      Number(description.quantity) <= 0
-    ) {
+    if (!regexNumber.test(quantite) || Number(quantite) <= 0) {
       handleAlertwar("la quantite n'est pas valide");
       return;
     }
-    if (description.Categorie.length < 2) {
-      handleAlertwar("la Categorie n'est pas valide");
-      return;
-    }
-    if (description.type_de_Produits.length < 2) {
+    // if (description.Categorie.length < 2) {
+    //   handleAlertwar("la Categorie n'est pas valide");
+    //   return;
+    // }
+    if (typeProduit?.length < 2) {
       handleAlertwar("le type_de_Produits n'est pas valide");
       return;
     }
-    if (description.marque.length < 2) {
+    if (marque?.length < 2) {
       handleAlertwar("la marque n'est pas valide");
       return;
     }
-    if (description.fournisseur.length < 2) {
+    if (fournisseure?.length < 2) {
       handleAlertwar("le fournisseur n'est pas valide");
       return;
     }
 
     const formData = new FormData();
-    formData.append("name", description.name);
-    if (description.image1 != null) {
-      formData.append("image1", description.image1);
+    formData.append("name", name);
+    if (image1 != null) {
+      formData.append("image1", image1);
     }
-    if (description.image2 != null) {
-      formData.append("image2", description.image2);
+    if (image2 != null) {
+      formData.append("image2", image2);
     }
-    if (description.image3 != null) {
-      formData.append("image3", description.image3);
+    if (image3 != null) {
+      formData.append("image3", image3);
     }
 
-    formData.append("quantite", description.quantity);
-    formData.append("prix", description.price);
-    formData.append("prixPromo", description.price_Promo);
-    formData.append("description", description.desc);
+    formData.append("quantite", quantite);
+    formData.append("prix", prix);
+    formData.append("prixPromo", prixPromo);
+    formData.append("description", descrip);
     formData.append("taille", tails);
     formData.append("couleur", colors);
-    formData.append("ClefType", description.type_de_Produits._id);
-    formData.append("Clefournisseur", description.fournisseur._id);
-    formData.append("marque", description.marque);
+    formData.append("ClefType", typeProduit);
+    alert(typeProduit);
+    formData.append("Clefournisseur", fournisseure);
+    formData.append("marque", marque);
     // formData.append("setNouveauChampImages", description.setNouveauChampImages);
-    if (
-      description.nouveauChampImages &&
-      description.nouveauChampImages.length > 0
-    ) {
-      for (const file of description.nouveauChampImages) {
+    if (imagePlus && imagePlus.length > 0) {
+      for (const file of imagePlus) {
         formData.append("nouveauChampImages", file);
       }
     }
@@ -408,46 +345,26 @@ function AProductUpdat() {
               <input
                 type="file"
                 id="image1"
-                onChange={(e) =>
-                  setDescription({
-                    ...description,
-                    image1: e.target.files[0],
-                  })
-                }
+                onChange={(e) => setImage1(e.target.files[0])}
               />
               <label htmlFor="image2">Url Image2</label>
               <input
                 type="file"
                 id="image2"
-                onChange={(e) =>
-                  setDescription({
-                    ...description,
-                    image2: e.target.files[0],
-                  })
-                }
+                onChange={(e) => setImage2(e.target.files[0])}
               />
               <label htmlFor="image3">Url Image3</label>
               <input
                 type="file"
                 id="image3"
-                onChange={(e) =>
-                  setDescription({
-                    ...description,
-                    image3: e.target.files[0],
-                  })
-                }
+                onChange={(e) => setImage3(e.target.files[0])}
               />
-              <label htmlFor="image3">Plus IMG</label>
+              <label htmlFor="image4">Plus IMG</label>
               <input
                 type="file"
-                id="image3"
+                id="image4"
                 multiple
-                onChange={(e) =>
-                  setDescription({
-                    ...description,
-                    nouveauChampImages: e.target.files,
-                  })
-                }
+                onChange={(e) => setImagePlus(e.target.files)}
               />
             </div>
           </div>
@@ -464,10 +381,8 @@ function AProductUpdat() {
             /> */}
             <ReactQuill
               theme="snow"
-              value={description.desc}
-              onChange={(data) =>
-                setDescription({ ...description, desc: data })
-              }
+              value={descrip}
+              onChange={(data) => setDescrip(data)}
               modules={modules}
             />
 
@@ -486,43 +401,32 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="text"
-                      defaultValue={product?.name}
-                      onChange={(e) =>
-                        setDescription({ ...description, name: e.target.value })
-                      }
+                      defaultValue={name}
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </td>
                   <td>
                     <input
                       type="number"
-                      defaultValue={product?.prix}
-                      onChange={(e) =>
-                        setDescription({
-                          ...description,
-                          price: Number(e.target.value),
-                        })
-                      }
+                      defaultValue={prix}
+                      onChange={(e) => setPrix(Number(e.target.value))}
                     />
                   </td>
                   <td>
                     <input
                       type="number"
-                      defaultValue={product?.quantite}
-                      onChange={(e) =>
-                        setDescription({
-                          ...description,
-                          quantity: Number(e.target.value),
-                        })
-                      }
+                      defaultValue={quantite}
+                      onChange={(e) => setQuantite(Number(e.target.value))}
                     />
                   </td>
                   <td>
                     <select
                       onChange={(e) =>
-                        setDescription({
-                          ...description,
-                          fournisseur: e.target.value,
-                        })
+                        setFournisseure(
+                          fournisseur?.find(
+                            (item) => item.email === e.target.value
+                          )?._id
+                        )
                       }
                     >
                       {fournisseur.map((param, index) => {
@@ -533,13 +437,8 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={product?.prixPromo}
-                      onChange={(e) =>
-                        setDescription({
-                          ...description,
-                          price_Promo: Number(e.target.value),
-                        })
-                      }
+                      defaultValue={prixPromo}
+                      onChange={(e) => setPriPromo(Number(e.target.value))}
                     />
                   </td>
                 </tr>
@@ -552,10 +451,15 @@ function AProductUpdat() {
                   <td colSpan={2}>
                     <select
                       onChange={(e) =>
-                        setDescription({
-                          ...description,
-                          Categorie: e.target.value,
-                        })
+                        // setCate({
+                        //   ...description,
+                        //   Categorie: e.target.value,
+                        // })
+                        setCate(
+                          categorie?.find(
+                            (item) => item.name === e.target.value
+                          )?._id
+                        )
                       }
                     >
                       {categorie.map((param, index) => {
@@ -569,14 +473,21 @@ function AProductUpdat() {
                   <td colSpan={2}>
                     <select
                       onChange={(e) =>
-                        setDescription({
-                          ...description,
-                          type_de_Produits: e.target.value,
-                        })
+                        setTypeProduit(
+                          types?.find(
+                            (item) => item.name === e.target.value.split(" ")[0]
+                          )?._id
+                        )
                       }
                     >
-                      {types.map((param, index) => {
-                        return <option key={index}>{param.name}</option>;
+                      {types?.map((param, index) => {
+                        return (
+                          <option key={index}>{`${param.name} --> ${
+                            categorie.find(
+                              (item) => item?._id === param?.clefCategories
+                            )?.name
+                          }`}</option>
+                        );
                       })}
                     </select>
                   </td>
@@ -588,13 +499,8 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="text"
-                      defaultValue={product.marque}
-                      onChange={(e) =>
-                        setDescription({
-                          ...description,
-                          marque: e.target.value,
-                        })
-                      }
+                      defaultValue={marque}
+                      onChange={(e) => setMarque(e.target.value)}
                     />
                   </td>
                 </tr>
@@ -635,7 +541,7 @@ function AProductUpdat() {
             alignItems: "center",
           }}
         >
-          <h1>Patientez Creation En Encours....</h1>
+          <h1>Patientez Mis A Jours En Encours....</h1>
         </div>
       )}
       <ToastContainer />
