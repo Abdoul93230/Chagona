@@ -117,6 +117,8 @@ function AProductUpdat() {
           return updatedDescription;
         });
 
+        console.log(description);
+
         const ctype = res.data.data.ClefType;
         const cFournisseur = res.data.data.Clefournisseur;
 
