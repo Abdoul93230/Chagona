@@ -105,8 +105,8 @@ function AProductUpdat() {
         setDescription((prevDescription) => {
           const updatedDescription = {
             ...prevDescription,
-            desc: prevDescription.desc || res.data.data.description,
             name: prevDescription.name || res.data.data.name,
+            desc: prevDescription.desc || res.data.data.description,
             price: prevDescription.price || res.data.data.prix,
             quantity: prevDescription.quantity || res.data.data.quantite,
             ID: prevDescription.ID || res.data.data._id,
