@@ -40,7 +40,10 @@ function AProductDet() {
             setFournisseur(res.data.data);
           })
           .catch((error) => {
-            console.log("Erreur lors de la requête vers le fournisseur", error);
+            console.log(
+              "Erreur lors de la requête vers  le fournisseur",
+              error
+            );
           });
 
         axios
