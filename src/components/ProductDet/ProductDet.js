@@ -364,7 +364,7 @@ function ProductDet({ product }) {
   const OP =
     option === "Product" ? (
       <div style={{ width: "100%", height: "auto" }}>
-        {VP?.taille[0].split(",").length >= 2 ? (
+        {VP?.couleur[0].split(",").length >= 2 ? (
           <div className="color">
             {VP?.pictures.length !== 0 ? (
               <>
@@ -648,7 +648,7 @@ function ProductDet({ product }) {
               className={
                 VP?.taille[0].split(",").length >= 2 ||
                 VP?.couleur[0].split(",").length >= 2
-                  ? `x d`
+                  ? "x d"
                   : "x"
               }
               onClick={() => chgOption("Product", 0)}
@@ -661,7 +661,7 @@ function ProductDet({ product }) {
         )}
         <h5
           className={
-            VP?.taille[0].split(",").length < 2 ||
+            VP?.taille[0].split(",").length < 2 &&
             VP?.couleur[0].split(",").length < 2
               ? "x d"
               : "x"
