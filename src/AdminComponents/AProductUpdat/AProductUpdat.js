@@ -486,7 +486,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="text"
-                      defaultValue={description.name}
+                      defaultValue={product?.name}
                       onChange={(e) =>
                         setDescription({ ...description, name: e.target.value })
                       }
@@ -495,7 +495,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={description.price}
+                      defaultValue={product?.price}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -507,7 +507,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={description.quantity}
+                      defaultValue={product?.quantity}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -533,7 +533,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={description.price_Promo}
+                      defaultValue={product?.price_Promo}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -564,7 +564,7 @@ function AProductUpdat() {
                     </select>
                   </td>
                   <td>
-                    <input type="text" defaultValue={description.ID} />
+                    <input type="text" defaultValue={product?.ID} />
                   </td>
                   <td colSpan={2}>
                     <select
@@ -588,7 +588,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="text"
-                      defaultValue={description.marque}
+                      defaultValue={product.marque}
                       onChange={(e) =>
                         setDescription({
                           ...description,

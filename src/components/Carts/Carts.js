@@ -121,44 +121,44 @@ function Carts({ op }) {
             }
 
             pric =
-              allProducts?.find((item) => item._id === param.id).prixPromo > 0
-                ? allProducts?.find((item) => item._id === param.id).prixPromo
-                : allProducts?.find((item) => item._id === param.id).prix;
+              allProducts?.find((item) => item._id === param.id)?.prixPromo > 0
+                ? allProducts?.find((item) => item._id === param.id)?.prixPromo
+                : allProducts?.find((item) => item._id === param.id)?.prix;
             total += pric * param.quantity;
 
             price =
-              allProducts?.find((item) => item._id === param.id).prixPromo > 0
-                ? allProducts?.find((item) => item._id === param.id).prixPromo
-                : allProducts?.find((item) => item._id === param.id).prix;
+              allProducts?.find((item) => item._id === param.id)?.prixPromo > 0
+                ? allProducts?.find((item) => item._id === param.id)?.prixPromo
+                : allProducts?.find((item) => item._id === param.id)?.prix;
             totalPrice = price * param.quantity;
 
             return (
               <div key={index} className="carde">
                 <img
                   src={
-                    allProducts?.find((item) => item._id === param.id).image1
+                    allProducts?.find((item) => item._id === param.id)?.image1
                   }
                   alt="loading"
                 />
                 <div className="det">
                   <h3>
-                    {allProducts?.find((item) => item._id === param.id).name}
+                    {allProducts?.find((item) => item._id === param.id)?.name}
                   </h3>
                   {allProducts?.find((item) => item._id === param.id)
-                    .prixPromo > 0 ? (
+                    ?.prixPromo > 0 ? (
                     <>
                       <h4 className="Lh">
                         ${" "}
                         {
                           allProducts?.find((item) => item._id === param.id)
-                            .prix
+                            ?.prix
                         }
                       </h4>
                       <h5>
                         $${" "}
                         {
                           allProducts?.find((item) => item._id === param.id)
-                            .prixPromo
+                            ?.prixPromo
                         }
                       </h5>
                     </>
@@ -168,7 +168,7 @@ function Carts({ op }) {
                         ${" "}
                         {
                           allProducts?.find((item) => item._id === param.id)
-                            .prix
+                            ?.prix
                         }
                       </h5>
                     </>

@@ -258,12 +258,12 @@ function ProductDet({ product }) {
       return;
     }
 
-    if (!color) {
+    if (VP?.couleur[0].split(",").length >= 2 && !color) {
       handleAlertwar("Veuillez choisir une couleur !");
       return;
     }
 
-    if (!taille) {
+    if (VP?.taille[0].split(",").length >= 2 && !taille) {
       handleAlertwar("Veuillez choisir une taille !");
       return;
     }
