@@ -106,18 +106,16 @@ function AProductUpdat() {
           const updatedDescription = {
             ...prevDescription,
             name: prevDescription.name || res.data.data.name,
-            desc: prevDescription.desc || res.data.data.description,
             price: prevDescription.price || res.data.data.prix,
             quantity: prevDescription.quantity || res.data.data.quantite,
             ID: prevDescription.ID || res.data.data._id,
             price_Promo: prevDescription.price_Promo || res.data.data.prixPromo,
             marque: prevDescription.marque || res.data.data.marque,
+            desc: prevDescription.desc || res.data.data.description,
           };
 
           return updatedDescription;
         });
-
-        console.log(res.data.data);
 
         const ctype = res.data.data.ClefType;
         const cFournisseur = res.data.data.Clefournisseur;
@@ -207,7 +205,7 @@ function AProductUpdat() {
     //   return;
     // }
     // if (tails.length <= 0) {
-    //   handleAlertwar("vous devez mettre au moins une couleur du produit");
+    //   handleAlertwar("vous devez mettre au moins une taille du produit");
     //   return;
     // }
     if (description.desc.length <= 20) {
@@ -488,7 +486,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="text"
-                      defaultValue={product.name}
+                      defaultValue={description.name}
                       onChange={(e) =>
                         setDescription({ ...description, name: e.target.value })
                       }
@@ -497,7 +495,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={product.price}
+                      defaultValue={description.price}
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -509,7 +507,7 @@ function AProductUpdat() {
                   <td>
                     <input
                       type="number"
-                      defaultValue={product.quantity}
+                      defaultValue={description.quantity}
                       onChange={(e) =>
                         setDescription({
                           ...description,
