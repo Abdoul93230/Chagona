@@ -201,7 +201,7 @@ function AProductUpdat() {
     formData.append("taille", tails);
     formData.append("couleur", colors);
     formData.append("ClefType", typeProduit);
-    alert(typeProduit);
+    // alert(typeProduit);
     formData.append("Clefournisseur", fournisseure);
     formData.append("marque", marque);
     // formData.append("setNouveauChampImages", description.setNouveauChampImages);
