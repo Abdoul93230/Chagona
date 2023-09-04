@@ -36,6 +36,7 @@ function ProductDet({ product }) {
   const [color, setColor] = useState(null);
   const [taille, setTaille] = useState(null);
   const [nbrCol, setNbrCol] = useState(null);
+  const [option, setOption] = useState("Details");
   const user = JSON.parse(localStorage.getItem("userEcomme"));
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -138,6 +139,12 @@ function ProductDet({ product }) {
       .then((res) => {
         setVp(res.data.data);
         // console.log(res.data.data);
+        setOption(
+          res.data.data?.taille[0].split(",").length >= 2 ||
+            res.data.data?.couleur[0].split(",").length >= 2
+            ? "Product"
+            : "Details"
+        );
       })
       .catch((error) => {
         // console.log(error)
@@ -283,13 +290,6 @@ function ProductDet({ product }) {
   };
 
   const [allTypes, setAllTypes] = useState(null);
-
-  const [option, setOption] = useState(
-    VP?.taille[0].split(",").length >= 2 ||
-      VP?.couleur[0].split(",").length >= 2
-      ? "Product"
-      : "Details"
-  );
 
   const CVCate = allTypes
     ? allTypes.find((item) => item?._id === VP?.ClefType)?.clefCategories
