@@ -492,14 +492,22 @@ function AddProductA() {
                       onChange={(e) => {
                         setDescription({
                           ...description,
-                          type_de_Produits: e.target.value,
+                          type_de_Produits: typeProduit?.find(
+                            (item) => item.name === e.target.value
+                          )?._id,
                         });
 
-                        typeProduit.map((param, index) => {
-                          if (param.name === e.target.value) {
-                            setClefType(param._id);
-                          }
-                        });
+                        setClefType(
+                          typeProduit?.find(
+                            (item) => item.name === e.target.value
+                          )?._id
+                        );
+
+                        // typeProduit.map((param, index) => {
+                        //   if (param.name === e.target.value) {
+                        //     setClefType(param._id);
+                        //   }
+                        // });
                       }}
                     >
                       <option>Choisir</option>
