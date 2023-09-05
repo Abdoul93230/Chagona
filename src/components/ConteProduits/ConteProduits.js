@@ -20,7 +20,7 @@ function ConteProduits({ products, name }) {
               >
                 <img src={param.image1} alt="loading" />
               </Link>
-              <h6>{param.name}</h6>
+              <h6>{param.name.slice(0, 20)}...</h6>
             </div>
           );
         })}

@@ -235,7 +235,7 @@ function CategorieProduct({ allCategories, allProducts }) {
                   onClick={() => navigue(`/ProductDet/${param._id}`)}
                 >
                   <img src={param.image1} alt="loading" />
-                  <h5>{param.name}</h5>
+                  <h5>{param.name.slice(0, 20)}</h5>
                   <h6>${param.prix}</h6>
                 </div>
               );
@@ -309,8 +309,14 @@ function CategorieProduct({ allCategories, allProducts }) {
                     onClick={() => navigue(`/ProductDet/${param._id}`)}
                   >
                     <img src={param.image2} alt="loading" />
-                    <h5>{param.name}</h5>
-                    <p>{param.description.slice(0, 17)}...</p>
+                    <h5>{param.name.slice(0, 20)}</h5>
+                    {/* <p>
+                      {param.description.slice(0, 17)}
+                      ...
+                    </p> */}
+                    {/* <p >dangerouslySetInnerHTML={{
+            __html: VP?.description,
+          }}</p> */}
                     <h6>
                       $ <s>{param.prix}</s> <span>{param.prixPromo}</span>
                     </h6>
@@ -338,8 +344,18 @@ function CategorieProduct({ allCategories, allProducts }) {
                     onClick={() => navigue(`/ProductDet/${param._id}`)}
                   >
                     <img src={param.image1} alt="loading" />
-                    <p>{param.description.slice(0, 17)}...</p>
-                    <h5>{param.name}</h5>
+                    {/* <p>
+                      {param.description
+                        .replace(
+                          /<\/?(div|ul|li|h\d|a|span|s|b|i|strong)>/g,
+                          ""
+                        )
+                        .slice(0, 17)}
+                      ...
+                    </p> */}
+                    <h5 style={{ textAlign: "left" }}>
+                      {param.name.slice(0, 18)}...
+                    </h5>
                     <h6>${param.prix}</h6>
                   </div>
                 );

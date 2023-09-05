@@ -97,7 +97,7 @@ function ProductsSli({ products, name }) {
                     </Link>
                   </div>
                   <div className="bottom">
-                    <h5>{param.name}</h5>
+                    <h5>{param.name.slice(0, 20)}...</h5>
 
                     {param.prixPromo > 0 ? (
                       <>
