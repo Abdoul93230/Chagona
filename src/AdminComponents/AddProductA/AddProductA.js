@@ -231,7 +231,7 @@ function AddProductA() {
     <>
       {!isWaiting ? (
         <div className="AddProductA">
-          <div className="left">
+          <div className="left ">
             <div className="carde">
               <div className="opImg">
                 <img
