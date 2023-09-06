@@ -158,12 +158,12 @@ function Home() {
                 />
                 <ProductsSli
                   products={getRandomElements(
-                    allProducts.filter(
-                      (item) =>
-                        item.ClefType ===
-                          allTypes.find(
-                            (i) => i.clefCategories === param?._id ?? ""
-                          )?._id ?? ""
+                    allProducts.filter((item) =>
+                      allTypes.some(
+                        (type) =>
+                          type.clefCategories === param?._id &&
+                          item.ClefType === type._id
+                      )
                     )
                   )}
                   name={param.name}
