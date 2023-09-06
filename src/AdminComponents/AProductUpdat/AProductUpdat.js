@@ -169,7 +169,7 @@ function AProductUpdat() {
     //   handleAlertwar("la Categorie n'est pas valide");
     //   return;
     // }
-    if (typeProduit?.length < 2) {
+    if (!typeProduit) {
       handleAlertwar("le type_de_Produits n'est pas valide");
       return;
     }
@@ -443,12 +443,12 @@ function AProductUpdat() {
                   </td>
                 </tr>
                 <tr>
-                  <th colSpan={2}>Categorie</th>
-                  <th>ID</th>
-                  <th colSpan={2}>type de Produits</th>
+                  {/* <th colSpan={2}>Categorie</th> */}
+                  <th colSpan={2}>ID</th>
+                  <th colSpan={3}>type de Produits</th>
                 </tr>
                 <tr>
-                  <td colSpan={2}>
+                  {/* <td colSpan={2}>
                     <select
                       onChange={(e) =>
                         // setCate({
@@ -465,21 +465,23 @@ function AProductUpdat() {
                       {categorie.map((param, index) => {
                         return <option key={index}>{param.name}</option>;
                       })}
-                    </select>
-                  </td>
-                  <td>
+                    </select> 
+                  </td> */}
+                  <td colSpan={2}>
                     <input type="text" defaultValue={product?._id} />
                   </td>
-                  <td colSpan={2}>
+                  <td colSpan={3}>
                     <select
-                      onChange={(e) =>
+                      onChange={(e) => {
                         setTypeProduit(
-                          types?.find(
-                            (item) => item.name === e.target.value.split(" ")[0]
-                          )?._id
-                        )
-                      }
+                          // types?.find(
+                          //   (item) => item.name === e.target.value.split(" ")[0]
+                          // )?._id
+                          types[Number(e.target.selectedIndex) - 1]?._id
+                        );
+                      }}
                     >
+                      <option>Choisir le type</option>
                       {types?.map((param, index) => {
                         return (
                           <option key={index}>{`${param.name} --> ${

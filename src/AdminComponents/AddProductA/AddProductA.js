@@ -88,7 +88,7 @@ function AddProductA() {
   const [categorie, setCategorie] = useState(null);
   const [typeProduit, setTypeProduit] = useState(null);
   const [Clefournisseur, setClefournisseur] = useState(null);
-  const [ClefType, setClefType] = useState(null);
+  const [ClefType, setClefType] = useState("");
 
   useEffect(() => {
     axios
@@ -169,18 +169,15 @@ function AddProductA() {
       return;
     }
 
-    if (
-      description.Categorie.length < 2 ||
-      description.Categorie === "Choisir"
-    ) {
-      handleAlertwar(errorMessages.categorieInvalid);
-      return;
-    }
+    // if (
+    //   description.Categorie.length < 2 ||
+    //   description.Categorie === "Choisir"
+    // ) {
+    //   handleAlertwar(errorMessages.categorieInvalid);
+    //   return;
+    // }
 
-    if (
-      description.type_de_Produits.length < 2 ||
-      description.type_de_Produits === "Choisir"
-    ) {
+    if (ClefType === "Choisir" || !ClefType) {
       handleAlertwar(errorMessages.typeDeProduitsInvalid);
       return;
     }
@@ -498,9 +495,7 @@ function AddProductA() {
                         });
 
                         setClefType(
-                          typeProduit?.find(
-                            (item) => item.name === e.target.value
-                          )?._id
+                          typeProduit[Number(e.target.selectedIndex) - 1]?._id
                         );
 
                         // typeProduit.map((param, index) => {
@@ -513,7 +508,13 @@ function AddProductA() {
                       <option>Choisir</option>
                       {typeProduit ? (
                         typeProduit.map((param, index) => {
-                          return <option key={index}>{param.name}</option>;
+                          return (
+                            <option key={index}>{`${param.name}--> ${
+                              categorie.find(
+                                (item) => item?._id === param?.clefCategories
+                              )?.name
+                            }`}</option>
+                          );
                         })
                       ) : (
                         <option>Aucun</option>
