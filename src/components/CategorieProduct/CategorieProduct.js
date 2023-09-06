@@ -254,9 +254,9 @@ function CategorieProduct({ allCategories, allProducts }) {
             {allTypes
               ?.filter((param) => param.clefCategories === ClefCate?._id)
               .map((param, index) => {
-                if (index > 4) {
-                  return null;
-                }
+                // if (index > 4) {
+                //   return null;
+                // }
                 return (
                   <li
                     key={index}

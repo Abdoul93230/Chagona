@@ -62,7 +62,7 @@ function AllCategories({ allCategories }) {
                     (param) =>
                       param.clefCategories ===
                       allCategories.find((item) => item.name === nameCategorie)
-                        ._id
+                        ?._id
                   )
                   .map((param, index) => (
                     <Link
