@@ -35,7 +35,7 @@ function Galeries({ products }) {
               >
                 <div className={index === 0 ? "hover show" : "hover"}>
                   <p style={{ padding: 3 }}>
-                    {param?.description.substring(0, 80)}
+                    {param?.name.substring(0, 80)}
                     <span style={{ fontSize: 30, color: "#FF6969" }}>...</span>
                   </p>
                 </div>

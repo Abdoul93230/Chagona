@@ -11,11 +11,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import axios from "axios";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function SearchTwo({ op, allCategories, allProducts }) {
   const [showButton, setShowButton] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [loading1, setLoading1] = useState(false);
   const navigue = useNavigate();
   const [poppup, setPoppup] = useState(false);
   const [show, setShow] = useState(null);
@@ -60,17 +63,20 @@ function SearchTwo({ op, allCategories, allProducts }) {
       // alert("le produit à rechercher doit avoir au moins 2 caractères");
       return;
     }
+    setLoading1(true);
     axios
       .get(`${BackendUrl}/searchProductByName/${searchName}`)
       .then((res) => {
         setProduct(res.data.products);
         setSh(false);
         setErreur(null);
+        setLoading1(false);
       })
       .catch((error) => {
         setProduct(null);
         setSh(true);
         setErreur(error.response.data.message);
+        setLoading1(false);
       });
   };
 
@@ -101,8 +107,11 @@ function SearchTwo({ op, allCategories, allProducts }) {
           }
         }
         setBrands(bran);
+        setLoading(false);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        setLoading(false);
+      });
   }, []);
 
   const menu = () => {
@@ -172,166 +181,176 @@ function SearchTwo({ op, allCategories, allProducts }) {
   }
 
   return (
-    <div className="SearchTwo">
-      <div className="top">
-        <div className="left">
-          <span className="l" onClick={() => goBack()}>
-            <ChevronLeft />
-          </span>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              searchProductByName();
-            }}
-          >
-            <input
-              type="search"
-              defaultValue={searchName}
-              onChange={(e) => {
-                setSearchName(e.target.value);
+    <LoadingIndicator loading={loading}>
+      <div className="SearchTwo">
+        <div className="top">
+          <div className="left">
+            <span className="l" onClick={() => goBack()}>
+              <ChevronLeft />
+            </span>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                searchProductByName();
               }}
-              placeholder="Shirts"
-            />
-            <input type="submit" value="search" />
-          </form>
-          <span className="r">
-            <Filter onClick={menu} style={{ display: "none" }} />
-          </span>
-        </div>
-
-        <div className="right">
-          <ul>
-            {allCategories?.map((param, index) => {
-              // if (index > 3) {
-              //   return null;
-              // }
-              return (
-                <li
-                  key={index}
-                  onClick={() => {
-                    setShow(param);
-                    setSh(true);
-                    setErreur(null);
-                  }}
-                >
-                  {param.name}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
-
-      <div className="bottom">
-        {erreur && !products ? (
-          <h2 style={{ fontSize: 10, width: "100%", marginTop: -15 }}>
-            {erreur}
-          </h2>
-        ) : (
-          ""
-        )}
-        {sh
-          ? shuffledProducts.map((param, index) => {
-              return (
-                <div
-                  key={index}
-                  className="carde"
-                  onClick={() => navigue(`/ProductDet/${param._id}`)}
-                >
-                  <img src={param.image1} alt="loading" />
-
-                  <h6 style={{ fontSize: 12 }}>{param.name}</h6>
-                  <h5>$ {param.prixPromo ? param.prixPromo : param.prix}</h5>
-                  <span>
-                    <Star style={{ width: "13px" }} /> {generateRandomNumber()}
-                  </span>
-                </div>
-              );
-            })
-          : products?.map((param, index) => {
-              return (
-                <div
-                  key={index}
-                  className="carde"
-                  onClick={() => navigue(`/ProductDet/${param._id}`)}
-                >
-                  <img src={param.image1} alt="loading" />
-
-                  <h6 style={{ fontSize: 12 }}>{param.name}</h6>
-                  <h5>$ {param.prixPromo ? param.prixPromo : param.prix}</h5>
-                  <span>
-                    <Star style={{ width: "13px" }} /> {generateRandomNumber()}
-                  </span>
-                </div>
-              );
-            })}
-      </div>
-
-      {/* filtre */}
-
-      <div className="fil">
-        <div className="conteneur">
-          <div className="T">
-            <h4>Refine results</h4>
-            <h5>clear</h5>
+            >
+              <input
+                type="search"
+                defaultValue={searchName}
+                onChange={(e) => {
+                  setSearchName(e.target.value);
+                }}
+                placeholder="Shirts"
+              />
+              <input type="submit" value="search" />
+            </form>
+            <span className="r">
+              <Filter onClick={menu} style={{ display: "none" }} />
+            </span>
           </div>
-          <ul>
-            {["category", "colour", "brand", "size", "price range"].map(
-              (param, index) => {
+
+          <div className="right">
+            <ul>
+              {allCategories?.map((param, index) => {
+                // if (index > 3) {
+                //   return null;
+                // }
                 return (
-                  <li key={index} onClick={() => chargeChoix(param)}>
-                    {param}
-                    <span>
-                      <ChevronRight />
-                    </span>
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setShow(param);
+                      setSh(true);
+                      setErreur(null);
+                    }}
+                  >
+                    {param.name}
                   </li>
                 );
-              }
-            )}
-          </ul>
-          <button onClick={menu}>
-            Apply filtres{" "}
-            <span>
-              <ChevronRight />
-            </span>
-          </button>
-        </div>
-      </div>
-
-      {poppup ? (
-        <div className="poppupConte">
-          <div className="poppup">
-            <div className="top">
-              <h3>Title</h3>
-              <span>
-                <X onClick={() => setPoppup(!poppup)} />
-              </span>
-            </div>
-            <ul>
-              {choix === "brand" ? (
-                Brands.map((param, index) => {
-                  return <li key={index}>{param}</li>;
-                })
-              ) : choix === "category" ? (
-                allCategories.map((param, index) => {
-                  return <li key={index}>{param.name}</li>;
-                })
-              ) : (
-                <>sds</>
-              )}
+              })}
             </ul>
           </div>
         </div>
-      ) : (
-        <></>
-      )}
 
-      {showButton && (
-        <button onClick={scrollToTop} className="scroll-to-top-button">
-          <ChevronUp className="i" />
-        </button>
-      )}
-    </div>
+        <LoadingIndicator loading={loading1}>
+          <div className="bottom">
+            {erreur && !products ? (
+              <h2 style={{ fontSize: 10, width: "100%", marginTop: -15 }}>
+                {erreur}
+              </h2>
+            ) : (
+              ""
+            )}
+            {sh
+              ? shuffledProducts.map((param, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="carde"
+                      onClick={() => navigue(`/ProductDet/${param._id}`)}
+                    >
+                      <img src={param.image1} alt="loading" />
+
+                      <h6 style={{ fontSize: 12 }}>{param.name}</h6>
+                      <h5>
+                        $ {param.prixPromo ? param.prixPromo : param.prix}
+                      </h5>
+                      <span>
+                        <Star style={{ width: "13px" }} />{" "}
+                        {generateRandomNumber()}
+                      </span>
+                    </div>
+                  );
+                })
+              : products?.map((param, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="carde"
+                      onClick={() => navigue(`/ProductDet/${param._id}`)}
+                    >
+                      <img src={param.image1} alt="loading" />
+
+                      <h6 style={{ fontSize: 12 }}>{param.name}</h6>
+                      <h5>
+                        $ {param.prixPromo ? param.prixPromo : param.prix}
+                      </h5>
+                      <span>
+                        <Star style={{ width: "13px" }} />{" "}
+                        {generateRandomNumber()}
+                      </span>
+                    </div>
+                  );
+                })}
+          </div>
+        </LoadingIndicator>
+
+        {/* filtre */}
+
+        <div className="fil">
+          <div className="conteneur">
+            <div className="T">
+              <h4>Refine results</h4>
+              <h5>clear</h5>
+            </div>
+            <ul>
+              {["category", "colour", "brand", "size", "price range"].map(
+                (param, index) => {
+                  return (
+                    <li key={index} onClick={() => chargeChoix(param)}>
+                      {param}
+                      <span>
+                        <ChevronRight />
+                      </span>
+                    </li>
+                  );
+                }
+              )}
+            </ul>
+            <button onClick={menu}>
+              Apply filtres{" "}
+              <span>
+                <ChevronRight />
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {poppup ? (
+          <div className="poppupConte">
+            <div className="poppup">
+              <div className="top">
+                <h3>Title</h3>
+                <span>
+                  <X onClick={() => setPoppup(!poppup)} />
+                </span>
+              </div>
+              <ul>
+                {choix === "brand" ? (
+                  Brands.map((param, index) => {
+                    return <li key={index}>{param}</li>;
+                  })
+                ) : choix === "category" ? (
+                  allCategories.map((param, index) => {
+                    return <li key={index}>{param.name}</li>;
+                  })
+                ) : (
+                  <>sds</>
+                )}
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {showButton && (
+          <button onClick={scrollToTop} className="scroll-to-top-button">
+            <ChevronUp className="i" />
+          </button>
+        )}
+      </div>
+    </LoadingIndicator>
   );
 }
 

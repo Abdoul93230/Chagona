@@ -110,7 +110,7 @@ function LogIn({ chg, creer }) {
                 <User />
               </div>
               <div className="right">
-                <label>UserName/Email</label>
+                <label>Email/UserEmail</label>
                 <input
                   type="email"
                   value={email}
