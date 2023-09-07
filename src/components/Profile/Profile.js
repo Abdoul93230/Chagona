@@ -5,6 +5,7 @@ import { ChevronRight, Menu, MessageCircle, ShoppingCart } from "react-feather";
 import image1 from "../../Images/costume-homme-1.jpg";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function Profile() {
@@ -16,7 +17,7 @@ function Profile() {
   const [nom, setNom] = useState("");
   const [allMessage, setAllMessage] = useState([]);
   const [email, setEmail] = useState("");
-
+  const [loading, setLoading] = useState(true);
   const [imageP, setImageP] = useState(null);
 
   const [produits, setProduits] = useState(0);
@@ -72,6 +73,7 @@ function Profile() {
         },
       })
       .then((Profiler) => {
+        setLoading(false);
         // console.log(Profiler);
         if (
           Profiler.data.data.image &&
@@ -88,6 +90,7 @@ function Profile() {
         // }
       })
       .catch((erro) => {
+        setLoading(false);
         // if (erro.response.status === 404)
         //   console.log(erro.response.data.message);
         // console.log(erro.response);
@@ -95,90 +98,92 @@ function Profile() {
   });
 
   return (
-    <div className="Profile">
-      <div className="top">
-        <div className="l" onClick={message}>
-          <MessageCircle style={{ width: "40px" }} />{" "}
-          <span>{allMessage.length > 0 ? allMessage.length : 0}</span>
+    <LoadingIndicator loading={loading}>
+      <div className="Profile">
+        <div className="top">
+          <div className="l" onClick={message}>
+            <MessageCircle style={{ width: "40px" }} />{" "}
+            <span>{allMessage.length > 0 ? allMessage.length : 0}</span>
+          </div>
+          <div
+            className="l"
+            onClick={() => {
+              navigue("/Cart");
+            }}
+          >
+            <ShoppingCart />
+            <span>{produits ? produits.length : 0}</span>
+          </div>
         </div>
-        <div
-          className="l"
-          onClick={() => {
-            navigue("/Cart");
-          }}
-        >
-          <ShoppingCart />
-          <span>{produits ? produits.length : 0}</span>
-        </div>
-      </div>
 
-      <div className="prof">
-        <div className="left">
-          <img src={imageP ? imageP : image1} alt="loading" />
-        </div>
-        <div className="right">
-          <h2>{nom}</h2>
-          <h3 style={{ fontSize: 14 }}>{email}</h3>
-          <Link to="/Profile/EditProfile" className="button">
-            Edit Profile
-          </Link>
-        </div>
-      </div>
-
-      <ul>
-        {[
-          { name: "Invite Friends", link: "/Profile/Invite_Friends" },
-          { name: "customer suport", link: "/Profile/customer_suport" },
-          { name: "My Orders", link: "/Order" },
-          { name: "make suggestion", link: "/Profile/make_suggestion" },
-        ].map((param, index) => {
-          return (
-            <Link to={`${param.link}`} className="li" key={index}>
-              <span>
-                <Menu />
-              </span>
-              <ol>
-                {param.name}{" "}
-                <span>
-                  <ChevronRight />
-                </span>
-              </ol>
+        <div className="prof">
+          <div className="left">
+            <img src={imageP ? imageP : image1} alt="loading" />
+          </div>
+          <div className="right">
+            <h2>{nom}</h2>
+            <h3 style={{ fontSize: 14 }}>{email}</h3>
+            <Link to="/Profile/EditProfile" className="button">
+              Edit Profile
             </Link>
-          );
-        })}
-      </ul>
+          </div>
+        </div>
 
-      <ul>
-        {[
-          { name: "Invite Friends", link: "Invite_Friends" },
-          { name: "customer suport", link: "customer_suport" },
-          { name: "rate our app", link: "rate_our_app" },
-          { name: "make suggestion", link: "make_suggestion" },
-        ].map((param, index) => {
-          return (
-            <Link
-              to={
-                param.name === "rate our app"
-                  ? `/PageNotRady`
-                  : `/Profile/${param.link}`
-              }
-              className="li"
-              key={index}
-            >
-              <span>
-                <Menu />
-              </span>
-              <ol>
-                {param.name}{" "}
+        <ul>
+          {[
+            { name: "Invite Friends", link: "/Profile/Invite_Friends" },
+            { name: "customer suport", link: "/Profile/customer_suport" },
+            { name: "My Orders", link: "/Order" },
+            { name: "make suggestion", link: "/Profile/make_suggestion" },
+          ].map((param, index) => {
+            return (
+              <Link to={`${param.link}`} className="li" key={index}>
                 <span>
-                  <ChevronRight />
+                  <Menu />
                 </span>
-              </ol>
-            </Link>
-          );
-        })}
-      </ul>
-    </div>
+                <ol>
+                  {param.name}{" "}
+                  <span>
+                    <ChevronRight />
+                  </span>
+                </ol>
+              </Link>
+            );
+          })}
+        </ul>
+
+        <ul>
+          {[
+            { name: "Invite Friends", link: "Invite_Friends" },
+            { name: "customer suport", link: "customer_suport" },
+            { name: "rate our app", link: "rate_our_app" },
+            { name: "make suggestion", link: "make_suggestion" },
+          ].map((param, index) => {
+            return (
+              <Link
+                to={
+                  param.name === "rate our app"
+                    ? `/PageNotRady`
+                    : `/Profile/${param.link}`
+                }
+                className="li"
+                key={index}
+              >
+                <span>
+                  <Menu />
+                </span>
+                <ol>
+                  {param.name}{" "}
+                  <span>
+                    <ChevronRight />
+                  </span>
+                </ol>
+              </Link>
+            );
+          })}
+        </ul>
+      </div>
+    </LoadingIndicator>
   );
 }
 

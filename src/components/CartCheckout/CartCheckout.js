@@ -17,6 +17,7 @@ function CartCheckout({ op }) {
   const [cvc, setCvc] = useState("");
   const [codePro, setCodPro] = useState("");
   const [codeValide, setCodeValide] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const [poppup, setPoppup] = useState(false);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
@@ -102,8 +103,10 @@ function CartCheckout({ op }) {
       .get(`${BackendUrl}/products`)
       .then((products) => {
         setAllProduits(products.data.data);
+        setLoading(false);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error.response.data.message);
       });
   }, []);
@@ -237,7 +240,7 @@ function CartCheckout({ op }) {
   const navigue = useNavigate();
   return (
     <div className="CartCheckout">
-      <LoadingIndicator time={2000}>
+      <LoadingIndicator loading={loading}>
         <div className="top">
           <X
             onClick={() => op("un")}

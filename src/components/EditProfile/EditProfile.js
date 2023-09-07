@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import "./EditProfile.css";
 import axios from "axios";
 import image from "../../Images/costume-homme-1.jpg";
@@ -16,6 +16,7 @@ function EditProfile() {
   const [imageP, setImageP] = useState(image);
   const [messageEr, setMessageEr] = useState(null);
 
+  const [loading, setLoading] = useState(true);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
   useEffect(() => {
     if (a) {
@@ -28,6 +29,7 @@ function EditProfile() {
         })
         .then((response) => {
           const data = response.data.user;
+
           if (nom.length <= 0) {
             setNom(data.name);
           } else if (email.length <= 0) {
@@ -47,6 +49,7 @@ function EditProfile() {
         })
         .then((Profiler) => {
           // console.log(Profiler);
+          setLoading(false);
           if (
             Profiler.data.data.image !==
             `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
@@ -60,6 +63,7 @@ function EditProfile() {
           }
         })
         .catch((erro) => {
+          setLoading(false);
           if (erro.response.status === 404)
             setMessageEr(erro.response.data.message);
           // console.log(erro.response);
@@ -69,7 +73,6 @@ function EditProfile() {
 
   const onSub = (e) => {
     e.preventDefault();
-
     if (nom.trim().length < 3) {
       return alert("Votre nom doit etre superieur ou inferieur a 3 caracteres");
     } else if (!regexMail.test(email)) {
@@ -86,6 +89,7 @@ function EditProfile() {
     formData.append("image", photo);
     formData.append("id", a.id);
 
+    setLoading(true);
     axios
       .post(`${BackendUrl}/createProfile`, formData)
       .then((user) => {
@@ -99,7 +103,8 @@ function EditProfile() {
               },
             })
             .then((Profiler) => {
-              console.log(Profiler);
+              // console.log(Profiler);
+              setLoading(false);
               if (
                 Profiler.data.data.image !==
                 `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
@@ -113,6 +118,7 @@ function EditProfile() {
               }
             })
             .catch((erro) => {
+              setLoading(false);
               if (erro.response.status === 404)
                 setMessageEr(erro.response.data.message);
               console.log(erro.response);
@@ -122,82 +128,85 @@ function EditProfile() {
         }
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error.response);
       });
   };
 
   return (
-    <div className="EditProfile">
-      {messageEr ? <h6 style={{ marginBottom: 20 }}>{messageEr}</h6> : <></>}
-      <div className="img" style={{ marginBottom: 66 }}>
-        <label htmlFor="image">
-          <img src={imageP} alt="loading" />
-          <h6 style={{ margin: "10px auto" }}>Click me to select image</h6>
-        </label>
-      </div>
-      <h6></h6>
-      <input
-        type="file"
-        id="image"
-        style={{ display: "none" }}
-        onChange={(e) => {
-          setPhoto(e.target.files[0]);
-        }}
-      />
-
-      <form onSubmit={onSub}>
-        <label htmlFor="nom">Nom (3 caracteres au moin)</label>
-        <input
-          type="text"
-          id="nome"
-          defaultValue={nom}
-          onChange={(e) => {
-            setNom(e.target.value);
-          }}
-          style={{ borderColor: nom.trim().length < 3 ? "red" : "gray" }}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          defaultValue={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          style={{
-            borderColor: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-              ? "red"
-              : "gray",
-          }}
-        />
-
-        <label htmlFor="Phone">Phone</label>
-        <input
-          type="number"
-          id="Phone"
-          value={phone}
-          placeholder="************"
-          onChange={(e) => {
-            setPhone(e.target.value);
-          }}
-          style={{
-            borderColor: !regexPhone.test(phone.toString()) ? "red" : "gray",
-          }}
-        />
-        <label style={{ marginTop: 15, fontSize: 12, cursor: "pointer" }}>
-          Change password?
-        </label>
-
-        <div className="btn">
-          <input
-            type="submit"
-            value="retour"
-            onClick={() => navigue("/Profile")}
-          />
-          <input type="submit" value="Submit" onSubmit={onSub} />
+    <LoadingIndicator loading={loading}>
+      <div className="EditProfile">
+        {messageEr ? <h6 style={{ marginBottom: 20 }}>{messageEr}</h6> : <></>}
+        <div className="img" style={{ marginBottom: 66 }}>
+          <label htmlFor="image">
+            <img src={imageP} alt="loading" />
+            <h6 style={{ margin: "10px auto" }}>Click me to select image</h6>
+          </label>
         </div>
-      </form>
-    </div>
+        <h6></h6>
+        <input
+          type="file"
+          id="image"
+          style={{ display: "none" }}
+          onChange={(e) => {
+            setPhoto(e.target.files[0]);
+          }}
+        />
+
+        <form onSubmit={onSub}>
+          <label htmlFor="nom">Nom (3 caracteres au moin)</label>
+          <input
+            type="text"
+            id="nome"
+            defaultValue={nom}
+            onChange={(e) => {
+              setNom(e.target.value);
+            }}
+            style={{ borderColor: nom.trim().length < 3 ? "red" : "gray" }}
+          />
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            defaultValue={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            style={{
+              borderColor: !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+                ? "red"
+                : "gray",
+            }}
+          />
+
+          <label htmlFor="Phone">Phone</label>
+          <input
+            type="number"
+            id="Phone"
+            value={phone}
+            placeholder="************"
+            onChange={(e) => {
+              setPhone(e.target.value);
+            }}
+            style={{
+              borderColor: !regexPhone.test(phone.toString()) ? "red" : "gray",
+            }}
+          />
+          <label style={{ marginTop: 15, fontSize: 12, cursor: "pointer" }}>
+            Change password?
+          </label>
+
+          <div className="btn">
+            <input
+              type="submit"
+              value="retour"
+              onClick={() => navigue("/Profile")}
+            />
+            <input type="submit" value="Submit" onSubmit={onSub} />
+          </div>
+        </form>
+      </div>
+    </LoadingIndicator>
   );
 }
 

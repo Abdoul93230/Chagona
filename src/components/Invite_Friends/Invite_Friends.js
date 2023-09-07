@@ -4,6 +4,7 @@ import "./Invite_Friends.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import image from "../../Images/produit4.jpg";
 import whatsapp from "../../Images/whatsapp.png";
 
@@ -33,6 +34,8 @@ function InviteFriends() {
       progress: undefined,
     });
   };
+
+  const [loading, setLoading] = useState(true);
   const navigue = useNavigate();
   const [emailP, setEmailP] = useState(null);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
@@ -55,6 +58,7 @@ function InviteFriends() {
         })
         .then((response) => {
           const data = response.data.user;
+          setLoading(false);
           if (!emailP) {
             setEmailP(data.email);
           }
@@ -67,7 +71,6 @@ function InviteFriends() {
 
   const envoyer = async (e) => {
     e.preventDefault();
-
     if (!regexMail.test(email) && number.length < 8) {
       handleAlertwar("Format de l'email non valide !");
       return;
@@ -84,8 +87,10 @@ function InviteFriends() {
         };
 
         try {
+          setLoading(true);
           await axios.post(`${BackendUrl}/Send_email_freind`, emailData);
           handleAlert("Email envoyé !");
+          setLoading(false);
           // Attendre quelques secondes avant de naviguer
           setTimeout(() => {
             navigue("/Profile");

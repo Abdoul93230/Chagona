@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import image from "../../Images/sac2.png";
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import whatsapp from "../../Images/whatsapp.png";
 import { ArrowDownRight } from "react-feather";
 import {
@@ -37,6 +38,7 @@ function ProductDet({ product }) {
   const [taille, setTaille] = useState(null);
   const [nbrCol, setNbrCol] = useState(null);
   const [option, setOption] = useState("Details");
+  const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("userEcomme"));
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -145,8 +147,10 @@ function ProductDet({ product }) {
             ? "Product"
             : "Details"
         );
+        setLoading(false);
       })
       .catch((error) => {
+        setLoading(false);
         // console.log(error)
       });
 
@@ -577,256 +581,260 @@ function ProductDet({ product }) {
     );
 
   return (
-    <div className="ProductDet">
-      <Helmet>
-        <title>{VP?.name}</title>
-        {/* <link rel="icon" href="/chemin/vers/votre/nouveau/favicon.ico" /> */}
-        <link rel="icon" type="image" href={VP?.image1} />
-        <link rel="apple-touch-icon" href={VP?.image1} />
-        <meta property="og:title" content={VP?.name} />
-        <meta property="og:description" content={VP?.description} />
-        <meta property="og:image" content={VP?.image1} />
-      </Helmet>
+    <LoadingIndicator loading={loading}>
+      <div className="ProductDet">
+        <Helmet>
+          <title>{VP?.name}</title>
+          {/* <link rel="icon" href="/chemin/vers/votre/nouveau/favicon.ico" /> */}
+          <link rel="icon" type="image" href={VP?.image1} />
+          <link rel="apple-touch-icon" href={VP?.image1} />
+          <meta property="og:title" content={VP?.name} />
+          <meta property="og:description" content={VP?.description} />
+          <meta property="og:image" content={VP?.image1} />
+        </Helmet>
 
-      <ToastContainer />
-      <div className="conte">
-        <div className="top">
-          <ul>
-            <li className="retour" onClick={goBack}>
-              <ChevronLeft style={{ width: "30px", height: "30px" }} />
-            </li>
-            <li className="NP">
-              <h6>{VP?.name}</h6>
-              {VP?.prixPromo > 0 ? (
-                <>
-                  <span>
-                    <s>$ {VP?.prix}</s>
-                  </span>
-                  <br />
+        <ToastContainer />
+        <div className="conte">
+          <div className="top">
+            <ul>
+              <li className="retour" onClick={goBack}>
+                <ChevronLeft style={{ width: "30px", height: "30px" }} />
+              </li>
+              <li className="NP">
+                <h6>{VP?.name}</h6>
+                {VP?.prixPromo > 0 ? (
+                  <>
+                    <span>
+                      <s>$ {VP?.prix}</s>
+                    </span>
+                    <br />
+                    <h5>
+                      ${VP?.prixPromo}{" "}
+                      <span>
+                        <Star style={{ width: "12px" }} />
+                        4.9
+                      </span>
+                    </h5>
+                  </>
+                ) : (
                   <h5>
-                    ${VP?.prixPromo}{" "}
+                    ${VP?.prix}{" "}
                     <span>
                       <Star style={{ width: "12px" }} />
                       4.9
                     </span>
                   </h5>
-                </>
-              ) : (
-                <h5>
-                  ${VP?.prix}{" "}
-                  <span>
-                    <Star style={{ width: "12px" }} />
-                    4.9
-                  </span>
-                </h5>
-              )}
-            </li>
-            <li className="Scarde" onClick={() => navigue("/Cart")}>
-              <ShoppingCart /> <span>{produitsL ? produitsL.length : 0}</span>
-            </li>
-          </ul>
+                )}
+              </li>
+              <li className="Scarde" onClick={() => navigue("/Cart")}>
+                <ShoppingCart /> <span>{produitsL ? produitsL.length : 0}</span>
+              </li>
+            </ul>
+          </div>
+          <div className="midel carousel-container">
+            <Slider {...settings}>
+              <div className="slide">
+                <img src={VP?.image1} alt="loading" />
+              </div>
+              <div className="slide">
+                <img src={VP?.image2} alt="loading" />
+              </div>
+              <div className="slide">
+                <img src={VP?.image3} alt="loading" />
+              </div>
+            </Slider>
+          </div>
         </div>
-        <div className="midel carousel-container">
-          <Slider {...settings}>
-            <div className="slide">
-              <img src={VP?.image1} alt="loading" />
-            </div>
-            <div className="slide">
-              <img src={VP?.image2} alt="loading" />
-            </div>
-            <div className="slide">
-              <img src={VP?.image3} alt="loading" />
-            </div>
-          </Slider>
+        <div className="menu">
+          {VP?.taille[0].split(",").length >= 2 ||
+          VP?.couleur[0].split(",").length >= 2 ? (
+            <>
+              <h5
+                className={
+                  VP?.taille[0].split(",").length >= 2 ||
+                  VP?.couleur[0].split(",").length >= 2
+                    ? "x d"
+                    : "x"
+                }
+                onClick={() => chgOption("Product", 0)}
+              >
+                Product <ArrowDownRight style={{ width: 15 }} />
+              </h5>
+            </>
+          ) : (
+            <></>
+          )}
+          <h5
+            className={
+              VP?.taille[0].split(",").length < 2 &&
+              VP?.couleur[0].split(",").length < 2
+                ? "x d"
+                : "x"
+            }
+            onClick={() => chgOption("Details", 1)}
+          >
+            Details <ArrowDownRight style={{ width: 15 }} />
+          </h5>
+          <h5 className="x" onClick={() => chgOption("Reviews", 2)}>
+            Reviews <ArrowDownRight style={{ width: 15 }} />
+          </h5>
         </div>
-      </div>
-      <div className="menu">
-        {VP?.taille[0].split(",").length >= 2 ||
-        VP?.couleur[0].split(",").length >= 2 ? (
-          <>
-            <h5
-              className={
-                VP?.taille[0].split(",").length >= 2 ||
-                VP?.couleur[0].split(",").length >= 2
-                  ? "x d"
-                  : "x"
-              }
-              onClick={() => chgOption("Product", 0)}
+        {OP}
+        <div className="button">
+          <div className="top">
+            <button
+              className="btn1"
+              // onClick={() => navigue("/Profile/Invite_Friends")}
+
+              onClick={() => {
+                setPoppup2(true);
+              }}
             >
-              Product <ArrowDownRight style={{ width: 15 }} />
-            </h5>
-          </>
+              SHARE THIS{" "}
+              <span>
+                <ChevronUp />
+              </span>
+            </button>
+            <button className="btn2" onClick={AddProduct}>
+              ADD TO CART{" "}
+              <span>
+                <ChevronRight />
+              </span>
+            </button>
+          </div>
+          <div className="bottom">
+            {/* A faire : Un button pour La possibilite de pouvoir commander via Whatsapp */}
+          </div>
+        </div>
+        <div
+          className="comment"
+          onClick={() => {
+            setPoppup(true);
+          }}
+        >
+          <h4>Comment?</h4>
+        </div>
+        {poppup ? (
+          <div className="poppupConte">
+            <div className="poppup">
+              <div className="top">
+                <h3>Ecrire un commentaitre</h3>
+                <span>
+                  <X onClick={() => setPoppup(!poppup)} />
+                </span>
+              </div>
+              <div className="CodeClef">
+                <textarea
+                  type="text"
+                  onChange={(e) => setCommente(e.target.value)}
+                  placeholder="tape the commente here"
+                ></textarea>
+                <label className="T">Notez ce produit</label>
+                <section
+                  onChange={(e) => {
+                    setEtoil(Number(e.target.value));
+                  }}
+                >
+                  <label htmlFor="un">
+                    <input
+                      style={{ display: "none" }}
+                      type="radio"
+                      id="un"
+                      name="etoille"
+                      value={1}
+                    />
+                    <Star
+                      style={{ color: etoil === 1 ? "#FF6969" : "white" }}
+                      className="i"
+                    />
+                  </label>
+                  <label htmlFor="deux">
+                    <input
+                      style={{ display: "none" }}
+                      type="radio"
+                      id="deux"
+                      name="etoille"
+                      value={2}
+                    />
+                    <Star
+                      style={{ color: etoil === 2 ? "#FF6969" : "white" }}
+                      className="i"
+                    />
+                  </label>
+                  <label htmlFor="trois">
+                    <input
+                      style={{ display: "none" }}
+                      type="radio"
+                      id="trois"
+                      name="etoille"
+                      value={3}
+                    />
+                    <Star
+                      style={{ color: etoil === 3 ? "#FF6969" : "white" }}
+                      className="i"
+                    />
+                  </label>
+                  <label htmlFor="quatre">
+                    <input
+                      style={{ display: "none" }}
+                      type="radio"
+                      id="quatre"
+                      name="etoille"
+                      value={4}
+                    />
+                    <Star
+                      style={{ color: etoil === 4 ? "#FF6969" : "white" }}
+                      className="i"
+                    />
+                  </label>
+                  <label htmlFor="cinq">
+                    <input
+                      style={{ display: "none" }}
+                      type="radio"
+                      id="cinq"
+                      name="etoille"
+                      value={5}
+                    />
+                    <Star
+                      style={{ color: etoil === 5 ? "#FF6969" : "white" }}
+                    />
+                  </label>
+                </section>
+                <button onClick={envoyer}>Envoyer</button>
+              </div>
+            </div>
+          </div>
         ) : (
           <></>
         )}
-        <h5
-          className={
-            VP?.taille[0].split(",").length < 2 &&
-            VP?.couleur[0].split(",").length < 2
-              ? "x d"
-              : "x"
-          }
-          onClick={() => chgOption("Details", 1)}
-        >
-          Details <ArrowDownRight style={{ width: 15 }} />
-        </h5>
-        <h5 className="x" onClick={() => chgOption("Reviews", 2)}>
-          Reviews <ArrowDownRight style={{ width: 15 }} />
-        </h5>
-      </div>
-      {OP}
-      <div className="button">
-        <div className="top">
-          <button
-            className="btn1"
-            // onClick={() => navigue("/Profile/Invite_Friends")}
+        {/* ///////////////////////////////////////////////////////// */}
 
-            onClick={() => {
-              setPoppup2(true);
-            }}
-          >
-            SHARE THIS{" "}
-            <span>
-              <ChevronUp />
-            </span>
-          </button>
-          <button className="btn2" onClick={AddProduct}>
-            ADD TO CART{" "}
-            <span>
-              <ChevronRight />
-            </span>
-          </button>
-        </div>
-        <div className="bottom">
-          {/* A faire : Un button pour La possibilite de pouvoir commander via Whatsapp */}
-        </div>
-      </div>
-      <div
-        className="comment"
-        onClick={() => {
-          setPoppup(true);
-        }}
-      >
-        <h4>Comment?</h4>
-      </div>
-      {poppup ? (
-        <div className="poppupConte">
-          <div className="poppup">
-            <div className="top">
-              <h3>Ecrire un commentaitre</h3>
-              <span>
-                <X onClick={() => setPoppup(!poppup)} />
-              </span>
-            </div>
-            <div className="CodeClef">
-              <textarea
-                type="text"
-                onChange={(e) => setCommente(e.target.value)}
-                placeholder="tape the commente here"
-              ></textarea>
-              <label className="T">Notez ce produit</label>
-              <section
-                onChange={(e) => {
-                  setEtoil(Number(e.target.value));
-                }}
-              >
-                <label htmlFor="un">
-                  <input
-                    style={{ display: "none" }}
-                    type="radio"
-                    id="un"
-                    name="etoille"
-                    value={1}
-                  />
-                  <Star
-                    style={{ color: etoil === 1 ? "#FF6969" : "white" }}
-                    className="i"
-                  />
-                </label>
-                <label htmlFor="deux">
-                  <input
-                    style={{ display: "none" }}
-                    type="radio"
-                    id="deux"
-                    name="etoille"
-                    value={2}
-                  />
-                  <Star
-                    style={{ color: etoil === 2 ? "#FF6969" : "white" }}
-                    className="i"
-                  />
-                </label>
-                <label htmlFor="trois">
-                  <input
-                    style={{ display: "none" }}
-                    type="radio"
-                    id="trois"
-                    name="etoille"
-                    value={3}
-                  />
-                  <Star
-                    style={{ color: etoil === 3 ? "#FF6969" : "white" }}
-                    className="i"
-                  />
-                </label>
-                <label htmlFor="quatre">
-                  <input
-                    style={{ display: "none" }}
-                    type="radio"
-                    id="quatre"
-                    name="etoille"
-                    value={4}
-                  />
-                  <Star
-                    style={{ color: etoil === 4 ? "#FF6969" : "white" }}
-                    className="i"
-                  />
-                </label>
-                <label htmlFor="cinq">
-                  <input
-                    style={{ display: "none" }}
-                    type="radio"
-                    id="cinq"
-                    name="etoille"
-                    value={5}
-                  />
-                  <Star style={{ color: etoil === 5 ? "#FF6969" : "white" }} />
-                </label>
-              </section>
-              <button onClick={envoyer}>Envoyer</button>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <></>
-      )}
-      {/* ///////////////////////////////////////////////////////// */}
-
-      {poppup2 ? (
-        <div className="poppupConte">
-          <div className="poppup">
-            <div className="top">
-              <h3>Partagez ce Lien</h3>
-              <span>
-                <X onClick={() => setPoppup2(!poppup2)} />
-              </span>
-            </div>
-            <div className="CodeClef">
-              <div className="group">
-                <span onClick={handleCopyClick}>Copier :</span>
-                <input type="text" defaultValue={window.location.href} />
+        {poppup2 ? (
+          <div className="poppupConte">
+            <div className="poppup">
+              <div className="top">
+                <h3>Partagez ce Lien</h3>
+                <span>
+                  <X onClick={() => setPoppup2(!poppup2)} />
+                </span>
               </div>
-              <div className="group">
-                <span>Via whatsapp :</span>
-                <img src={whatsapp} alt="loading" onClick={shareURL} />
+              <div className="CodeClef">
+                <div className="group">
+                  <span onClick={handleCopyClick}>Copier :</span>
+                  <input type="text" defaultValue={window.location.href} />
+                </div>
+                <div className="group">
+                  <span>Via whatsapp :</span>
+                  <img src={whatsapp} alt="loading" onClick={shareURL} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <></>
-      )}
-    </div>
+        ) : (
+          <></>
+        )}
+      </div>
+    </LoadingIndicator>
   );
 }
 

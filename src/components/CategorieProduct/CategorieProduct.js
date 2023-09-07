@@ -24,6 +24,7 @@ function CategorieProduct({ allCategories, allProducts }) {
   const params = useParams();
   const navigue = useNavigate();
   const [allPub, setAllPub] = useState(null);
+  const [loading, setLoading] = useState(true);
   let Pub =
     allPub?.filter(
       (item) =>
@@ -66,9 +67,11 @@ function CategorieProduct({ allCategories, allProducts }) {
       .get(`${BackendUrl}/getAllCommenteProduit`)
       .then((coments) => {
         setAllCommente(coments.data);
+        setLoading(false);
         // console.log(coments.data);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error);
       });
   }, []);
@@ -451,7 +454,7 @@ function CategorieProduct({ allCategories, allProducts }) {
 
   return (
     <div className="CategorieProduct">
-      <LoadingIndicator time={3000}>
+      <LoadingIndicator loading={loading}>
         <div className="head">
           <span className="r">
             <ChevronLeft onClick={goBack} />

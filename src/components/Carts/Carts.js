@@ -20,6 +20,7 @@ function Carts({ op }) {
   const [allProducts, setAllProduits] = useState(null);
   const [Vide, setVide] = useState(null);
   const [allMessage, setAllMessage] = useState([]);
+  const [loading, setLoading] = useState(true);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
 
   const calculateTotalPrice = () => {
@@ -57,7 +58,7 @@ function Carts({ op }) {
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
-    if (local) {
+    if (local && JSON.parse(local).length !== 0) {
       setProduits(JSON.parse(local));
       // console.log(JSON.parse(local).filter((param) => param.id));
       const a = JSON.parse(local).map((para) => para.id);
@@ -73,8 +74,10 @@ function Carts({ op }) {
       .get(`${BackendUrl}/products`)
       .then((products) => {
         setAllProduits(products.data.data);
+        setLoading(false);
       })
       .catch((error) => {
+        setLoading(false);
         console.log(error.response.data.message);
       });
   }, []);
@@ -100,8 +103,8 @@ function Carts({ op }) {
   };
 
   return (
-    <div className="Carts">
-      <LoadingIndicator time={3000}>
+    <LoadingIndicator loading={loading}>
+      <div className="Carts">
         <div className="top">
           <div className="i" onClick={message}>
             <MessageCircle style={{ width: "40px" }} />{" "}
@@ -217,8 +220,8 @@ function Carts({ op }) {
         )}
 
         <Navbar />
-      </LoadingIndicator>
-    </div>
+      </div>
+    </LoadingIndicator>
   );
 }
 

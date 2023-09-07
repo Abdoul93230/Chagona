@@ -21,6 +21,7 @@ function Home() {
   const [allTypes, setAllTypes] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   function getRandomElements(array) {
     const shuffledArray = shuffle(array);
     return shuffledArray.slice(0, 10);
@@ -56,6 +57,7 @@ function Home() {
       .get(`${BackendUrl}/products`)
       .then((Categories) => {
         setAllProducts(Categories.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -95,7 +97,7 @@ function Home() {
 
   return (
     <div className="home">
-      <LoadingIndicator time={3000}>
+      <LoadingIndicator loading={loading}>
         <HomeTop />
         <HeaderOne categories={allCategories} />
         <Presentation categories={allCategories} />
