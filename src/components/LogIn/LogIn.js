@@ -34,6 +34,7 @@ function LogIn({ chg, creer }) {
   };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isloading, setIsloading] = useState(false);
 
   const chargeEmail = () => {
     const a = document.querySelector(".LogIn .right input[type='email']").value;
@@ -49,6 +50,7 @@ function LogIn({ chg, creer }) {
 
   const navigue = new useNavigate();
   const connect = async () => {
+    setIsloading(true);
     axios
       .post(
         `${BackendUrl}/login`,
@@ -62,10 +64,12 @@ function LogIn({ chg, creer }) {
           credentials: "include",
         }
       )
-      .then((user) => {
+      .then(async (user) => {
         // console.log(user);
         if (user.status === 200) {
+          // await new Promise((resolve) => setTimeout(resolve, 2000));
           handleAlert(user.data.message);
+          setIsloading(false);
           chg("oui");
           navigue("/Home");
           localStorage.setItem(`userEcomme`, JSON.stringify(user.data));
@@ -74,65 +78,84 @@ function LogIn({ chg, creer }) {
         }
       })
       .catch((error) => {
-        if (error.response.status === 400)
+        setIsloading(false);
+        if (error.response.status === 400) {
           handleAlertwar(error.response.data.message);
-        else console.log(error.response);
+        } else console.log(error.response);
       });
   };
   return (
-    <div className="LogIn">
-      <ul>
-        <li>
-          <div className="left">
-            <User />
-          </div>
-          <div className="right">
-            <label>UserName/Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={chargeEmail}
-              placeholder="janedoe123@email.com"
-            />
-          </div>
-        </li>
-
-        <li>
-          <div className="left">
-            <Menu />
-          </div>
-          <div className="right">
-            <label>Password</label>
-            <input
-              onChange={chargePassword}
-              value={password}
-              type="password"
-              placeholder="*******************"
-            />
-          </div>
-        </li>
-      </ul>
-
-      <button onClick={() => connect()}>
-        Log In{" "}
-        <span>
-          <ChevronRight />
-        </span>
-      </button>
-      <p>
-        Don't have an account? Swipe right to{" "}
-        <span
-          onClick={() => {
-            creer("SingnUp");
+    <>
+      {isloading ? (
+        <div
+          style={{
+            width: "100%",
+            height: "90vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          create a new account
-        </span>
-      </p>
-      <div>
-        <ToastContainer />
-      </div>
-    </div>
+          <h1 style={{ textAlign: "center" }}>
+            Connection en cours Veuillez Patientez....
+          </h1>
+        </div>
+      ) : (
+        <div className="LogIn">
+          <ul>
+            <li>
+              <div className="left">
+                <User />
+              </div>
+              <div className="right">
+                <label>UserName/Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={chargeEmail}
+                  placeholder="janedoe123@email.com"
+                />
+              </div>
+            </li>
+
+            <li>
+              <div className="left">
+                <Menu />
+              </div>
+              <div className="right">
+                <label>Password</label>
+                <input
+                  onChange={chargePassword}
+                  value={password}
+                  type="password"
+                  placeholder="*******************"
+                />
+              </div>
+            </li>
+          </ul>
+
+          <button onClick={() => connect()}>
+            Log In{" "}
+            <span>
+              <ChevronRight />
+            </span>
+          </button>
+          <p>
+            Don't have an account? Swipe right to{" "}
+            <span
+              onClick={() => {
+                creer("SingnUp");
+              }}
+            >
+              create a new account
+            </span>
+          </p>
+          <div>
+            <ToastContainer />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

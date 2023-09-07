@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SingnUp.css";
 import axios from "axios";
 import { ChevronRight, Menu, MessageSquare, User } from "react-feather";
@@ -32,6 +32,7 @@ function SingnUp({ chg }) {
     });
   };
   const navigue = useNavigate();
+  const [isloading, setIsloading] = useState(false);
   //////////////// verification des information et creation de l'utilisateur  ///////////////////////////
 
   const validateCredentials = () => {
@@ -61,6 +62,7 @@ function SingnUp({ chg }) {
       );
       return false;
     } else {
+      setIsloading(true);
       axios
         .post(`${BackendUrl}/user`, {
           name: name,
@@ -85,6 +87,7 @@ function SingnUp({ chg }) {
               // console.log(user);
               if (user.status === 200) {
                 handleAlert(user.data.message);
+                setIsloading(false);
                 chg("oui");
                 navigue("/Home");
                 localStorage.setItem(`userEcomme`, JSON.stringify(user.data));
@@ -93,6 +96,7 @@ function SingnUp({ chg }) {
               }
             })
             .catch((error) => {
+              setIsloading(false);
               if (error.response.status === 400)
                 handleAlertwar(error.response.data.message);
               else console.log(error.response);
@@ -122,53 +126,71 @@ function SingnUp({ chg }) {
   //////////////////////////////// fin validation et creation  //////////////////////////////////////
 
   return (
-    <div className="SingnUp">
-      <ul>
-        <li>
-          <div className="left">
-            <MessageSquare />
-          </div>
-          <div className="right">
-            <label>Email</label>
-            <input type="email" placeholder="janedoe123@email.com" />
-          </div>
-        </li>
+    <>
+      {isloading ? (
+        <div
+          style={{
+            width: "100%",
+            height: "90vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <h1 style={{ textAlign: "center" }}>
+            Connection en cours Veuillez Patientez....
+          </h1>
+        </div>
+      ) : (
+        <div className="SingnUp">
+          <ul>
+            <li>
+              <div className="left">
+                <MessageSquare />
+              </div>
+              <div className="right">
+                <label>Email</label>
+                <input type="email" placeholder="janedoe123@email.com" />
+              </div>
+            </li>
 
-        <li>
-          <div className="left">
-            <User />
-          </div>
-          <div className="right">
-            <label>UserName</label>
-            <input type="text" placeholder="janedoe12345" />
-          </div>
-        </li>
+            <li>
+              <div className="left">
+                <User />
+              </div>
+              <div className="right">
+                <label>UserName</label>
+                <input type="text" placeholder="janedoe12345" />
+              </div>
+            </li>
 
-        <li>
-          <div className="left">
-            <Menu />
-          </div>
-          <div className="right">
-            <label>Password</label>
-            <input type="password" placeholder="*******************" />
-          </div>
-        </li>
-      </ul>
+            <li>
+              <div className="left">
+                <Menu />
+              </div>
+              <div className="right">
+                <label>Password</label>
+                <input type="password" placeholder="*******************" />
+              </div>
+            </li>
+          </ul>
 
-      <button onClick={validateCredentials}>
-        Sign Up{" "}
-        <span>
-          <ChevronRight />
-        </span>
-      </button>
-      <p>
-        By creating an account, you agree to our <span>Terms of Service</span>{" "}
-        and <span>Privacy Policy</span>
-      </p>
-      <div>
-        <ToastContainer />
-      </div>
-    </div>
+          <button onClick={validateCredentials}>
+            Sign Up{" "}
+            <span>
+              <ChevronRight />
+            </span>
+          </button>
+          <p>
+            By creating an account, you agree to our{" "}
+            <span>Terms of Service</span> and <span>Privacy Policy</span>
+          </p>
+          <div>
+            <ToastContainer />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

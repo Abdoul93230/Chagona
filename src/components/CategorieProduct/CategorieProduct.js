@@ -24,12 +24,6 @@ function CategorieProduct({ allCategories, allProducts }) {
   const params = useParams();
   const navigue = useNavigate();
   const [allPub, setAllPub] = useState(null);
-  const ClefCate = allCategories.find((item) => item.name === params.Cat);
-  const [ClefTypes, setClefType] = useState(
-    params.product
-      ? allTypes.find((item) => item.name === params.product)
-      : null
-  );
   let Pub =
     allPub?.filter(
       (item) =>
@@ -43,9 +37,6 @@ function CategorieProduct({ allCategories, allProducts }) {
   }
 
   useEffect(() => {
-    if (params.product) {
-      setClefType(allTypes.find((item) => item.name === params.product));
-    }
     axios
       .get(`${BackendUrl}/productPubget`)
       .then((pub) => {
@@ -82,12 +73,12 @@ function CategorieProduct({ allCategories, allProducts }) {
       });
   }, []);
 
-  // const ClefCate = allCategories
-  //   ? allCategories.find((item) => item.name === params?.Cat)
-  //   : null;
-  // const ClefTypes = allTypes
-  //   ? allTypes.find((item) => item.name === params.product)
-  //   : null;
+  const ClefCate = allCategories
+    ? allCategories.find((item) => item.name === params?.Cat)
+    : null;
+  const ClefTypes = allTypes
+    ? allTypes.find((item) => item.name === params?.product)
+    : null;
 
   const settings = {
     dots: true,
@@ -110,7 +101,7 @@ function CategorieProduct({ allCategories, allProducts }) {
 
   const Home1 = params.product
     ? getRandomElementsSix(
-        allProducts?.filter((item) => item.ClefType === ClefTypes?._id),
+        allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
         9
       )
     : getRandomElementsSix(
@@ -140,7 +131,7 @@ function CategorieProduct({ allCategories, allProducts }) {
       );
   const Pt1 = params.product
     ? getRandomElementsSix(
-        allProducts.filter((item) => item.ClefType === ClefTypes?._id),
+        allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
         6
       )
     : getRandomElementsSix(
@@ -263,9 +254,9 @@ function CategorieProduct({ allCategories, allProducts }) {
             {allTypes
               ?.filter((param) => param.clefCategories === ClefCate?._id)
               .map((param, index) => {
-                // if (index > 4) {
-                //   return null;
-                // }
+                if (index > 4) {
+                  return null;
+                }
                 return (
                   <li
                     key={index}
