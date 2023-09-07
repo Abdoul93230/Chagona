@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "./LogIn.css";
 import { ToastContainer, toast } from "react-toastify";
+import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import "react-toastify/dist/ReactToastify.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -98,6 +99,7 @@ function LogIn({ chg, creer }) {
         >
           <h1 style={{ textAlign: "center" }}>
             Connection en cours Veuillez Patientez....
+            <LoadingIndicator loading={isloading} />
           </h1>
         </div>
       ) : (
