@@ -179,6 +179,10 @@ function CartCheckout({ op }) {
 
   const Plasser = () => {
     const local = localStorage.getItem("panier");
+    if (JSON.parse(local).length === 0) {
+      handleAlertwar("Aucun produit n'est selectionner.");
+      return;
+    }
     if (phone.length <= 0) {
       navigue("/More/shipping_address");
       return;

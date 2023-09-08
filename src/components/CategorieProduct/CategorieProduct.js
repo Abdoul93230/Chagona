@@ -13,7 +13,7 @@ import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import { shuffle } from "lodash";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
-function CategorieProduct({ allCategories, allProducts }) {
+function CategorieProduct() {
   function goBack() {
     window.history.back();
   }
@@ -25,11 +25,17 @@ function CategorieProduct({ allCategories, allProducts }) {
   const navigue = useNavigate();
   const [allPub, setAllPub] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [allProducts, setAllProducts] = useState([]);
+  const [Ptp, setPtp] = useState([]);
+  const [pt2, setPt2] = useState([]);
+  const [ptAll, setPtAll] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
+
   let Pub =
     allPub?.filter(
       (item) =>
         item.clefCategorie ===
-        allCategories?.find((item) => item.name === params.Cat)._id
+        allCategories?.find((item) => item.name === params.Cat)?._id
     ) || [];
   // console.log(params.Cat);
   function getRandomElementsSix(array, nbr) {
@@ -41,7 +47,6 @@ function CategorieProduct({ allCategories, allProducts }) {
     axios
       .get(`${BackendUrl}/productPubget`)
       .then((pub) => {
-        // console.log(pub);
         if (pub.data.length > 0) {
           setAllPub(pub.data);
         } else {
@@ -51,18 +56,73 @@ function CategorieProduct({ allCategories, allProducts }) {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
 
-  useEffect(() => {
     axios
-      .get(`${BackendUrl}/getAllType`)
-      .then((types) => {
-        setAllTypes(types.data.data);
+      .get(`${BackendUrl}/getAllCategories`)
+      .then((Categories) => {
+        setAllCategories(Categories.data.data);
+
+        const ClefCate = Categories.data.data
+          ? Categories.data.data.find((item) => item.name === params?.Cat)
+          : null;
+
+        axios
+          .get(`${BackendUrl}/getAllType`)
+          .then((types) => {
+            setAllTypes(types.data.data);
+
+            const ClefTypes = types.data.data
+              ? types.data.data.find((item) => item.name === params?.product)
+              : null;
+
+            axios
+              .get(`${BackendUrl}/products`)
+              .then((prod) => {
+                setAllProducts(prod.data.data);
+
+                const filteredProductsPromo = prod.data.data.filter((item) =>
+                  types.data.data.some(
+                    (type) =>
+                      type.clefCategories === ClefCate?._id &&
+                      item.ClefType === type._id &&
+                      item.prixPromo > 0
+                  )
+                );
+
+                const filteredProductsTop30 = prod.data.data
+                  .slice(0, 30)
+                  .filter((item) =>
+                    types.data.data.some(
+                      (type) =>
+                        type.clefCategories === ClefCate?._id &&
+                        item.ClefType === type._id
+                    )
+                  );
+
+                setPtp(getRandomElementsSix(filteredProductsPromo, 6));
+                setPt2(getRandomElementsSix(filteredProductsTop30, 6));
+                setPtAll(
+                  prod.data.data.filter((item) =>
+                    types.data.data.some(
+                      (type) =>
+                        type.clefCategories === ClefCate?._id &&
+                        item.ClefType === type._id
+                    )
+                  )
+                );
+              })
+              .catch((error) => console.log(error));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
       });
+  }, []);
 
+  useEffect(() => {
     axios
       .get(`${BackendUrl}/getAllCommenteProduit`)
       .then((coments) => {
@@ -166,34 +226,6 @@ function CategorieProduct({ allCategories, allProducts }) {
         ),
         6
       );
-  let Ptp = getRandomElementsSix(
-    allProducts.filter((item) =>
-      allTypes.some(
-        (type) =>
-          type.clefCategories === ClefCate?._id &&
-          item.ClefType === type._id &&
-          item.prixPromo > 0
-      )
-    ),
-    6
-  );
-  let pt2 = getRandomElementsSix(
-    allProducts
-      .slice(0, 30)
-      .filter((item) =>
-        allTypes.some(
-          (type) =>
-            type.clefCategories === ClefCate?._id && item.ClefType === type._id
-        )
-      ),
-    6
-  );
-  let ptAll = allProducts.filter((item) =>
-    allTypes.some(
-      (type) =>
-        type.clefCategories === ClefCate?._id && item.ClefType === type._id
-    )
-  );
 
   const option =
     choix === "Home" ? (
@@ -267,21 +299,27 @@ function CategorieProduct({ allCategories, allProducts }) {
                     key={index}
                     onClick={() => {
                       navigue(`/Categorie/${params.Cat}/${param.name}`);
-                      getRandomElementsSix(
-                        allProducts
-                          .slice(0, 30)
-                          .filter((item) => item.ClefType === param?._id),
-                        6
+                      setPt2(
+                        getRandomElementsSix(
+                          allProducts
+                            .slice(0, 30)
+                            .filter((item) => item.ClefType === param?._id),
+                          6
+                        )
                       );
-                      Ptp = getRandomElementsSix(
+                      setPtp(
+                        getRandomElementsSix(
+                          allProducts.filter(
+                            (item) =>
+                              item.ClefType === param?._id && item.prixPromo > 0
+                          ),
+                          6
+                        )
+                      );
+                      setPtAll(
                         allProducts.filter(
-                          (item) =>
-                            item.ClefType === param?._id && item.prixPromo > 0
-                        ),
-                        6
-                      );
-                      ptAll = allProducts.filter(
-                        (item) => item.ClefType === param?._id
+                          (item) => item.ClefType === param?._id
+                        )
                       );
                     }}
                   >
