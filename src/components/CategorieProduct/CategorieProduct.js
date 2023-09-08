@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { ChevronLeft, Search, ChevronRight, Star } from "react-feather";
 import ConteProduits from "../ConteProduits/ConteProduits";
-import image1 from "../../Images/sac.png";
+// import image1 from "../../Images/sac.png";
 import axios from "axios";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import { shuffle } from "lodash";
@@ -102,36 +102,55 @@ function CategorieProduct({ allCategories, allProducts }) {
     return `${day}/${month}/${year}`;
   }
 
-  const Home1 = params.product
-    ? getRandomElementsSix(
-        allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
-        9
+  // const Home1 = params.product
+  //   ? getRandomElementsSix(
+  //       allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
+  //       9
+  //     )
+  //   : getRandomElementsSix(
+  //       allProducts.filter((item) =>
+  //         allTypes.some(
+  //           (type) =>
+  //             type.clefCategories === ClefCate?._id &&
+  //             item.ClefType === type._id
+  //         )
+  //       ),
+  //       9
+  //     );
+  const Home1 = getRandomElementsSix(
+    allProducts.filter((item) =>
+      allTypes.some(
+        (type) =>
+          type.clefCategories === ClefCate?._id && item.ClefType === type._id
       )
-    : getRandomElementsSix(
-        allProducts.filter((item) =>
-          allTypes.some(
-            (type) =>
-              type.clefCategories === ClefCate?._id &&
-              item.ClefType === type._id
-          )
-        ),
-        9
-      );
-  const Home2 = params.product
-    ? getRandomElementsSix(
-        allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
-        6
+    ),
+    9
+  );
+  // const Home2 = params.product
+  //   ? getRandomElementsSix(
+  //       allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
+  //       6
+  //     )
+  //   : getRandomElementsSix(
+  //       allProducts.filter((item) =>
+  //         allTypes.some(
+  //           (type) =>
+  //             type.clefCategories === ClefCate?._id &&
+  //             item.ClefType === type._id
+  //         )
+  //       ),
+  //       6
+  //     );
+
+  const Home2 = getRandomElementsSix(
+    allProducts.filter((item) =>
+      allTypes.some(
+        (type) =>
+          type.clefCategories === ClefCate?._id && item.ClefType === type._id
       )
-    : getRandomElementsSix(
-        allProducts.filter((item) =>
-          allTypes.some(
-            (type) =>
-              type.clefCategories === ClefCate?._id &&
-              item.ClefType === type._id
-          )
-        ),
-        6
-      );
+    ),
+    6
+  );
   const Pt1 = params.product
     ? getRandomElementsSix(
         allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
@@ -147,51 +166,34 @@ function CategorieProduct({ allCategories, allProducts }) {
         ),
         6
       );
-  const Ptp = params.product
-    ? getRandomElementsSix(
-        allProducts.filter(
-          (item) => item.ClefType === ClefTypes?._id && item.prixPromo > 0
-        ),
-        6
+  let Ptp = getRandomElementsSix(
+    allProducts.filter((item) =>
+      allTypes.some(
+        (type) =>
+          type.clefCategories === ClefCate?._id &&
+          item.ClefType === type._id &&
+          item.prixPromo > 0
       )
-    : getRandomElementsSix(
-        allProducts.filter((item) =>
-          allTypes.some(
-            (type) =>
-              type.clefCategories === ClefCate?._id &&
-              item.ClefType === type._id &&
-              item.prixPromo > 0
-          )
-        ),
-        6
-      );
-  const pt2 = params.product
-    ? getRandomElementsSix(
-        allProducts
-          .slice(0, 30)
-          .filter((item) => item.ClefType === ClefTypes?._id),
-        6
-      )
-    : getRandomElementsSix(
-        allProducts
-          .slice(0, 30)
-          .filter((item) =>
-            allTypes.some(
-              (type) =>
-                type.clefCategories === ClefCate?._id &&
-                item.ClefType === type._id
-            )
-          ),
-        6
-      );
-  const ptAll = params.product
-    ? allProducts.filter((item) => item.ClefType === ClefTypes?._id)
-    : allProducts.filter((item) =>
+    ),
+    6
+  );
+  let pt2 = getRandomElementsSix(
+    allProducts
+      .slice(0, 30)
+      .filter((item) =>
         allTypes.some(
           (type) =>
             type.clefCategories === ClefCate?._id && item.ClefType === type._id
         )
-      );
+      ),
+    6
+  );
+  let ptAll = allProducts.filter((item) =>
+    allTypes.some(
+      (type) =>
+        type.clefCategories === ClefCate?._id && item.ClefType === type._id
+    )
+  );
 
   const option =
     choix === "Home" ? (
@@ -255,7 +257,7 @@ function CategorieProduct({ allCategories, allProducts }) {
         <div className="options">
           <ul>
             {allTypes
-              ?.filter((param) => param.clefCategories === ClefCate?._id)
+              ?.filter((para) => para.clefCategories === ClefCate?._id)
               .map((param, index) => {
                 if (index > 4) {
                   return null;
@@ -265,6 +267,22 @@ function CategorieProduct({ allCategories, allProducts }) {
                     key={index}
                     onClick={() => {
                       navigue(`/Categorie/${params.Cat}/${param.name}`);
+                      getRandomElementsSix(
+                        allProducts
+                          .slice(0, 30)
+                          .filter((item) => item.ClefType === param?._id),
+                        6
+                      );
+                      Ptp = getRandomElementsSix(
+                        allProducts.filter(
+                          (item) =>
+                            item.ClefType === param?._id && item.prixPromo > 0
+                        ),
+                        6
+                      );
+                      ptAll = allProducts.filter(
+                        (item) => item.ClefType === param?._id
+                      );
                     }}
                   >
                     {param.name}
