@@ -94,14 +94,18 @@ function Presentation({ categories }) {
                     return (
                       <div className="slide" key={index}>
                         <img src={param.image} alt="loading" />
-                        <div className="button">
-                          <h6 onClick={() => navigue(`/PubDet/${param._id}`)}>
-                            SEE MORE
-                          </h6>
-                          <span>
-                            <ChevronRight />
-                          </span>
-                        </div>
+                        {param.pub ? (
+                          <div className="button">
+                            <h6 onClick={() => navigue(`/PubDet/${param._id}`)}>
+                              SEE MORE
+                            </h6>
+                            <span>
+                              <ChevronRight />
+                            </span>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                     );
                   })

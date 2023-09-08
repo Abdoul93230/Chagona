@@ -99,17 +99,57 @@ function CategorieProduct() {
                     )
                   );
 
-                setPtp(getRandomElementsSix(filteredProductsPromo, 6));
-                setPt2(getRandomElementsSix(filteredProductsTop30, 6));
-                setPtAll(
-                  prod.data.data.filter((item) =>
-                    types.data.data.some(
-                      (type) =>
-                        type.clefCategories === ClefCate?._id &&
-                        item.ClefType === type._id
+                if (params.product) {
+                  setPtAll(
+                    prod.data.data.filter((item) =>
+                      types.data.data.some(
+                        (type) =>
+                          type.name === params.product &&
+                          item.ClefType === type._id
+                      )
                     )
-                  )
-                );
+                  );
+
+                  setPtp(
+                    getRandomElementsSix(
+                      prod.data.data.filter((item) =>
+                        types.data.data.some(
+                          (type) =>
+                            type.name === params.product &&
+                            item.ClefType === type._id &&
+                            item.prixPromo > 0
+                        )
+                      ),
+                      6
+                    )
+                  );
+                  setPt2(
+                    getRandomElementsSix(
+                      prod.data.data
+                        .slice(0, 30)
+                        .filter((item) =>
+                          types.data.data.some(
+                            (type) =>
+                              type.name === params.product &&
+                              item.ClefType === type._id
+                          )
+                        ),
+                      6
+                    )
+                  );
+                } else {
+                  setPtAll(
+                    prod.data.data.filter((item) =>
+                      types.data.data.some(
+                        (type) =>
+                          type.clefCategories === ClefCate?._id &&
+                          item.ClefType === type._id
+                      )
+                    )
+                  );
+                  setPtp(getRandomElementsSix(filteredProductsPromo, 6));
+                  setPt2(getRandomElementsSix(filteredProductsTop30, 6));
+                }
               })
               .catch((error) => console.log(error));
           })
@@ -246,12 +286,16 @@ function CategorieProduct() {
                         style={{ width: "100%", height: "auto" }}
                       >
                         <div className="slide">
-                          <div className="sup">
-                            <p>Colection</p>
-                            <span>
-                              <ChevronRight />
-                            </span>
-                          </div>
+                          {Pub.pub ? (
+                            <div className="sup">
+                              <p>Colection</p>
+                              <span>
+                                <ChevronRight />
+                              </span>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
                           <img src={param.image} alt="loading" />
                         </div>
                       </div>
@@ -330,7 +374,11 @@ function CategorieProduct() {
           </ul>
         </div>
         <div className="promo">
-          <h2>{params.product ? params.product : params.Cat}</h2>
+          {pt2.length > 0 ? (
+            <h2>{params.product ? params.product : params.Cat}</h2>
+          ) : (
+            <></>
+          )}
 
           {/* <div className="contCarde">
             <div className="conteneur">
@@ -358,7 +406,7 @@ function CategorieProduct() {
             <></>
           )}
           <div className="cardeCont">
-            <h2>Promo</h2>
+            {Ptp.length > 0 ? <h2>Promo</h2> : <></>}
             <div className="c">
               {Ptp.map((param, index) => {
                 return (
@@ -392,7 +440,7 @@ function CategorieProduct() {
             </div>
           </div>
 
-          <h2 style={{ marginTop: 80 }}>All</h2>
+          {ptAll.length > 0 ? <h2 style={{ marginTop: 80 }}>All</h2> : <></>}
           <div className="contCarde">
             <div className="conteneur">
               {ptAll.map((param, index) => {
