@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./PaymentMethode.css";
 import { ChevronLeft, CreditCard } from "react-feather";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function PaymentMethode() {
   const [choix, setChoix] = useState("");
@@ -12,6 +14,30 @@ function PaymentMethode() {
   const [cvc, setCvc] = useState("");
   const regexPhone = /^[0-9]{8,}$/;
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
+
+  const handleAlert = (message) => {
+    toast.success(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const handleAlertwar = (message) => {
+    toast.warn(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
 
   useEffect(() => {
     axios
@@ -47,73 +73,76 @@ function PaymentMethode() {
     e.preventDefault();
     const data = { clefUser: a.id };
 
-    if (!choix) {
-      alert("veuiller choisir un moyen de payment.");
-      return;
-    }
-    if (choix === "Visa") {
-      const option = "Visa";
-      data.option = option;
+    // if (!choix) {
+    //   alert("veuiller choisir un moyen de payment.");
+    //   return;
+    // }
+    // if (choix === "Visa") {
+    //   const option = "Visa";
+    //   data.option = option;
 
-      if (!/^4[0-9]{12}(?:[0-9]{3})?$/.test(numeroCard)) {
-        alert("le numero de la carte n'est pas valide1");
-        return;
-      }
-      if (!/^[0-9]{3}$/.test(cvc)) {
-        alert("le code de la carte n'est pas valide");
-        return;
-      }
-      if (expiredCard.length <= 0) {
-        alert("veuiller selectionner la date d'expiration");
-        return;
-      }
-      data.numeroCard = numeroCard;
-      data.cvc = cvc;
-      data.expire = expiredCard;
-    } else if (choix === "master Card") {
-      const option = "master Card";
-      data.option = option;
-      if (!/^(?:5[1-5][0-9]{14})$/.test(numeroCard)) {
-        alert("le numero de la carte n'est pas valide2");
-        return;
-      }
-      if (!/^[0-9]{3}$/.test(cvc)) {
-        alert("le code de la carte n'est pas valide");
-        return;
-      }
-      if (expiredCard.length <= 0) {
-        alert("veuiller selectionner la date d'expiration");
-        return;
-      }
-      data.numeroCard = numeroCard;
-      data.cvc = cvc;
-      data.expire = expiredCard;
-    } else if (choix === "Mobile Money") {
-      const option = "Mobile Money";
-      data.option = option;
-      if (!regexPhone.test(numero.toString())) {
-        return alert("forma du numero non valid!");
-      }
-      if (
-        operateur === null ||
-        operateur === "choisir" ||
-        operateur.length <= 0
-      ) {
-        alert("veuiller choisir votre operateur.");
-        return;
-      }
-      data.numero = numero;
-      data.operateur = operateur;
-    } else if (choix === "Payment a domicile") {
-      const option = "Payment a domicile";
-      data.option = option;
-    } else {
-    }
+    //   if (!/^4[0-9]{12}(?:[0-9]{3})?$/.test(numeroCard)) {
+    //     alert("le numero de la carte n'est pas valide1");
+    //     return;
+    //   }
+    //   if (!/^[0-9]{3}$/.test(cvc)) {
+    //     alert("le code de la carte n'est pas valide");
+    //     return;
+    //   }
+    //   if (expiredCard.length <= 0) {
+    //     alert("veuiller selectionner la date d'expiration");
+    //     return;
+    //   }
+    //   data.numeroCard = numeroCard;
+    //   data.cvc = cvc;
+    //   data.expire = expiredCard;
+    // } else if (choix === "master Card") {
+    //   const option = "master Card";
+    //   data.option = option;
+    //   if (!/^(?:5[1-5][0-9]{14})$/.test(numeroCard)) {
+    //     alert("le numero de la carte n'est pas valide2");
+    //     return;
+    //   }
+    //   if (!/^[0-9]{3}$/.test(cvc)) {
+    //     alert("le code de la carte n'est pas valide");
+    //     return;
+    //   }
+    //   if (expiredCard.length <= 0) {
+    //     alert("veuiller selectionner la date d'expiration");
+    //     return;
+    //   }
+    //   data.numeroCard = numeroCard;
+    //   data.cvc = cvc;
+    //   data.expire = expiredCard;
+    // } else if (choix === "Mobile Money") {
+    //   const option = "Mobile Money";
+    //   data.option = option;
+    //   if (!regexPhone.test(numero.toString())) {
+    //     return alert("forma du numero non valid!");
+    //   }
+    //   if (
+    //     operateur === null ||
+    //     operateur === "choisir" ||
+    //     operateur.length <= 0
+    //   ) {
+    //     alert("veuiller choisir votre operateur.");
+    //     return;
+    //   }
+    //   data.numero = numero;
+    //   data.operateur = operateur;
+    // } else if (choix === "Payment a domicile") {
+    //   const option = "Payment a domicile";
+    //   data.option = option;
+    // } else {
+    // }
+
+    const option = "Payment a domicile";
+    data.option = option;
 
     axios
       .post(`${BackendUrl}/createMoyentPayment`, data)
       .then((res) => {
-        alert(res.data.message);
+        handleAlert(res.data.message);
       })
       .catch((error) => console.log(error));
 
@@ -267,7 +296,17 @@ function PaymentMethode() {
               <div
                 className="carde"
                 key={index}
-                onClick={() => setChoix(param)}
+                onClick={() => {
+                  if (
+                    param === "master Card" ||
+                    param === "Visa" ||
+                    param === "Mobile Money"
+                  ) {
+                    handleAlertwar("L'Option Sera Bientot Disponible");
+                  } else {
+                    setChoix(param);
+                  }
+                }}
               >
                 <div className="left">
                   <input type="checkbox" defaultChecked={false} />
@@ -298,6 +337,7 @@ function PaymentMethode() {
       >
         CheckOut
       </button> */}
+      <ToastContainer />
     </div>
   );
 }

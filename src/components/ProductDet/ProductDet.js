@@ -263,18 +263,28 @@ function ProductDet({ product }) {
     }
 
     if (VP?.couleur[0].split(",").length >= 2 && !color) {
-      handleAlertwar(
-        `Veuillez choisir un model parmis les ${
-          VP?.couleur[0].split(",").length
-        }`
-      );
+      if (VP.pictures.length >= 2) {
+        handleAlertwar(
+          `Veuillez choisir un model parmis les ${VP?.pictures.length}`
+        );
+      } else {
+        handleAlertwar(
+          `Veuillez choisir une couleur parmis les ${
+            VP?.couleur[0].split(",").length
+          }`
+        );
+      }
+      chgOption("Product", 0);
       return;
     }
 
     if (VP?.taille[0].split(",").length >= 2 && !taille) {
       handleAlertwar(
-        `Veuillez choisir une taille ${VP?.taille[0].split(",").length}`
+        `Veuillez choisir une taille parmis les ${
+          VP?.taille[0].split(",").length
+        }`
       );
+      chgOption("Product", 0);
       return;
     }
 

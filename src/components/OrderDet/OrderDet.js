@@ -53,7 +53,8 @@ function OrderDet({ allProducts }) {
             <div key={index} className="carde">
               <img
                 src={
-                  allProducts?.find((item) => item._id === param.produit).image1
+                  allProducts?.find((item) => item._id === param.produit)
+                    ?.image1
                 }
                 alt="loading"
               />
@@ -64,7 +65,7 @@ function OrderDet({ allProducts }) {
                   <span>
                     {
                       allProducts?.find((item) => item._id === param.produit)
-                        .name
+                        ?.name
                     }
                   </span>
                 </h6>
@@ -75,11 +76,11 @@ function OrderDet({ allProducts }) {
                   prix:{" "}
                   <span>
                     {allProducts?.find((item) => item._id === param.produit)
-                      .prixPromo
+                      ?.prixPromo
                       ? allProducts?.find((item) => item._id === param.produit)
-                          .prixPromo * param.quantite
+                          ?.prixPromo * param.quantite
                       : allProducts?.find((item) => item._id === param.produit)
-                          .prix * param.quantite}
+                          ?.prix * param.quantite}
                   </span>{" "}
                   fcfa
                 </h6>
