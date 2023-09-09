@@ -112,7 +112,7 @@ function Home() {
           direction="right"
         /> */}
         <InfiniteCarousel
-          param="Explorez une Sélection Unique de Produits de haute games sur Habou227 !"
+          param="Échangez avec confiance. Shoppez les meilleures offres. Découvrez l'excellence."
           direction="right"
         />
         <ConteProduits

@@ -24,6 +24,7 @@ function AProductUpdat() {
   const [typeProduit, setTypeProduit] = useState("");
   const [descrip, setDescrip] = useState("");
   const [cate, setCate] = useState("");
+  const [prixLivraison, setPrixLivraison] = useState(0);
 
   function goBack() {
     window.history.back();
@@ -106,6 +107,7 @@ function AProductUpdat() {
       setFournisseure(res.data.data.Clefournisseur);
       setTypeProduit(res.data.data.ClefType);
       setDescrip(res.data.data.description);
+      setPrixLivraison(res.data.data.prixLivraison || 0);
 
       const ctype = res.data.data.ClefType;
       const cFournisseur = res.data.data.Clefournisseur;
@@ -204,6 +206,7 @@ function AProductUpdat() {
     // alert(typeProduit);
     formData.append("Clefournisseur", fournisseure);
     formData.append("marque", marque);
+    formData.append("prixLivraison", prixLivraison);
     // formData.append("setNouveauChampImages", description.setNouveauChampImages);
     if (imagePlus && imagePlus.length > 0) {
       for (const file of imagePlus) {
@@ -443,9 +446,9 @@ function AProductUpdat() {
                   </td>
                 </tr>
                 <tr>
-                  {/* <th colSpan={2}>Categorie</th> */}
+                  <th colSpan={1}>Categorie</th>
                   <th colSpan={2}>ID</th>
-                  <th colSpan={3}>type de Produits</th>
+                  <th colSpan={2}>type de Produits</th>
                 </tr>
                 <tr>
                   {/* <td colSpan={2}>
@@ -465,12 +468,20 @@ function AProductUpdat() {
                       {categorie.map((param, index) => {
                         return <option key={index}>{param.name}</option>;
                       })}
-                    </select> 
+                    </select>   
                   </td> */}
+                  <td>
+                    <input
+                      type="number"
+                      min={0}
+                      value={prixLivraison}
+                      onChange={(e) => setPrixLivraison(Number(e.target.value))}
+                    />
+                  </td>
                   <td colSpan={2}>
                     <input type="text" defaultValue={product?._id} />
                   </td>
-                  <td colSpan={3}>
+                  <td colSpan={2}>
                     <select
                       onChange={(e) => {
                         setTypeProduit(

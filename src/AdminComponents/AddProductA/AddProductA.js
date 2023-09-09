@@ -13,6 +13,7 @@ const BackendUrl = process.env.REACT_APP_Backend_Url;
 function AddProductA() {
   const [imgP, setImgP] = useState(image1);
   const [value, setValue] = useState("");
+  const [prixLivraison, setPrixLivraison] = useState(0);
   const [description, setDescription] = useState({
     desc: "La description du produit",
     name: "Le Nom du Produit",
@@ -210,7 +211,9 @@ function AddProductA() {
         formData.append("nouveauChampImages", file);
       }
     }
-
+    if (prixLivraison && prixLivraison > 0) {
+      formData("prixLivraison", prixLivraison);
+    }
     setIsWaitting(true);
 
     axios
@@ -448,13 +451,13 @@ function AddProductA() {
                   </td>
                 </tr>
                 <tr>
-                  <th>Categorie</th>
+                  <th>prixLivraison (Niamey)</th>
                   <th>quantity</th>
                   <th colSpan={2}>type de Produits</th>
                 </tr>
                 <tr>
                   <td>
-                    <select
+                    {/* <select
                       onChange={(e) =>
                         setDescription({
                           ...description,
@@ -470,7 +473,13 @@ function AddProductA() {
                       ) : (
                         <option>Aucun</option>
                       )}
-                    </select>
+                    </select> */}
+                    <input
+                      type="number"
+                      min={0}
+                      value={prixLivraison}
+                      onChange={(e) => setPrixLivraison(Number(e.target.value))}
+                    />
                   </td>
                   <td>
                     <input

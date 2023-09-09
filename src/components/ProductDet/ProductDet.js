@@ -460,7 +460,11 @@ function ProductDet({ product }) {
           <tr>
             <td style={{ textAlign: "left" }}>
               <h2>Livraison</h2>
-              <p>750F(Niamey)</p>
+              <p>
+                {VP?.prixLivraison
+                  ? `${VP?.prixLivraison}f (Niamey)`
+                  : `750F (Niamey)`}
+              </p>
             </td>
             <td style={{ textAlign: "right" }}>
               <h2>fitting</h2>
@@ -611,11 +615,11 @@ function ProductDet({ product }) {
                 {VP?.prixPromo > 0 ? (
                   <>
                     <span>
-                      <s>$ {VP?.prix}</s>
+                      <s>cfa: {VP?.prix}</s>
                     </span>
                     <br />
                     <h5>
-                      ${VP?.prixPromo}{" "}
+                      cfa: {VP?.prixPromo}{" "}
                       <span>
                         <Star style={{ width: "12px" }} />
                         4.9
