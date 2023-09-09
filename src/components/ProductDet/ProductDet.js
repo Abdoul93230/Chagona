@@ -263,12 +263,18 @@ function ProductDet({ product }) {
     }
 
     if (VP?.couleur[0].split(",").length >= 2 && !color) {
-      handleAlertwar("Veuillez choisir une couleur !");
+      handleAlertwar(
+        `Veuillez choisir un model parmis les ${
+          VP?.couleur[0].split(",").length
+        }`
+      );
       return;
     }
 
     if (VP?.taille[0].split(",").length >= 2 && !taille) {
-      handleAlertwar("Veuillez choisir une taille !");
+      handleAlertwar(
+        `Veuillez choisir une taille ${VP?.taille[0].split(",").length}`
+      );
       return;
     }
 

@@ -106,12 +106,12 @@ function MessageDet({ chg }) {
             />
           </span>
           <div className="det">
-            <h4>Smiley's Store</h4>
+            <h4>Habou227's Store</h4>
             <h5>Active</h5>
           </div>
         </div>
 
-        <h2>ss</h2>
+        <h2>H227</h2>
       </div>
 
       <div className="main" ref={messageContainerRef}>

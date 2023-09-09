@@ -13,6 +13,7 @@ import HomeTop from "../components/HomeTop/HomeTop";
 import LoadingIndicator from "./LoadingIndicator ";
 import { shuffle } from "lodash";
 import { ChevronUp } from "react-feather";
+import InfiniteCarousel from "../components/ScrollingDivs/ScrollingDivs";
 import "./styles.css";
 
 function Home() {
@@ -100,7 +101,20 @@ function Home() {
       <LoadingIndicator loading={loading}>
         <HomeTop />
         <HeaderOne categories={allCategories} />
+        <InfiniteCarousel
+          param="Bienvenue sur notre plateforme de commerce électronique locale ! Achetez
+        des produits locaux de qualité."
+          direction="left"
+        />
         <Presentation categories={allCategories} />
+        {/* <InfiniteCarousel
+          param="Habou227 sur games haute de Produits de Unique Sélection une Explorez !"
+          direction="right"
+        /> */}
+        <InfiniteCarousel
+          param="Explorez une Sélection Unique de Produits de haute games sur Habou227 !"
+          direction="right"
+        />
         <ConteProduits
           products={getRandomElementss(allProducts, 6)}
           // name={"homes & femmes"}
