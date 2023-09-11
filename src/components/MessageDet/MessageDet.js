@@ -51,9 +51,23 @@ function MessageDet({ chg }) {
   useEffect(() => {
     // Écouter les nouveaux messages du serveur
     socket.on("new_message_user", (message) => {
-      // setAllMessages([...allMessages, message]);
-      if (a.id && message.clefUser === a.id) {
-        setAllMessage([...allMessage, message]);
+      if (message.clefUser === a?.id) {
+        axios
+          .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
+          .then((res) => {
+            setAllMessage(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        axios
+          .put(`${BackendUrl}/lecturUserMessage`, { userKey: a.id })
+          .then((resp) => {
+            // console.log(resp);
+          })
+          .catch((erro) => {
+            console.log(erro);
+          });
       }
     });
   });

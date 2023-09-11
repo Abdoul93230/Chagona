@@ -54,9 +54,18 @@ function Inbox() {
   useEffect(() => {
     // Écouter les nouveaux messages du serveur
     socket.on("new_message_user", (message) => {
-      setAllMessages([...allMessages, message]);
+      axios
+        .get(`${BackendUrl}/getAllUserMessages`)
+        .then((res) => {
+          setAllMessages(res.data);
+          // console.log(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       if (id && message.clefUser === id) {
-        setAllMessage([...allMessage, message]);
+        // setAllMessage([...allMessage, message]);
+        getMessages(id);
       }
     });
   });

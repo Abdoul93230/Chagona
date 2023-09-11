@@ -7,6 +7,7 @@ import {
   Menu,
   Home,
 } from "react-feather";
+import io from "socket.io-client";
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import logo from "../../Images/logo2.png";
 import axios from "axios";
@@ -14,6 +15,7 @@ import axios from "axios";
 import "./HomeTop.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
+const socket = io(BackendUrl);
 function HomeTop() {
   const [produits, setProduits] = useState(0);
   const navigue = useNavigate();
@@ -34,6 +36,26 @@ function HomeTop() {
         console.log(error);
       });
   }, []);
+
+  useEffect(() => {
+    // Écouter les nouveaux messages du serveur
+    socket.on("new_message_user", (message) => {
+      if (message.clefUser === a?.id) {
+        axios
+          .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
+          .then((res) => {
+            setAllMessage(
+              res.data.filter(
+                (item) => item.lusUser == false && item.provenance === false
+              )
+            );
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+  });
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
