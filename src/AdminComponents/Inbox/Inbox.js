@@ -15,7 +15,8 @@ function Inbox() {
   const [message, setMessage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [istrue, setIstrue] = useState(false);
-  const [id, setId] = useState(null);
+  const [Id, setId] = useState("");
+  const [nbr, setNbr] = useState(null);
   const messageContainerRef = useRef(null);
   const provenance = false;
 
@@ -54,6 +55,7 @@ function Inbox() {
   useEffect(() => {
     // Écouter les nouveaux messages du serveur
     socket.on("new_message_user", (message) => {
+      // console.log("oui");
       axios
         .get(`${BackendUrl}/getAllUserMessages`)
         .then((res) => {
@@ -63,18 +65,32 @@ function Inbox() {
         .catch((error) => {
           console.log(error);
         });
-      if (id && message.clefUser === id) {
-        // setAllMessage([...allMessage, message]);
-        getMessages(id);
+      console.log(Id);
+      if (message) {
+        // console.log(message.data.clefUser);
+
+        axios
+          .get(
+            `${BackendUrl}/getUserMessagesByClefUser/${message.data.clefUser}`
+          )
+          .then((res) => {
+            setAllMessage(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     });
-  });
+
+    return () => {
+      // Nettoyer l'écouteur du socket lors du démontage du composant
+      socket.off("new_message_user");
+    };
+  }, [socket]);
 
   const getMessages = (param) => {
-    setIstrue(param);
-
     axios
-      .get(`${BackendUrl}/getUserMessagesByClefUser/${param._id}`)
+      .get(`${BackendUrl}/getUserMessagesByClefUser/${param}`)
       .then((res) => {
         setAllMessage(res.data);
       })
@@ -82,12 +98,21 @@ function Inbox() {
         console.log(error);
       });
     axios
-      .put(`${BackendUrl}/lecturAdminMessage`, { userKey: param._id })
+      .put(`${BackendUrl}/lecturAdminMessage`, { userKey: param })
       .then((resp) => {
-        console.log(resp);
+        // console.log(resp);
       })
       .catch((erro) => {
         console.log(erro);
+      });
+    axios
+      .get(`${BackendUrl}/getAllUserMessages`)
+      .then((res2) => {
+        setAllMessages(res2.data);
+        // console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
   // getAllUserMessages
@@ -179,8 +204,10 @@ function Inbox() {
                     className="carde"
                     key={index}
                     onClick={() => {
-                      getMessages(param);
-                      setId(param?._id);
+                      getMessages(param._id);
+                      setId(param);
+                      setIstrue(param);
+                      console.log(param);
                     }}
                   >
                     {/* https://chagona.onrender.com/images/image-1688253105925-0.jpeg */}
@@ -231,8 +258,8 @@ function Inbox() {
                     className="carde"
                     key={index}
                     onClick={() => {
-                      getMessages(param);
-                      setId(param?._id);
+                      getMessages(param._id);
+                      setId(param);
                     }}
                   >
                     <img

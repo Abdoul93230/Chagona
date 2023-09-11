@@ -51,7 +51,7 @@ function MessageDet({ chg }) {
   useEffect(() => {
     // Écouter les nouveaux messages du serveur
     socket.on("new_message_user", (message) => {
-      if (message.clefUser === a?.id) {
+      if (message.clefUser) {
         axios
           .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
           .then((res) => {
@@ -70,7 +70,11 @@ function MessageDet({ chg }) {
           });
       }
     });
-  });
+    return () => {
+      // Nettoyer l'écouteur du socket lors du démontage du composant
+      socket.off("new_message_user");
+    };
+  }, [socket]);
 
   const envoyer = () => {
     if (message.length <= 0) {

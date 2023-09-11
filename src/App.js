@@ -45,17 +45,17 @@ function App() {
   useEffect(() => {
     const socket = io(BackendUrl);
 
-    socket.on("connect", () => {
-      console.log("Connecté au serveur Socket.io");
+    // socket.on("connect", () => {
+    //   console.log("Connecté au serveur Socket.io");
+    // });
+
+    socket.on("new_message_user", (data) => {
+      // console.log("Nouveau message reçu :");
     });
 
-    socket.on("newMessage", (data) => {
-      console.log("Nouveau message reçu :", data);
-    });
-
-    socket.on("disconnect", () => {
-      console.log("Déconnecté du serveur Socket.io");
-    });
+    // socket.on("disconnect", () => {
+    //   console.log("Déconnecté du serveur Socket.io");
+    // });
 
     return () => {
       socket.disconnect();
