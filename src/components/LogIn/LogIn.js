@@ -152,11 +152,10 @@ function LogIn({ chg, creer }) {
               create a new account
             </span>
           </p>
-          <div>
-            <ToastContainer />
-          </div>
+          <div></div>
         </div>
       )}
+      <ToastContainer />
     </>
   );
 }

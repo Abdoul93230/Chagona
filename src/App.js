@@ -31,6 +31,7 @@ function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [acces, setAcces] = useState("non");
   const [adminConnection, setAdminConnection] = useState(false);
+  const [verificationComplete, setVerificationComplete] = useState(false);
 
   const changeAdminConnection = () => {
     setAdminConnection(true);
@@ -49,15 +50,46 @@ function App() {
         .get(`${BackendUrl}/verify`, { withCredentials: true })
         .then((response) => {
           setAcces("oui");
-          // console.log({ local: user.token });
-          // console.log(response.data);
         })
         .catch((error) => {
           setAcces("non");
           console.log(error.response);
+          setVerificationComplete(true);
+        })
+        .finally(() => {
+          setVerificationComplete(true);
         });
+    } else {
+      setVerificationComplete(true);
     }
+  }, []);
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("userEcomme"));
 
+  //   // Simuler une attente de 2 secondes avant de commencer la vérification
+  //   const verificationTimeout = setTimeout(() => {
+  //     if (user) {
+  //       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+  //       axios
+  //         .get(`${BackendUrl}/verify`, { withCredentials: true })
+  //         .then((response) => {
+  //           setAcces("oui");
+  //         })
+  //         .catch((error) => {
+  //           setAcces("non");
+  //           console.log(error.response);
+  //         })
+  //         .finally(() => {
+  //           setVerificationComplete(true); // Indique que la vérification est terminée
+  //         });
+  //     }
+  //   }, 6000); // 2 secondes de délai
+
+  //   // Assurez-vous de nettoyer le timeout lorsque le composant est démonté
+  //   return () => clearTimeout(verificationTimeout);
+  // }, []);
+
+  useEffect(() => {
     const admin = JSON.parse(localStorage.getItem("AdminEcomme"));
     if (admin) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${admin.token}`;
@@ -94,237 +126,270 @@ function App() {
       });
   }, []);
 
+  const spinnerStyle = {
+    border: "4px solid rgba(0, 0, 0, 0.1)",
+    borderTop: "4px solid #FF6969",
+    borderRadius: "50%",
+    width: "30px",
+    height: "30px",
+    animation: "spin 1s linear infinite",
+    margin: "auto",
+  };
+
+  const spinnerContainerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh", // Centre le spinner verticalement sur la page
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              acces === "oui" ? (
-                <Home allCategories={allCategories} allProducts={allProducts} />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          />
-          <Route
-            path="/Home"
-            element={
-              acces === "oui" ? (
-                <Home allCategories={allCategories} allProducts={allProducts} />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          />
+        {verificationComplete ? (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                acces === "oui" ? (
+                  <Home
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            />
+            <Route
+              path="/Home"
+              element={
+                acces === "oui" ? (
+                  <Home
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            />
 
-          <Route
-            path="/ContactUs"
-            element={
-              acces === "oui" ? <ContactUs /> : <Connection chg={changeA} />
-            }
-          />
+            <Route
+              path="/ContactUs"
+              element={
+                acces === "oui" ? <ContactUs /> : <Connection chg={changeA} />
+              }
+            />
 
-          <Route
-            path="/Messages"
-            element={
-              acces === "oui" ? <Messages /> : <Connection chg={changeA} />
-            }
-          />
-          <Route
-            path="/Categories"
-            element={
-              acces === "oui" ? (
-                <Categories allCategories={allCategories} />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          />
-          <Route
-            path="/ProductDet/:id"
-            element={
-              acces === "oui" ? (
-                <Productdetails
+            <Route
+              path="/Messages"
+              element={
+                acces === "oui" ? <Messages /> : <Connection chg={changeA} />
+              }
+            />
+            <Route
+              path="/Categories"
+              element={
+                acces === "oui" ? (
+                  <Categories allCategories={allCategories} />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            />
+            <Route
+              path="/ProductDet/:id"
+              element={
+                acces === "oui" ? (
+                  <Productdetails
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            />
+            <Route
+              path="/Categorie/:Cat"
+              element={
+                acces === "oui" ? (
+                  <CategorieProduct
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            />
+            <Route
+              path="/Categorie/:Cat/:product"
+              element={
+                acces === "oui" ? (
+                  <CategorieProduct
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            />
+            <Route
+              path="/Cart"
+              element={
+                acces === "oui" ? <Cart /> : <Connection chg={changeA} />
+              }
+            ></Route>
+            <Route
+              path="/More"
+              element={
+                acces === "oui" ? (
+                  <More chg={changeA} />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/Search"
+              element={
+                acces === "oui" ? (
+                  <Search
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/Profile"
+              element={
+                acces === "oui" ? <Profiles /> : <Connection chg={changeA} />
+              }
+            ></Route>
+            <Route
+              path="/Admin"
+              element={
+                adminConnection ? (
+                  <Admin
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <AdminConnection chg={changeAdminConnection} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/Admin/:op"
+              element={
+                adminConnection ? (
+                  <Admin
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <AdminConnection chg={changeAdminConnection} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/Admin/:op/:id"
+              element={
+                adminConnection ? (
+                  <Admin
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <AdminConnection chg={changeAdminConnection} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/Profile/:op"
+              element={
+                acces === "oui" ? (
+                  <ProfileComponets />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/More/:op"
+              element={
+                acces === "oui" ? (
+                  <MoreComponents />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/Order"
+              element={
+                acces === "oui" ? (
+                  <Myorders
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/Galeries"
+              element={
+                acces === "oui" ? (
+                  <GaleriesComponent />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            />
+            <Route
+              path="/Order/:id"
+              element={
+                acces === "oui" ? (
+                  <OrderDet
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
+              }
+            ></Route>
+            <Route
+              path="/PageNotRady"
+              element={
+                <PageNotRady
                   allCategories={allCategories}
                   allProducts={allProducts}
                 />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          />
-          <Route
-            path="/Categorie/:Cat"
-            element={
-              acces === "oui" ? (
-                <CategorieProduct
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          />
-          <Route
-            path="/Categorie/:Cat/:product"
-            element={
-              acces === "oui" ? (
-                <CategorieProduct
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          />
-          <Route
-            path="/Cart"
-            element={acces === "oui" ? <Cart /> : <Connection chg={changeA} />}
-          ></Route>
-          <Route
-            path="/More"
-            element={
-              acces === "oui" ? (
-                <More chg={changeA} />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/Search"
-            element={
-              acces === "oui" ? (
-                <Search
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/Profile"
-            element={
-              acces === "oui" ? <Profiles /> : <Connection chg={changeA} />
-            }
-          ></Route>
-          <Route
-            path="/Admin"
-            element={
-              adminConnection ? (
-                <Admin
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <AdminConnection chg={changeAdminConnection} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/Admin/:op"
-            element={
-              adminConnection ? (
-                <Admin
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <AdminConnection chg={changeAdminConnection} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/Admin/:op/:id"
-            element={
-              adminConnection ? (
-                <Admin
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <AdminConnection chg={changeAdminConnection} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/Profile/:op"
-            element={
-              acces === "oui" ? (
-                <ProfileComponets />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/More/:op"
-            element={
-              acces === "oui" ? (
-                <MoreComponents />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/Order"
-            element={
-              acces === "oui" ? (
-                <Myorders
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/Galeries"
-            element={
-              acces === "oui" ? (
-                <GaleriesComponent />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          />
-          <Route
-            path="/Order/:id"
-            element={
-              acces === "oui" ? (
-                <OrderDet
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              ) : (
-                <Connection chg={changeA} />
-              )
-            }
-          ></Route>
-          <Route
-            path="/PageNotRady"
-            element={
-              <PageNotRady
-                allCategories={allCategories}
-                allProducts={allProducts}
-              />
-            }
-          ></Route>
-          <Route
-            path="/PubDet/:id"
-            element={
-              acces === "oui" ? <PubDet /> : <Connection chg={changeA} />
-            }
-          ></Route>
-        </Routes>
+              }
+            ></Route>
+            <Route
+              path="/PubDet/:id"
+              element={
+                acces === "oui" ? <PubDet /> : <Connection chg={changeA} />
+              }
+            ></Route>
+          </Routes>
+        ) : (
+          <div style={spinnerContainerStyle}>
+            <div style={spinnerStyle}></div>
+            {/* <p>En cours de vérification...</p> */}
+          </div>
+        )}
       </BrowserRouter>
     </div>
   );

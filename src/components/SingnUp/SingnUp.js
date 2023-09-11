@@ -185,11 +185,10 @@ function SingnUp({ chg }) {
             By creating an account, you agree to our{" "}
             <span>Terms of Service</span> and <span>Privacy Policy</span>
           </p>
-          <div>
-            <ToastContainer />
-          </div>
+          <div></div>
         </div>
       )}
+      <ToastContainer />
     </>
   );
 }
