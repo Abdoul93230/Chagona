@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
+import io from "socket.io-client";
 import "./Inbox.css";
 import image1 from "../../Images/sac2.png";
 import { ChevronRight, Search, Delete } from "react-feather";
 import axios from "axios";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
-
+const socket = io(BackendUrl);
 function Inbox() {
   const [allUsers, setAllUsers] = useState(null);
   const [allProfiles, setallprofiles] = useState(null);
@@ -14,6 +15,7 @@ function Inbox() {
   const [message, setMessage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [istrue, setIstrue] = useState(false);
+  const [id, setId] = useState(null);
   const messageContainerRef = useRef(null);
   const provenance = false;
 
@@ -49,6 +51,16 @@ function Inbox() {
       });
   }, []);
 
+  useEffect(() => {
+    // Écouter les nouveaux messages du serveur
+    socket.on("new_message_user", (message) => {
+      setAllMessages([...allMessages, message]);
+      if (id && message.clefUser === id) {
+        setAllMessage([...allMessage, message]);
+      }
+    });
+  });
+
   const getMessages = (param) => {
     setIstrue(param);
 
@@ -83,6 +95,13 @@ function Inbox() {
       })
       .then((res) => {
         // alert(res.data);
+        socket.emit("new_message_u", {
+          data: {
+            message: message,
+            clefUser: istrue?._id,
+            provenance: provenance,
+          },
+        });
         setMessage("");
         axios
           .get(`${BackendUrl}/getUserMessagesByClefUser/${istrue?._id}`)
@@ -150,7 +169,10 @@ function Inbox() {
                   <div
                     className="carde"
                     key={index}
-                    onClick={() => getMessages(param)}
+                    onClick={() => {
+                      getMessages(param);
+                      setId(param?._id);
+                    }}
                   >
                     {/* https://chagona.onrender.com/images/image-1688253105925-0.jpeg */}
 
@@ -199,7 +221,10 @@ function Inbox() {
                   <div
                     className="carde"
                     key={index}
-                    onClick={() => getMessages(param)}
+                    onClick={() => {
+                      getMessages(param);
+                      setId(param?._id);
+                    }}
                   >
                     <img
                       src={

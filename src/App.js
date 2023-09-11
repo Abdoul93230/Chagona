@@ -22,6 +22,7 @@ import AdminConnection from "./AdminComponents/AdminConnection/AdminConnection";
 import GaleriesComponent from "./components/GaleriesComponent/GaleriesComponent";
 import PageNotRady from "./components/PageNotRady/PageNotRady";
 import PubDet from "./components/PubDet/PubDet";
+import io from "socket.io-client";
 import "reactjs-popup/dist/index.css";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -40,6 +41,26 @@ function App() {
   const changeA = (param) => {
     setAcces(param);
   };
+
+  useEffect(() => {
+    const socket = io(BackendUrl);
+
+    socket.on("connect", () => {
+      console.log("Connecté au serveur Socket.io");
+    });
+
+    socket.on("newMessage", (data) => {
+      console.log("Nouveau message reçu :", data);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Déconnecté du serveur Socket.io");
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userEcomme"));
@@ -63,31 +84,6 @@ function App() {
       setVerificationComplete(true);
     }
   }, []);
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("userEcomme"));
-
-  //   // Simuler une attente de 2 secondes avant de commencer la vérification
-  //   const verificationTimeout = setTimeout(() => {
-  //     if (user) {
-  //       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
-  //       axios
-  //         .get(`${BackendUrl}/verify`, { withCredentials: true })
-  //         .then((response) => {
-  //           setAcces("oui");
-  //         })
-  //         .catch((error) => {
-  //           setAcces("non");
-  //           console.log(error.response);
-  //         })
-  //         .finally(() => {
-  //           setVerificationComplete(true); // Indique que la vérification est terminée
-  //         });
-  //     }
-  //   }, 6000); // 2 secondes de délai
-
-  //   // Assurez-vous de nettoyer le timeout lorsque le composant est démonté
-  //   return () => clearTimeout(verificationTimeout);
-  // }, []);
 
   useEffect(() => {
     const admin = JSON.parse(localStorage.getItem("AdminEcomme"));

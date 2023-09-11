@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment, useRef } from "react";
 import axios from "axios";
+import io from "socket.io-client";
 import "./MessageDet.css";
 import { ChevronLeft, Plus, ChevronUp, Delete } from "react-feather";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -10,7 +11,7 @@ function MessageDet({ chg }) {
   const [allMessage, setAllMessage] = useState([]);
   const provenance = true;
   const messageContainerRef = useRef(null);
-
+  const socket = io(BackendUrl);
   function goBack() {
     window.history.back();
   }
@@ -47,6 +48,16 @@ function MessageDet({ chg }) {
       });
   }, []);
 
+  useEffect(() => {
+    // Écouter les nouveaux messages du serveur
+    socket.on("new_message_user", (message) => {
+      // setAllMessages([...allMessages, message]);
+      if (a.id && message.clefUser === a.id) {
+        setAllMessage([...allMessage, message]);
+      }
+    });
+  });
+
   const envoyer = () => {
     if (message.length <= 0) {
       return;
@@ -59,6 +70,13 @@ function MessageDet({ chg }) {
       })
       .then((res) => {
         // alert(res.data);
+        socket.emit("new_message_u", {
+          data: {
+            message: message,
+            clefUser: a.id,
+            provenance: provenance,
+          },
+        });
         setMessage("");
         axios
           .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
