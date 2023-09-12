@@ -51,7 +51,7 @@ function MessageDet({ chg }) {
   useEffect(() => {
     // Écouter les nouveaux messages du serveur
     socket.on("new_message_user", (message) => {
-      if (message.clefUser) {
+      if (message.data.clefUser) {
         axios
           .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
           .then((res) => {
@@ -70,9 +70,30 @@ function MessageDet({ chg }) {
           });
       }
     });
+
     return () => {
       // Nettoyer l'écouteur du socket lors du démontage du composant
       socket.off("new_message_user");
+    };
+  }, [socket]);
+
+  useEffect(() => {
+    socket.on("delete_message", (data) => {
+      if (data) {
+        axios
+          .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
+          .then((res) => {
+            setAllMessage(res.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
+
+    return () => {
+      // Nettoyer l'écouteur du socket lors du démontage du composant
+      socket.off("delete_message");
     };
   }, [socket]);
 

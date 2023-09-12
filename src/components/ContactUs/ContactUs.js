@@ -55,7 +55,7 @@ function ContactUs() {
           console.log(error.response.data.message);
         });
     }
-  });
+  }, []);
 
   const envoyer = (e) => {
     e.preventDefault();
@@ -75,7 +75,8 @@ function ContactUs() {
     const emailData = {
       senderEmail: email,
       subject: "Contact",
-      message: message,
+      message: `<p>${message}</p>`,
+      titel: `<br/><br/><h1>Formullaire de Contacte sur Habou227: en provenace de <br/> ${email}</h1>`,
     };
 
     axios

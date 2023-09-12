@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import "./EditProfile.css";
 import axios from "axios";
-import image from "../../Images/costume-homme-1.jpg";
+import AvatarEditor from "react-avatar-editor";
+import image from "../../Images/icon_user.png";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function EditProfile() {
   const navigue = useNavigate();
@@ -15,8 +16,15 @@ function EditProfile() {
   const [photo, setPhoto] = useState(null);
   const [imageP, setImageP] = useState(image);
   const [messageEr, setMessageEr] = useState(null);
-
+  const [editingPhoto, setEditingPhoto] = useState(false);
+  const [scale, setScale] = useState(1);
+  const editorRef = useRef(null);
   const [loading, setLoading] = useState(true);
+
+  const handleScaleChange = (e) => {
+    setScale(parseFloat(e.target.value));
+  };
+
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
   useEffect(() => {
     if (a) {
@@ -30,12 +38,9 @@ function EditProfile() {
         .then((response) => {
           const data = response.data.user;
 
-          if (nom.length <= 0) {
-            setNom(data.name);
-          } else if (email.length <= 0) {
-            setEmail(data.email);
-          } else {
-          }
+          setNom(data.name);
+
+          setEmail(data.email);
         })
         .catch((error) => {
           console.log(error.response.data.message);
@@ -57,9 +62,7 @@ function EditProfile() {
             setImageP(Profiler.data.data.image);
           }
           if (Profiler.data.data.numero) {
-            if (phone.length <= 0) {
-              setPhone(Profiler.data.data.numero);
-            }
+            setPhone(Profiler.data.data.numero);
           }
         })
         .catch((erro) => {
@@ -69,7 +72,7 @@ function EditProfile() {
           // console.log(erro.response);
         });
     }
-  });
+  }, []);
 
   const onSub = (e) => {
     e.preventDefault();
@@ -80,13 +83,20 @@ function EditProfile() {
     } else if (!regexPhone.test(phone.toString())) {
       return alert("forma du numero non valid!");
     }
-
+    const allowedImageTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+    ];
     const a = JSON.parse(localStorage.getItem(`userEcomme`));
     const formData = new FormData();
     formData.append("name", nom);
     formData.append("email", email);
     formData.append("phone", phone);
-    formData.append("image", photo);
+    if (photo !== null && allowedImageTypes.includes(photo.type)) {
+      formData.append("image", photo);
+    }
     formData.append("id", a.id);
 
     setLoading(true);
@@ -133,24 +143,129 @@ function EditProfile() {
       });
   };
 
+  const handleFileInputChange = (param) => {
+    const selectedFile = param;
+
+    if (selectedFile) {
+      const allowedImageTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+      ];
+
+      if (allowedImageTypes.includes(selectedFile.type)) {
+        setPhoto(selectedFile);
+        return true;
+      } else {
+        alert(
+          "Le fichier sélectionné n'est pas une image valide (JPEG, PNG, GIF, WebP autorisés)."
+        );
+        setEditingPhoto(false);
+        setPhoto(null);
+        return false;
+      }
+    }
+  };
+
+  const onChangeImg = () => {
+    const a = JSON.parse(localStorage.getItem(`userEcomme`));
+
+    // Vérifiez si l'éditeur de photos existe
+    if (!editorRef.current) {
+      console.log("L'éditeur de photos n'est pas défini");
+      return;
+    }
+
+    // Récupérez le fichier image édité à partir de l'éditeur de photos
+    const editedCanvas = editorRef.current.getImage();
+
+    // Vérifiez si editedCanvas est défini
+    if (!editedCanvas) {
+      console.log("Aucune image dans l'éditeur de photos");
+      return;
+    }
+
+    editedCanvas.toBlob((blob) => {
+      const editedFile = new File([blob], "edited_image.png", {
+        type: "image/png",
+      });
+
+      const allowedImageTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/gif",
+        "image/webp",
+      ];
+      const formData = new FormData();
+
+      if (allowedImageTypes.includes(editedFile.type)) {
+        setLoading(true);
+        formData.append("name", nom);
+        formData.append("email", email);
+        formData.append("phone", phone);
+        formData.append("id", a.id);
+        formData.append("image", editedFile);
+
+        axios
+          .post(`${BackendUrl}/createProfile`, formData)
+          .then((user) => {
+            if (user.status === 200) {
+              axios
+                .get(`${BackendUrl}/getUserProfile`, {
+                  params: { id: a.id },
+                })
+                .then((Profiler) => {
+                  setLoading(false);
+                  setEditingPhoto(false);
+                  setMessageEr("");
+                  if (
+                    Profiler.data.data.image !==
+                    "https://chagona.onrender.com/images/image-1688253105925-0.jpeg"
+                  ) {
+                    setImageP(Profiler.data.data.image);
+                  }
+                  if (Profiler.data.data.numero) {
+                    if (phone.length <= 0) {
+                      setPhone(Profiler.data.data.numero);
+                    }
+                  }
+                })
+                .catch((erro) => {
+                  setLoading(false);
+                  if (erro.response.status === 404) console.log(erro.response);
+                });
+            } else {
+              console.log({ err: user.data });
+            }
+          })
+          .catch((error) => {
+            setLoading(false);
+            console.log(error.response);
+          });
+      } else {
+        console.log("Non, le type de fichier édité n'est pas autorisé");
+      }
+    });
+  };
+
   return (
     <LoadingIndicator loading={loading}>
       <div className="EditProfile">
         {messageEr ? <h6 style={{ marginBottom: 20 }}>{messageEr}</h6> : <></>}
         <div className="img" style={{ marginBottom: 66 }}>
-          <label htmlFor="image">
+          <label htmlFor="image" onClick={() => setEditingPhoto(true)}>
             <img src={imageP} alt="loading" />
             <h6 style={{ margin: "10px auto" }}>Click me to select image</h6>
           </label>
         </div>
         <h6></h6>
         <input
+          // disabled={photo ? "disabled" : ""}
           type="file"
           id="image"
           style={{ display: "none" }}
-          onChange={(e) => {
-            setPhoto(e.target.files[0]);
-          }}
+          onChange={(e) => handleFileInputChange(e.target.files[0])}
         />
 
         <form onSubmit={onSub}>
@@ -205,6 +320,53 @@ function EditProfile() {
             <input type="submit" value="Submit" onSubmit={onSub} />
           </div>
         </form>
+        {editingPhoto && (
+          <div
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "space-between",
+              top: "0px",
+              left: "0px",
+              zIndex: 100,
+              backgroundColor: "white",
+            }}
+          >
+            <button
+              onClick={() => {
+                setEditingPhoto(false);
+                setPhoto(null);
+              }}
+            >
+              Annuler
+            </button>
+            <AvatarEditor
+              ref={editorRef}
+              image={photo}
+              width={130}
+              height={130}
+              border={10}
+              borderRadius={50}
+              scale={scale}
+            />
+            <label htmlFor="image" onClick={() => setEditingPhoto(true)}>
+              Select Images
+            </label>
+            <input
+              type="range"
+              min="1"
+              max="2"
+              step="0.01"
+              value={scale}
+              onChange={handleScaleChange}
+            />
+            {photo ? <button onClick={onChangeImg}>Enregistrer</button> : ""}
+          </div>
+        )}
       </div>
     </LoadingIndicator>
   );

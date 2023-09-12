@@ -15,8 +15,6 @@ function Inbox() {
   const [message, setMessage] = useState("");
   const [searchName, setSearchName] = useState("");
   const [istrue, setIstrue] = useState(false);
-  const [Id, setId] = useState("");
-  const [nbr, setNbr] = useState(null);
   const messageContainerRef = useRef(null);
   const provenance = false;
 
@@ -65,7 +63,6 @@ function Inbox() {
         .catch((error) => {
           console.log(error);
         });
-      console.log(Id);
       if (message) {
         // console.log(message.data.clefUser);
 
@@ -168,7 +165,8 @@ function Inbox() {
     axios
       .delete(`${BackendUrl}/deleteUserMessageById/${param}`)
       .then((res) => {
-        // alert(res.data.message);
+        alert(res.data.message);
+        socket.emit("delete_message", res.data.message);
 
         axios
           .get(`${BackendUrl}/getUserMessagesByClefUser/${istrue?._id}`)
@@ -205,9 +203,7 @@ function Inbox() {
                     key={index}
                     onClick={() => {
                       getMessages(param._id);
-                      setId(param);
                       setIstrue(param);
-                      console.log(param);
                     }}
                   >
                     {/* https://chagona.onrender.com/images/image-1688253105925-0.jpeg */}
@@ -259,7 +255,7 @@ function Inbox() {
                     key={index}
                     onClick={() => {
                       getMessages(param._id);
-                      setId(param);
+                      setIstrue(param);
                     }}
                   >
                     <img

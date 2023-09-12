@@ -85,7 +85,45 @@ function SingnUp({ chg }) {
             )
             .then((user) => {
               // console.log(user);
+              const dateActuelle = new Date();
+              const options = {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              };
+              const dateInscription = dateActuelle.toLocaleDateString(
+                "fr-FR",
+                options
+              );
+
               if (user.status === 200) {
+                const message = `<h1>Nouvel Utilisateur Inscrit sur Habou227</h1>
+                <p>Cher(e)Habou227,</p>
+                <p>Nous avons le plaisir de vous informer qu'un nouvel utilisateur s'est inscrit sur Habou227. Voici les détails de l'utilisateur :</p>
+                <ul>
+                    <li>Nom : ${name}</li>
+                    <li>Adresse e-mail : ${email}</li>
+                    <li>Date d'inscription : ${dateInscription}</li>
+                </ul>
+                <p>Vous pouvez vérifier ces informations dans notre base de données pour assurer le suivi approprié. N'hésitez pas à contacter l'utilisateur pour le saluer et l'orienter dans son expérience de magasinage en ligne.</p>
+                <p>Si vous avez des questions ou avez besoin d'informations supplémentaires, n'hésitez pas à me contacter à [abdoulrazak9323@gmail.com] ou par téléphone au [+227 87727501].</p>
+                <p>Nous sommes ravis d'accueillir de nouveaux utilisateurs sur Habou227 et espérons que cette nouvelle inscription contribuera à notre croissance continue.</p>
+                <p>Cordialement,</p>
+                <p>Abdoul Razak<br>L'équipe Habou227</p>`;
+                const emailData = {
+                  senderEmail: email,
+                  subject: "Nouveau utilisateur",
+                  message: `<div>${message}</div`,
+                  titel: `<br/><br/><h3>Nouveau utilisateur sur Habou227</h3>`,
+                };
+
+                axios
+                  .post(`${BackendUrl}/sendMail`, emailData)
+                  .then((response) => {})
+                  .catch((error) => {
+                    console.error("Erreur lors de la requête email:", error);
+                  });
+
                 handleAlert(user.data.message);
                 setIsloading(false);
                 chg("oui");
@@ -103,11 +141,13 @@ function SingnUp({ chg }) {
             });
         })
         .catch((error) => {
+          setIsloading(false);
           if (error.response.status === 400) {
             handleAlertwar(error.response.data.error);
             return;
           }
           if (error.response.status === 409) {
+            setIsloading(false);
             handleAlertwar(error.response.data.message);
             return;
           }

@@ -3,6 +3,7 @@ import Connection from "./Pages/Connection";
 import Home from "./Pages/Home";
 import Categories from "./Pages/Categories";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Productdetails from "./Pages/Productdetails";
 import CategorieProduct from "./components/CategorieProduct/CategorieProduct";
 import Search from "./Pages/Search";
@@ -22,6 +23,7 @@ import AdminConnection from "./AdminComponents/AdminConnection/AdminConnection";
 import GaleriesComponent from "./components/GaleriesComponent/GaleriesComponent";
 import PageNotRady from "./components/PageNotRady/PageNotRady";
 import PubDet from "./components/PubDet/PubDet";
+import YourComponent from "./Pages/YourComponent";
 import io from "socket.io-client";
 import "reactjs-popup/dist/index.css";
 
@@ -185,6 +187,7 @@ function App() {
                 acces === "oui" ? <Messages /> : <Connection chg={changeA} />
               }
             />
+            <Route path="/YourComponent" element={<YourComponent />} />
             <Route
               path="/Categories"
               element={
@@ -387,6 +390,7 @@ function App() {
           </div>
         )}
       </BrowserRouter>
+      <ToastContainer />
     </div>
   );
 }

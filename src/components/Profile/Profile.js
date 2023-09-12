@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import axios from "axios";
 import { ChevronRight, Menu, MessageCircle, ShoppingCart } from "react-feather";
-import image1 from "../../Images/costume-homme-1.jpg";
+import image1 from "../../Images/icon_user.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
@@ -55,12 +55,9 @@ function Profile() {
       })
       .then((response) => {
         const data = response.data.user;
-        if (nom.length <= 0) {
-          setNom(data.name);
-        } else if (email.length <= 0) {
-          setEmail(data.email);
-        } else {
-        }
+        setNom(data.name);
+
+        setEmail(data.email);
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -95,7 +92,7 @@ function Profile() {
         //   console.log(erro.response.data.message);
         // console.log(erro.response);
       });
-  });
+  }, []);
 
   return (
     <LoadingIndicator loading={loading}>
