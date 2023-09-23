@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./SingnUp.css";
 import axios from "axios";
-import { ChevronRight, Menu, MessageSquare, User } from "react-feather";
+import {
+  ChevronRight,
+  Menu,
+  MessageSquare,
+  PhoneCall,
+  User,
+} from "react-feather";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,6 +39,7 @@ function SingnUp({ chg }) {
   };
   const navigue = useNavigate();
   const [isloading, setIsloading] = useState(false);
+  const regexPhone = /^[0-9]{8,}$/;
   //////////////// verification des information et creation de l'utilisateur  ///////////////////////////
 
   const validateCredentials = () => {
@@ -45,21 +52,31 @@ function SingnUp({ chg }) {
     const passwordInput = document.querySelector(
       ".SingnUp .right input[type='password']"
     );
+    const phoneNumberInput = document.querySelector(
+      ".SingnUp .right input[type='number']"
+    );
 
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
+    const phoneNumber = phoneNumberInput.value.trim();
 
     if (name === "" || name.length < 3) {
       handleAlertwar("Veuillez entrer un nom valide au moins 3 string.");
       return false;
-    } else if (email === "" || !validateEmail(email)) {
+    } else if (email.length !== 0 && !validateEmail(email)) {
       handleAlertwar("Veuillez entrer une adresse e-mail valide.");
       return false;
     } else if (password === "" || password.length < 6) {
       handleAlertwar(
         "Veuillez entrer un mot de passe valide au moins 6 carracters."
       );
+      return false;
+    } else if (
+      (phoneNumber.length > 0 && !regexPhone.test(phoneNumber)) ||
+      phoneNumber.length > 11
+    ) {
+      handleAlertwar("Veuillez entrer un numero fonctionnel");
       return false;
     } else {
       setIsloading(true);
@@ -68,6 +85,7 @@ function SingnUp({ chg }) {
           name: name,
           password: password,
           email: email,
+          phoneNumber,
         })
         .then((response) => {
           axios
@@ -75,7 +93,8 @@ function SingnUp({ chg }) {
               `${BackendUrl}/login`,
 
               {
-                email: email,
+                email: email.length > 0 ? email : null, // Utilisez l'email si il est saisi
+                phoneNumber: phoneNumber.length > 0 ? phoneNumber : null, // Utilisez le numéro de téléphone si il est saisi
                 password: password,
               },
               {
@@ -142,8 +161,9 @@ function SingnUp({ chg }) {
         })
         .catch((error) => {
           setIsloading(false);
+          console.log(error);
           if (error.response.status === 400) {
-            handleAlertwar(error.response.data.error);
+            handleAlertwar(error.response.data.message);
             return;
           }
           if (error.response.status === 409) {
@@ -193,7 +213,16 @@ function SingnUp({ chg }) {
                 <input type="email" placeholder="janedoe123@email.com" />
               </div>
             </li>
-
+            or
+            <li>
+              <div className="left">
+                <PhoneCall />
+              </div>
+              <div className="right">
+                <label>Phone Number</label>
+                <input type="number" placeholder="+227 87727501" />
+              </div>
+            </li>
             <li>
               <div className="left">
                 <User />
@@ -203,7 +232,6 @@ function SingnUp({ chg }) {
                 <input type="text" placeholder="janedoe12345" />
               </div>
             </li>
-
             <li>
               <div className="left">
                 <Menu />

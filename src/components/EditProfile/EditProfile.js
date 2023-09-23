@@ -4,6 +4,7 @@ import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import "./EditProfile.css";
 import axios from "axios";
 import AvatarEditor from "react-avatar-editor";
+import { ToastContainer, toast } from "react-toastify";
 import image from "../../Images/icon_user.png";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function EditProfile() {
@@ -23,6 +24,30 @@ function EditProfile() {
 
   const handleScaleChange = (e) => {
     setScale(parseFloat(e.target.value));
+  };
+
+  const handleAlert = (message) => {
+    toast.success(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const handleAlertwar = (message) => {
+    toast.warn(`${message} !`, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
@@ -77,11 +102,13 @@ function EditProfile() {
   const onSub = (e) => {
     e.preventDefault();
     if (nom.trim().length < 3) {
-      return alert("Votre nom doit etre superieur ou inferieur a 3 caracteres");
+      return handleAlertwar(
+        "Votre nom doit etre superieur ou inferieur a 3 caracteres"
+      );
     } else if (!regexMail.test(email)) {
-      return alert("forma du mail non valid!");
+      return handleAlertwar("forma du mail non valid!");
     } else if (!regexPhone.test(phone.toString())) {
-      return alert("forma du numero non valid!");
+      return handleAlertwar("forma du numero non valid!");
     }
     const allowedImageTypes = [
       "image/jpeg",
@@ -102,9 +129,9 @@ function EditProfile() {
     setLoading(true);
     axios
       .post(`${BackendUrl}/createProfile`, formData)
-      .then((user) => {
-        if (user.status === 200) {
-          alert(user.data.message);
+      .then((Profile) => {
+        if (Profile.status === 200) {
+          handleAlert(Profile.data.message);
 
           axios
             .get(`${BackendUrl}/getUserProfile`, {
@@ -134,11 +161,14 @@ function EditProfile() {
               console.log(erro.response);
             });
         } else {
-          console.log({ err: user.data });
+          console.log({ err: Profile.data });
         }
       })
       .catch((error) => {
         setLoading(false);
+        if (error.response.data.data.keyPattern.email) {
+          handleAlertwar("Un utilisateur avec le même email existe déjà !");
+        }
         console.log(error.response);
       });
   };
@@ -322,6 +352,7 @@ function EditProfile() {
         </form>
         {editingPhoto && (
           <div
+            className="editPhoto"
             style={{
               position: "absolute",
               width: "100%",
@@ -329,42 +360,58 @@ function EditProfile() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              justifyContent: "space-between",
+              justifyContent: "center",
               top: "0px",
               left: "0px",
               zIndex: 100,
               backgroundColor: "white",
             }}
           >
-            <button
-              onClick={() => {
-                setEditingPhoto(false);
-                setPhoto(null);
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                background: "rgba(0, 0, 0, 0.747)",
               }}
             >
-              Annuler
-            </button>
-            <AvatarEditor
-              ref={editorRef}
-              image={photo}
-              width={130}
-              height={130}
-              border={10}
-              borderRadius={50}
-              scale={scale}
-            />
-            <label htmlFor="image" onClick={() => setEditingPhoto(true)}>
-              Select Images
-            </label>
-            <input
-              type="range"
-              min="1"
-              max="2"
-              step="0.01"
-              value={scale}
-              onChange={handleScaleChange}
-            />
-            {photo ? <button onClick={onChangeImg}>Enregistrer</button> : ""}
+              <div className="item">
+                <button
+                  onClick={() => {
+                    setEditingPhoto(false);
+                    setPhoto(null);
+                  }}
+                >
+                  Annuler
+                </button>
+                <AvatarEditor
+                  ref={editorRef}
+                  image={photo}
+                  width={130}
+                  height={130}
+                  border={10}
+                  borderRadius={50}
+                  scale={scale}
+                />
+                <label htmlFor="image" onClick={() => setEditingPhoto(true)}>
+                  Select Images
+                </label>
+                <input
+                  type="range"
+                  min="1"
+                  max="2"
+                  step="0.01"
+                  value={scale}
+                  onChange={handleScaleChange}
+                />
+                {photo ? (
+                  <button className="deux" onClick={onChangeImg}>
+                    Enregistrer
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
           </div>
         )}
       </div>
