@@ -141,17 +141,17 @@ function ProductDet({ product }) {
       .then((res) => {
         setVp(res.data.data);
         // console.log(res.data.data);
-        setOption(
-          res.data.data?.taille[0].split(",").length >= 2 ||
-            res.data.data?.couleur[0].split(",").length >= 2
-            ? "Product"
-            : "Details"
-        );
+        // setOption(
+        //   res.data.data?.taille[0].split(",").length >= 2 ||
+        //     res.data.data?.couleur[0].split(",").length >= 2
+        //     ? "Product"
+        //     : "Details"
+        // );
         setLoading(false);
       })
       .catch((error) => {
         setLoading(false);
-        // console.log(error)
+        console.log(error);
       });
 
     axios
@@ -274,7 +274,7 @@ function ProductDet({ product }) {
           }`
         );
       }
-      chgOption("Product", 0);
+      chgOption("Details", 0);
       return;
     }
 
@@ -284,7 +284,7 @@ function ProductDet({ product }) {
           VP?.taille[0].split(",").length
         }`
       );
-      chgOption("Product", 0);
+      chgOption("Details", 0);
       return;
     }
 
@@ -382,79 +382,7 @@ function ProductDet({ product }) {
   };
 
   const OP =
-    option === "Product" ? (
-      <div style={{ width: "100%", height: "auto" }}>
-        {VP?.couleur[0].split(",").length >= 2 ? (
-          <div className="color">
-            {VP?.pictures.length !== 0 ? (
-              <>
-                <h3>SELECT COLOR : {nbrCol ? `color:${nbrCol}` : ""}</h3>
-                <div className="coli">
-                  {VP?.pictures.map((param, index) => (
-                    <span
-                      key={index}
-                      style={{
-                        backgroundColor: param,
-                        // boxShadow: `0px 0px 7px ${param}`,
-                      }}
-                      onClick={() => {
-                        setColor(param);
-                        setNbrCol(+index + 1);
-                      }}
-                    >
-                      <img
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "contain",
-                        }}
-                        src={param}
-                        alt="loading"
-                      />
-                    </span>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <>
-                <h3>SELECT COLOR : {color ? color : ""}</h3>
-                <div className="col">
-                  {VP?.couleur[0].split(",").map((param, index) => (
-                    <span
-                      key={index}
-                      style={{
-                        backgroundColor: param,
-                        boxShadow: `0px 0px 7px ${param}`,
-                      }}
-                      onClick={() => setColor(param)}
-                    ></span>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        ) : (
-          <></>
-        )}
-
-        {VP?.taille[0].split(",").length >= 2 ? (
-          <div className="size">
-            <h3>SELECT SIZE (US) : {taille ? taille : ""}</h3>
-            <div className="siz">
-              {VP?.taille[0].split(",").map((param, index) => {
-                return (
-                  <span key={index} onClick={() => setTaille(param)}>
-                    {param}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
-    ) : option === "Details" ? (
+    option === "Details" ? (
       <div className="Details">
         <table>
           <tr>
@@ -482,6 +410,78 @@ function ProductDet({ product }) {
             </td>
           </tr>
         </table>
+
+        <div style={{ width: "100%", height: "auto" }}>
+          {VP?.couleur[0].split(",").length >= 2 ? (
+            <div className="color">
+              {VP?.pictures.length !== 0 ? (
+                <>
+                  <h3>SELECT COLOR : {nbrCol ? `color:${nbrCol}` : ""}</h3>
+                  <div className="coli">
+                    {VP?.pictures.map((param, index) => (
+                      <span
+                        key={index}
+                        style={{
+                          backgroundColor: param,
+                          // boxShadow: `0px 0px 7px ${param}`,
+                        }}
+                        onClick={() => {
+                          setColor(param);
+                          setNbrCol(+index + 1);
+                        }}
+                      >
+                        <img
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "contain",
+                          }}
+                          src={param}
+                          alt="loading"
+                        />
+                      </span>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h3>SELECT COLOR : {color ? color : ""}</h3>
+                  <div className="col">
+                    {VP?.couleur[0].split(",").map((param, index) => (
+                      <span
+                        key={index}
+                        style={{
+                          backgroundColor: param,
+                          boxShadow: `0px 0px 7px ${param}`,
+                        }}
+                        onClick={() => setColor(param)}
+                      ></span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {VP?.taille[0].split(",").length >= 2 ? (
+            <div className="size">
+              <h3>SELECT SIZE (US) : {taille ? taille : ""}</h3>
+              <div className="siz">
+                {VP?.taille[0].split(",").map((param, index) => {
+                  return (
+                    <span key={index} onClick={() => setTaille(param)}>
+                      {param}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
         {/* <div className="detplus" onClick={plust}> */}
         {/* <p>{VP?.description}</p> */}
         <div
@@ -666,7 +666,7 @@ function ProductDet({ product }) {
           </div>
         </div>
         <div className="menu">
-          {VP?.taille[0].split(",").length >= 2 ||
+          {/* {VP?.taille[0].split(",").length >= 2 ||
           VP?.couleur[0].split(",").length >= 2 ? (
             <>
               <h5
@@ -683,19 +683,11 @@ function ProductDet({ product }) {
             </>
           ) : (
             <></>
-          )}
-          <h5
-            className={
-              VP?.taille[0].split(",").length < 2 &&
-              VP?.couleur[0].split(",").length < 2
-                ? "x d"
-                : "x"
-            }
-            onClick={() => chgOption("Details", 1)}
-          >
+          )} */}
+          <h5 className={"x d"} onClick={() => chgOption("Details", 0)}>
             Details <ArrowDownRight style={{ width: 15 }} />
           </h5>
-          <h5 className="x" onClick={() => chgOption("Reviews", 2)}>
+          <h5 className="x" onClick={() => chgOption("Reviews", 1)}>
             Reviews <ArrowDownRight style={{ width: 15 }} />
           </h5>
         </div>

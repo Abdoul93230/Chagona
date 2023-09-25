@@ -118,7 +118,8 @@
     color: #515C6F;
     font-weight: lighter;
     text-align: left;
-    padding-left: 10px;
+    font-size: 12px;
+    padding-left: 5px;
 }
 .ProductDet .color .col{
     width: 100%;
@@ -144,26 +145,28 @@
     border-radius: 50%;
 }
 .ProductDet .color .coli span{
-    width: 90px;
-    height: 90px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
+    margin: 0px 2px;
     /* border-radius: 50%; */
 }
 .ProductDet .color .coli span img{
-    border-radius: 10px;
+    border-radius: 50%;
 }
 
 .ProductDet .size{
     margin-top: 15px;
     padding: 0px 10px;
-    margin-bottom: 80px;
+    margin-bottom: 10px;
 }
 
 .ProductDet .size h3{
     color: #515C6F;
     font-weight: lighter;
     text-align: left;
-    padding-left: 10px;
+    padding-left: 5px;
+    font-size: 12px;
 }
 
 .ProductDet .size .siz{
@@ -173,6 +176,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 5px;
+    flex-wrap: wrap;
 }
 .ProductDet .size .siz span{
     display: flex;
@@ -183,6 +187,7 @@
     background-color: white;
     padding: 5px;
     width: 60px;
+    margin: 0px 2px;
 }
 
 .ProductDet .button{

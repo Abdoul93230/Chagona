@@ -39,10 +39,10 @@ function ShippingAdress() {
       alert("Votre nom doit etre superieur ou inferieur a 3 caracteres");
       return;
     }
-    if (!regexMail.test(email)) {
-      alert("forma du mail non valid!");
-      return;
-    }
+    // if (!regexMail.test(email)) {
+    //   alert("forma du mail non valid!");
+    //   return;
+    // }
     if (!regexPhone.test(phone.toString())) {
       alert("forma du numero non valid!");
       return;
@@ -85,11 +85,11 @@ function ShippingAdress() {
             setPlus(shippingAd.data.address.description);
           })
           .catch((error) => {
-            console.log(error.response);
+            console.log(error);
           });
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error);
       });
   };
   return (
