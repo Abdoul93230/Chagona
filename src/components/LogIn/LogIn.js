@@ -34,7 +34,7 @@ function LogIn({ chg, creer }) {
   };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState();
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [isloading, setIsloading] = useState(false);
 
   const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
