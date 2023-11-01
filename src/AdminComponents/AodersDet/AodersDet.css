@@ -1,0 +1,76 @@
+.AodersDet{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: white;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.AodersDet .conteneur{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+
+.AodersDet .right h5{
+    text-align: right;
+    margin: 10px;
+}
+
+.AodersDet h2{
+    text-align: left;
+    text-transform: uppercase;
+}
+.AodersDet h4{
+    text-align: left;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+}
+
+.AodersDet table{
+    width: 100%;
+    height: auto;
+}
+.AodersDet table thead tr th{ 
+    border-bottom: 2px solid gray;
+    padding: 5px 0px;
+}
+
+.AodersDet table tbody tr td{
+    padding: 8px 0px;
+    border-bottom: 2px solid black;
+}
+
+.AodersDet table tbody tr td .img{
+    width: 75px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.AodersDet table tbody tr td img{
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.AodersDet button{
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    background-color: rgba(0, 0, 255, 0.658);
+    border-radius: 5px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+}

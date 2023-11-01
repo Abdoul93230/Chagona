@@ -1,0 +1,11 @@
+.PageNotRady{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.PageNotRady h1{
+    text-align: center;
+}

@@ -1,0 +1,124 @@
+.OrderComponents{
+    width: 100%;
+    height: auto;
+    padding: 8px;
+}
+.OrderComponents .ret{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.OrderComponents .ret .i{
+    width: 30px;
+    height: 34px;
+    color: #FF6969;
+}
+.OrderComponents h1{
+    width: 100%;
+    text-align: left;
+    color: #515C6F;
+    margin-top: 20px;
+}
+
+.OrderComponents ul{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+.OrderComponents ul li{
+    list-style-type: none;
+    color: #515C6F;
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.OrderComponents ul .d{
+   background-color: #FF6969;
+   padding: 8px 13px;
+   border-radius: 17px;
+   color: white;
+}
+
+.OrderComponents .conteneur{
+    width: 100%;
+    height: auto;
+    margin-top: 17px;
+    padding: 6px 0px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.OrderComponents .carde{
+    width: 310px;
+    padding: 7px 5px;
+    margin: 15px auto;
+    box-shadow: 0px 0px 7px #515c6f8e;
+    border-radius: 10px;
+    
+}
+
+.OrderComponents .carde .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.OrderComponents .carde .top h4{
+    margin: 0px 5px;
+    color: #515C6F;
+    text-transform: capitalize;
+}
+
+.OrderComponents .carde .bottom{
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.OrderComponents .carde .bottom .left{
+    width: 50%;
+}
+.OrderComponents .carde .bottom .right{
+    width: 50%;
+    border-left: 2px solid #515c6f81;
+
+}
+
+.OrderComponents .carde .bottom h5{
+    width: 100%;
+    text-align: left;
+    padding-left: 15px;
+    color: #515C6F;
+}
+.OrderComponents .carde .bottom h6{
+    color: #515C6F;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.OrderComponents .conteneur .vide{
+    background-color: #FF6969;
+    color: white;
+    font-weight: bold;
+    width: 200px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin: 100px auto;
+    
+}

@@ -1,0 +1,25 @@
+.ConnectionBar{
+    padding-top: 30px;
+    width: 100%;
+    margin-bottom:40px ;
+}
+.ConnectionBar ul{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.ConnectionBar ul li{
+    text-decoration: none;
+    color: #515c6fb2;
+    font-weight: bolder;
+    font-size: 18px;
+    cursor: pointer;
+    list-style-type: none;
+}
+/* .ConnectionBar ul .active{
+    color: #515c6f;
+} */

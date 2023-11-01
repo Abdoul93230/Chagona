@@ -1,0 +1,242 @@
+.AProductDet{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.AProductDet .left{
+    padding: 5px;
+    width: 40%;
+}
+.AProductDet .right{
+    width: 59%;
+    padding: 5px;
+    position: relative;
+    height: 100%;
+}
+.AProductDet .left .carde{
+background-color: white;
+padding: 5px;
+border-radius:8px ;
+width: 100%;
+display: flex;
+align-items: flex-start;
+}
+.AProductDet .left .carde img{
+    width: 300px;
+    height: 200px;
+    object-fit: contain;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.233);
+    border-radius: 8px;
+    margin-left: 10px;
+}
+.AProductDet .left .carde .opImg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+    padding: 5px;
+    height: auto;
+}
+
+.AProductDet .left .carde .opImg img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.AProductDet .left .color{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+.AProductDet .left .color h5{
+    text-align: left;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 17px;
+    color: #CCD7E3;
+}
+
+.AProductDet .left .color .conte{
+    display: flex;
+
+}
+
+.AProductDet .left .color .conte span{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 8px 10px;
+    cursor: pointer;
+}
+
+.AProductDet .left .tails{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+.AProductDet .left .tails h5{
+    text-align: left;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 17px;
+    color: #CCD7E3;
+}
+
+.AProductDet .left .tails .conte{
+    display: flex;
+
+}
+
+.AProductDet .left .tails .conte span{
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin: 8px 10px;
+    box-shadow: 0px 0px 10px #CCD7E3;
+    cursor: pointer;
+}
+
+
+
+.AProductDet .right h6{
+    text-align: left;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #34383d;
+}
+
+.AProductDet .right .desc{
+    text-align: left;
+    color: #1e2225;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.AProductDet .right table{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.AProductDet .right table  tr th{
+    padding: 5px 0px;
+    background-color: #CCD7E3;
+    text-transform: capitalize;
+    
+}
+.AProductDet .right table  tr td{
+    padding: 5px 0px;
+    text-transform: capitalize;
+}
+
+
+.AProductDet .right .plusImg{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    /* border: 2px solid crimson; */
+}
+
+.AProductDet .right .plusImg h3{
+    color: #1e2225;
+    text-align: left;
+
+}
+
+.AProductDet .right .plusImg .img{
+    width: 100%;
+    display: flex;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.AProductDet .right .plusImg .img img{
+    width: 150px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.AProductDet .right .SM{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+.AProductDet .right .SM button{
+    padding: 15px 15px;
+    font-weight: bold;
+    background-color: rgba(43, 43, 243, 0.849);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.AProductDet .right .SM button:nth-child(1){
+    background-color: red;
+}
+
+
+@media screen and (max-width:750px) {
+    .AProductDet{
+        flex-direction: column;
+    }
+    .AProductDet .left{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .AProductDet .right{
+        width: 100%;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        background-color:white;
+    }
+    .AProductDet .right .SM{
+        position:inherit;
+        margin-top: 60px;
+        margin-bottom: 10px;
+        background-color: white;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:500px){
+    .AProductDet .right table  tr th{
+        font-size: 12px;
+    }
+    .AProductDet .right table  tr td{
+        font-size: 12px;
+    }
+    .AProductDet .right .desc {
+        font-size: 13px;
+        line-height: 25px;
+    }
+}
+
+
+@media screen and (max-width:400px){
+    .AProductDet .right table  tr th{
+        font-size: 11px;
+    }
+    .AProductDet .right table  tr td{
+        font-size: 11px;
+    }
+    .AProductDet .right .desc{
+        font-size: 13px;
+        line-height: 25px;
+    }
+}

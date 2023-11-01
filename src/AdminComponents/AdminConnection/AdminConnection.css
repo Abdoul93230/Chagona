@@ -1,0 +1,94 @@
+.AdminConnection{
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    padding-top: 130px;
+}
+
+.AdminConnection ul{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.AdminConnection ul li{
+    display: flex;
+    width: 100%;
+    list-style: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.AdminConnection ul li .left{
+    color: #515C6F;
+    
+}
+.AdminConnection ul li .right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 83%;
+    color: #515C6F;
+}
+
+.AdminConnection ul li .right label{
+    font-size: 18px;
+    font-weight: lighter;
+    text-transform: uppercase;
+}
+
+.AdminConnection ul li .right input{
+    width: 100%;
+    padding: 5px 5px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #515C6F;
+    
+}
+
+.AdminConnection button{
+    width: 95%;
+    margin: 18px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #FF6969;
+    border: none;
+    border-radius: 26px;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+}
+
+.AdminConnection button span{
+    position: absolute;
+    right: 2%;
+    bottom: 2px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    color: #FF6969;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.AdminConnection p{
+    color: #515C6F;
+    width: 70%;
+    margin: 15px auto;
+    font-size: 13px;
+}
+.AdminConnection p span{
+    color: #FF6969;
+    cursor: pointer;
+}

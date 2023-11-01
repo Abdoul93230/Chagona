@@ -1,0 +1,221 @@
+.AddFournisseur{
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+    font-family: serif;
+}
+
+.AddFournisseur .left{
+    width: 49%;
+}
+
+.AddFournisseur .left img{
+    width: 200px;
+    height: 200px;
+    border: 5px solid cadetblue;
+    border-radius: 50%;
+}
+
+.AddFournisseur .left .n{
+    display: block;
+    margin: 5px auto;
+    margin-top: 15px;
+    padding: 8px;
+    width: 80%;
+    outline: none;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+
+
+
+.AddFournisseur .right{
+    width: 50%;
+}
+
+.AddFournisseur .right table{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.AddFournisseur .right table tr{
+    border: 2px solid black;
+}
+
+.AddFournisseur .right table tr th{
+    color: rgba(22, 22, 22, 0.897);
+    padding:10px;
+    border-bottom: 2px solid black;
+    font-size: 12px;
+}
+
+.AddFournisseur .right table tr td{
+    text-align: center;
+    padding: 8px 0px;
+    font-size: 13px;
+}
+.AddFournisseur .right table tr td input{
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.AddFournisseur .right form{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.AddFournisseur .right form textarea{
+    display: block;
+    width: 80%;
+    height: 150px;
+    border: 2px solid rgba(0, 0, 0, 0.623);
+    font-size: 15px;
+}
+.AddFournisseur .right form label{
+    margin-left: 5px ;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+}
+
+.AddFournisseur .right form input[type="submit"]{
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: rgb(37, 37, 233);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+.AddFournisseur .left .AddStore{
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.AddFournisseur .left .AddStore h2{
+    color: rgba(80, 79, 79, 0.897);
+    text-align: left;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}
+
+
+.AddFournisseur .left .AddStore form{
+    width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+
+.AddFournisseur .left .AddStore form label{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    text-transform: capitalize;
+}
+
+
+.AddFournisseur .left .AddStore form label input{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid #6d6969;
+    margin-top: 5px;
+
+
+}
+
+.AddFournisseur .left .AddStore form input[type="submit"]{
+    padding: 10px 15px;
+    border: none;
+    color: white;
+    background-color: #ff6969;
+    cursor: pointer;
+    margin: 15px auto;
+    width: 95%;
+    border-radius: 18px;
+    font-weight: bolder;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:980px) {
+    .AddFournisseur{
+        flex-direction: column;
+        align-items: center;
+    }
+    .AddFournisseur .left{
+        width: 90%;
+        margin: 10px auto;
+    }
+    .AddFournisseur .right{
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+
+@media screen and (max-width:780px){
+    .AddFournisseur .left{
+        width: 99%;
+       
+    }
+    .AddFournisseur .right{
+        width: 99%;
+    }
+}
+
+@media screen and (max-width:585px){
+   
+    .AddFournisseur .right table tr th{
+        font-size: 11px;
+    }
+    .AddFournisseur .right table tr td{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:480px){
+    .AddFournisseur .right table tr th{
+        font-size: 10px;
+    }
+    .AddFournisseur .right table tr td{
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width:375px){
+    .AddFournisseur .right table tr th{
+        font-size: 9px;
+    }
+    .AddFournisseur .right table tr td{
+        font-size: 10px;
+    }
+}

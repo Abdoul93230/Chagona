@@ -1,0 +1,294 @@
+.AProductUpdat{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.AProductUpdat .left{
+    padding: 5px;
+    width: 40%;
+}
+.AProductUpdat .right{
+    width: 59%;
+    padding: 5px;
+    position: relative;
+    height: auto;
+}
+.AProductUpdat .left .carde{
+background-color: white;
+padding: 5px;
+border-radius:8px ;
+width: 100%;
+display: flex;
+align-items: flex-start;
+}
+.AProductUpdat .left .carde img{
+    width: 300px;
+    height: 200px;
+    object-fit: contain;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.233);
+    border-radius: 8px;
+    margin-left: 10px;
+}
+.AProductUpdat .left .carde .opImg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 70px;
+    padding: 5px;
+    height: auto;
+}
+
+.AProductUpdat .left .carde .opImg img{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.AProductUpdat .left .color{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+.AProductUpdat .left .color h5{
+    text-align: left;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 17px;
+    color: #CCD7E3;
+}
+
+.AProductUpdat .left .color .conte{
+    display: flex;
+
+}
+
+.AProductUpdat .left .color .conte input{
+    width:40px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.AProductUpdat .left .color .conte button{
+    padding: 0px 4px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.AProductUpdat .left .tails{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+.AProductUpdat .left .tails h5{
+    text-align: left;
+    font-weight: bolder;
+    text-transform: uppercase;
+    font-size: 17px;
+    color: #CCD7E3;
+}
+
+.AProductUpdat .left .tails .conte{
+    display: flex;
+
+}
+
+.AProductUpdat .left .tails .conte input{
+    padding: 5px 0px;
+    border-radius: 5px;
+    margin: 8px 5px;
+    border: none;
+    outline: none;
+    width: 50px;
+    box-shadow: 0px 0px 10px #CCD7E3;
+    cursor: pointer;
+}
+
+
+
+.AProductUpdat .right h6{
+    text-align: left;
+    font-size: 17px;
+    text-transform: uppercase;
+    color: #34383d;
+}
+
+.AProductUpdat .right .desc{
+    text-align: left;
+    color: #1e2225;
+    font-weight: 500;
+    margin-top: 8px;
+    display: block;
+    width: 100%;
+    height: 150px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.AProductUpdat .right table{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.AProductUpdat .right table  tr th{
+    padding: 5px 0px;
+    background-color: #CCD7E3;
+    
+}
+.AProductUpdat .right table  tr td{
+    padding: 5px 0px;
+}
+
+.AProductUpdat .right table  tr td input{
+    width: 100%;
+    font-size: 13;
+    border: none;
+    padding: 7px 0px;
+}
+.AProductUpdat .right table  tr td select{
+    width: 100%;
+    font-size: 13;
+    border: none;
+    padding: 7px 0px;
+}
+
+
+
+.AProductUpdat .right .plusImg{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    /* border: 2px solid crimson; */
+}
+
+.AProductUpdat .right .plusImg h3{
+    color: #1e2225;
+    text-align: left;
+
+}
+
+.AProductUpdat .right .plusImg .img{
+    width: 100%;
+    display: flex;
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.AProductUpdat .right .plusImg .img img{
+    width: 100px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+
+
+
+.AProductUpdat .right .SM{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    /* position: absolute;
+    bottom: 0px;
+    left: 0px; */
+}
+
+.AProductUpdat .right .SM button{
+    padding: 15px 15px;
+    font-weight: bold;
+    background-color: rgba(43, 43, 243, 0.849);
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.AProductUpdat .right .SM button:nth-child(1){
+    background-color: red;
+}
+
+.AProductUpdat .url{
+    width: 100%;
+    height: auto;
+    padding: 5px ;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.AProductUpdat .url input{
+    padding: 5px 5px;
+    border: 2px solid #34383d;
+    border-radius: 5px;
+    margin: 5px 0px;
+}
+.AProductUpdat .url label{
+    font-weight: 600;
+    cursor: pointer;
+}
+
+@media screen and (max-width:900px) {
+    .AProductUpdat{
+        flex-direction: column;
+    }
+    .AProductUpdat .left{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .AProductUpdat .right{
+        width: 100%;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        background-color:white;
+    }
+    .AProductUpdat .right .SM{
+        position:inherit;
+        margin-top: 60px;
+        margin-bottom: 10px;
+        background-color: white;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:500px){
+    .AProductUpdat .right table  tr th{
+        font-size: 12px;
+    }
+    .AProductUpdat .right table  tr td{
+        font-size: 12px;
+    }
+    .AProductDet .right .desc {
+        font-size: 13px;
+        line-height: 25px;
+    }
+}
+
+
+@media screen and (max-width:400px){
+    .AProductUpdat .right table  tr th{
+        font-size: 11px;
+    }
+    .AProductUpdat .right table  tr td{
+        font-size: 11px;
+    }
+    .AProductUpdat .right .desc{
+        font-size: 13px;
+        line-height: 25px;
+    }
+}

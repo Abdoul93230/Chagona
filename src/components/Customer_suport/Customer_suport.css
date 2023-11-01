@@ -1,0 +1,21 @@
+.CustomerSuport{
+    width: 100%;
+    height: auto;
+}
+
+.CustomerSuport .top{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: #FF6969;
+}
+
+.CustomerSuport .top h5{
+    text-align: left;
+    color: white;
+    display: flex;
+    align-items: center;
+}

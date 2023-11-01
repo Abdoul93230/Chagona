@@ -1,0 +1,110 @@
+.HomeTop {
+    background-color: #fff;
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    height: 70px;
+    z-index: 100000;
+}
+.HomeTop .one{
+    display: flex;
+    flex-direction: column;
+}
+
+.HomeTop .one .h{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.HomeTop .one .h .l{
+    text-decoration: none;
+    position: relative;
+    margin: 2px 10px;
+    color: #727C8E;
+
+}
+
+.HomeTop .one .h img{
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    top: -45px;
+    left: -39px;
+    z-index: 100;
+}
+
+.HomeTop .one .h .l span{
+    background-color: #FF6969;
+    color: white;
+    width: 20px;
+    height: 20px;
+    padding: 2px ;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -5px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+
+
+.HomeTop .search{
+    padding: 2px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    display: none;
+}
+
+.HomeTop .search form{
+    width: 100%;
+    height: auto;
+}
+
+.HomeTop .search input[type="search"]{
+    padding: 8px;
+    width: 90%;
+    border: 2px solid #727C8E;
+    outline: none;
+    border-radius: 8px;
+}
+
+.HomeTop .one ul{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.HomeTop .one ul .NavLink{
+    text-decoration: none;
+    color: #727C8E;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.HomeTop .one ul{
+    display: none;
+}
+
+
+
+@media screen and (max-width:400px) {
+    .HomeTop .search input[type="search"]{
+        width: 100%;
+    }
+}
+@media screen and (min-width:775px) {
+    .HomeTop .one ul{
+        display: flex;
+    }
+}

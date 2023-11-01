@@ -1,0 +1,215 @@
+.AOrders{
+    width: 100%;
+    height: auto;
+}
+.AOrders .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    /* border: 2px solid crimson; */
+}
+.AOrders .top .right{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    /* border: 1px solid crimson; */
+    width: 40%;
+}
+.AOrders .top .right h3{
+    font-family: serif;
+    color: rgb(3,3,88);
+    font-weight: bolder;
+    text-align: left;
+   width: 100%;
+}
+.AOrders .top ul{
+    display: flex;
+    width: 330px;
+    padding: 5px 0px;
+    font-family: serif;
+    font-weight: bold;
+    justify-content: space-between;
+   color: rgb(3,3,88);
+   margin-left:0px ;
+   
+   
+}
+.AOrders .top ul .li{
+    cursor: pointer;
+   text-decoration: none;
+   color: black;
+}
+.AOrders .top ul .active{
+    border-bottom: 2px solid rgb(3,3,88);
+}
+.AOrders .top .search{
+    border: 2px solid rgb(3,3,88);
+    border-radius: 5px;
+    height: 40px;
+}
+.AOrders .top .search input[type="search"]{
+    padding: 5px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+.AOrders .top .search input[type="submit"]{
+    padding: 7px 15px;
+    color: white;
+    height: 100%;
+    background-color: rgb(3,3,88);
+    border-left: 2px solid rgb(3,3,88);
+    transition: all .8s;
+    border: none;
+}
+.AOrders .top .search input[type="submit"]:hover{
+    transition: all .8s;
+    background-color: rgba(3, 3, 88, 0.719);   
+}
+.AOrders .midel{
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+}
+.AOrders .midel table{
+    width: 100%;
+}
+.AOrders .midel table thead{
+    background-color: rgb(3,3,88);
+}
+.AOrders .midel table thead tr th{
+    color: white;
+    padding: 10px 0px;
+    font-family: serif;
+    font-style: italic;
+}
+.AOrders .midel table tbody tr{
+    border: none;
+    border-bottom: 1px solid rgb(3,3,88);
+    background-color: rgba(3,3,88,.7);
+    cursor: pointer;
+    transition: all .5s;
+}
+.AOrders .midel table tbody tr:hover{
+    transition: all .5s;
+    background-color:rgba(3,3,88,.8);
+
+}
+.AOrders .midel table tbody tr td .img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(3,3,88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.AOrders .midel table tbody tr td{
+    color: white;
+    padding: 0.5px 0px;
+}
+
+.AOrders .midel .pagination{
+    border: 2px solid rgb(3,3,88);
+    width: 152px;
+    margin: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+.AOrders .midel .pagination span{
+    border-left: 2px solid rgb(3,3,88);
+    background-color: rgb(3,3,88);
+    color: white;
+    transition: all .8s;
+    padding: 0px 5px;
+}
+.AOrders .midel .pagination span:hover{
+    transition: all .8s;
+    color: rgb(3,3,88);
+    background-color: transparent;
+    cursor: pointer;
+    
+}
+
+@media screen and (max-width:885px){
+    .AOrders .top .right{
+        width: 50%;
+    }
+}
+@media screen and (max-width:820px){
+    .AOrders .top .right{
+        width: 55%;
+    }
+    .AOrders .midel table tbody tr td:last-child{
+        display: none;
+    }
+    .AOrders .midel table thead tr th:last-child{
+        display: none;
+    }
+}
+@media screen and (max-width:735px){
+    .AOrders .top .right{
+        width: 48%;
+    }
+    .AOrders .top .right ul{
+        width: 100%;
+    }
+    .AOrders .top .right ul .li{
+        margin: 0px 5px;
+    }
+    .AOrders .midel table tbody tr td{
+        font-size: 12px;
+    }
+    .AOrders .midel table thead tr th{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:585px){
+    .AOrders .midel table tbody tr td:nth-child(3){
+        display: none;
+    }
+    .AOrders .midel table thead tr th:nth-child(3){
+       display: none;
+    }
+    .AOrders .top{
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+    .AOrders .top .right{
+        width: 400px;
+    }
+    .AOrders .top .right ul .li{
+        font-size: 14px;
+    }
+    .AOrders .top .search{
+        display: block;
+        margin-left: 0%;
+       
+    }
+    .AOrders .midel table tbody tr td .img{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media screen and (max-width:440px){
+    
+    
+    .AOrders .midel table thead tr th{
+        font-size: 11px;
+    }
+    .AOrders .midel table tbody tr td .img{
+        width: 28px;
+        height: 28px;
+    }
+    .AOrders .midel table tbody tr td:nth-child(4){
+        display: none;
+    }
+    .AOrders .midel table thead tr th:nth-child(4){
+       display: none;
+    }
+    
+    
+}

@@ -1,0 +1,218 @@
+.Carts{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 60px;
+    
+}
+.Carts .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.Carts .Lh{
+    text-decoration: line-through;
+}
+
+.Carts .top .i{
+    position: relative;
+    margin: 5px 10px;
+}
+.Carts .top .i span{
+    background: #FF6969;
+    padding: 1px 2px;
+    border-radius: 15px;
+    color: white;
+    position: absolute;
+    bottom: -6px;
+    left: -8px;
+}
+
+.Carts h2{
+    color: #515C6F;
+    text-align: left;
+    font-size: 30px;
+}
+.Carts .main{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+.Carts .main .carde{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 2px 8px;
+    margin-top: 20px;
+
+}
+.Carts .main .carde img{
+    width: 90px;
+    height: 90px;
+    background-color: white;
+    border-radius: 50%;
+    object-fit: contain;
+}
+.Carts .main .carde .det{
+    width: 75%;
+    padding-left:8px ;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #515C6F;
+}
+
+.Carts .main .carde .det h3{
+    text-align: left;
+    color: #515C6F;
+    font-weight: lighter;
+    font-size: 20px;
+}
+
+.Carts .main .carde .det h4{
+    text-align: left;
+    color: #515C6F;
+    font-weight: lighter;
+}
+
+.Carts .main .carde .det h5{
+    color: #FF6969;
+    text-align: left;
+    font-weight: lighter;
+    margin-top: 7px;
+}
+.Carts .main .carde .det button{
+    width: 90px;
+    display: flex;
+    padding: 3px;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+}
+.Carts .main .carde .det button span{
+    width: 20px;
+    height: 20px;
+    background-color: #515c6f73;
+    color: #515C6F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.Carts .bottom{
+    width: 98%;
+    height: auto;
+    margin: 0px auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #515C6F;
+    margin-top: 20px;
+    position: fixed;
+    bottom: 52px;
+    left: 1%;
+    background-color: #F5F6F8;
+    padding-bottom: 10px;
+}
+
+.Carts .bottom .left{
+    width: 50%;
+    height: auto;
+}
+
+.Carts .bottom .left h2{
+    color: #515C6F;
+    font-weight: lighter;
+    font-size: 15px;
+}
+.Carts .bottom .left h3{
+    color: #515C6F;
+    font-size: 15px;
+    text-align: left;
+    margin: 5px 0px;
+}
+.Carts .bottom .left h4{
+    color: #515C6F;
+    font-weight: lighter;
+    font-size: 13px;
+    text-align: left;
+}
+.Carts .bottom .right{
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Carts .bottom .right button{
+    width: 98%;
+    background-color: #FF6969;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border: none;
+    border-radius: 25px;
+    align-items: center;
+    font-weight: bolder;
+    text-transform: uppercase;
+    box-shadow: 0px 0px 10px #515c6f5e;
+    
+}
+.Carts .bottom .right button span{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    color: #FF6969;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.Carts .btnC{
+    width: 100px;
+    margin: 10px auto;
+    padding: 10px;
+    border: none;
+    background-color: #FF6969;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 60px;
+    transition: all .5s;
+}
+
+.Carts .btnC:hover{
+    transition: all .5s;
+    background-color: #ff6969d7;
+}
+
+@media screen and (min-width:700px) {
+    .Carts .main{
+        width: 80%;
+    }
+    .Carts .bottom .right{
+        width: 30%;
+    }
+}
+@media screen and (min-width:800px) {
+    .Carts .main{
+        width: 50%;
+    }
+    .Carts .bottom .right{
+        width: 17%;
+    }
+}

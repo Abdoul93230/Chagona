@@ -1,0 +1,152 @@
+.Profile{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+.Profile .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+}
+.Profile .top .l{
+    position: relative;
+    margin: 5px 10px;
+    cursor: pointer;
+}
+
+.Profile .top .l span{
+    position: absolute;
+    bottom: -5px;
+    left: -8px;
+    background-color: #FF6969;
+    padding: 1px 2px;
+    color: white;
+    border-radius: 10px;
+}
+
+
+
+
+.Profile .prof{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.Profile .prof .left{
+    width: 37%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Profile .prof .left img{
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    /* object-fit: contain; */
+}
+
+.Profile .prof .right{
+    width: 61%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Profile .prof .right h2{
+    color: #515C6F;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.Profile .prof .right h3{
+    font-weight: lighter;
+    text-align: left;
+}
+
+.Profile .prof .right .button{
+    width: 130px;
+    padding: 10px;
+    border-radius:20px ;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    color: #515C6F;
+    background-color: #515c6f44;
+    font-size: 14px;
+    border: 1px solid #515C6F;
+}
+
+.Profile ul{
+    width: 100%;
+    height: auto;
+    padding: 8px 10px;
+    background-color: white;
+    list-style-type: none;
+    margin-top: 15px;
+    border-radius: 8px;
+}
+.Profile ul .li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    text-transform: capitalize;
+    text-decoration: none;
+    color: #515C6F;
+}
+
+.Profile ul .li ol{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    border-bottom: 1px solid #515c6f60;
+    padding: 5px 0px;
+}
+.Profile ul .li ol span{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #515c6f2c;
+    color: #515C6F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width:700px) {
+    .Profile ul{
+        width: 60%;
+    }
+}
+@media screen and (min-width:1000px) {
+    .Profile ul{
+        width: 55%;
+        margin-left: 10%;
+    }
+}
+@media screen and (min-width:1200px) {
+    .Profile ul{
+        width: 50%;
+        margin-left: 13%;
+    }
+}

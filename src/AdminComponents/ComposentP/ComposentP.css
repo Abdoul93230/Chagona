@@ -1,0 +1,242 @@
+.ComposentP{
+    width: 100%;
+    height: auto;
+    background-color: #F4F7FC;
+    display: grid;
+    grid-template-columns: 250px auto;
+    grid-template-rows: 60px auto;
+    gap: 5px;
+    /* border:2px solid crimson; */
+}
+.heid{
+    display: none;
+}
+
+.ComposentP .sidBar{
+    position: relative;
+    grid-row: 1/3;
+    height: 100vh;
+}
+
+.ComposentP .sidBar .sb{
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    background-color: white;
+    z-index: 10000;
+}
+.ComposentP .sidTop{
+    background: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ComposentP .midell{
+    padding: 10px;
+    height: calc(100vh - 75px);
+    overflow: auto;
+}
+
+.ComposentP .sidBar ul{
+    display: flex;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.ComposentP .sidBar ul .li{
+    width: 100%;
+    text-decoration: none;
+    margin: 10px auto;
+    color: #171725;
+    display: flex;
+    align-items: center;
+    padding: 8px 0px;
+    z-index: 100;
+    position: relative;
+}
+.ComposentP .sidBar ul .li:before{
+    position: absolute;
+    content: " ";
+    background-color: #0062FF;
+    top: 0px;
+    left: 0px;
+    width: 5px;
+    height: 100%;
+    z-index: -100;
+    transition: all .8s;
+}
+.ComposentP .sidBar ul .li:hover:before{
+    transition: all .8s;
+    background-color: #F4F7FC;
+    width: 100%;
+}
+.ComposentP .sidBar ul .li .i{
+    margin: 0px 15px;
+}
+
+.ComposentP .sidBar button{
+    position: absolute;
+    bottom: 20px;
+    left: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+    cursor: pointer;
+}
+
+
+.ComposentP .sidTop .select{
+    display: flex;
+}
+.ComposentP .sidTop .select .right{
+    display: flex;
+    align-items: center;
+    color: #171725;
+}
+
+.ComposentP .sidTop .select .right .pp{
+    margin-right: 30px;
+    margin-left: 10px;
+}
+
+.ComposentP .sidTop .select .right h5{
+    font-weight: lighter;
+}
+.ComposentP .sidTop .select .right img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 50%;
+    background-color: #F4F7FC;
+    margin: 0px 5px;
+}
+.ComposentP .sidTop .select .left{
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 8px;
+    color: #171725;
+}
+
+.ComposentP .sidTop .select .left .i{
+    position: relative;
+    color: #171725;
+}
+.ComposentP .sidTop .select .left .i span{
+    position: absolute;
+    top: -10px;
+    right: -8px;
+    padding: 0px 5px;
+    border-radius: 50%;
+    color: white;
+    background-color: crimson;
+}
+
+
+.ComposentP .sidTop .search{
+    display: flex;
+    align-items: center;
+}
+
+.ComposentP .sidTop .search input{
+    padding: 10px;
+    border: none;
+    outline: none;
+}
+
+
+
+
+.ComposentP .style{
+    margin-left: 78% ;
+    color: #0062FF;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width:1150px) {
+    
+    .ComposentP{
+        grid-template-columns: 190px auto;
+        grid-template-rows: 60px auto;
+        gap: 4px;
+    }
+    
+    .ComposentP .sidBar .sb{
+        width: 190px;
+    }
+}
+
+@media screen and (max-width:1111px) {
+    
+    .ComposentP{
+        grid-template-columns: 0px auto;
+        grid-template-rows: 60px auto;
+        gap: 5px;
+    }
+    
+    .ComposentP .sidBar .sb{
+        width: 190px;
+        background-color: #f7f7f7;
+       
+    }
+    .ComposentP .sidBar .cache{
+        display: none;
+    }
+    .show{
+        display: block !important;
+    }
+    .ComposentP .sidBar.showBar{
+        display: block !important;
+        width: 200px;
+        height: 100vh;
+        position: fixed;
+        
+    }
+}
+
+@media screen and (max-width:550px){
+    .ComposentP .sidTop .search input{
+        width: 100px;
+    }
+}
+@media screen and (max-width:455px){
+    .ComposentP .sidTop .search input{
+        width: 100px;
+    }
+    .ComposentP .sidTop .select .right .pp{
+        margin-right: 20px;
+    }
+    .ComposentP .sidTop .select .right img{
+        width: 30px;
+        height: 30px;
+    }
+   
+}
+
+@media screen and (max-width:420px){
+    .ComposentP .sidTop .search input{
+        width: 100px;
+    }
+    .ComposentP .sidTop .ii{
+        display: none;
+    }
+    .ComposentP .sidTop .select .right .pp{
+        margin-right: 0px;
+    }
+}
+
+@media screen and (max-width:400px){
+    .ComposentP .sidTop .search input{
+        display: none;
+    }
+}

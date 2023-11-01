@@ -1,0 +1,72 @@
+.InviteFriends{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-color: white;
+}
+
+.InviteFriends img{
+    width: 100%;
+    height: 45%;
+    object-fit: cover;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.InviteFriends form{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+.InviteFriends form textarea{
+    width: 100%;
+    height: 150px;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+    padding: 5px;
+    outline: none;
+    line-height: 20px;
+    box-shadow: 0px 0px 7px gray;
+    border: 1px solid gray;
+}
+
+.InviteFriends form input{
+    display: block;
+    padding: 8px 5px;
+    border: 2px solid rgb(136, 167, 250);
+    border-radius: 4px;
+    width: 60%;
+}
+.InviteFriends form label{
+    display: block;
+    text-align: left;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+    color: rgb(43, 43, 44);
+}
+
+.InviteFriends button{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 16px;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.whatsapp{
+    width: 100px;
+    height: 80px;
+}
+
+.whatsapp img{
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}

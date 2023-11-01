@@ -1,0 +1,74 @@
+.ConteProduits{
+    width: 100%;
+    height: auto;
+    padding: 0px;
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.ConteProduits h2{
+    text-align: center;
+    background-color: rgb(225, 250, 250);
+    font-weight: 400;
+    text-transform: capitalize;
+    font-size: 15px;
+    padding: 2px;
+    margin-bottom: 5px;
+    color: #515C6F;
+}
+
+.ConteProduits .Productcontenair{
+    width: 100%;
+    background-color: white;
+    height: auto;
+    display: flex;
+    padding: 8px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ConteProduits .Productcontenair .carde{
+    width: 30%;
+    height: 150px;
+    border-radius: 5px;
+    margin: 5px;
+    position: relative;
+}
+
+.ConteProduits .Productcontenair .carde img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.ConteProduits .Productcontenair .carde h6{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.596);
+    font-size: 14px;
+    color: white;
+    padding: 2px 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+
+@media screen and (min-width:900px) {
+    .ConteProduits{
+        width: 90%;
+        margin: 0px auto;
+    }
+    .ConteProduits .Productcontenair .carde{
+        height: 200px;
+        width: 15%;
+    }
+    .ConteProduits h2{
+        padding: 5px;
+        font-size: 16px;
+    }
+}

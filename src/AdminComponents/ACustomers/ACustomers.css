@@ -1,0 +1,197 @@
+.ACustomers{
+    width: 100%;
+    position: relative;
+    height: auto;
+}
+
+.ACustomers .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ACustomers .top h3{
+    font-weight: bolder;
+    font-family: serif;
+}
+.ACustomers .top .search{
+    border: 2px solid rgb(3,3,88);
+    border-radius: 5px;
+}
+.ACustomers .top .search input[type="search"]{
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.ACustomers .top .search input[type="submit"]{
+    padding: 6px 15.1px;
+    background-color: rgba(3,3,88,.6);
+    color: white;
+    font-weight: bold;
+    font-family: serif;
+    height: 100%;
+    border: none;
+    transition: all .5s;
+   
+}
+.ACustomers .top .search input[type="submit"]:hover{
+    transition: all .5s;
+    background-color: rgba(3,3,88,.4);
+}
+.ACustomers .midel{
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+    
+}
+.ACustomers .midel table{
+    width: 100%;
+}
+.ACustomers .midel table thead tr:first-child{
+    background-color: rgba(3,3,88,.9);
+    color: white;
+    font-family: serif;
+    font-style: italic;
+}
+.ACustomers .midel table tr:first-child th{
+    padding: 15px 0px;
+}
+.ACustomers .midel table tbody tr{
+    background-color: rgba(3,3,88,.7);
+    color: white;
+    border-bottom: 2px solid black !important;
+    cursor: pointer;
+    transition: all .5s;
+}
+.ACustomers .midel table tbody tr:hover{
+    background-color: rgba(3,3,88,.8);
+}
+.ACustomers .midel table tbody tr td{
+    padding: 4px 0px;
+   
+}
+.ACustomers .midel table tbody tr td .img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(3,3,88);
+}
+.ACustomers .midel .pagination{
+    width: 151px;
+    margin: 6px 2px; 
+    padding: 3px 0px;
+}
+
+.ACustomers .midel .pagination span{
+    color: white;
+    padding: 5px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .8s;
+    font-weight: bold;
+    background: rgb(3,3,88);
+    font-weight: normal;
+}
+.ACustomers .midel .pagination span:hover{
+    transition: all .8s;
+    background-color: transparent;
+    color: rgb(3,3,88);
+}
+
+
+@media screen and (max-width:840px) {
+    .ACustomers .midel table tbody tr td{
+        font-size: 13px;
+    }
+    .ACustomers .midel table tr:first-child th{
+        padding: 12px 0px;
+        font-size: 16px;
+    }
+    .ACustomers .midel .pagination{
+        width: 142px;
+    }
+    .ACustomers .midel .pagination span{
+        padding: 3px 5px;
+        font-weight: normal;
+    }
+}
+
+@media screen and (max-width:690px) {
+    .ACustomers .midel table tr:first-child th{
+        padding: 11px 0px;
+        font-size: 13px;
+    }
+    .ACustomers .midel table tbody tr td:last-child{
+        display: none;
+    }
+    .ACustomers .midel table tr:first-child th:last-child{
+        display: none;
+    }
+}
+
+@media screen and (max-width:560px) {
+    
+    .ACustomers .midel table tbody tr td{
+        font-size: 11px;
+    }
+    .ACustomers .midel table tr:first-child th{
+        padding: 12px 0px;
+        font-size: 13px;
+    }
+    .ACustomers .midel .pagination{
+        width: 142px;
+    }
+    .ACustomers .midel .pagination span{
+        padding: 3px 5px;
+        font-weight: normal;
+    }
+}
+@media screen and (max-width:530px){
+    .ACustomers .midel table{
+        width: 100%;
+    }
+    .ACustomers .midel table tr:first-child th{
+        font-size: 12px;
+    }
+
+    .ACustomers .midel table tbody tr td:nth-child(5){
+        display: none;
+    }
+    .ACustomers .midel table tr:first-child th:nth-child(5){
+        display: none;
+    }
+}
+
+@media screen and (max-width:420px){
+    .ACustomers .top h3{
+        font-size: 16px;
+    }
+    .ACustomers .top .search{
+        width: 60%;
+        display: flex;
+    }
+    .ACustomers .top .search input[type="submit"]{
+        padding: 5px;
+        width: 35%;
+    }
+    .ACustomers .top .search input[type="search"]{
+        width: 65%;
+    }
+    
+    .ACustomers .midel table tbody tr td:nth-child(4){
+        display: none;
+    }
+    .ACustomers .midel table tr:first-child th:nth-child(4){
+        display: none;
+    }
+    .ACustomers .midel table tbody tr td{
+        font-size: 13px;
+    }
+    
+}

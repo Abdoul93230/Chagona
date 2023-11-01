@@ -1,0 +1,100 @@
+.EditProfile{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+.EditProfile .img{
+    width: 130px;
+    height: 130px;
+    margin: 10px auto;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.EditProfile .img img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px #515C6F;
+}
+
+.EditProfile form{
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding-bottom: 80px;
+}
+
+.EditProfile form label{
+    display: block;
+    text-align: left;
+    text-transform: capitalize;
+    cursor: pointer;
+    width: 70%;
+    margin: 5px auto;
+
+}
+
+.EditProfile form input{
+    display: block;
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #515C6F;
+    border-radius: 3px;
+    background-color: transparent;
+    margin: 0px auto;
+
+}
+
+.EditProfile form .btn{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.EditProfile form .btn input[type="submit"]{
+    width: auto;
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+
+}
+
+.EditProfile form .btn input[type="submit"]:nth-child(1){
+    background-color: red;
+}
+
+.EditProfile .editPhoto{
+    /* border: 4px solid crimson; */
+}
+.EditProfile .editPhoto .item{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: rgba(0, 0, 0, 0.747); */
+}
+
+.EditProfile .editPhoto .item button{
+    padding: 5px 10px;
+    margin: 10px auto;
+    cursor: pointer;
+    background-color: #ff6969;
+    border: none;
+    border-radius: 5px;
+}
+.EditProfile .editPhoto .item .deux{
+    background-color: rgba(0, 0, 255, 0.623);
+    color: white;
+}

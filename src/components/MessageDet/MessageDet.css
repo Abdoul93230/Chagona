@@ -1,0 +1,158 @@
+.MessageDet{
+    width: 100%;
+    height: auto;
+    padding: 15px;
+}
+
+.MessageDet .top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid crimson; */
+}
+.MessageDet .top .left{
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.MessageDet .top h2{
+    background-color: rgba(127, 255, 212, 0.37);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(127, 255, 212, 0.685);
+    color: rgb(16, 37, 30);
+}
+
+.MessageDet .top span{
+    color: #FF6969;
+    margin-right: 10px;
+}
+
+.MessageDet .top .left .det{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+
+.MessageDet .top .left .det h4{
+    color: #515C6F;
+    font-weight: lighter;
+    font-size: 20px;
+}
+.MessageDet .top .left .det h5{
+    color: #515C6F;
+
+}
+
+.MessageDet .main{
+    width: 100%;
+    height: calc(100vh - 26vh);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* border: 2px solid blue; */
+    overflow-y: scroll;
+}
+
+
+.MessageDet .main h5{
+    width: 70%;
+    color: #515C6F;
+    text-align: right;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.MessageDet .main .message{
+    width: 70%;
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.MessageDet .main .message .del{
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    color: #515C6F;
+    width: 20px;
+    cursor: pointer;
+}
+
+.MessageDet .main .message p{
+    width: 100%;
+    line-height: 28px;
+    text-align: left;
+    color:  #515C6F;
+    padding: 0px 5px;
+}
+
+.MessageDet .main .message p span{
+    text-decoration: underline;
+    color: #FF6969;
+    margin: 0px 5px;
+}
+.MessageDet .main h6{
+    color: #515C6F;
+}
+
+.MessageDet .bottom{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    /* position: absolute; */
+    /* bottom: 0px; */
+    /* left: 0px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px;
+    /* position: fixed; */
+}
+
+.MessageDet .bottom .un{
+    background-color: #515c6f73;
+    color: #515C6F;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.MessageDet .bottom textarea{
+    color: #515C6F;
+    border: none;
+    width: 70%;
+    padding: 7px ;
+    outline: none;
+    margin-top: 17px;
+    font-size: 15px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.MessageDet .bottom .deux{
+    background-color: #FF6969;
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+
+@media screen and (max-width:400px) {
+    .MessageDet .main .message{
+        width: 90% !important;
+        
+    }
+}

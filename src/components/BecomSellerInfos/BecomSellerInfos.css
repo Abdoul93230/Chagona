@@ -1,0 +1,82 @@
+.BecomSellerInfos{
+    width: 100%;
+    height: auto;
+}
+
+.BecomSellerInfos span{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #FF6969;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BecomSellerInfos span .i{
+    width: 40px ;
+    height: 40px;
+}
+
+.BecomSellerInfos h2{
+    color: #515C6F;
+    text-align: left;
+    padding-left: 10px;
+    margin-top: 50px;
+}
+
+
+
+
+.BecomSellerInfos ul{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+    padding: 8px;
+
+}
+.BecomSellerInfos ul li{
+    list-style-type: none;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: rgba(255, 72, 0, 0.397);
+    color: #515C6F;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 5px;
+}
+.BecomSellerInfos ul .li{
+    background-color: transparent;
+    margin: 0px 8px;
+    color: black;
+    font-size: 13px;
+}
+
+.BecomSellerInfos .Btn{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BecomSellerInfos .Btn button{
+    width: 300px;
+    margin:10px auto ;
+    color: #fff;
+    background-color: #FF6969;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    padding: 7px 10px;
+    font-weight: bolder;
+    font-size: 25px;
+}

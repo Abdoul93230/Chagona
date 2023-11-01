@@ -1,0 +1,35 @@
+*{
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 0px;
+}
+.Navbar{
+    position: absolute;
+    bottom:0px;
+    left: 0px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    padding: 5px 0px;
+    position: fixed;
+    z-index: 100;
+}
+.Navbar .NavLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: gray;
+}
+
+.Navbar .active{
+    color: #FF6969 !important;
+}
+
+
+@media screen and (min-width:775px) {
+    .Navbar{
+        display: none;
+    }
+}

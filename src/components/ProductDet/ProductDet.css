@@ -1,0 +1,561 @@
+.ProductDet{
+    width: 100%;
+    height: auto;
+    
+}
+.ProductDet .conte{
+    background-color: #6d7b9628;
+    width: 100%;
+    height: auto;
+    padding: 12px;
+    /* box-shadow: 0px 0px 50px #6d7b96; */
+    padding-bottom: 20px;
+}
+.ProductDet .top{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+.ProductDet .top ul{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.ProductDet .top ul li{
+    list-style: none;
+    position: relative;
+}
+.ProductDet .top ul .retour{
+    color: #FF6969;
+
+}
+.ProductDet .top ul .NP h6{
+    color: #515C6F;
+    font-size: 17px;
+    font-weight: lighter;
+}
+.ProductDet .top ul .NP h5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    
+    
+}
+.ProductDet .top ul .NP h5 span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF6969;
+    border-radius: 5px;
+    padding: 0px 5px;
+    margin: 0px 5px;
+    font-size: 12px;
+    height: 18px;
+    color: white;
+
+}
+
+.ProductDet .top ul .Scarde{
+    color: #515C6F;
+}
+.ProductDet .top ul .Scarde span{
+    color: white;
+    background-color: #FF6969;
+    padding: 1px 6px;
+    border-radius: 10px;
+    position: absolute;
+    bottom: -10px;
+    left: -8px;
+}
+
+.ProductDet .midel{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.ProductDet .midel .slide{
+    width: 100%;
+    height: 250px;
+    position: relative;
+}
+.ProductDet .midel .slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ProductDet .menu{
+    width: 90%;
+    margin: 5px auto;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.ProductDet .menu h5{
+    color: #515C6F;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.ProductDet .menu .d{
+    border-radius: 18px;
+    background-color: white;
+}
+
+.ProductDet .color{
+    margin-top: 15px;
+    padding: 0px 10px;
+}
+.ProductDet .color h3{
+    color: #515C6F;
+    font-weight: lighter;
+    text-align: left;
+    font-size: 12px;
+    padding-left: 5px;
+}
+.ProductDet .color .col{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+.ProductDet .color .coli{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+.ProductDet .color .col span{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.ProductDet .color .coli span{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin: 0px 2px;
+    /* border-radius: 50%; */
+}
+.ProductDet .color .coli span img{
+    border-radius: 50%;
+}
+
+.ProductDet .size{
+    margin-top: 15px;
+    padding: 0px 10px;
+    margin-bottom: 10px;
+}
+
+.ProductDet .size h3{
+    color: #515C6F;
+    font-weight: lighter;
+    text-align: left;
+    padding-left: 5px;
+    font-size: 12px;
+}
+
+.ProductDet .size .siz{
+    width: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+.ProductDet .size .siz span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+    width: 60px;
+    margin: 0px 2px;
+}
+
+.ProductDet .button{
+    position: fixed;
+    bottom: 0px;
+    left: 2px;
+    width: 99%;
+    margin: 0px auto;
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #5762773f;   
+}
+
+.ProductDet .button .top{
+    display: flex;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+}
+
+.ProductDet .button button{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    font-weight: bold;
+}
+
+.ProductDet .button .btn1{
+    background-color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #515C6F;
+    box-shadow: 0px 0px 10px #dddddd;
+}
+.ProductDet .button .btn2{
+    color: white;
+    background-color: #FF6969;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #FF6969;
+}
+.ProductDet .button .btn1 span{
+    width: 25px;
+    height: 25px;
+    background-color: #515C6F;
+    border-radius: 50%;
+    color: white;
+    margin-left: 10px;
+}
+.ProductDet .button .btn2 span{
+    width: 25px;
+    height: 25px;
+    background-color:white;
+    border-radius: 50%;
+    color: #FF6969;
+    margin-left: 10px;
+}
+
+
+.ProductDet .Details{
+    width: 100%;
+    height: auto;
+    padding: 2px 10px;
+    margin-bottom: 70px;
+    
+}
+.ProductDet .Details table{
+    width: 100%;
+    height: auto;
+    
+}
+
+.ProductDet .Details table tr td{
+    padding-bottom: 5px;
+}
+
+.ProductDet .Details table tr td h2{
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #515C6F;
+}
+
+.ProductDet .Details table tr td p{
+    text-transform: capitalize;
+    font-size: 17px;
+    font-weight: lighter;
+    color: #000;
+   
+}
+
+.PLUS{
+    height: auto !important;
+    
+}
+.ProductDet .ImgPlus{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.ProductDet .ImgPlus img{
+    width: 100%;
+}
+
+.ProductDet .Details .detplus{
+    width: 100%;
+    margin: 10px auto;
+    height: 45px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 10px;
+    color: #515C6F;
+    background-color: rgba(0,0,0,0.1);
+}
+.ProductDet .Details .detplus p{
+    text-align: center;
+    width: 90%;
+}
+
+.ProductDet .Reviews{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 5px;
+    margin: 10px auto;
+}
+.ProductDet .Reviews .left{
+    width: 27%;
+    height: 100%;
+    display: flex;
+   
+    justify-content: center;
+}
+.ProductDet .Reviews .left h2{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #B7E6E6;
+    color: #515C6F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
+.ProductDet .Reviews .right{
+    width: 72%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.ProductDet .Reviews .right .top{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.ProductDet .Reviews .right .top .l{
+    width: 70%;
+}
+
+.ProductDet .Reviews .right .top .l h3{
+    text-align: left;
+    color: #FF6969;
+    
+}
+.ProductDet .Reviews .right .top .l h4{
+    text-align: left;
+    color: #515C6F;
+    margin-top: -8px;
+}
+.ProductDet .Reviews .right .top .l p{
+    text-align: left;
+}
+.ProductDet .Reviews .right .bottom{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 8px auto;
+}
+
+
+.ProductDet .Reviews .right .bottom img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background-color: #dddddd;
+}
+
+
+.ProductDet .Reviews .right .top .r{
+    width: 30%;
+    color: #515C6F;
+    font-weight: lighter;
+    font-size: 15px;
+}
+
+.PLM{
+    height: 50px;
+    display: flex;
+    margin: 4px auto;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+.ProductDet{
+    position: relative;
+}
+.ProductDet .comment{
+    width: 60px;
+    height: 60px;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px  gray;
+    position: fixed;
+    top: 40%;
+    left: 2px;
+    z-index: 100;
+    background-color: white;
+    cursor: pointer;
+}
+.ProductDet .poppupConte{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #515c6f48;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 1000;
+
+}
+
+.ProductDet .poppupConte .poppup{
+    background-color: #515c6f;
+    margin-top: 200px;
+    width: 295px;
+    height: auto;
+    padding-bottom: 15px;
+    border-radius: 5px;
+}
+
+.ProductDet .poppupConte .poppup .top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    margin-top: 0px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.ProductDet .poppupConte .poppup .CodeClef{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ProductDet .poppupConte .poppup .CodeClef textarea{
+    width: 100%;
+    padding: 10px;
+    border: 2px solid white;
+    background-color: #40475271;
+    border-radius: 7px;
+    outline: none;
+    color: white;
+}
+.ProductDet .poppupConte .poppup .CodeClef  .T{
+    color: white;
+    margin-top: 10px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.ProductDet .poppupConte .poppup .CodeClef section{
+    width: 100%;
+    /* color: #FF6969; */
+}
+.ProductDet .poppupConte .poppup .CodeClef section .i{
+    margin: 0px 5px;
+}
+
+.ProductDet .poppupConte .poppup .CodeClef button{
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #FF6969;
+    color: white;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.ProductDet .poppupConte .poppup .group{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ProductDet .poppupConte .poppup .group img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.ProductDet .poppupConte .poppup .group span{
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+}
+.ProductDet .poppupConte .poppup .group input{
+    padding: 3px;
+}
+
+
+.ddet img{
+    display: block;
+    width: 300px;
+    height: 200px;
+    margin: 2px auto;
+}
+
+.ddet iframe{
+    width: 100%;
+    height: 300px;
+}
+
+
+
+
+
+
+@media screen and (min-width:500px) {
+    .ProductDet{
+        width: 400px;
+        margin: 0px auto;
+    }
+    .ProductDet .button{
+        width: 400px;
+        position: relative;
+    }
+}

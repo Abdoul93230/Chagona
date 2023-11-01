@@ -1,0 +1,182 @@
+.ACustomerDet{
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+}
+
+.ACustomerDet .left{
+    width: 49%;
+}
+
+.ACustomerDet .left img{
+    width: 200px;
+    height: 200px;
+    border: 5px solid cadetblue;
+    border-radius: 50%;
+}
+
+.ACustomerDet .right{
+    width: 50%;
+}
+
+.ACustomerDet .right table{
+    width: 100%;
+}
+.ACustomerDet .right table tr{
+    border: 2px solid black;
+}
+
+.ACustomerDet .right table tr th{
+    color: rgba(22, 22, 22, 0.897);
+    padding:10px;
+    border-bottom: 2px solid black;
+    font-size: 12px;
+}
+
+.ACustomerDet .right table tr td{
+    text-align: center;
+    padding: 8px 0px;
+    font-size: 13px;
+}
+
+.ACustomerDet .right form{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.ACustomerDet .right form textarea{
+    display: block;
+    width: 80%;
+    height: 150px;
+    border: 2px solid rgba(0, 0, 0, 0.623);
+    font-size: 15px;
+}
+.ACustomerDet .right form label{
+    margin-left: 5px ;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+}
+.ACustomerDet .right form label select{
+    margin-left: 10px;
+}
+.ACustomerDet .right form input[type="submit"]{
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: rgb(37, 37, 233);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.ACustomerDet .left .bon{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.ACustomerDet .left .bon h3{
+    text-transform: capitalize;
+}
+.ACustomerDet .left .bon form{
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.ACustomerDet .left .bon form label{
+    font-weight: bold;
+    margin-bottom: 2px;
+    text-transform: capitalize;
+
+}
+.ACustomerDet .left .bon form input{
+    padding: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.767);
+    border-radius: 5px;
+}
+
+.ACustomerDet .left .bon form input[type="submit"]{
+    color:white;
+    background-color: rgb(37, 37, 233);
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+}
+
+
+@media screen and (max-width:980px) {
+    .ACustomerDet{
+        flex-direction: column;
+        align-items: center;
+    }
+    .ACustomerDet .left{
+        width: 90%;
+        margin: 10px auto;
+    }
+    .ACustomerDet .right{
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+
+@media screen and (max-width:780px){
+    .ACustomerDet .left{
+        width: 99%;
+       
+    }
+    .ACustomerDet .right{
+        width: 99%;
+    }
+}
+
+@media screen and (max-width:585px){
+    .ACustomerDet .left .bon{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ACustomerDet .left .bon form{
+        width: 99%;
+        margin: 8px 0px;
+    }
+    .ACustomerDet .right table tr th{
+        font-size: 11px;
+    }
+    .ACustomerDet .right table tr td{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:480px){
+    .ACustomerDet .right table tr th{
+        font-size: 10px;
+    }
+    .ACustomerDet .right table tr td{
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width:375px){
+    .ACustomerDet .right table tr th{
+        font-size: 9px;
+    }
+    .ACustomerDet .right table tr td{
+        font-size: 10px;
+    }
+}
