@@ -23,10 +23,7 @@ import AdminConnection from "./AdminComponents/AdminConnection/AdminConnection";
 import GaleriesComponent from "./components/GaleriesComponent/GaleriesComponent";
 import PageNotRady from "./components/PageNotRady/PageNotRady";
 import PubDet from "./components/PubDet/PubDet";
-<<<<<<< HEAD
 import BecomSellerInfos from "./components/BecomSellerInfos/BecomSellerInfos";
-=======
->>>>>>> cbce12963a6551575879d802a05f6cfede3f84a3
 import YourComponent from "./Pages/YourComponent";
 import io from "socket.io-client";
 import "reactjs-popup/dist/index.css";
@@ -185,7 +182,6 @@ function App() {
                 acces === "oui" ? <ContactUs /> : <Connection chg={changeA} />
               }
             />
-<<<<<<< HEAD
             <Route
               path="/BecomSellerInfos"
               element={
@@ -196,8 +192,6 @@ function App() {
                 )
               }
             />
-=======
->>>>>>> cbce12963a6551575879d802a05f6cfede3f84a3
 
             <Route
               path="/Messages"
