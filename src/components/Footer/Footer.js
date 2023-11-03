@@ -44,11 +44,7 @@ function Footer({ scroll }) {
           </li>
           <li
             onClick={() => {
-<<<<<<< HEAD
               navigue("/BecomSellerInfos");
-=======
-              navigue("/PageNotRady");
->>>>>>> cbce12963a6551575879d802a05f6cfede3f84a3
             }}
           >
             BECOME A SELLER
