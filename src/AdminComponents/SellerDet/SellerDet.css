@@ -1,0 +1,278 @@
+.SellerDet{
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: white;
+    font-family: serif;
+}
+
+.SellerDet .left{
+    width: 49%;
+}
+
+.SellerDet .left img{
+    width: 200px;
+    height: 200px;
+    border: 5px solid cadetblue;
+    border-radius: 50%;
+}
+
+.SellerDet .left .lisrProduit{
+    margin-top: 18px;
+}
+
+.SellerDet .left .lisrProduit h2{
+    font-size: 16px;
+    text-align: left;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+
+
+.SellerDet .left .cont{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    height: 500px;
+    overflow: auto;
+    padding: 10px;
+}
+
+.SellerDet .left .cont .conte{
+    width: 100%;
+    height: auto !important;
+    display: flex;
+    border-radius: 10px;
+    padding: 10px 5px;
+    box-shadow: 0px 0px 10px #838282;
+    margin-bottom: 9px;
+    position: relative;
+}
+
+.SellerDet .left .cont .conte .option{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+.SellerDet .left .cont .conte .option .i{
+    cursor: pointer;
+    margin: 0px 2px;
+}
+
+.SellerDet .left .cont .conte .option .i:nth-child(2){
+    color: #ff6969;
+    display: none;
+}
+.SellerDet .left .cont .conte .option .i:nth-child(1){
+    color: rgba(66, 66, 230, 0.753);
+}
+
+
+.SellerDet .left .cont .conte .l{
+    width: 25%;
+    width: 100px;
+}
+
+.SellerDet .left .cont .conte img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0px 0px 10px #838282;
+}
+SellerDet
+.SellerDet .left .cont .conte .r{
+    width: 65%;
+    margin-left: 7px;
+}
+
+.SellerDet .left .cont .conte .r ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.SellerDet .left .cont .conte .r ul li{
+    margin: 2px 5px;
+}
+
+
+
+
+
+
+
+
+
+
+.SellerDet .right{
+    width: 50%;
+}
+
+.SellerDet .right table{
+    width: 100%;
+}
+.SellerDet .right table tr{
+    border: 2px solid black;
+}
+
+.SellerDet .right table tr th{
+    color: rgba(22, 22, 22, 0.897);
+    padding:10px;
+    border-bottom: 2px solid black;
+    font-size: 12px;
+}
+
+.SellerDet .right table tr td{
+    text-align: center;
+    padding: 8px 0px;
+    font-size: 13px;
+    text-transform: capitalize;
+}
+
+.SellerDet .right form{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.SellerDet .right form textarea{
+    display: block;
+    width: 80%;
+    height: 150px;
+    border: 2px solid rgba(0, 0, 0, 0.623);
+    font-size: 15px;
+}
+.SellerDet .right form label{
+    margin-left: 5px ;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+}
+
+.SellerDet .right form input[type="submit"]{
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: rgb(37, 37, 233);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+
+.SellerDet .right .Store{
+    box-shadow: 0px 0px 10px #838282;
+    border-radius: 10px;
+    margin-top: 10px;
+    pad: 10px;
+}
+
+
+.SellerDet .right .Store h3{
+    color: #838282;
+
+}
+
+
+.SellerDet .right .Store .conte{
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.SellerDet .right .Store .conte .l{
+    width: 25%;
+    width: 100px;
+}
+
+.SellerDet .right .Store img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px #838282;
+}
+
+.SellerDet .right .Store .conte .r{
+    width: 65%;
+    margin-left: 10px;
+}
+
+.SellerDet .right .Store .conte .r ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.SellerDet .right .Store .conte .r ul li{
+    margin: 5px;
+}
+
+
+
+@media screen and (max-width:980px) {
+    .SellerDet{
+        flex-direction: column;
+        align-items: center;
+    }
+    .SellerDet .left{
+        width: 90%;
+        margin: 10px auto;
+    }
+    .SellerDet .right{
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+
+@media screen and (max-width:780px){
+    .SellerDet .left{
+        width: 99%;
+       
+    }
+    .SellerDet .right{
+        width: 99%;
+    }
+}
+
+@media screen and (max-width:585px){
+   
+    .SellerDet .right table tr th{
+        font-size: 11px;
+    }
+    .SellerDet .right table tr td{
+        font-size: 12px;
+    }
+}
+@media screen and (max-width:480px){
+    .SellerDet .right table tr th{
+        font-size: 10px;
+    }
+    .SellerDet .right table tr td{
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width:375px){
+    .SellerDet .right table tr th{
+        font-size: 9px;
+    }
+    .SellerDet .right table tr td{
+        font-size: 10px;
+    }
+}

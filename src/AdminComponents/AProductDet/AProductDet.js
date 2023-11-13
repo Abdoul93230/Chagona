@@ -171,11 +171,11 @@ function AProductDet() {
               </thead>
               <tbody>
                 <tr>
-                  <td>{product.name}</td>
-                  <td>{product.prix} fcfa</td>
-                  <td>{product.quantite}</td>
-                  <td>{fournisseur.name ? fournisseur.name : "Aucun"}</td>
-                  <td>{product.prixPromo} f</td>
+                  <td>{product?.name}</td>
+                  <td>{product?.prix} fcfa</td>
+                  <td>{product?.quantite}</td>
+                  <td>{fournisseur?.name ? fournisseur.name : "Aucun"}</td>
+                  <td>{product?.prixPromo} f</td>
                 </tr>
                 <tr>
                   <th colSpan={2}>Categorie</th>

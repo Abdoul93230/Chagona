@@ -37,6 +37,8 @@ import AFournisseurDet from "../AFournisseurDet/AFournisseurDet";
 import AddFournisseur from "../AddFournisseurs/AddFournisseur";
 import AddCategorie from "../AddCategorie/AddCategorie";
 import ProductPub from "../ProductPub/ProductPub";
+import Sellers from "../Sellers/Sellers";
+import SellerDet from "../SellerDet/SellerDet";
 import { useParams } from "react-router-dom";
 
 const admin = JSON.parse(localStorage.getItem("AdminEcomme"));
@@ -89,6 +91,9 @@ function ComposentP({ allCategories, allProducts }) {
             </Link>
             <Link to="/Admin/AFournisseurs" className="li" onClick={show}>
               <HelpCircle className="i" /> Fournisseurs
+            </Link>
+            <Link to="/Admin/Sellers" className="li" onClick={show}>
+              <HelpCircle className="i" /> Sellers
             </Link>
             <Link className="li" to="/Admin/AddCategorie" onClick={show}>
               <Settings className="i" /> Add Categorie
@@ -174,8 +179,12 @@ function ComposentP({ allCategories, allProducts }) {
           <AodersDet allCategories={allCategories} allProducts={allProducts} />
         ) : params.op === "AFournisseurs" ? (
           <AFournisseurs />
+        ) : params.op === "Sellers" ? (
+          <Sellers />
         ) : params.op === "AFournisseurDet" ? (
           <AFournisseurDet />
+        ) : params.op === "SellerDet" ? (
+          <SellerDet />
         ) : params.op === "AddFournisseur" ? (
           <AddFournisseur />
         ) : params.op === "AddCategorie" ? (

@@ -1,0 +1,217 @@
+.Sellers{
+    width: 100%;
+    position: relative;
+    height: auto;
+}
+
+.Sellers .top{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Sellers .top h3{
+    font-weight: bolder;
+    font-family: serif;
+}
+.Sellers .top .search{
+    border: 2px solid rgb(3,3,88);
+    border-radius: 5px;
+}
+.Sellers .top .search input[type="search"]{
+    padding: 5px 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+.Sellers .top .search input[type="submit"]{
+    padding: 6px 15.1px;
+    background-color: rgba(3,3,88,.6);
+    color: white;
+    font-weight: bold;
+    font-family: serif;
+    height: 100%;
+    border: none;
+    transition: all .5s;
+   
+}
+.Sellers .top .search input[type="submit"]:hover{
+    transition: all .5s;
+    background-color: rgba(3,3,88,.4);
+}
+.Sellers .midel{
+    width: 100%;
+    height: auto;
+    margin-top: 50px;
+    
+}
+.Sellers .midel table{
+    width: 100%;
+}
+.Sellers .midel table thead tr:first-child{
+    background-color: rgba(3,3,88,.9);
+    color: white;
+    font-family: serif;
+    font-style: italic;
+}
+.Sellers .midel table tr:first-child th{
+    padding: 15px 0px;
+}
+.Sellers .midel table tbody tr{
+    background-color: rgba(3,3,88,.7);
+    color: white;
+    border-bottom: 2px solid black !important;
+    cursor: pointer;
+    transition: all .5s;
+}
+.Sellers .midel table tbody tr:hover{
+    background-color: rgba(3,3,88,.8);
+}
+.Sellers .midel table tbody tr td{
+    padding: 4px 0px;
+   
+}
+.Sellers .midel table tbody tr td .img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(3,3,88);
+}
+.Sellers .midel .pagination{
+    width: 151px;
+    margin: 6px 2px; 
+    padding: 3px 0px;
+}
+
+.Sellers .midel .pagination span{
+    color: white;
+    padding: 5px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .8s;
+    font-weight: bold;
+    background: rgb(3,3,88);
+    font-weight: normal;
+}
+.Sellers .midel .pagination span:hover{
+    transition: all .8s;
+    background-color: transparent;
+    color: rgb(3,3,88);
+}
+
+.Sellers .midel .b{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Sellers .midel .b button{
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    background-color: blue;
+    border-radius: 5px;
+    border: none;
+    margin-left: 10px;
+
+}
+
+
+@media screen and (max-width:840px) {
+    .Sellers .midel table tbody tr td{
+        font-size: 13px;
+    }
+    .Sellers .midel table tr:first-child th{
+        padding: 12px 0px;
+        font-size: 16px;
+    }
+    .Sellers .midel .pagination{
+        width: 142px;
+    }
+    .Sellers .midel .pagination span{
+        padding: 3px 5px;
+        font-weight: normal;
+    }
+}
+
+@media screen and (max-width:690px) {
+    .Sellers .midel table tr:first-child th{
+        padding: 11px 0px;
+        font-size: 13px;
+    }
+    .Sellers .midel table tbody tr td:last-child{
+        display: none;
+    }
+    .Sellers .midel table tr:first-child th:last-child{
+        display: none;
+    }
+}
+
+@media screen and (max-width:560px) {
+    
+    .Sellers .midel table tbody tr td{
+        font-size: 11px;
+    }
+    .Sellers .midel table tr:first-child th{
+        padding: 12px 0px;
+        font-size: 13px;
+    }
+    .Sellers .midel .pagination{
+        width: 142px;
+    }
+    .Sellers .midel .pagination span{
+        padding: 3px 5px;
+        font-weight: normal;
+    }
+}
+@media screen and (max-width:530px){
+    .Sellers .midel table{
+        width: 100%;
+    }
+    .Sellers .midel table tr:first-child th{
+        font-size: 12px;
+    }
+
+    .Sellers .midel table tbody tr td:nth-child(5){
+        display: none;
+    }
+    .Sellers .midel table tr:first-child th:nth-child(5){
+        display: none;
+    }
+}
+
+@media screen and (max-width:420px){
+    .Sellers .top h3{
+        font-size: 16px;
+    }
+    .Sellers .top .search{
+        width: 60%;
+        display: flex;
+    }
+    .Sellers .top .search input[type="submit"]{
+        padding: 5px;
+        width: 35%;
+    }
+    .Sellers .top .search input[type="search"]{
+        width: 65%;
+    }
+    
+    .Sellers .midel table tbody tr td:nth-child(4){
+        display: none;
+    }
+    .Sellers .midel table tr:first-child th:nth-child(4){
+        display: none;
+    }
+    .Sellers .midel table tbody tr td{
+        font-size: 13px;
+    }
+    
+}
