@@ -5,7 +5,7 @@ import SingnUp from "../components/SingnUp/SingnUp";
 import ForgotPassword from "../components/ForgotPassword/ForgotPassword";
 
 function Connection({ chg }) {
-  const [option, setOption] = useState("SingnUp");
+  const [option, setOption] = useState("LogIn");
   const changeOption = (param) => {
     setOption(param);
   };

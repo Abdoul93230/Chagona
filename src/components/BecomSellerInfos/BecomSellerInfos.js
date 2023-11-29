@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronLeft } from "react-feather";
+import { useNavigate } from "react-router-dom";
 import "./BecomSellerInfos.css";
 
 function BecomSellerInfos() {
@@ -99,6 +100,7 @@ function BecomSellerInfos() {
   function goBack() {
     window.history.back();
   }
+  const navigue = useNavigate();
 
   return (
     <div className="BecomSellerInfos">
@@ -121,7 +123,11 @@ function BecomSellerInfos() {
         })}
       </ul>
       <div className="Btn">
-        <button>Apply</button>
+        <button
+          onClick={() => window.open("https://habou227-seller.onrender.com")}
+        >
+          Apply
+        </button>
       </div>
     </div>
   );

@@ -133,6 +133,7 @@ function EditProfile() {
         if (Profile.status === 200) {
           handleAlert(Profile.data.message);
           setEditingPhoto(false);
+          setPhoto(null);
           axios
             .get(`${BackendUrl}/getUserProfile`, {
               params: {
@@ -188,10 +189,10 @@ function EditProfile() {
         setPhoto(selectedFile);
         return true;
       } else {
-        alert(
+        handleAlertwar(
           "Le fichier sélectionné n'est pas une image valide (JPEG, PNG, GIF, WebP autorisés)."
         );
-        setEditingPhoto(false);
+        // setEditingPhoto(false);
         setPhoto(null);
         return false;
       }
@@ -479,7 +480,7 @@ function EditProfile() {
                   }}
                 />
                 <label
-                  htmlFor="imagS1"
+                  htmlFor="image"
                   onClick={() => setEditingPhoto(true)}
                   style={{
                     width: "280px",
