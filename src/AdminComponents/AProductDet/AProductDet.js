@@ -16,6 +16,7 @@ function AProductDet() {
   const [fournisseur, setFournisseur] = useState("");
   const [types, setTypes] = useState("");
   const [categorie, setcategorie] = useState("");
+  const [Seller, setSeller] = useState(null);
   const [isWaiting, setIsWaitting] = useState(false);
 
   const changeImgP = (param) => {
@@ -33,7 +34,17 @@ function AProductDet() {
 
         const ctype = res.data.data.ClefType;
         const cFournisseur = res.data.data.Clefournisseur;
+        ////////////////////////////////////////////////////////////
+        axios
+          .get(`${BackendUrl}/getSeller/${cFournisseur}`)
+          .then((res) => {
+            setSeller(res.data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
+        ////////////////////////////////////////////////////////////////
         axios
           .get(`${BackendUrl}/fournisseur/${cFournisseur}`)
           .then((res) => {
@@ -174,7 +185,13 @@ function AProductDet() {
                   <td>{product?.name}</td>
                   <td>{product?.prix} fcfa</td>
                   <td>{product?.quantite}</td>
-                  <td>{fournisseur?.name ? fournisseur.name : "Aucun"}</td>
+                  <td>
+                    {fournisseur?.name
+                      ? fournisseur.name
+                      : Seller?.name
+                      ? Seller?.name
+                      : "Aucun"}
+                  </td>
                   <td>{product?.prixPromo} f</td>
                 </tr>
                 <tr>

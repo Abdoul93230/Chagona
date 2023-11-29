@@ -13,7 +13,19 @@ function AodersDet({ allCategories, allProducts }) {
   const [commandes, setCommandes] = useState(null);
   const [fournisseurs, setFournisseurs] = useState([]);
   const [allCode, setAllCode] = useState(null);
+  const [Sellers, setSellers] = useState([]);
   // console.log(params.op);
+
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/getSellers`)
+      .then((res) => {
+        setSellers(res.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -157,18 +169,38 @@ function AodersDet({ allCategories, allProducts }) {
             return (
               <tr key={index}>
                 <td>
-                  {allProducts?.find((item) => item._id === param.produit).name}
+                  {
+                    allProducts?.find((item) => item._id === param.produit)
+                      ?.name
+                  }
                 </td>
                 <td>{param.produit}</td>
                 <td>
-                  {
-                    fournisseurs?.find(
-                      (item) =>
-                        item._id ===
-                        allProducts?.find((itm) => itm._id === param.produit)
-                          .Clefournisseur
-                    )?.numero
-                  }
+                  {fournisseurs?.find(
+                    (item) =>
+                      item._id ===
+                      allProducts?.find((itm) => itm._id === param.produit)
+                        ?.Clefournisseur
+                  )?.numero
+                    ? fournisseurs?.find(
+                        (item) =>
+                          item._id ===
+                          allProducts?.find((itm) => itm._id === param.produit)
+                            ?.Clefournisseur
+                      )?.numero
+                    : Sellers?.find(
+                        (item) =>
+                          item._id ===
+                          allProducts?.find((itm) => itm._id === param.produit)
+                            ?.Clefournisseur
+                      )?.phone
+                    ? Sellers?.find(
+                        (item) =>
+                          item._id ===
+                          allProducts?.find((itm) => itm._id === param.produit)
+                            ?.Clefournisseur
+                      )?.phone
+                    : "nada"}
                 </td>
                 <td>{param.quantite}</td>
                 <td>
@@ -210,16 +242,16 @@ function AodersDet({ allCategories, allProducts }) {
 
                 <td>
                   {allProducts?.find((item) => item._id === param.produit)
-                    .prixPromo ||
+                    ?.prixPromo ||
                     allProducts?.find((item) => item._id === param.produit)
-                      .prix}
+                      ?.prix}
                 </td>
 
                 <td>
                   {(allProducts?.find((item) => item._id === param.produit)
-                    .prixPromo ||
+                    ?.prixPromo ||
                     allProducts?.find((item) => item._id === param.produit)
-                      .prix) * param.quantite}
+                      ?.prix) * param.quantite}
                 </td>
               </tr>
             );

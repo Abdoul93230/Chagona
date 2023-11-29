@@ -4,7 +4,7 @@ import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import "./EditProfile.css";
 import axios from "axios";
 import AvatarEditor from "react-avatar-editor";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import image from "../../Images/icon_user.png";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function EditProfile() {
@@ -62,7 +62,7 @@ function EditProfile() {
         })
         .then((response) => {
           const data = response.data.user;
-
+          console.log(a);
           setNom(data.name);
 
           setEmail(data.email);
@@ -132,7 +132,7 @@ function EditProfile() {
       .then((Profile) => {
         if (Profile.status === 200) {
           handleAlert(Profile.data.message);
-
+          setEditingPhoto(false);
           axios
             .get(`${BackendUrl}/getUserProfile`, {
               params: {
@@ -350,7 +350,7 @@ function EditProfile() {
             <input type="submit" value="Submit" onSubmit={onSub} />
           </div>
         </form>
-        {editingPhoto && (
+        {/* {editingPhoto && (
           <div
             className="editPhoto"
             style={{
@@ -405,6 +405,123 @@ function EditProfile() {
                 />
                 {photo ? (
                   <button className="deux" onClick={onChangeImg}>
+                    Enregistrer
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          </div>
+        )} */}
+
+        {editingPhoto && (
+          <div
+            className="editPhoto"
+            style={{
+              position: "absolute",
+              width: "100%",
+              height: "100vh",
+              top: "0px",
+              left: "0px",
+              zIndex: 100,
+
+              backgroundColor: "white",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+
+                background: "rgba(0, 0, 0, 0.747)",
+                paddingTop: "100px",
+              }}
+            >
+              <div
+                className="item"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0px 0px 6px #ff6969",
+                  borderRadius: "10px",
+                  width: 320,
+                  margin: "0px auto",
+                }}
+              >
+                <AvatarEditor
+                  ref={editorRef}
+                  image={photo}
+                  width={130}
+                  height={130}
+                  border={10}
+                  borderRadius={50}
+                  scale={scale}
+                  style={{
+                    width: "80%",
+                    height: "230px",
+                    margin: "10px auto",
+                  }}
+                />
+                <input
+                  type="range"
+                  min="1"
+                  max="2"
+                  step="0.01"
+                  value={scale}
+                  onChange={handleScaleChange}
+                  style={{
+                    width: "80%",
+                    margin: "0px auto",
+                    marginBottom: "15px",
+                  }}
+                />
+                <label
+                  htmlFor="imagS1"
+                  onClick={() => setEditingPhoto(true)}
+                  style={{
+                    width: "280px",
+                    color: "#fff",
+                    cursor: "pointer",
+                    background: "#ff6969",
+                    padding: "5px 10px",
+                    border: "none",
+                    borderRadius: "15px",
+                    fontFamily: "serif",
+                    fontWeight: "bold",
+                    margin: "10px auto",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  Select Images
+                </label>
+                <button
+                  onClick={() => {
+                    setEditingPhoto(false);
+                    setPhoto(null);
+                  }}
+                  style={{
+                    width: "280px",
+                    color: "#fff",
+                    cursor: "pointer",
+                    background: "#ff6969",
+                    padding: "5px 10px",
+                    border: "none",
+                    borderRadius: "15px",
+                    fontFamily: "serif",
+                    fontWeight: "bold",
+                    fontSize: "20px",
+                    margin: "10px auto",
+                  }}
+                >
+                  Annuler
+                </button>
+                {photo ? (
+                  <button className="deux" onClick={onSub}>
                     Enregistrer
                   </button>
                 ) : (
