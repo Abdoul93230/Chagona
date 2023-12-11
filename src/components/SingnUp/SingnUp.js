@@ -3,7 +3,7 @@ import "./SingnUp.css";
 import axios from "axios";
 import {
   ChevronRight,
-  Menu,
+  Lock,
   MessageSquare,
   PhoneCall,
   User,
@@ -206,25 +206,6 @@ function SingnUp({ chg }) {
           <ul>
             <li>
               <div className="left">
-                <MessageSquare />
-              </div>
-              <div className="right">
-                <label>Email</label>
-                <input type="email" placeholder="janedoe123@email.com" />
-              </div>
-            </li>
-            or
-            <li>
-              <div className="left">
-                <PhoneCall />
-              </div>
-              <div className="right">
-                <label>Phone Number</label>
-                <input type="number" placeholder="+227 87727501" />
-              </div>
-            </li>
-            <li>
-              <div className="left">
                 <User />
               </div>
               <div className="right">
@@ -232,9 +213,31 @@ function SingnUp({ chg }) {
                 <input type="text" placeholder="janedoe12345" />
               </div>
             </li>
+            <div className="gMP">
+              <li>
+                <div className="left">
+                  <MessageSquare />
+                </div>
+                <div className="right">
+                  <label>Email</label>
+                  <input type="email" placeholder="janedoe123@email.com" />
+                </div>
+              </li>
+              or
+              <li>
+                <div className="left">
+                  <PhoneCall />
+                </div>
+                <div className="right">
+                  <label>Phone Number</label>
+                  <input type="number" placeholder="+227 87727501" />
+                </div>
+              </li>
+            </div>
+
             <li>
               <div className="left">
-                <Menu />
+                <Lock />
               </div>
               <div className="right">
                 <label>Password</label>

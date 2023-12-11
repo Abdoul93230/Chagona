@@ -381,6 +381,29 @@ function ProductDet({ product }) {
     shareProductViaWhatsApp(VP?.name ?? "nom", currentURL, VP?.image1);
   };
 
+  const setBorder = (index) => {
+    const cls = document.getElementsByClassName("setBorder");
+    for (let i = 0; i < cls.length; i++) {
+      if (i === index) {
+        if (!cls[i].classList.contains("active"))
+          cls[i].classList.add("active");
+      } else {
+        cls[i].classList.remove("active");
+      }
+    }
+  };
+  const setBorderT = (index) => {
+    const cls = document.getElementsByClassName("setBorderT");
+    for (let i = 0; i < cls.length; i++) {
+      if (i === index) {
+        if (!cls[i].classList.contains("active"))
+          cls[i].classList.add("active");
+      } else {
+        cls[i].classList.remove("active");
+      }
+    }
+  };
+
   const OP =
     option === "Details" ? (
       <div className="Details">
@@ -428,6 +451,7 @@ function ProductDet({ product }) {
                         onClick={() => {
                           setColor(param);
                           setNbrCol(+index + 1);
+                          setBorder(index);
                         }}
                       >
                         <img
@@ -436,6 +460,7 @@ function ProductDet({ product }) {
                             height: "100%",
                             objectFit: "contain",
                           }}
+                          className="setBorder"
                           src={param}
                           alt="loading"
                         />
@@ -471,7 +496,14 @@ function ProductDet({ product }) {
               <div className="siz">
                 {VP?.taille[0].split(",").map((param, index) => {
                   return (
-                    <span key={index} onClick={() => setTaille(param)}>
+                    <span
+                      className="setBorderT"
+                      key={index}
+                      onClick={() => {
+                        setTaille(param);
+                        setBorderT(index);
+                      }}
+                    >
                       {param}
                     </span>
                   );
@@ -506,7 +538,7 @@ function ProductDet({ product }) {
         {VP?.pictures.length !== 0 ? (
           <div className="ImgPlus">
             {VP?.pictures.map((param, index) => {
-              return <img alt="loading" src={param} />;
+              return <img key={index} alt="loading" src={param} />;
             })}
           </div>
         ) : (

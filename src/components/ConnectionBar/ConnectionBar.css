@@ -20,6 +20,8 @@
     cursor: pointer;
     list-style-type: none;
 }
-/* .ConnectionBar ul .active{
+.ConnectionBar ul .active{
     color: #515c6f;
-} */
+    border-bottom: 3px solid #515c6f;
+    padding-bottom: 5px;
+}

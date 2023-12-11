@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronRight, Menu, PhoneCall, User } from "react-feather";
+import { ChevronRight, Lock, PhoneCall, User } from "react-feather";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LogIn.css";
@@ -119,6 +119,7 @@ function LogIn({ chg, creer }) {
           ? error.response.data.message
           : "Une erreur s'est produite lors de la connexion. Veuillez réessayer."
       );
+      // console.log(error);
     }
   };
 
@@ -142,37 +143,39 @@ function LogIn({ chg, creer }) {
       ) : (
         <div className="LogIn">
           <ul>
+            <div className="gMP">
+              <li>
+                <div className="left">
+                  <User />
+                </div>
+                <div className="right">
+                  <label>Email/UserEmail</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={chargeEmail}
+                    placeholder="janedoe123@email.com"
+                  />
+                </div>
+              </li>
+              or
+              <li>
+                <div className="left">
+                  <PhoneCall />
+                </div>
+                <div className="right">
+                  <label>Phone Number</label>
+                  <input
+                    type="number"
+                    placeholder="+227 87727501"
+                    onChange={chargePhoneNumber}
+                  />
+                </div>
+              </li>
+            </div>
             <li>
               <div className="left">
-                <User />
-              </div>
-              <div className="right">
-                <label>Email/UserEmail</label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={chargeEmail}
-                  placeholder="janedoe123@email.com"
-                />
-              </div>
-            </li>
-            or
-            <li>
-              <div className="left">
-                <PhoneCall />
-              </div>
-              <div className="right">
-                <label>Phone Number</label>
-                <input
-                  type="number"
-                  placeholder="+227 87727501"
-                  onChange={chargePhoneNumber}
-                />
-              </div>
-            </li>
-            <li>
-              <div className="left">
-                <Menu />
+                <Lock />
               </div>
               <div className="right">
                 <label>Password</label>

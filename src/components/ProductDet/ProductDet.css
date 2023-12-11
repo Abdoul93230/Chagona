@@ -151,6 +151,16 @@
     margin: 0px 2px;
     /* border-radius: 50%; */
 }
+.ProductDet .color .coli .active{
+    border: 3px solid #FF6969;
+    width: 53px !important;
+    height: 53px !important;
+}
+.ProductDet .color .col .active{
+    border: 3px solid #FF6969;
+    width: 43px !important;
+    height: 43px !important;
+}
 .ProductDet .color .coli span img{
     border-radius: 50%;
 }
@@ -160,6 +170,7 @@
     padding: 0px 10px;
     margin-bottom: 10px;
 }
+
 
 .ProductDet .size h3{
     color: #515C6F;
@@ -188,6 +199,11 @@
     padding: 5px;
     width: 60px;
     margin: 0px 2px;
+}
+.ProductDet .size .siz .active{
+    border: 3px solid #FF6969;
+    width: 63px !important;
+    /* height: 43px !important; */
 }
 
 .ProductDet .button{

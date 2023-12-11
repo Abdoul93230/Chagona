@@ -24,6 +24,13 @@
     padding: 10px;
 }
 
+.LogIn ul .gMP{
+    width: 96%;
+    margin: 5px auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #ff6969a2;
+}
+
 .LogIn ul li .left{
     color: #515C6F;
     

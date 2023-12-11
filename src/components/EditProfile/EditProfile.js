@@ -300,7 +300,9 @@ function EditProfile() {
         />
 
         <form onSubmit={onSub}>
-          <label htmlFor="nom">Nom (3 caracteres au moin)</label>
+          <label htmlFor="nom">
+            Nom : <span>(3 caracteres au moin)</span>
+          </label>
           <input
             type="text"
             id="nome"
@@ -310,7 +312,7 @@ function EditProfile() {
             }}
             style={{ borderColor: nom.trim().length < 3 ? "red" : "gray" }}
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">Email : </label>
           <input
             type="email"
             id="email"
@@ -325,7 +327,7 @@ function EditProfile() {
             }}
           />
 
-          <label htmlFor="Phone">Phone</label>
+          <label htmlFor="Phone">Phone :</label>
           <input
             type="number"
             id="Phone"
