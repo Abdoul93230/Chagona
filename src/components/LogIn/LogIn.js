@@ -114,6 +114,7 @@ function LogIn({ chg, creer }) {
         handleError(response.data.message);
       }
     } catch (error) {
+      console.log(error);
       handleError(
         error.response && error.response.status === 400
           ? error.response.data.message
