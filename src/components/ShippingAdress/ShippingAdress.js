@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./ShippingAdress.css";
 import { ChevronLeft } from "react-feather";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { handleAlert, handleAlertwar } from "../../App";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function ShippingAdress() {
@@ -13,6 +15,8 @@ function ShippingAdress() {
   const [region, setRegion] = useState("");
   const [Quartier, setQuartier] = useState("");
   const [plus, setPlus] = useState("");
+  const navigue = useNavigate();
+  const location = useLocation();
   function goBack() {
     window.history.back();
   }
@@ -73,7 +77,14 @@ function ShippingAdress() {
     axios
       .post(`${BackendUrl}/createOrUpdateAddress`, obj)
       .then((shipping) => {
-        alert(shipping.data.message);
+        handleAlert(shipping.data.message);
+        const fromCartParam = new URLSearchParams(location.search).get(
+          "fromCart"
+        );
+        if (fromCartParam === "true") {
+          navigue(`/Cart?fromCart=true`);
+          return;
+        }
         axios
           .get(`${BackendUrl}/getAddressByUserKey/${a.id}`)
           .then((shippingAd) => {
@@ -89,6 +100,9 @@ function ShippingAdress() {
           });
       })
       .catch((error) => {
+        if (error.response.status === 400) {
+          handleAlertwar(error.response.data.err);
+        }
         console.log(error);
       });
   };
@@ -100,15 +114,6 @@ function ShippingAdress() {
       <h2>Shipping Adress</h2>
       <form onSubmit={envoyer}>
         <div className="left E">
-          <label htmlFor="region">Name :</label>
-          <input
-            type="text"
-            required
-            id="name"
-            placeholder="votre nom"
-            value={nom}
-            onChange={(e) => setNom(e.target.value)}
-          />
           <label htmlFor="region">
             Region : {region.length !== 0 ? region : ""}
           </label>
@@ -136,6 +141,15 @@ function ShippingAdress() {
             placeholder="Tape Here"
             value={Quartier}
             onChange={(e) => setQuartier(e.target.value)}
+          />
+          <label htmlFor="region">Name :</label>
+          <input
+            type="text"
+            required
+            id="name"
+            placeholder="votre nom"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
           />
         </div>
         <div className="right E">

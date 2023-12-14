@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./CartCheckout.css";
 import { ChevronRight, X, CreditCard, Minus, Plus } from "react-feather";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { handleAlert, handleAlertwar } from "../../App";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -18,6 +17,7 @@ function CartCheckout({ op }) {
   const [codePro, setCodPro] = useState("");
   const [codeValide, setCodeValide] = useState(null);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   const [poppup, setPoppup] = useState(false);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
@@ -30,30 +30,6 @@ function CartCheckout({ op }) {
   const [allProducts, setAllProduits] = useState(null);
 
   const [produits, setProduits] = useState(null);
-
-  const handleAlert = (message) => {
-    toast.success(`${message} !`, {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
-  const handleAlertwar = (message) => {
-    toast.warn(`${message} !`, {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
 
   useEffect(() => {
     const local = localStorage.getItem("panier");
@@ -184,11 +160,11 @@ function CartCheckout({ op }) {
       return;
     }
     if (phone.length <= 0) {
-      navigue("/More/shipping_address");
+      navigue("/More/shipping_address?fromCart=true");
       return;
     }
     if (choix.length <= 0) {
-      navigue("/More/payment_method");
+      navigue("/More/payment_method?fromCart=true");
       return;
     }
     if (local) {
@@ -247,7 +223,10 @@ function CartCheckout({ op }) {
       <LoadingIndicator loading={loading}>
         <div className="top">
           <X
-            onClick={() => op("un")}
+            onClick={() => {
+              op("un");
+              navigue("/Cart");
+            }}
             style={{ width: "40px", height: "40px" }}
           />
         </div>
@@ -255,7 +234,7 @@ function CartCheckout({ op }) {
         <h5>Shipping Address</h5>
 
         <div className="ul">
-          <ul onClick={() => navigue("/More/shipping_address")}>
+          <ul onClick={() => navigue(`/More/shipping_address?fromCart=true`)}>
             <li>{nom}</li>
             <li>{region}</li>
             <li>{Quartier}</li>
@@ -275,7 +254,7 @@ function CartCheckout({ op }) {
 
         <div
           className="payment"
-          onClick={() => navigue("/More/payment_method")}
+          onClick={() => navigue("/More/payment_method?fromCart=true")}
         >
           <div className="left">
             <h4>payment method</h4>
@@ -404,7 +383,6 @@ function CartCheckout({ op }) {
         ) : (
           <></>
         )}
-        <ToastContainer />
       </LoadingIndicator>
     </div>
   );

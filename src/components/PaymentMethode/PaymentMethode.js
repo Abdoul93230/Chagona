@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./PaymentMethode.css";
 import { ChevronLeft, CreditCard } from "react-feather";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { handleAlert, handleAlertwar } from "../../App";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function PaymentMethode() {
   const [choix, setChoix] = useState("");
@@ -13,31 +13,9 @@ function PaymentMethode() {
   const [operateur, setOperateur] = useState("");
   const [cvc, setCvc] = useState("");
   const regexPhone = /^[0-9]{8,}$/;
+  const location = useLocation();
+  const navigue = useNavigate();
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
-
-  const handleAlert = (message) => {
-    toast.success(`${message} !`, {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
-  const handleAlertwar = (message) => {
-    toast.warn(`${message} !`, {
-      position: toast.POSITION.TOP_RIGHT,
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
 
   useEffect(() => {
     axios
@@ -143,6 +121,14 @@ function PaymentMethode() {
       .post(`${BackendUrl}/createMoyentPayment`, data)
       .then((res) => {
         handleAlert(res.data.message);
+        const fromCartParam = new URLSearchParams(location.search).get(
+          "fromCart"
+        );
+        if (fromCartParam === "true") {
+          navigue(`/Cart?fromCart=true`);
+          return;
+        } else {
+        }
       })
       .catch((error) => console.log(error));
 
@@ -309,7 +295,11 @@ function PaymentMethode() {
                 }}
               >
                 <div className="left">
-                  <input type="checkbox" defaultChecked={false} />
+                  <input
+                    type="checkbox"
+                    checked={param === "Payment a domicile" ? true : false}
+                    style={{ backgroundColor: "#ff6969", padding: 10 }}
+                  />
                 </div>
                 <div className="right">
                   <span>
@@ -337,7 +327,6 @@ function PaymentMethode() {
       >
         CheckOut
       </button> */}
-      <ToastContainer />
     </div>
   );
 }

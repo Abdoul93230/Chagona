@@ -2,7 +2,7 @@ import React from "react";
 import "./Carts.css";
 import { MessageCircle, ChevronRight, ShoppingCart } from "react-feather";
 import Navbar from "../NaveBar/Navbar";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
@@ -21,6 +21,7 @@ function Carts({ op }) {
   const [Vide, setVide] = useState(null);
   const [allMessage, setAllMessage] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
 
   const calculateTotalPrice = () => {
@@ -42,6 +43,12 @@ function Carts({ op }) {
   let total = 0;
 
   useEffect(() => {
+    const fromCartParam = new URLSearchParams(location.search).get("fromCart");
+    if (fromCartParam === "true") {
+      op(`deux`);
+      return;
+    } else {
+    }
     axios
       .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
       .then((res) => {

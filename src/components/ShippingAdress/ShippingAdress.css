@@ -2,6 +2,7 @@
     width: 100%;
     height: auto;
     padding: 8px;
+    font-family: serif;
 }
 
 .ShippingAdress h2{
@@ -32,13 +33,17 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-top: 120px;
+    flex-direction: column;
+    margin-top: 60px;
+    box-shadow: 0px 0px 10px #515C6F;
+    padding: 10px;
+    border-radius: 8px;
     
 }
 
 
 .ShippingAdress form .E{
-    width: 50%;
+    width: 100%;
 }
 
 .ShippingAdress form .E label{
@@ -46,20 +51,39 @@
     text-align: left;
     color: #515C6F;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin: 9px 0px;
     width: 100%;
 }
 
 .ShippingAdress form .E input{
-    padding: 8px 2px;
+    padding: 9px 2px;
     display: block;
     width: 95%;
+    border: none;
+    color: #515C6F;
+    border-bottom: 2px solid #515C6F;
+    background-color: transparent;
 }
 
 .ShippingAdress form .E textarea{
-    padding: 2px;
+    padding: 5px;
     display: block;
+    color: #515C6F;
     width: 100%;
+    border: 2px solid #515C6F;
+    border-radius: 4px;
+    background-color: transparent;
+    font-weight: bold;
+}
+.ShippingAdress form .E select{
+    border: 1px solid #515C6F;
+    padding: 5px;
+    background-color: transparent;
+    width: 100%;
+    border-radius: 2px;
+    color: #515C6F;
+    border: none;
+    border-bottom: 2px solid #515C6F;
 }
 
 .ShippingAdress button{
@@ -67,6 +91,7 @@
     background-color: #FF6969;
     margin-top: 10px;
     border: none;
+    font-weight: bold;
     padding: 12px 20px;
-    border-radius: 25px;
+    border-radius: 10px;
 }
