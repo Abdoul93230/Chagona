@@ -68,64 +68,63 @@ function App() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const user = JSON.parse(localStorage.getItem("userEcomme"));
-
-  //   if (user) {
-  //     axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
-  //     axios
-  //       .get(`${BackendUrl}/verify`, { withCredentials: true })
-  //       .then((response) => {
-  //         setAcces("oui");
-  //         // console.log(params);
-  //       })
-  //       .catch((error) => {
-  //         setAcces("non");
-  //         console.log(error.response);
-  //         setVerificationComplete(true);
-  //       })
-  //       .finally(() => {
-  //         setVerificationComplete(true);
-  //       });
-  //   } else {
-  //     setVerificationComplete(true);
-  //   }
-  // }, []);
-
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userEcomme"));
 
-    const fetchData = async () => {
-      if (user) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
-        try {
-          const response = await axios.get(`${BackendUrl}/verify`, {
-            withCredentials: true,
-          });
+    if (user) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+      axios
+        .get(`${BackendUrl}/verify`, { withCredentials: true })
+        .then((response) => {
           setAcces("oui");
-        } catch (error) {
+        })
+        .catch((error) => {
           setAcces("non");
           console.log(error.response);
-        } finally {
           setVerificationComplete(true);
-        }
-      } else {
-        setVerificationComplete(true);
-        // Définissez un délai d'attente de 1 minute avant d'afficher l'alerte
-        const timeoutId = setTimeout(() => {
-          handleAlertwar2(
-            "Bienvenue! Veuillez vous connecter ou créer un compte dans le profil",
-            6000
-          );
-        }, 120000); // 60 000 millisecondes = 1 minute
-
-        // Nettoyez le timeout si le composant est démonté avant l'expiration du délai
-        return () => clearTimeout(timeoutId);
-      }
-    };
-
-    fetchData();
+        })
+        .finally(() => {
+          setVerificationComplete(true);
+        });
+    } else {
+      setVerificationComplete(true);
+    }
   }, []);
+
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("userEcomme"));
+
+  //   const fetchData = async () => {
+  //     if (user) {
+  //       axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
+  //       try {
+  //         const response = await axios.get(`${BackendUrl}/verify`, {
+  //           withCredentials: true,
+  //         });
+  //         setAcces("oui");
+  //       } catch (error) {
+  //         setAcces("non");
+  //         console.log(error.response);
+  //       } finally {
+  //         setVerificationComplete(true);
+  //       }
+  //     } else {
+  //       setVerificationComplete(true);
+  //       // Définissez un délai d'attente de 1 minute avant d'afficher l'alerte
+  //       const timeoutId = setTimeout(() => {
+  //         handleAlertwar2(
+  //           "Bienvenue! Veuillez vous connecter ou créer un compte dans le profil",
+  //           6000
+  //         );
+  //       }, 120000); // 60 000 millisecondes = 1 minute
+
+  //       // Nettoyez le timeout si le composant est démonté avant l'expiration du délai
+  //       return () => clearTimeout(timeoutId);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const admin = JSON.parse(localStorage.getItem("AdminEcomme"));
@@ -190,21 +189,27 @@ function App() {
             <Route
               path="/"
               element={
-                // acces === "oui" ? (
-                <Home allCategories={allCategories} allProducts={allProducts} />
-                // ) : (
-                //   <Connection chg={changeA} />
-                // )
+                acces === "oui" ? (
+                  <Home
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
               }
             />
             <Route
               path="/Home"
               element={
-                // acces === "oui" ? (
-                <Home allCategories={allCategories} allProducts={allProducts} />
-                // ) : (
-                //   <Connection chg={changeA} />
-                // )
+                acces === "oui" ? (
+                  <Home
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
               }
             />
 
@@ -235,50 +240,50 @@ function App() {
             <Route
               path="/Categories"
               element={
-                // acces === "oui" ? (
-                <Categories allCategories={allCategories} />
-                // ) : (
-                //   <Connection chg={changeA} />
-                // )
+                acces === "oui" ? (
+                  <Categories allCategories={allCategories} />
+                ) : (
+                  <Connection chg={changeA} />
+                )
               }
             />
             <Route
               path="/ProductDet/:id"
               element={
-                // acces === "oui" ? (
-                <Productdetails
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-                // ) : (
-                //   <Connection chg={changeA} />
-                // )
+                acces === "oui" ? (
+                  <Productdetails
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
               }
             />
             <Route
               path="/Categorie/:Cat"
               element={
-                // acces === "oui" ? (
-                <CategorieProduct
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-                // ) : (
-                //   <Connection chg={changeA} />
-                // )
+                acces === "oui" ? (
+                  <CategorieProduct
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
               }
             />
             <Route
               path="/Categorie/:Cat/:product"
               element={
-                // acces === "oui" ? (
-                <CategorieProduct
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-                // ) : (
-                //   <Connection chg={changeA} />
-                // )
+                acces === "oui" ? (
+                  <CategorieProduct
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
               }
             />
             <Route
@@ -300,14 +305,14 @@ function App() {
             <Route
               path="/Search"
               element={
-                // acces === "oui" ? (
-                <Search
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-                // ) : (
-                //   <Connection chg={changeA} />
-                // )
+                acces === "oui" ? (
+                  <Search
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                ) : (
+                  <Connection chg={changeA} />
+                )
               }
             ></Route>
             <Route
