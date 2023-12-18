@@ -24,7 +24,7 @@ function Profile() {
 
   useEffect(() => {
     axios
-      .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
+      .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
       .then((res) => {
         setAllMessage(
           res.data.filter(

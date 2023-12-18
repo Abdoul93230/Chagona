@@ -64,7 +64,7 @@ function EditProfile() {
           const data = response.data.user;
           console.log(a);
           setNom(data.name);
-
+          setPhone(data?.phoneNumber ? data?.phoneNumber : "");
           setEmail(data.email);
         })
         .catch((error) => {
@@ -168,7 +168,10 @@ function EditProfile() {
       .catch((error) => {
         setLoading(false);
         if (error.response.data.data.keyPattern.email) {
-          handleAlertwar("Un utilisateur avec le même email existe déjà !");
+          handleAlertwar("Un utilisateur avec le même email existe déjà ");
+        }
+        if (error.response.data.data.keyPattern.phoneNumber) {
+          handleAlertwar("Un utilisateur avec le même Numero existe déjà ");
         }
         console.log(error.response);
       });
