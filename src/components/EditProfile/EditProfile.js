@@ -167,10 +167,13 @@ function EditProfile() {
       })
       .catch((error) => {
         setLoading(false);
-        if (error.response.data.data.keyPattern.email) {
+        if (error.response.status === 402) {
+          handleAlertwar(error.response.data.message);
+        }
+        if (error.response.data.data?.keyPattern?.email) {
           handleAlertwar("Un utilisateur avec le même email existe déjà ");
         }
-        if (error.response.data.data.keyPattern.phoneNumber) {
+        if (error.response.data.data?.keyPattern?.phoneNumber) {
           handleAlertwar("Un utilisateur avec le même Numero existe déjà ");
         }
         console.log(error.response);
