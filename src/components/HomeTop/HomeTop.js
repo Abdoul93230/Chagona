@@ -9,7 +9,7 @@ import {
 } from "react-feather";
 import io from "socket.io-client";
 import { Link, useNavigate, NavLink } from "react-router-dom";
-import logo from "../../Images/logo2.png";
+import logo from "../../Images/E-HABOU-removebg-preview.png";
 import axios from "axios";
 
 import "./HomeTop.css";
