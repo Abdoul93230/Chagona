@@ -73,8 +73,8 @@
 .MessageDet .midel2 .client-message {
     background-color: #007bff;
     color: #fff;
-    margin-right: 10px; /* Espace à droite pour les messages du client */
-    margin-left: 10px;
+    margin-right: 20px; /* Espace à droite pour les messages du client */
+    /* margin-left: 10px; */
     margin-bottom: 10px; /* Espacement entre les messages */
     padding: 10px 15px;
     border-radius: 10px;
@@ -86,8 +86,8 @@
   .fournisseur-message {
     background-color: #eee;
     color: #333;
-    margin-left: 10px; /* Espace à gauche pour les messages du fournisseur */
-    margin-right: 10px;
+    margin-left: 20px; /* Espace à gauche pour les messages du fournisseur */
+    /* margin-right: 10px; */
     margin-bottom: 10px; /* Espacement entre les messages */
     padding: 10px;
     border-radius: 10px;
