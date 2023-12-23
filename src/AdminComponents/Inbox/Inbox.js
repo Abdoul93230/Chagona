@@ -231,6 +231,8 @@ function Inbox() {
                           ? allProfiles?.find(
                               (prof) => prof.clefUser === param._id
                             )?.numero
+                          : param.phoneNumber
+                          ? param.phoneNumber
                           : "none"}{" "}
                         <span> Bonjour...</span>
                       </p>
