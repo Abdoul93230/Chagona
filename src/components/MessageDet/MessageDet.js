@@ -218,15 +218,26 @@ function MessageDet({ chg }) {
         })}
       </div> */}
       <div className="midel2" ref={messageContainerRef}>
-        {allMessage.map((param, index) => (
-          <div
-            key={index}
-            className={`message ${
-              param.provenance ? "client-message" : "fournisseur-message"
-            }`}
-            dangerouslySetInnerHTML={{ __html: param?.message }} // Utilisez dangerouslySetInnerHTML
-          />
-        ))}
+        {allMessage.map((param, index) => {
+          if (!param.use) {
+            return null;
+          }
+
+          return (
+            <>
+              <h6 style={{ color: "#515C6F", textAlign: "center" }}>
+                {formatDate(param.date)}
+              </h6>
+              <div
+                key={index}
+                className={`message ${
+                  param.provenance ? "client-message" : "fournisseur-message"
+                }`}
+                dangerouslySetInnerHTML={{ __html: param?.message }} // Utilisez dangerouslySetInnerHTML
+              />
+            </>
+          );
+        })}
       </div>
 
       {/* <div className="bottom">

@@ -1,7 +1,8 @@
 .MessageDet{
     width: 100%;
-    height: auto;
+    height: 100vh;
     padding: 15px 5px;
+    position: relative;
 }
 
 .MessageDet .top{
@@ -19,15 +20,15 @@
 }
 
 .MessageDet .top h2{
-    background-color: rgba(127, 255, 212, 0.37);
+    background-color: #ee7d7d;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(127, 255, 212, 0.685);
-    color: rgb(16, 37, 30);
+    box-shadow: 0px 0px 10px #ff6969ad;
+    color:#fff;
 }
 
 .MessageDet .top span{
@@ -71,7 +72,8 @@
 
 /* Styles pour les messages du client */
 .MessageDet .midel2 .client-message {
-    background-color: #007bff;
+    /* background-color: #007bff; */
+    background-color: #FF6969;
     color: #fff;
     margin-right: 20px; /* Espace à droite pour les messages du client */
     /* margin-left: 10px; */
@@ -107,7 +109,8 @@
   
   /* Style du coin en bas du message du client */
   .MessageDet .midel2  .client-message::before {
-    border-color: #007bff transparent transparent transparent;
+    /* border-color: #007bff transparent transparent transparent; */
+    border-color: #FF6969 transparent transparent transparent;;
     left: 0;
   }
   
@@ -188,7 +191,7 @@
 }
 
 .MessageDet .midel3 .react-quill {
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     padding: 10px;
     height: 200px;
     font-size: 16px;
@@ -196,7 +199,8 @@
   
   /* Style du bouton "Envoyer" */
   .MessageDet .midel3  .button {
-    background-color: #007bff;
+    /* background-color: #007bff; */
+    background-color: #FF6969;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -215,6 +219,9 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
 }
 
 
