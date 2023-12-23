@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import io from "socket.io-client";
 import "./Inbox.css";
-import image1 from "../../Images/sac2.png";
+// import image1 from "../../Images/sac2.png";
+import image1 from "../../Images/icon_user.png";
 import { ChevronRight, Search, Delete } from "react-feather";
 import axios from "axios";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
