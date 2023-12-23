@@ -3,6 +3,7 @@
     height: 100vh;
     padding: 15px 5px;
     position: relative;
+    box-sizing: border-box;
 }
 
 .MessageDet .top{

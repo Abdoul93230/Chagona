@@ -189,12 +189,12 @@ function MessageDet({ chg }) {
             />
           </span>
           <div className="det">
-            <h4>Habou227's Store</h4>
+            <h4>E-Habou's Store</h4>
             <h5>Active</h5>
           </div>
         </div>
 
-        <h2>H227</h2>
+        <h2>E-H</h2>
       </div>
 
       {/* <div className="main" ref={messageContainerRef}>
@@ -224,18 +224,17 @@ function MessageDet({ chg }) {
           }
 
           return (
-            <>
+            <Fragment key={index}>
               <h6 style={{ color: "#515C6F", textAlign: "center" }}>
                 {formatDate(param.date)}
               </h6>
               <div
-                key={index}
                 className={`message ${
                   param.provenance ? "client-message" : "fournisseur-message"
                 }`}
                 dangerouslySetInnerHTML={{ __html: param?.message }} // Utilisez dangerouslySetInnerHTML
               />
-            </>
+            </Fragment>
           );
         })}
       </div>
