@@ -158,14 +158,14 @@ function Carts({ op }) {
                     ?.prixPromo > 0 ? (
                     <>
                       <h4 className="Lh">
-                        ${" "}
+                        cfa{" "}
                         {
                           allProducts?.find((item) => item._id === param.id)
                             ?.prix
                         }
                       </h4>
                       <h5>
-                        $${" "}
+                        cfa{" "}
                         {
                           allProducts?.find((item) => item._id === param.id)
                             ?.prixPromo
@@ -175,7 +175,7 @@ function Carts({ op }) {
                   ) : (
                     <>
                       <h5>
-                        ${" "}
+                        cfa{" "}
                         {
                           allProducts?.find((item) => item._id === param.id)
                             ?.prix
@@ -210,7 +210,7 @@ function Carts({ op }) {
           <div className="bottom">
             <div className="left">
               <h2>Total</h2>
-              <h3>${total}</h3>
+              <h3>cfa{total}</h3>
               <h4>Free Bomestic shipping</h4>
             </div>
             <div className="right">

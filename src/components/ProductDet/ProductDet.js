@@ -670,7 +670,7 @@ function ProductDet({ product }) {
                   </>
                 ) : (
                   <h5>
-                    ${VP?.prix}{" "}
+                    Cfa {VP?.prix}{" "}
                     <span>
                       <Star style={{ width: "12px" }} />
                       4.9

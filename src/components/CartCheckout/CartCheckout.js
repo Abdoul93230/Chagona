@@ -303,7 +303,7 @@ function CartCheckout({ op }) {
                     {allProducts?.find((item) => item._id === param.id).name}
                   </h4>
                   <h6>
-                    ${" "}
+                    cfa{" "}
                     {allProducts?.find((item) => item._id === param.id)
                       .prixPromo > 0
                       ? allProducts?.find((item) => item._id === param.id)
@@ -338,7 +338,7 @@ function CartCheckout({ op }) {
         <div className="place">
           <div className="left">
             <h4>Total</h4>
-            <h3>${total} F</h3>
+            <h3>cfa{total} F</h3>
             {codeValide ? (
               <h5 style={{ marginTop: -5 }}>
                 reduction: {codeValide.prixReduiction} f
