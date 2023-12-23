@@ -102,6 +102,8 @@ function ACustomers() {
                         ? allAddress?.find(
                             (prof) => prof.clefUser === param._id
                           )?.name
+                        : param?.name
+                        ? param?.name
                         : "none"}
                     </td>
                     <td>{param._id}</td>
@@ -112,6 +114,8 @@ function ACustomers() {
                         ? allProfiles?.find(
                             (prof) => prof.clefUser === param._id
                           )?.numero
+                        : param?.phoneNumber
+                        ? param?.phoneNumber
                         : "none"}
                     </td>
                     <td>
