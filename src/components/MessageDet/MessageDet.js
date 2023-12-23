@@ -3,6 +3,7 @@ import axios from "axios";
 import io from "socket.io-client";
 import "./MessageDet.css";
 import { ChevronLeft, Plus, ChevronUp, Delete } from "react-feather";
+import ReactQuill from "react-quill";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function MessageDet({ chg }) {
@@ -11,6 +12,15 @@ function MessageDet({ chg }) {
   const [allMessage, setAllMessage] = useState([]);
   const provenance = true;
   const messageContainerRef = useRef(null);
+  // const [messages, setMessages] = useState([
+  //   { id: 1, text: "Bonjour, comment puis-je vous aider ?", sender: "client" },
+  //   {
+  //     id: 2,
+  //     text: "Bonjour ! Je suis là pour répondre à vos questions.",
+  //     sender: "fournisseur",
+  //   },
+  //   // ... d'autres messages
+  // ]);
   const socket = io(BackendUrl);
   function goBack() {
     window.history.back();
@@ -21,6 +31,9 @@ function MessageDet({ chg }) {
     const formattedDate = new Date(date).toLocaleString("en-US", options);
     return formattedDate;
   }
+  const handleMessageChange = (value) => {
+    setMessage(value);
+  };
 
   useEffect(() => {
     if (messageContainerRef.current) {
@@ -47,6 +60,19 @@ function MessageDet({ chg }) {
         console.log(erro);
       });
   }, []);
+
+  // const handleSendMessage = () => {
+  //   if (message.trim() === "") return; // Évitez d'envoyer un message vide
+
+  //   const newMessage = {
+  //     id: messages.length + 1,
+  //     text: message,
+  //     sender: "client", // Définissez l'expéditeur comme "client"
+  //   };
+
+  //   setMessages([...messages, newMessage]);
+  //   setMessage(""); // Réinitialisez l'éditeur
+  // };
 
   useEffect(() => {
     // Écouter les nouveaux messages du serveur
@@ -171,7 +197,7 @@ function MessageDet({ chg }) {
         <h2>H227</h2>
       </div>
 
-      <div className="main" ref={messageContainerRef}>
+      {/* <div className="main" ref={messageContainerRef}>
         {allMessage.map((param, index) => {
           if (!param.use) {
             return null;
@@ -190,9 +216,20 @@ function MessageDet({ chg }) {
             </Fragment>
           );
         })}
+      </div> */}
+      <div className="midel2" ref={messageContainerRef}>
+        {allMessage.map((param, index) => (
+          <div
+            key={index}
+            className={`message ${
+              param.provenance ? "client-message" : "fournisseur-message"
+            }`}
+            dangerouslySetInnerHTML={{ __html: param?.message }} // Utilisez dangerouslySetInnerHTML
+          />
+        ))}
       </div>
 
-      <div className="bottom">
+      {/* <div className="bottom">
         <Plus className="un" />
         <textarea
           placeholder="Type your message..."
@@ -200,6 +237,17 @@ function MessageDet({ chg }) {
           onChange={(e) => setMessage(e.target.value)}
         />
         <ChevronUp className="deux" onClick={envoyer} />
+      </div> */}
+      <div className="midel3">
+        <ReactQuill
+          value={message}
+          onChange={handleMessageChange}
+          placeholder="Écrivez votre message ici..."
+          className="custom-editor" // Ajoutez une classe CSS personnalisée ici
+        />
+        <button className="button" onClick={envoyer}>
+          Envoyer
+        </button>
       </div>
     </div>
   );
