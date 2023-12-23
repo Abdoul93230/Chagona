@@ -118,21 +118,21 @@ function AOrders() {
                     <td>
                       {
                         allUsers?.find((item) => item._id === param.clefUser)
-                          .email
+                          ?.email
                       }
                     </td>
                     <td>
                       {
                         allAddress?.find(
                           (prof) => prof.clefUser === param.clefUser
-                        ).numero
+                        )?.numero
                       }
                     </td>
                     <td>
                       {
                         allAddress?.find(
                           (prof) => prof.clefUser === param.clefUser
-                        ).quartier
+                        )?.quartier
                       }
                     </td>
                     <td>{param.statusPayment}</td>
