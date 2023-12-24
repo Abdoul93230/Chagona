@@ -21,6 +21,7 @@ function AddProductA() {
     quantity: "la quantite",
     fournisseur: "",
     price_Promo: 0,
+    prixF: 0,
     Categorie: "",
     type_de_Produits: "",
     marque: "inconu",
@@ -214,6 +215,7 @@ function AddProductA() {
     formData.append("ClefType", ClefType);
     formData.append("Clefournisseur", Clefournisseur);
     formData.append("marque", description.marque);
+    formData.append("prixF", description.prixF);
     if (nouveauChampImages && nouveauChampImages.length > 0) {
       for (const file of nouveauChampImages) {
         formData.append("nouveauChampImages", file);
@@ -527,7 +529,7 @@ function AddProductA() {
                         typeProduit.map((param, index) => {
                           return (
                             <option key={index}>{`${param.name}--> ${
-                              categorie.find(
+                              categorie?.find(
                                 (item) => item?._id === param?.clefCategories
                               )?.name
                             }`}</option>
@@ -541,6 +543,7 @@ function AddProductA() {
                 </tr>
                 <tr>
                   <th>Marque</th>
+                  <th>PrixFounisseur</th>
                 </tr>
                 <tr>
                   <td>
@@ -551,6 +554,18 @@ function AddProductA() {
                         setDescription({
                           ...description,
                           marque: e.target.value,
+                        })
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      defaultValue={description.prixF}
+                      onChange={(e) =>
+                        setDescription({
+                          ...description,
+                          prixF: e.target.value,
                         })
                       }
                     />

@@ -206,6 +206,14 @@ function AProductDet() {
                   <td>{product._id}</td>
                   <td colSpan={2}>{types.name}</td>
                 </tr>
+                <tr>
+                  <th>Marque</th>
+                  <th>PrixFounisseur</th>
+                </tr>
+                <tr>
+                  <td>{product?.marque}</td>
+                  <td>{product?.prixf}</td>
+                </tr>
               </tbody>
             </table>
             <div className="plusImg">

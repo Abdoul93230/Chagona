@@ -29,6 +29,7 @@ import io from "socket.io-client";
 import "reactjs-popup/dist/index.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -333,6 +334,10 @@ function App() {
                   <AdminConnection chg={changeAdminConnection} />
                 )
               }
+            ></Route>
+            <Route
+              path="/reset-password/:email"
+              element={<ResetPassword />}
             ></Route>
             <Route
               path="/Admin/:op"
