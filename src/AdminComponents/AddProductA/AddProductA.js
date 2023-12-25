@@ -214,7 +214,10 @@ function AddProductA() {
     formData.append("couleur", colors);
     formData.append("ClefType", ClefType);
     formData.append("Clefournisseur", Clefournisseur);
-    formData.append("marque", description.marque);
+    formData.append(
+      "marque",
+      description.marque.length != 0 ? description.marque : "inconu"
+    );
     formData.append("prixF", description.prixF);
     if (nouveauChampImages && nouveauChampImages.length > 0) {
       for (const file of nouveauChampImages) {
@@ -234,6 +237,7 @@ function AddProductA() {
       })
       .catch((error) => {
         console.log(error);
+        setIsWaitting(false);
       });
   };
 
@@ -560,7 +564,7 @@ function AddProductA() {
                   </td>
                   <td>
                     <input
-                      type="text"
+                      type="number"
                       defaultValue={description.prixF}
                       onChange={(e) =>
                         setDescription({
