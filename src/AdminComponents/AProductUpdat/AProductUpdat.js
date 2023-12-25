@@ -176,10 +176,10 @@ function AProductUpdat() {
       handleAlertwar("le type_de_Produits n'est pas valide");
       return;
     }
-    if (marque?.length < 2) {
-      handleAlertwar("la marque n'est pas valide");
-      return;
-    }
+    // if (marque?.length < 2) {
+    //   handleAlertwar("la marque n'est pas valide");
+    //   return;
+    // }
     if (fournisseure?.length < 2) {
       handleAlertwar("le fournisseur n'est pas valide");
       return;
