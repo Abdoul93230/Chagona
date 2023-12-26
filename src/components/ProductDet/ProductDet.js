@@ -423,8 +423,9 @@ function ProductDet({ product }) {
               <h2>Livraison</h2>
               <p>
                 {VP?.prixLivraison
-                  ? `${VP?.prixLivraison}f (Niamey)`
-                  : `750F (Niamey)`}
+                  ? `${VP?.prixLivraison && VP?.prixLivraison > 0}f (Niamey)`
+                  : // : `750F (Niamey)`
+                    "offerte"}
               </p>
             </td>
             <td style={{ textAlign: "right" }}>
