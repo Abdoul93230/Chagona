@@ -32,7 +32,13 @@ import "react-toastify/dist/ReactToastify.css";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import { getProducts, getTypes } from "./redux/ProductsActions";
+import {
+  getCategories,
+  getProducts,
+  getProducts_Commentes,
+  getProducts_Pubs,
+  getTypes,
+} from "./redux/ProductsActions";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -55,6 +61,9 @@ function App() {
   useEffect(() => {
     store.dispatch(getProducts());
     store.dispatch(getTypes());
+    store.dispatch(getCategories());
+    store.dispatch(getProducts_Pubs());
+    store.dispatch(getProducts_Commentes());
     const socket = io(BackendUrl);
 
     // socket.on("connect", () => {

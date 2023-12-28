@@ -22,6 +22,7 @@ import {
 } from "react-feather";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function ProductDet({ product }) {
@@ -40,6 +41,9 @@ function ProductDet({ product }) {
   const [option, setOption] = useState("Details");
   const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("userEcomme"));
+  const DATA_Types = useSelector((state) => state.products.types);
+  const DATA_Categories = useSelector((state) => state.products.categories);
+  const DATA_Products = useSelector((state) => state.products.data);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -154,23 +158,23 @@ function ProductDet({ product }) {
         console.log(error);
       });
 
-    axios
-      .get(`${BackendUrl}/getAllCategories`)
-      .then((Categories) => {
-        setAllCategories(Categories.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get(`${BackendUrl}/getAllCategories`)
+    //   .then((Categories) => {
+    setAllCategories(DATA_Categories);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 
-    axios
-      .get(`${BackendUrl}/products`)
-      .then((Categories) => {
-        setAllProducts(Categories.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
+    // axios
+    //   .get(`${BackendUrl}/products`)
+    //   .then((Categories) => {
+    setAllProducts(DATA_Products);
+    // })
+    // .catch((error) => {
+    //   console.log(error.response.data.message);
+    // });
   }, []);
 
   const envoyer = () => {
@@ -320,14 +324,10 @@ function ProductDet({ product }) {
     : null;
 
   useEffect(() => {
-    axios
-      .get(`${BackendUrl}/getAllType`)
-      .then((types) => {
-        setAllTypes(types.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get(`${BackendUrl}/getAllType`)
+    //   .then((types) => {
+    setAllTypes(DATA_Types);
 
     axios
       .get(`${BackendUrl}/getAllCommenteProduitById/${params.id}`)

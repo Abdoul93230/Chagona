@@ -25,6 +25,8 @@ function Home() {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const DATA_Products = useSelector((state) => state.products.data);
+  const DATA_Types = useSelector((state) => state.products.types);
+  const DATA_Categories = useSelector((state) => state.products.categories);
   function getRandomElements(array) {
     const shuffledArray = shuffle(array);
     return shuffledArray.slice(0, 10);
@@ -38,14 +40,14 @@ function Home() {
     return shuffledArray.slice(0, nbr);
   }
   useEffect(() => {
-    axios
-      .get(`${BackendUrl}/getAllType`)
-      .then((types) => {
-        setAllTypes(types.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get(`${BackendUrl}/getAllType`)
+    //   .then((types) => {
+    setAllTypes(DATA_Types);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 
     axios
       .get(`${BackendUrl}/getAllCategories`)
