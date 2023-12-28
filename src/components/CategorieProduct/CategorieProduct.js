@@ -317,7 +317,7 @@ function CategorieProduct() {
                 >
                   <img src={param.image1} alt="loading" />
                   <h5>{param.name.slice(0, 20)}</h5>
-                  <h6>${param.prix}</h6>
+                  <h6>f {param.prix}</h6>
                 </div>
               );
             })}
@@ -425,7 +425,7 @@ function CategorieProduct() {
             __html: VP?.description,
           }}</p> */}
                     <h6>
-                      $ <s>{param.prix}</s> <span>{param.prixPromo}</span>
+                      f <s>{param.prix}</s> <span>{param.prixPromo}</span>
                     </h6>
                     <span className="p">
                       -{" "}
@@ -463,7 +463,7 @@ function CategorieProduct() {
                     <h5 style={{ textAlign: "left" }}>
                       {param.name.slice(0, 18)}...
                     </h5>
-                    <h6>${param.prix}</h6>
+                    <h6>f {param.prix}</h6>
                   </div>
                 );
               })}

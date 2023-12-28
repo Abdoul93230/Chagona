@@ -11,6 +11,7 @@ const ResetPassword = () => {
   const { email } = useParams();
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPassword2, setNewPassword2] = useState("");
   const navigue = useNavigate();
   const [isloading, setIsloading] = useState(false);
 
@@ -19,6 +20,10 @@ const ResetPassword = () => {
     setIsloading(true);
     if (newPassword === "" || newPassword.length < 6) {
       handleAlertwar("Votre mot de passe doit contenir au moins 6 caractères.");
+      setIsloading(false);
+      return;
+    } else if (newPassword.trim() !== newPassword2.trim()) {
+      handleAlertwar("Vos deux mot de passe ne sont pas conforme.");
       setIsloading(false);
       return;
     } else {
@@ -89,6 +94,14 @@ const ResetPassword = () => {
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </label>
+            <label>
+              Confirmez le mot de passe:
+              <input
+                type="password"
+                value={newPassword2}
+                onChange={(e) => setNewPassword2(e.target.value)}
               />
             </label>
             <button type="submit">Réinitialiser le mot de passe</button>

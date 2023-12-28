@@ -148,6 +148,7 @@
     height: 140px;
     padding: 5px 0px;
     padding-top: 0px;
+    /* border: 3px solid blue; */
 }
 .CategorieProduct .home .produits .carde img{
     width: 100%;
@@ -474,12 +475,13 @@
 }
 @media screen and (max-width:370px) {
     .CategorieProduct .home .produits .carde{
-        width: 90px;
+        width: 100px;
     }
 }
 @media screen and (max-width:335px) {
     .CategorieProduct .home .produits .carde{
-        width: 85px;
+        /* border: 5px solid red; */
+        width: 95px;
     }
 }
 
@@ -500,7 +502,7 @@
         height: 230px;
     }
     .CategorieProduct .home{
-        width: 90%;
+        width: 95%;
         margin: 0px auto;
         margin-bottom: 10px;
 
