@@ -30,6 +30,9 @@ import "reactjs-popup/dist/index.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ResetPassword from "./components/ResetPassword/ResetPassword";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import { getProducts, getTypes } from "./redux/ProductsActions";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -50,6 +53,8 @@ function App() {
   };
 
   useEffect(() => {
+    store.dispatch(getProducts());
+    store.dispatch(getTypes());
     const socket = io(BackendUrl);
 
     // socket.on("connect", () => {
@@ -183,269 +188,271 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        {verificationComplete ? (
-          <Routes>
-            <Route
-              path="/"
-              element={
-                acces === "oui" ? (
-                  <Home
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
-            <Route
-              path="/Home"
-              element={
-                acces === "oui" ? (
-                  <Home
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
+    <Provider store={store}>
+      <div className="App">
+        <BrowserRouter>
+          {verificationComplete ? (
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  acces === "oui" ? (
+                    <Home
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
+              <Route
+                path="/Home"
+                element={
+                  acces === "oui" ? (
+                    <Home
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
 
-            <Route
-              path="/ContactUs"
-              element={
-                acces === "oui" ? <ContactUs /> : <Connection chg={changeA} />
-              }
-            />
-            <Route
-              path="/BecomSellerInfos"
-              element={
-                acces === "oui" ? (
-                  <BecomSellerInfos />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
+              <Route
+                path="/ContactUs"
+                element={
+                  acces === "oui" ? <ContactUs /> : <Connection chg={changeA} />
+                }
+              />
+              <Route
+                path="/BecomSellerInfos"
+                element={
+                  acces === "oui" ? (
+                    <BecomSellerInfos />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
 
-            <Route
-              path="/Messages"
-              element={
-                acces === "oui" ? <Messages /> : <Connection chg={changeA} />
-              }
-            />
-            <Route path="/YourComponent" element={<YourComponent />} />
-            <Route
-              path="/Categories"
-              element={
-                acces === "oui" ? (
-                  <Categories allCategories={allCategories} />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
-            <Route
-              path="/ProductDet/:id"
-              element={
-                acces === "oui" ? (
-                  <Productdetails
+              <Route
+                path="/Messages"
+                element={
+                  acces === "oui" ? <Messages /> : <Connection chg={changeA} />
+                }
+              />
+              <Route path="/YourComponent" element={<YourComponent />} />
+              <Route
+                path="/Categories"
+                element={
+                  acces === "oui" ? (
+                    <Categories allCategories={allCategories} />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
+              <Route
+                path="/ProductDet/:id"
+                element={
+                  acces === "oui" ? (
+                    <Productdetails
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
+              <Route
+                path="/Categorie/:Cat"
+                element={
+                  acces === "oui" ? (
+                    <CategorieProduct
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
+              <Route
+                path="/Categorie/:Cat/:product"
+                element={
+                  acces === "oui" ? (
+                    <CategorieProduct
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
+              <Route
+                path="/Cart"
+                element={
+                  acces === "oui" ? <Cart /> : <Connection chg={changeA} />
+                }
+              ></Route>
+              <Route
+                path="/More"
+                element={
+                  acces === "oui" ? (
+                    <More chg={changeA} />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/Search"
+                element={
+                  acces === "oui" ? (
+                    <Search
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/Profile"
+                element={
+                  acces === "oui" ? <Profiles /> : <Connection chg={changeA} />
+                }
+              ></Route>
+              <Route
+                path="/Admin"
+                element={
+                  adminConnection ? (
+                    <Admin
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <AdminConnection chg={changeAdminConnection} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/reset-password/:email"
+                element={<ResetPassword />}
+              ></Route>
+              <Route
+                path="/Admin/:op"
+                element={
+                  adminConnection ? (
+                    <Admin
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <AdminConnection chg={changeAdminConnection} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/Admin/:op/:id"
+                element={
+                  adminConnection ? (
+                    <Admin
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <AdminConnection chg={changeAdminConnection} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/Profile/:op"
+                element={
+                  acces === "oui" ? (
+                    <ProfileComponets />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/More/:op"
+                element={
+                  acces === "oui" ? (
+                    <MoreComponents />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/Order"
+                element={
+                  acces === "oui" ? (
+                    <Myorders
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/Galeries"
+                element={
+                  acces === "oui" ? (
+                    <GaleriesComponent />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              />
+              <Route
+                path="/Order/:id"
+                element={
+                  acces === "oui" ? (
+                    <OrderDet
+                      allCategories={allCategories}
+                      allProducts={allProducts}
+                    />
+                  ) : (
+                    <Connection chg={changeA} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="/PageNotRady"
+                element={
+                  <PageNotRady
                     allCategories={allCategories}
                     allProducts={allProducts}
                   />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
-            <Route
-              path="/Categorie/:Cat"
-              element={
-                acces === "oui" ? (
-                  <CategorieProduct
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
-            <Route
-              path="/Categorie/:Cat/:product"
-              element={
-                acces === "oui" ? (
-                  <CategorieProduct
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
-            <Route
-              path="/Cart"
-              element={
-                acces === "oui" ? <Cart /> : <Connection chg={changeA} />
-              }
-            ></Route>
-            <Route
-              path="/More"
-              element={
-                acces === "oui" ? (
-                  <More chg={changeA} />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/Search"
-              element={
-                acces === "oui" ? (
-                  <Search
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/Profile"
-              element={
-                acces === "oui" ? <Profiles /> : <Connection chg={changeA} />
-              }
-            ></Route>
-            <Route
-              path="/Admin"
-              element={
-                adminConnection ? (
-                  <Admin
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <AdminConnection chg={changeAdminConnection} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/reset-password/:email"
-              element={<ResetPassword />}
-            ></Route>
-            <Route
-              path="/Admin/:op"
-              element={
-                adminConnection ? (
-                  <Admin
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <AdminConnection chg={changeAdminConnection} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/Admin/:op/:id"
-              element={
-                adminConnection ? (
-                  <Admin
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <AdminConnection chg={changeAdminConnection} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/Profile/:op"
-              element={
-                acces === "oui" ? (
-                  <ProfileComponets />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/More/:op"
-              element={
-                acces === "oui" ? (
-                  <MoreComponents />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/Order"
-              element={
-                acces === "oui" ? (
-                  <Myorders
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/Galeries"
-              element={
-                acces === "oui" ? (
-                  <GaleriesComponent />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            />
-            <Route
-              path="/Order/:id"
-              element={
-                acces === "oui" ? (
-                  <OrderDet
-                    allCategories={allCategories}
-                    allProducts={allProducts}
-                  />
-                ) : (
-                  <Connection chg={changeA} />
-                )
-              }
-            ></Route>
-            <Route
-              path="/PageNotRady"
-              element={
-                <PageNotRady
-                  allCategories={allCategories}
-                  allProducts={allProducts}
-                />
-              }
-            ></Route>
-            <Route
-              path="/PubDet/:id"
-              element={
-                acces === "oui" ? <PubDet /> : <Connection chg={changeA} />
-              }
-            ></Route>
-          </Routes>
-        ) : (
-          <div style={spinnerContainerStyle}>
-            <div style={spinnerStyle}></div>
-            {/* <p>En cours de vérification...</p> */}
-          </div>
-        )}
-      </BrowserRouter>
-      <ToastContainer />
-    </div>
+                }
+              ></Route>
+              <Route
+                path="/PubDet/:id"
+                element={
+                  acces === "oui" ? <PubDet /> : <Connection chg={changeA} />
+                }
+              ></Route>
+            </Routes>
+          ) : (
+            <div style={spinnerContainerStyle}>
+              <div style={spinnerStyle}></div>
+              {/* <p>En cours de vérification...</p> */}
+            </div>
+          )}
+        </BrowserRouter>
+        <ToastContainer />
+      </div>
+    </Provider>
   );
 }
 

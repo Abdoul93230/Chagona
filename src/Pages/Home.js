@@ -15,6 +15,7 @@ import { shuffle } from "lodash";
 import { ChevronUp } from "react-feather";
 import InfiniteCarousel from "../components/ScrollingDivs/ScrollingDivs";
 import "./styles.css";
+import { useSelector } from "react-redux";
 
 function Home() {
   const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -23,6 +24,7 @@ function Home() {
   const [allCategories, setAllCategories] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const DATA_Products = useSelector((state) => state.products.data);
   function getRandomElements(array) {
     const shuffledArray = shuffle(array);
     return shuffledArray.slice(0, 10);
@@ -49,20 +51,20 @@ function Home() {
       .get(`${BackendUrl}/getAllCategories`)
       .then((Categories) => {
         setAllCategories(Categories.data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    axios
-      .get(`${BackendUrl}/products`)
-      .then((Categories) => {
-        setAllProducts(Categories.data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
+    // axios
+    //   .get(`${BackendUrl}/products`)
+    //   .then((Categories) => {
+    setAllProducts(DATA_Products);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.response.data.message);
+    //     });
   }, []);
   const clefElectronique = allCategories
     ? allCategories.find((item) => item.name === "électroniques")

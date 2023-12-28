@@ -11,6 +11,7 @@ import ConteProduits from "../ConteProduits/ConteProduits";
 import axios from "axios";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import { shuffle } from "lodash";
+import { useSelector } from "react-redux";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function CategorieProduct() {
@@ -30,7 +31,8 @@ function CategorieProduct() {
   const [pt2, setPt2] = useState([]);
   const [ptAll, setPtAll] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
-
+  const DATA_Products = useSelector((state) => state.products.data);
+  const DATA_Types = useSelector((state) => state.products.types);
   let Pub =
     allPub?.filter(
       (item) =>
@@ -66,96 +68,91 @@ function CategorieProduct() {
           ? Categories.data.data.find((item) => item.name === params?.Cat)
           : null;
 
-        axios
-          .get(`${BackendUrl}/getAllType`)
-          .then((types) => {
-            setAllTypes(types.data.data);
+        // axios
+        //   .get(`${BackendUrl}/getAllType`)
+        //   .then((types) => {
+        setAllTypes(DATA_Types);
 
-            const ClefTypes = types.data.data
-              ? types.data.data.find((item) => item.name === params?.product)
-              : null;
+        const ClefTypes = DATA_Types
+          ? DATA_Types.find((item) => item.name === params?.product)
+          : null;
 
-            axios
-              .get(`${BackendUrl}/products`)
-              .then((prod) => {
-                setAllProducts(prod.data.data);
+        // axios;
+        // .get(`${BackendUrl}/products`)
+        // .then((prod) => {
+        setAllProducts(DATA_Products);
 
-                const filteredProductsPromo = prod.data.data.filter((item) =>
-                  types.data.data.some(
-                    (type) =>
-                      type.clefCategories === ClefCate?._id &&
-                      item.ClefType === type._id &&
-                      item.prixPromo > 0
-                  )
-                );
+        const filteredProductsPromo = DATA_Products.filter((item) =>
+          DATA_Types.some(
+            (type) =>
+              type.clefCategories === ClefCate?._id &&
+              item.ClefType === type._id &&
+              item.prixPromo > 0
+          )
+        );
 
-                const filteredProductsTop30 = prod.data.data
-                  .slice(0, 30)
-                  .filter((item) =>
-                    types.data.data.some(
-                      (type) =>
-                        type.clefCategories === ClefCate?._id &&
-                        item.ClefType === type._id
-                    )
-                  );
+        const filteredProductsTop30 = DATA_Products.slice(0, 30).filter(
+          (item) =>
+            DATA_Types.some(
+              (type) =>
+                type.clefCategories === ClefCate?._id &&
+                item.ClefType === type._id
+            )
+        );
 
-                if (params.product) {
-                  setPtAll(
-                    prod.data.data.filter((item) =>
-                      types.data.data.some(
-                        (type) =>
-                          type.name === params.product &&
-                          item.ClefType === type._id
-                      )
-                    )
-                  );
+        if (params.product) {
+          setPtAll(
+            DATA_Products.filter((item) =>
+              DATA_Types.some(
+                (type) =>
+                  type.name === params.product && item.ClefType === type._id
+              )
+            )
+          );
 
-                  setPtp(
-                    getRandomElementsSix(
-                      prod.data.data.filter((item) =>
-                        types.data.data.some(
-                          (type) =>
-                            type.name === params.product &&
-                            item.ClefType === type._id &&
-                            item.prixPromo > 0
-                        )
-                      ),
-                      6
-                    )
-                  );
-                  setPt2(
-                    getRandomElementsSix(
-                      prod.data.data
-                        .slice(0, 30)
-                        .filter((item) =>
-                          types.data.data.some(
-                            (type) =>
-                              type.name === params.product &&
-                              item.ClefType === type._id
-                          )
-                        ),
-                      6
-                    )
-                  );
-                } else {
-                  setPtAll(
-                    prod.data.data.filter((item) =>
-                      types.data.data.some(
-                        (type) =>
-                          type.clefCategories === ClefCate?._id &&
-                          item.ClefType === type._id
-                      )
-                    )
-                  );
-                  setPtp(getRandomElementsSix(filteredProductsPromo, 6));
-                  setPt2(getRandomElementsSix(filteredProductsTop30, 6));
-                }
-              })
-              .catch((error) => console.log(error));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          setPtp(
+            getRandomElementsSix(
+              DATA_Products.filter((item) =>
+                DATA_Types.some(
+                  (type) =>
+                    type.name === params.product &&
+                    item.ClefType === type._id &&
+                    item.prixPromo > 0
+                )
+              ),
+              6
+            )
+          );
+          setPt2(
+            getRandomElementsSix(
+              DATA_Products.slice(0, 30).filter((item) =>
+                DATA_Types.some(
+                  (type) =>
+                    type.name === params.product && item.ClefType === type._id
+                )
+              ),
+              6
+            )
+          );
+        } else {
+          setPtAll(
+            DATA_Products.filter((item) =>
+              DATA_Types.some(
+                (type) =>
+                  type.clefCategories === ClefCate?._id &&
+                  item.ClefType === type._id
+              )
+            )
+          );
+          setPtp(getRandomElementsSix(filteredProductsPromo, 6));
+          setPt2(getRandomElementsSix(filteredProductsTop30, 6));
+        }
+        // })
+        // .catch((error) => console.log(error));
+        // })
+        // .catch((error) => {
+        //   console.log(error);
+        // });
       })
       .catch((error) => {
         console.log(error);

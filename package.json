@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@paypal/react-paypal-js": "^8.1.0",
+    "@reduxjs/toolkit": "^2.0.1",
     "@stripe/react-stripe-js": "^2.1.1",
     "@stripe/stripe-js": "^1.54.1",
     "@testing-library/jest-dom": "^5.16.5",
@@ -24,6 +25,7 @@
     "react-leaflet": "^4.2.1",
     "react-paginate": "^8.2.0",
     "react-quill": "^2.0.0",
+    "react-redux": "^9.0.4",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
