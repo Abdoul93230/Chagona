@@ -81,6 +81,8 @@
 .ProductDet .midel .slide{
     width: 100%;
     height: 250px;
+    /* color: red; */
+    /* border: 2px solid crimson; */
     position: relative;
 }
 .ProductDet .midel .slide img{

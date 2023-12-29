@@ -687,13 +687,55 @@ function ProductDet({ product }) {
           <div className="midel carousel-container">
             <Slider {...settings}>
               <div className="slide">
-                <img src={VP?.image1} alt="loading" />
+                <div
+                  style={{
+                    backgroundImage: `url(${VP?.image1})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    height: "100%", // Ajustez la hauteur selon vos besoins
+                    width: "100%", // Ajustez la largeur selon vos besoins
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#ff9696", // Couleur du texte, ajustez selon vos besoins
+                  }}
+                ></div>
+                {/* <img src={VP?.image1} alt="loading" /> */}
               </div>
               <div className="slide">
-                <img src={VP?.image2} alt="loading" />
+                {/* <img src={VP?.image2} alt="loading" /> */}
+                <div
+                  style={{
+                    backgroundImage: `url(${VP?.image2})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    height: "100%", // Ajustez la hauteur selon vos besoins
+                    width: "100%", // Ajustez la largeur selon vos besoins
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#ff9696", // Couleur du texte, ajustez selon vos besoins
+                  }}
+                ></div>
               </div>
               <div className="slide">
-                <img src={VP?.image3} alt="loading" />
+                {/* <img src={VP?.image3} alt="loading" /> */}
+                <div
+                  style={{
+                    backgroundImage: `url(${VP?.image3})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    height: "100%", // Ajustez la hauteur selon vos besoins
+                    width: "100%", // Ajustez la largeur selon vos besoins
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#ff9696", // Couleur du texte, ajustez selon vos besoins
+                  }}
+                ></div>
               </div>
             </Slider>
           </div>

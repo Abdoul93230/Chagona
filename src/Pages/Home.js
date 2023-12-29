@@ -120,14 +120,14 @@ function Home() {
           direction="right"
         />
         <ConteProduits
-          products={getRandomElementss(allProducts, 6)}
+          products={getRandomElementss(DATA_Products, 6)}
           // name={"homes & femmes"}
         />
         {/* <ProductOne allProducts={allProducts} /> */}
         <ConteProduits
           products={getRandomElementsSix(
-            allProducts.filter((item) =>
-              allTypes.some(
+            DATA_Products.filter((item) =>
+              DATA_Types.some(
                 (type) =>
                   type.clefCategories === clefElectronique?._id &&
                   item.ClefType === type._id
@@ -138,8 +138,8 @@ function Home() {
         />
         <ProductsSli
           products={getRandomElements(
-            allProducts.filter((item) =>
-              allTypes.some(
+            DATA_Products.filter((item) =>
+              DATA_Types.some(
                 (type) =>
                   type.clefCategories === clefElectronique?._id &&
                   item.ClefType === type._id
@@ -149,12 +149,12 @@ function Home() {
           name={"électroniques"}
         />
 
-        <Galeries products={allProducts} />
+        <Galeries products={DATA_Products} />
 
         {allCategories?.map((param, index) => {
           if (
             getRandomElements(
-              allProducts.filter(
+              DATA_Products.filter(
                 (item) =>
                   item.ClefType ===
                   allTypes.find((i) => i.clefCategories === param._id)?._id
@@ -166,8 +166,8 @@ function Home() {
               <div key={index}>
                 <ConteProduits
                   products={getRandomElementsSix(
-                    allProducts.filter((item) =>
-                      allTypes.some(
+                    DATA_Products.filter((item) =>
+                      DATA_Types.some(
                         (type) =>
                           type.clefCategories === param?._id &&
                           item.ClefType === type._id
@@ -178,8 +178,8 @@ function Home() {
                 />
                 <ProductsSli
                   products={getRandomElements(
-                    allProducts.filter((item) =>
-                      allTypes.some(
+                    DATA_Products.filter((item) =>
+                      DATA_Types.some(
                         (type) =>
                           type.clefCategories === param?._id &&
                           item.ClefType === type._id
