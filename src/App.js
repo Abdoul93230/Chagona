@@ -325,14 +325,14 @@ function App() {
               <Route
                 path="/Search"
                 element={
-                  acces === "oui" ? (
-                    <Search
-                      allCategories={allCategories}
-                      allProducts={allProducts}
-                    />
-                  ) : (
-                    <Connection chg={changeA} />
-                  )
+                  // acces === "oui" ? (
+                  <Search
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                  // ) : (
+                  //   <Connection chg={changeA} />
+                  // )
                 }
               ></Route>
               <Route
