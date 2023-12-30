@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ChevronRight, Lock, PhoneCall, User } from "react-feather";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LogIn.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -36,7 +36,7 @@ function LogIn({ chg, creer }) {
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isloading, setIsloading] = useState(false);
-
+  const location = useLocation();
   const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const regexPhone = /^[0-9]{8,}$/;
 
@@ -108,7 +108,29 @@ function LogIn({ chg, creer }) {
         handleAlert(response.data.message);
         setIsloading(false);
         chg("oui");
-        navigue("/Home");
+        const fromCartParam = new URLSearchParams(location.search).get(
+          "fromCart"
+        );
+        const fromCartProfile = new URLSearchParams(location.search).get(
+          "fromProfile"
+        );
+        const fromCartMore = new URLSearchParams(location.search).get(
+          "fromMore"
+        );
+        const fromCartMessages = new URLSearchParams(location.search).get(
+          "fromMessages"
+        );
+        if (fromCartParam) {
+          navigue("/Cart?fromCart=true");
+        } else if (fromCartProfile) {
+          navigue("/Profile");
+        } else if (fromCartMore) {
+          navigue("/More");
+        } else if (fromCartMessages) {
+          navigue("/Messages");
+        } else {
+          navigue("/Home");
+        }
         localStorage.setItem(`userEcomme`, JSON.stringify(response.data));
       } else {
         handleError(response.data.message);

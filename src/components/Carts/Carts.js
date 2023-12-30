@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
+import { useSelector } from "react-redux";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function Carts({ op }) {
@@ -22,6 +23,7 @@ function Carts({ op }) {
   const [allMessage, setAllMessage] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const DATA_Products = useSelector((state) => state.products.data);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
 
   const calculateTotalPrice = () => {
@@ -49,18 +51,20 @@ function Carts({ op }) {
       return;
     } else {
     }
-    axios
-      .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
-      .then((res) => {
-        setAllMessage(
-          res.data.filter(
-            (item) => item.lusUser == false && item.provenance === false
-          )
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (a) {
+      axios
+        .get(`${BackendUrl}/getUserMessagesByClefUser/${a.id}`)
+        .then((res) => {
+          setAllMessage(
+            res.data.filter(
+              (item) => item.lusUser == false && item.provenance === false
+            )
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
 
   useEffect(() => {
@@ -214,7 +218,15 @@ function Carts({ op }) {
               <h4>Free Bomestic shipping</h4>
             </div>
             <div className="right">
-              <button onClick={() => op("deux")}>
+              <button
+                onClick={() => {
+                  if (a) {
+                    op("deux");
+                  } else {
+                    navigue("/connection?fromCart=true");
+                  }
+                }}
+              >
                 Checkout{" "}
                 <span>
                   <ChevronRight />

@@ -25,7 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 
 const BackendUrl = process.env.REACT_APP_Backend_Url;
-function ProductDet({ product }) {
+function ProductDet() {
   const params = useParams();
   const [poppup, setPoppup] = useState(false);
   const [poppup2, setPoppup2] = useState(false);
@@ -295,7 +295,7 @@ function ProductDet({ product }) {
     const updatedProducts = [
       ...existingProducts,
       {
-        ...product,
+        ...VP,
         colors: [color], // Ajouter la couleur sélectionnée comme tableau
         sizes: [taille], // Ajouter la taille sélectionnée comme tableau
         quantity: 1,

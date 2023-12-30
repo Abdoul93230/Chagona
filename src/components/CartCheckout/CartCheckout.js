@@ -31,6 +31,7 @@ function CartCheckout({ op }) {
 
   const [produits, setProduits] = useState(null);
 
+  // console.log("rdraaa", a);
   useEffect(() => {
     const local = localStorage.getItem("panier");
 

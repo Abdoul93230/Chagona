@@ -40,19 +40,13 @@ function Home() {
     return shuffledArray.slice(0, nbr);
   }
   useEffect(() => {
-    // axios
-    //   .get(`${BackendUrl}/getAllType`)
-    //   .then((types) => {
     setAllTypes(DATA_Types);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
 
     axios
       .get(`${BackendUrl}/getAllCategories`)
       .then((Categories) => {
         setAllCategories(Categories.data.data);
+        // console.log(Categories.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -68,8 +62,8 @@ function Home() {
     //       console.log(error.response.data.message);
     //     });
   }, []);
-  const clefElectronique = allCategories
-    ? allCategories.find((item) => item.name === "électroniques")
+  const clefElectronique = DATA_Categories
+    ? DATA_Categories.find((item) => item.name === "électroniques")
     : null;
 
   // Gestionnaire pour faire défiler vers le haut de la page
@@ -104,13 +98,13 @@ function Home() {
     <div className="home">
       <LoadingIndicator loading={loading}>
         <HomeTop />
-        <HeaderOne categories={allCategories} />
+        <HeaderOne categories={DATA_Categories} />
         <InfiniteCarousel
           param="Bienvenue sur notre plateforme de commerce électronique locale ! Achetez
         des produits locaux de qualité."
           direction="left"
         />
-        <Presentation categories={allCategories} />
+        <Presentation categories={DATA_Categories} />
         {/* <InfiniteCarousel
           param="Habou227 sur games haute de Produits de Unique Sélection une Explorez !"
           direction="right"
@@ -151,13 +145,13 @@ function Home() {
 
         <Galeries products={DATA_Products} />
 
-        {allCategories?.map((param, index) => {
+        {DATA_Categories.map((param, index) => {
           if (
             getRandomElements(
               DATA_Products.filter(
                 (item) =>
                   item.ClefType ===
-                  allTypes.find((i) => i.clefCategories === param._id)?._id
+                  DATA_Types.find((i) => i.clefCategories === param._id)?._id
               )
             ).length > 0 &&
             param._id !== clefElectronique?._id
@@ -193,7 +187,7 @@ function Home() {
           else return null;
         })}
         <Footer scroll={scrollToTop} />
-        <Navbar />
+        <Navbar fromHom={true} />
       </LoadingIndicator>
 
       {showButton && (

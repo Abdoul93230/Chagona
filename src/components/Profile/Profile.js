@@ -6,6 +6,7 @@ import image1 from "../../Images/icon_user.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
+import { handleAlert } from "../../App";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function Profile() {
@@ -23,18 +24,23 @@ function Profile() {
   const [produits, setProduits] = useState(0);
 
   useEffect(() => {
-    axios
-      .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
-      .then((res) => {
-        setAllMessage(
-          res.data.filter(
-            (item) => item.lusUser === false && item.provenance === false
-          )
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (a) {
+      axios
+        .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
+        .then((res) => {
+          setAllMessage(
+            res.data.filter(
+              (item) => item.lusUser === false && item.provenance === false
+            )
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      // handleAlert("veuiller vous connectez pour plus de fonctionalites.");
+      // navigue("/connection?fromProfile=true");
+    }
   }, []);
 
   useEffect(() => {
@@ -47,51 +53,53 @@ function Profile() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${BackendUrl}/user`, {
-        params: {
-          id: a.id,
-        },
-      })
-      .then((response) => {
-        const data = response.data.user;
-        setNom(data.name);
+    if (a) {
+      axios
+        .get(`${BackendUrl}/user`, {
+          params: {
+            id: a.id,
+          },
+        })
+        .then((response) => {
+          const data = response.data.user;
+          setNom(data.name);
 
-        setEmail(data.email);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-      });
+          setEmail(data.email);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+        });
 
-    axios
-      .get(`${BackendUrl}/getUserProfile`, {
-        params: {
-          id: a.id,
-        },
-      })
-      .then((Profiler) => {
-        setLoading(false);
-        // console.log(Profiler);
-        if (
-          Profiler.data.data.image &&
-          Profiler.data.data.image !==
-            `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
-        ) {
-          setImageP(Profiler.data.data.image);
-          // console.log(Profiler.data.data);
-        }
-        // if (Profiler.data.data.numero) {
-        //   if (phone.length <= 0) {
-        //     setPhone(Profiler.data.data.numero);
-        //   }
-        // }
-      })
-      .catch((erro) => {
-        setLoading(false);
-        // if (erro.response.status === 404)
-        //   console.log(erro.response.data.message);
-        // console.log(erro.response);
-      });
+      axios
+        .get(`${BackendUrl}/getUserProfile`, {
+          params: {
+            id: a.id,
+          },
+        })
+        .then((Profiler) => {
+          setLoading(false);
+          // console.log(Profiler);
+          if (
+            Profiler.data.data.image &&
+            Profiler.data.data.image !==
+              `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
+          ) {
+            setImageP(Profiler.data.data.image);
+            // console.log(Profiler.data.data);
+          }
+          // if (Profiler.data.data.numero) {
+          //   if (phone.length <= 0) {
+          //     setPhone(Profiler.data.data.numero);
+          //   }
+          // }
+        })
+        .catch((erro) => {
+          setLoading(false);
+          // if (erro.response.status === 404)
+          //   console.log(erro.response.data.message);
+          // console.log(erro.response);
+        });
+    }
   }, []);
 
   return (

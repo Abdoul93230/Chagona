@@ -24,23 +24,25 @@ function HomeTop() {
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
 
   useEffect(() => {
-    axios
-      .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
-      .then((res) => {
-        setNbr(
-          res.data.filter(
-            (item) => item.lusUser == false && item.provenance === false
-          )?.length
-        );
-        setAllMessage(
-          res.data.filter(
-            (item) => item.lusUser == false && item.provenance === false
-          )
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (a) {
+      axios
+        .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
+        .then((res) => {
+          setNbr(
+            res.data.filter(
+              (item) => item.lusUser == false && item.provenance === false
+            )?.length
+          );
+          setAllMessage(
+            res.data.filter(
+              (item) => item.lusUser == false && item.provenance === false
+            )
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
 
   useEffect(() => {
@@ -48,23 +50,25 @@ function HomeTop() {
     socket.on("new_message_user", (message) => {
       if (message) {
         console.log("oui");
-        axios
-          .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
-          .then((res) => {
-            setNbr(
-              res.data.filter(
-                (item) => item.lusUser == false && item.provenance === false
-              )?.length
-            );
-            setAllMessage(
-              res.data.filter(
-                (item) => item.lusUser == false && item.provenance === false
-              )
-            );
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        if (a) {
+          axios
+            .get(`${BackendUrl}/getUserMessagesByClefUser/${a?.id}`)
+            .then((res) => {
+              setNbr(
+                res.data.filter(
+                  (item) => item.lusUser == false && item.provenance === false
+                )?.length
+              );
+              setAllMessage(
+                res.data.filter(
+                  (item) => item.lusUser == false && item.provenance === false
+                )
+              );
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       }
     });
     return () => {
@@ -89,7 +93,10 @@ function HomeTop() {
       <div className="one">
         <div className="h">
           <img src={logo} alt="loadin" />
-          <Link className="l" to="/Messages">
+          <Link
+            className="l"
+            to={a ? "/Messages" : "/Messages?fromMessages=true"}
+          >
             <MessageCircle style={{ width: "40px" }} />{" "}
             <span>{nbr > 0 ? allMessage.length : 0}</span>
           </Link>

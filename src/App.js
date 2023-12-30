@@ -205,28 +205,33 @@ function App() {
               <Route
                 path="/"
                 element={
-                  acces === "oui" ? (
-                    <Home
-                      allCategories={allCategories}
-                      allProducts={allProducts}
-                    />
-                  ) : (
-                    <Connection chg={changeA} />
-                  )
+                  // acces === "oui" ? (
+                  <Home
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                  // ) : (
+                  // <Connection chg={changeA} />
+                  // )
                 }
               />
               <Route
                 path="/Home"
                 element={
-                  acces === "oui" ? (
-                    <Home
-                      allCategories={allCategories}
-                      allProducts={allProducts}
-                    />
-                  ) : (
-                    <Connection chg={changeA} />
-                  )
+                  // acces === "oui" ? (
+                  <Home
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                  // ) : (
+                  //   <Connection chg={changeA} />
+                  // )
                 }
+              />
+
+              <Route
+                path="/connection"
+                element={<Connection chg={changeA} />}
               />
 
               <Route
@@ -266,46 +271,45 @@ function App() {
               <Route
                 path="/ProductDet/:id"
                 element={
-                  acces === "oui" ? (
-                    <Productdetails
-                      allCategories={allCategories}
-                      allProducts={allProducts}
-                    />
-                  ) : (
-                    <Connection chg={changeA} />
-                  )
+                  // acces === "oui" ? (
+                  <Productdetails />
+                  // ) : (
+                  //   <Connection chg={changeA} />
+                  // )
                 }
               />
               <Route
                 path="/Categorie/:Cat"
                 element={
-                  acces === "oui" ? (
-                    <CategorieProduct
-                      allCategories={allCategories}
-                      allProducts={allProducts}
-                    />
-                  ) : (
-                    <Connection chg={changeA} />
-                  )
+                  // acces === "oui" ? (
+                  <CategorieProduct
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                  // ) : (
+                  //   <Connection chg={changeA} />
+                  // )
                 }
               />
               <Route
                 path="/Categorie/:Cat/:product"
                 element={
-                  acces === "oui" ? (
-                    <CategorieProduct
-                      allCategories={allCategories}
-                      allProducts={allProducts}
-                    />
-                  ) : (
-                    <Connection chg={changeA} />
-                  )
+                  // acces === "oui" ? (
+                  <CategorieProduct
+                    allCategories={allCategories}
+                    allProducts={allProducts}
+                  />
+                  // ) : (
+                  //   <Connection chg={changeA} />
+                  // )
                 }
               />
               <Route
                 path="/Cart"
                 element={
-                  acces === "oui" ? <Cart /> : <Connection chg={changeA} />
+                  // acces === "oui" ?
+                  <Cart />
+                  // : <Connection chg={changeA} />
                 }
               ></Route>
               <Route
@@ -470,7 +474,7 @@ export default App;
 const handleAlert = (message) => {
   toast.success(`${message} !`, {
     position: toast.POSITION.TOP_RIGHT,
-    autoClose: 3000,
+    autoClose: 4000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -482,7 +486,7 @@ const handleAlert = (message) => {
 const handleAlertwar = (message) => {
   toast.warn(`${message} !`, {
     position: toast.POSITION.TOP_RIGHT,
-    autoClose: 3000,
+    autoClose: 4000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

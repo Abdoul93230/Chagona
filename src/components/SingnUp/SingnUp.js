@@ -8,7 +8,7 @@ import {
   PhoneCall,
   User,
 } from "react-feather";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
@@ -40,6 +40,7 @@ function SingnUp({ chg }) {
   const navigue = useNavigate();
   const [isloading, setIsloading] = useState(false);
   const regexPhone = /^[0-9]{8,}$/;
+  const location = useLocation();
   //////////////// verification des information et creation de l'utilisateur  ///////////////////////////
 
   const validateCredentials = () => {
@@ -146,7 +147,29 @@ function SingnUp({ chg }) {
                 handleAlert(user.data.message);
                 setIsloading(false);
                 chg("oui");
-                navigue("/Home");
+                const fromCartParam = new URLSearchParams(location.search).get(
+                  "fromCart"
+                );
+                const fromCartProfile = new URLSearchParams(
+                  location.search
+                ).get("fromProfile");
+                const fromCartMore = new URLSearchParams(location.search).get(
+                  "fromMore"
+                );
+                const fromCartMessages = new URLSearchParams(
+                  location.search
+                ).get("fromMessages");
+                if (fromCartParam) {
+                  navigue("/Cart?fromCart=true");
+                } else if (fromCartProfile) {
+                  navigue("/Profile");
+                } else if (fromCartMore) {
+                  navigue("/More");
+                } else if (fromCartMessages) {
+                  navigue("/Messages");
+                } else {
+                  navigue("/Home");
+                }
                 localStorage.setItem(`userEcomme`, JSON.stringify(user.data));
               } else {
                 handleAlertwar(user.data.message);
