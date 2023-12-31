@@ -253,7 +253,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
 
                       <h6 style={{ fontSize: 12 }}>{param.name}</h6>
                       <h5>
-                        $ {param.prixPromo ? param.prixPromo : param.prix}
+                        f {param.prixPromo ? param.prixPromo : param.prix}
                       </h5>
                       <span>
                         <Star style={{ width: "13px" }} />{" "}
@@ -273,7 +273,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
 
                       <h6 style={{ fontSize: 12 }}>{param.name}</h6>
                       <h5>
-                        $ {param.prixPromo ? param.prixPromo : param.prix}
+                        f {param.prixPromo ? param.prixPromo : param.prix}
                       </h5>
                       <span>
                         <Star style={{ width: "13px" }} />{" "}
