@@ -101,11 +101,11 @@ function ProductsSli({ products, name }) {
 
                     {param.prixPromo > 0 ? (
                       <>
-                        <h6>${param.prix}</h6>
-                        <h4>${param.prixPromo}</h4>
+                        <h6>f {param.prix}</h6>
+                        <h4>f {param.prixPromo}</h4>
                       </>
                     ) : (
-                      <h4>${param.prix}</h4>
+                      <h4>f{param.prix}</h4>
                     )}
                   </div>
                 </div>
