@@ -105,7 +105,7 @@ function ProductsSli({ products, name }) {
                         <h4>f {param.prixPromo}</h4>
                       </>
                     ) : (
-                      <h4>f{param.prix}</h4>
+                      <h4>f {param.prix}</h4>
                     )}
                   </div>
                 </div>

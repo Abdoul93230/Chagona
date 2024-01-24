@@ -23,22 +23,22 @@ function Carts({ op }) {
   const [allMessage, setAllMessage] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-  const DATA_Products = useSelector((state) => state.products.data);
+  // const DATA_Products = useSelector((state) => state.products.data);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
 
-  const calculateTotalPrice = () => {
-    let total = 0;
+  // const calculateTotalPrice = () => {
+  //   let total = 0;
 
-    produits?.forEach((param) => {
-      const price = param.prixPromo > 0 ? param.prixPromo : param.prix;
-      total += price * param.quantity;
-    });
+  //   produits?.forEach((param) => {
+  //     const price = param.prixPromo > 0 ? param.prixPromo : param.prix;
+  //     total += price * param.quantity;
+  //   });
 
-    return total;
-  };
+  //   return total;
+  // };
 
   // let prix = calculateTotalPrice();
-  let prix;
+  // let prix;
   let price;
   let totalPrice;
   let pric = 0;
@@ -188,9 +188,9 @@ function Carts({ op }) {
                     </>
                   )}
                   <button>
-                    <span onClick={() => decrementQuantity(index)}>-</span>
+                    <span onClick={() => decrementQuantity(index)}> - </span>
                     {param.quantity}
-                    <span onClick={() => incrementQuantity(index)}>+</span>
+                    <span onClick={() => incrementQuantity(index)}> + </span>
                   </button>
                   <h5 style={{ display: "inline-block", fontWeight: "bold" }}>
                     TT {totalPrice} f
@@ -214,7 +214,7 @@ function Carts({ op }) {
           <div className="bottom">
             <div className="left">
               <h2>Total</h2>
-              <h3>cfa{total}</h3>
+              <h3>cfa {total}</h3>
               <h4>Free Bomestic shipping</h4>
             </div>
             <div className="right">

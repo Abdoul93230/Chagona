@@ -12,21 +12,21 @@ import axios from "axios";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import { shuffle } from "lodash";
 import { useSelector } from "react-redux";
-const BackendUrl = process.env.REACT_APP_Backend_Url;
+// const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function CategorieProduct() {
   function goBack() {
     window.history.back();
   }
 
-  const [allTypes, setAllTypes] = useState([]);
+  // const [allTypes, setAllTypes] = useState([]);
   const [Allcommente, setAllCommente] = useState([]);
   const [choix, setChoix] = useState("Home");
   const params = useParams();
   const navigue = useNavigate();
   const [allPub, setAllPub] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [allProducts, setAllProducts] = useState([]);
+  // const [allProducts, setAllProducts] = useState([]);
   const [Ptp, setPtp] = useState([]);
   const [pt2, setPt2] = useState([]);
   const [ptAll, setPtAll] = useState([]);
@@ -81,7 +81,7 @@ function CategorieProduct() {
     // axios
     //   .get(`${BackendUrl}/getAllType`)
     //   .then((types) => {
-    setAllTypes(DATA_Types);
+    // setAllTypes(DATA_Types);
 
     const ClefTypes = DATA_Types
       ? DATA_Types.find((item) => item.name === params?.product)
@@ -90,7 +90,7 @@ function CategorieProduct() {
     // axios;
     // .get(`${BackendUrl}/products`)
     // .then((prod) => {
-    setAllProducts(DATA_Products);
+    // setAllProducts(DATA_Products);
 
     const filteredProductsPromo = DATA_Products.filter((item) =>
       DATA_Types.some(
@@ -183,8 +183,8 @@ function CategorieProduct() {
   const ClefCate = allCategories
     ? allCategories.find((item) => item.name === params?.Cat)
     : null;
-  const ClefTypes = allTypes
-    ? allTypes.find((item) => item.name === params?.product)
+  const ClefTypes = DATA_Types
+    ? DATA_Types.find((item) => item.name === params?.product)
     : null;
 
   const settings = {
@@ -222,8 +222,8 @@ function CategorieProduct() {
   //       9
   //     );
   const Home1 = getRandomElementsSix(
-    allProducts.filter((item) =>
-      allTypes.some(
+    DATA_Products.filter((item) =>
+      DATA_Types.some(
         (type) =>
           type.clefCategories === ClefCate?._id && item.ClefType === type._id
       )
@@ -247,8 +247,8 @@ function CategorieProduct() {
   //     );
 
   const Home2 = getRandomElementsSix(
-    allProducts.filter((item) =>
-      allTypes.some(
+    DATA_Products.filter((item) =>
+      DATA_Types.some(
         (type) =>
           type.clefCategories === ClefCate?._id && item.ClefType === type._id
       )
@@ -257,12 +257,12 @@ function CategorieProduct() {
   );
   const Pt1 = params.product
     ? getRandomElementsSix(
-        allProducts.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
+        DATA_Products.filter((item) => item.ClefType === ClefTypes?._id ?? ""),
         6
       )
     : getRandomElementsSix(
-        allProducts.filter((item) =>
-          allTypes.some(
+        DATA_Products.filter((item) =>
+          DATA_Types.some(
             (type) =>
               type.clefCategories === ClefCate?._id &&
               item.ClefType === type._id
@@ -336,45 +336,45 @@ function CategorieProduct() {
       <div className="prod" style={{ marginBottom: "30px" }}>
         <div className="options">
           <ul>
-            {allTypes
-              ?.filter((para) => para.clefCategories === ClefCate?._id)
-              .map((param, index) => {
-                if (index > 4) {
-                  return null;
-                }
-                return (
-                  <li
-                    key={index}
-                    onClick={() => {
-                      navigue(`/Categorie/${params.Cat}/${param.name}`);
-                      setPt2(
-                        getRandomElementsSix(
-                          allProducts
-                            .slice(0, 30)
-                            .filter((item) => item.ClefType === param?._id),
-                          6
-                        )
-                      );
-                      setPtp(
-                        getRandomElementsSix(
-                          allProducts.filter(
-                            (item) =>
-                              item.ClefType === param?._id && item.prixPromo > 0
-                          ),
-                          6
-                        )
-                      );
-                      setPtAll(
-                        allProducts.filter(
+            {DATA_Types?.filter(
+              (para) => para.clefCategories === ClefCate?._id
+            ).map((param, index) => {
+              if (index > 4) {
+                return null;
+              }
+              return (
+                <li
+                  key={index}
+                  onClick={() => {
+                    navigue(`/Categorie/${params.Cat}/${param.name}`);
+                    setPt2(
+                      getRandomElementsSix(
+                        DATA_Products.slice(0, 30).filter(
                           (item) => item.ClefType === param?._id
-                        )
-                      );
-                    }}
-                  >
-                    {param.name}
-                  </li>
-                );
-              })}
+                        ),
+                        6
+                      )
+                    );
+                    setPtp(
+                      getRandomElementsSix(
+                        DATA_Products.filter(
+                          (item) =>
+                            item.ClefType === param?._id && item.prixPromo > 0
+                        ),
+                        6
+                      )
+                    );
+                    setPtAll(
+                      DATA_Products.filter(
+                        (item) => item.ClefType === param?._id
+                      )
+                    );
+                  }}
+                >
+                  {param.name}
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div className="promo">
@@ -522,7 +522,7 @@ function CategorieProduct() {
                     <img
                       className="img"
                       src={
-                        allProducts?.find(
+                        DATA_Products?.find(
                           (item) => item._id === param.clefProduct
                         ).image1
                       }
@@ -531,7 +531,7 @@ function CategorieProduct() {
                     <img
                       className="img"
                       src={
-                        allProducts?.find(
+                        DATA_Products?.find(
                           (item) => item._id === param.clefProduct
                         ).image2
                       }
@@ -540,7 +540,7 @@ function CategorieProduct() {
                     <img
                       className="img"
                       src={
-                        allProducts?.find(
+                        DATA_Products?.find(
                           (item) => item._id === param.clefProduct
                         ).image3
                       }

@@ -205,14 +205,32 @@
     padding: 3px;
 }
 
-.AInbox .right  .main .bottom form button{
+.AInbox .right  .main .bottom form .react-quill {
+    border: 2px solid #ccc;
+    padding: 10px;
+    height: 200px;
+    font-size: 16px;
+  }
+  
+  /* Style du bouton "Envoyer" */
+  .AInbox .right  .main .bottom form .react-quill .button {
+    /* background-color: #007bff; */
+    background-color: #FF6969;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+/* .AInbox .right  .main .bottom form button{
     padding: 10px 20px;
     border: none;
-    margin-left: 10px;
-    background-color: rgb(23, 56, 56);
-    color: white;
+    margin-left: 10px; */
+    /* background-color: rgb(23, 56, 56); */
+    /* color: white;
     border-radius: 10px;
-}
+} */
 
 @media screen and (max-width:795px) {
     .AInbox .right  .main .top .carde{

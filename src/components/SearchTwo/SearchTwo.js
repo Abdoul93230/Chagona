@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import axios from "axios";
+import { useSelector } from "react-redux";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
 function SearchTwo({ op, allCategories, allProducts }) {
@@ -22,13 +23,15 @@ function SearchTwo({ op, allCategories, allProducts }) {
   const navigue = useNavigate();
   const [poppup, setPoppup] = useState(false);
   const [show, setShow] = useState(null);
-  const [allTypes, setAllTypes] = useState([]);
   const [products, setProduct] = useState([]);
   const [erreur, setErreur] = useState(null);
   const [searchName, setSearchName] = useState("");
   const [sh, setSh] = useState(true);
   const Categories = [];
   const [Brands, setBrands] = useState([]);
+  const DATA_Products = useSelector((state) => state.products.data);
+  const DATA_Types = useSelector((state) => state.products.types);
+  const DATA_Categories = useSelector((state) => state.products.categories);
 
   // Gestionnaire pour faire défiler vers le haut de la page
   const scrollToTop = () => {
@@ -82,17 +85,8 @@ function SearchTwo({ op, allCategories, allProducts }) {
 
   useEffect(() => {
     if (!show) {
-      setShow(allCategories[0]);
+      setShow(DATA_Categories[0]);
     }
-
-    axios
-      .get(`${BackendUrl}/getAllType`)
-      .then((types) => {
-        setAllTypes(types.data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }, [show]);
 
   useEffect(() => {
@@ -158,14 +152,11 @@ function SearchTwo({ op, allCategories, allProducts }) {
       ? sizes
       : [];
 
-  const shuffledProducts = allProducts
-    .filter((item) =>
-      allTypes.some(
-        (type) =>
-          type.clefCategories === show?._id && item.ClefType === type._id
-      )
+  const shuffledProducts = DATA_Products.filter((item) =>
+    DATA_Types.some(
+      (type) => type.clefCategories === show?._id && item.ClefType === type._id
     )
-    .sort(() => Math.random() - 0.5); // Mélange les produits du tableau
+  ).sort(() => Math.random() - 0.5); // Mélange les produits du tableau
 
   function generateRandomNumber() {
     const min = 3;
@@ -211,7 +202,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
 
           <div className="right">
             <ul>
-              {allCategories?.map((param, index) => {
+              {DATA_Categories?.map((param, index) => {
                 // if (index > 3) {
                 //   return null;
                 // }
@@ -331,7 +322,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
                     return <li key={index}>{param}</li>;
                   })
                 ) : choix === "category" ? (
-                  allCategories.map((param, index) => {
+                  DATA_Categories.map((param, index) => {
                     return <li key={index}>{param.name}</li>;
                   })
                 ) : (
