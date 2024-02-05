@@ -168,6 +168,7 @@ function CartCheckout({ op }) {
       navigue("/More/payment_method?fromCart=true");
       return;
     }
+
     if (local) {
       const pane = JSON.parse(local);
       let prod = [];
@@ -193,28 +194,92 @@ function CartCheckout({ op }) {
       }
 
       // console.log(data);
-
-      axios
-        .post(`${BackendUrl}/createCommande`, data)
-        .then((res) => {
-          // alert(res.data.message);
-          localStorage.removeItem("panier");
-          if (codeValide) {
-            if (codeValide.isValide) {
+      if (choix.length > 0) {
+        const dataToSend = {
+          customer_name: a?.name,
+          currency: "XOF",
+          country: "NE",
+          amount: total ? total : "",
+          transaction_id: "payment001",
+          msisdn: choix === "master Card" || "Visa" ? numeroCard : phone,
+        };
+        const authToken = "sk_ef56606cf6f3420bbf844fe60d06b6c0";
+        const requestOptions = {
+          method: "post",
+          url: "https://i-pay.money/api/v1/payments", // Remplacez par votre URL d'API
+          headers: {
+            "Content-Type": "application/json", // Spécifier le type de contenu du corps de la requête
+            Authorization: `Bearer ${authToken}`, // Inclure le jeton Bearer dans le header
+            "Ipay-Payment-Type":
+              choix === "master Card" || "Visa" ? "card" : "mobile", // Ajouter des attributs au header au besoin
+            "Ipay-Target-Environment": "live",
+            Accept: "*/*",
+          },
+          data: dataToSend, // Les données à envoyer dans le corps de la requête
+        };
+        if (
+          choix === "Visa" ||
+          choix === "Master Card" ||
+          choix === "Mobile Money"
+        ) {
+          axios(requestOptions)
+            .then((response) => {
               axios
-                .put(`${BackendUrl}/updateCodePromo`, {
-                  codePromoId: codeValide._id,
-                  isValide: false,
+                .post(`${BackendUrl}/createCommande`, data)
+                .then((res) => {
+                  // alert(res.data.message);
+                  localStorage.removeItem("panier");
+                  if (codeValide) {
+                    if (codeValide.isValide) {
+                      axios
+                        .put(`${BackendUrl}/updateCodePromo`, {
+                          codePromoId: codeValide._id,
+                          isValide: false,
+                        })
+                        .then(() => {
+                          // console.log("fait")
+                        })
+                        .catch((error) => console.log(error));
+                    }
+                  }
+                  op("trois");
                 })
-                .then(() => {
-                  // console.log("fait")
-                })
-                .catch((error) => console.log(error));
-            }
-          }
-          op("trois");
-        })
-        .catch((error) => console.log("errrr", error));
+                .catch((error) => console.log("errrr", error));
+              console.log("Réponse de l'API:", response);
+            })
+            .catch((error) => {
+              console.log(
+                "Erreur lors de la requête:",
+                error.response ? error.response.data : error.message,
+                error
+              );
+            });
+        } else if (choix === "Payment a domicile") {
+          axios
+            .post(`${BackendUrl}/createCommande`, data)
+            .then((res) => {
+              // alert(res.data.message);
+              localStorage.removeItem("panier");
+              if (codeValide) {
+                if (codeValide.isValide) {
+                  axios
+                    .put(`${BackendUrl}/updateCodePromo`, {
+                      codePromoId: codeValide._id,
+                      isValide: false,
+                    })
+                    .then(() => {
+                      // console.log("fait")
+                    })
+                    .catch((error) => console.log(error));
+                }
+              }
+              op("trois");
+            })
+            .catch((error) => console.log("errrr", error));
+        }
+      } else {
+        alert("les infos du payment ne sont pas encore mis");
+      }
     }
   };
 

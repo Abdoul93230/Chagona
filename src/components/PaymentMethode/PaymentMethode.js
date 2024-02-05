@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./PaymentMethode.css";
-import { ChevronLeft, CreditCard } from "react-feather";
+import { ChevronLeft, Home, PhoneOutgoing } from "react-feather";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { handleAlert, handleAlertwar } from "../../App";
+import Visa from "../../Images/visalogo-removebg-preview.png";
+import Master from "../../Images/logo-master-card-removebg-preview.png";
+import Phone from "../../Images/Phone1-removebg-preview.png";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function PaymentMethode() {
   const [choix, setChoix] = useState("");
@@ -51,71 +54,71 @@ function PaymentMethode() {
     e.preventDefault();
     const data = { clefUser: a.id };
 
-    // if (!choix) {
-    //   alert("veuiller choisir un moyen de payment.");
-    //   return;
-    // }
-    // if (choix === "Visa") {
-    //   const option = "Visa";
-    //   data.option = option;
+    if (!choix) {
+      handleAlertwar("veuiller choisir un moyen de payment.");
+      return;
+    }
+    if (choix === "Visa") {
+      const option = "Visa";
+      data.option = option;
 
-    //   if (!/^4[0-9]{12}(?:[0-9]{3})?$/.test(numeroCard)) {
-    //     alert("le numero de la carte n'est pas valide1");
-    //     return;
-    //   }
-    //   if (!/^[0-9]{3}$/.test(cvc)) {
-    //     alert("le code de la carte n'est pas valide");
-    //     return;
-    //   }
-    //   if (expiredCard.length <= 0) {
-    //     alert("veuiller selectionner la date d'expiration");
-    //     return;
-    //   }
-    //   data.numeroCard = numeroCard;
-    //   data.cvc = cvc;
-    //   data.expire = expiredCard;
-    // } else if (choix === "master Card") {
-    //   const option = "master Card";
-    //   data.option = option;
-    //   if (!/^(?:5[1-5][0-9]{14})$/.test(numeroCard)) {
-    //     alert("le numero de la carte n'est pas valide2");
-    //     return;
-    //   }
-    //   if (!/^[0-9]{3}$/.test(cvc)) {
-    //     alert("le code de la carte n'est pas valide");
-    //     return;
-    //   }
-    //   if (expiredCard.length <= 0) {
-    //     alert("veuiller selectionner la date d'expiration");
-    //     return;
-    //   }
-    //   data.numeroCard = numeroCard;
-    //   data.cvc = cvc;
-    //   data.expire = expiredCard;
-    // } else if (choix === "Mobile Money") {
-    //   const option = "Mobile Money";
-    //   data.option = option;
-    //   if (!regexPhone.test(numero.toString())) {
-    //     return alert("forma du numero non valid!");
-    //   }
-    //   if (
-    //     operateur === null ||
-    //     operateur === "choisir" ||
-    //     operateur.length <= 0
-    //   ) {
-    //     alert("veuiller choisir votre operateur.");
-    //     return;
-    //   }
-    //   data.numero = numero;
-    //   data.operateur = operateur;
-    // } else if (choix === "Payment a domicile") {
-    //   const option = "Payment a domicile";
-    //   data.option = option;
-    // } else {
-    // }
+      if (!/^4[0-9]{12}(?:[0-9]{3})?$/.test(numeroCard)) {
+        handleAlertwar("le numero de la carte n'est pas valide1");
+        return;
+      }
+      if (!/^[0-9]{3}$/.test(cvc)) {
+        handleAlertwar("le code de la carte n'est pas valide");
+        return;
+      }
+      if (expiredCard.length <= 0) {
+        handleAlertwar("veuiller selectionner la date d'expiration");
+        return;
+      }
+      data.numeroCard = numeroCard;
+      data.cvc = cvc;
+      data.expire = expiredCard;
+    } else if (choix === "master Card") {
+      const option = "master Card";
+      data.option = option;
+      if (!/^(?:5[1-5][0-9]{14})$/.test(numeroCard)) {
+        handleAlertwar("le numero de la carte n'est pas valide2");
+        return;
+      }
+      if (!/^[0-9]{3}$/.test(cvc)) {
+        handleAlertwar("le code de la carte n'est pas valide");
+        return;
+      }
+      if (expiredCard.length <= 0) {
+        handleAlertwar("veuiller selectionner la date d'expiration");
+        return;
+      }
+      data.numeroCard = numeroCard;
+      data.cvc = cvc;
+      data.expire = expiredCard;
+    } else if (choix === "Mobile Money") {
+      const option = "Mobile Money";
+      data.option = option;
+      if (!regexPhone.test(numero.toString())) {
+        return handleAlertwar("forma du numero non valid!");
+      }
+      if (
+        operateur === null ||
+        operateur === "choisir" ||
+        operateur.length <= 0
+      ) {
+        handleAlertwar("veuiller choisir votre operateur.");
+        return;
+      }
+      data.numero = numero;
+      data.operateur = operateur;
+    } else if (choix === "Payment a domicile") {
+      const option = "Payment a domicile";
+      data.option = option;
+    } else {
+    }
 
-    const option = "Payment a domicile";
-    data.option = option;
+    // const option = "Payment a domicile";
+    // data.option = option;
 
     axios
       .post(`${BackendUrl}/createMoyentPayment`, data)
@@ -283,27 +286,35 @@ function PaymentMethode() {
                 className="carde"
                 key={index}
                 onClick={() => {
-                  if (
-                    param === "master Card" ||
-                    param === "Visa" ||
-                    param === "Mobile Money"
-                  ) {
-                    handleAlertwar("L'Option Sera Bientot Disponible");
-                  } else {
-                    setChoix(param);
-                  }
+                  // if (
+                  //   param === "master Card" ||
+                  //   param === "Visa" ||
+                  //   param === "Mobile Money"
+                  // ) {
+                  //   handleAlertwar("L'Option Sera Bientot Disponible");
+                  // } else {
+                  setChoix(param);
+                  // }
                 }}
               >
                 <div className="left">
                   <input
                     type="checkbox"
-                    checked={param === "Payment a domicile" ? true : false}
+                    checked={param === choix ? true : false}
                     style={{ backgroundColor: "#ff6969", padding: 10 }}
                   />
                 </div>
                 <div className="right">
                   <span>
-                    <CreditCard className="i" />
+                    {param === "Visa" ? (
+                      <img src={Visa} className="ii" alt="loading" />
+                    ) : param === "master Card" ? (
+                      <img src={Master} className="ii" alt="loading" />
+                    ) : param === "Payment a domicile" ? (
+                      <Home className="i" />
+                    ) : (
+                      <img src={Phone} className="ii" alt="loading" />
+                    )}
                   </span>
                   <h6>{param}</h6>
                 </div>
