@@ -100,7 +100,38 @@ function PaymentMethode() {
       data.option = option;
       if (!regexPhone.test(numero.toString())) {
         return handleAlertwar("forma du numero non valid!");
+      } else if (numero.length < 8) {
+        handleAlertwar(
+          "Le numéro de l'utilisateur doit contenir au moins 8 chiffres"
+        );
+        return;
+      } else if (numero.length === 8) {
+        // Ajouter le préfixe "227" au début du numéro
+        const userNumber = "227" + numero;
+        setNumero(userNumber);
+        data.numero = userNumber;
+      } else if (numero.length === 11) {
+        // Vérifier si le préfixe est "227"
+        if (numero.substring(0, 3) !== "227") {
+          handleAlertwar(
+            "Le préfixe du numéro de l'utilisateur doit être '227'"
+          );
+          return;
+        }
+      } else if (numero.length > 11) {
+        handleAlertwar(
+          "Le numéro doit contenir 8, ou 11 chiffres avec l'identifiant"
+        );
+        return;
+      } else if (numero.length > 8 && numero.length < 11) {
+        handleAlertwar(
+          "Le numéro doit contenir 8, ou 11 chiffres avec l'identifiant"
+        );
+        return;
+      } else {
+        data.numero = numero;
       }
+
       if (
         operateur === null ||
         operateur === "choisir" ||
@@ -109,7 +140,6 @@ function PaymentMethode() {
         handleAlertwar("veuiller choisir votre operateur.");
         return;
       }
-      data.numero = numero;
       data.operateur = operateur;
     } else if (choix === "Payment a domicile") {
       const option = "Payment a domicile";

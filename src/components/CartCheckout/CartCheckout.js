@@ -232,7 +232,7 @@ function CartCheckout({ op }) {
             .post(`${BackendUrl}/payments`, dataToSend)
             .then((response) => {
               const ref = response.data.data.reference;
-              console.log("success");
+              alert("success");
               axios
                 .get(`${BackendUrl}/payments/`)
                 .then((res) => {
