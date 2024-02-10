@@ -18,7 +18,7 @@ function CartCheckout({ op }) {
   const [codeValide, setCodeValide] = useState(null);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
-
+  const [allPayment, setAllPayment] = useState([]);
   const [poppup, setPoppup] = useState(false);
   const a = JSON.parse(localStorage.getItem(`userEcomme`));
   const [nom, setNom] = useState("");
@@ -39,6 +39,21 @@ function CartCheckout({ op }) {
       setProduits(JSON.parse(local));
     }
   }, []);
+
+  function generateUniqueID() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0"); // Ajoute un zéro au début si le mois est < 10
+    const day = String(now.getDate()).padStart(2, "0"); // Ajoute un zéro au début si le jour est < 10
+    const hours = String(now.getHours()).padStart(2, "0"); // Ajoute un zéro au début si l'heure est < 10
+    const minutes = String(now.getMinutes()).padStart(2, "0"); // Ajoute un zéro au début si la minute est < 10
+    const seconds = String(now.getSeconds()).padStart(2, "0"); // Ajoute un zéro au début si la seconde est < 10
+
+    // Concatène les différentes parties pour former l'identifiant unique
+    const uniqueID = `${year}${month}${day}${hours}${minutes}${seconds}`;
+
+    return uniqueID;
+  }
 
   useEffect(() => {
     axios
@@ -195,58 +210,70 @@ function CartCheckout({ op }) {
 
       // console.log(data);
       if (choix.length > 0) {
+        const uniqueID = generateUniqueID();
         const dataToSend = {
-          customer_name: a?.name,
+          name: a?.name,
           currency: "XOF",
           country: "NE",
-          amount: total ? total : "",
-          transaction_id: "payment001",
-          msisdn:
-            choix === "master Card" || choix === "Visa" ? numeroCard : phone,
+          total: total ? total : "",
+          transaction_id: uniqueID,
+          choix: choix,
+          numeroCard: numeroCard,
+          phone: numero,
         };
-        const authToken = "sk_ef56606cf6f3420bbf844fe60d06b6c0";
-        const requestOptions = {
-          method: "post",
-          url: "https://i-pay.money/api/v1/payments",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${authToken}`,
-            "Ipay-Payment-Type":
-              choix === "master Card" || choix === "Visa" ? "card" : "mobile",
-            "Ipay-Target-Environment": "live",
-            Accept: "*/*",
-          },
-          data: dataToSend,
-        };
+        data.reference = uniqueID;
+
         if (
           choix === "Visa" ||
           choix === "Master Card" ||
           choix === "Mobile Money"
         ) {
-          axios(requestOptions)
+          axios
+            .post(`${BackendUrl}/payments`, dataToSend)
             .then((response) => {
+              const ref = response.data.data.reference;
+              console.log("success");
               axios
-                .post(`${BackendUrl}/createCommande`, data)
+                .get(`${BackendUrl}/payments/`)
                 .then((res) => {
-                  // alert(res.data.message);
-                  localStorage.removeItem("panier");
-                  if (codeValide) {
-                    if (codeValide.isValide) {
-                      axios
-                        .put(`${BackendUrl}/updateCodePromo`, {
-                          codePromoId: codeValide._id,
-                          isValide: false,
-                        })
-                        .then(() => {
-                          // console.log("fait")
-                        })
-                        .catch((error) => console.log(error));
-                    }
+                  setAllPayment(res.data.data);
+
+                  if (
+                    res.data.data.find((item) => item.reference === ref)
+                      .status != "Failed" ||
+                    res.data.data.find((item) => item.reference === ref)
+                      .status != "Initiated"
+                  ) {
+                    axios
+                      .post(`${BackendUrl}/createCommande`, data)
+                      .then((resp) => {
+                        // alert(resp.data.message);
+                        localStorage.removeItem("panier");
+                        if (codeValide) {
+                          if (codeValide.isValide) {
+                            axios
+                              .put(`${BackendUrl}/updateCodePromo`, {
+                                codePromoId: codeValide._id,
+                                isValide: false,
+                              })
+                              .then(() => {
+                                // console.log("fait")
+                              })
+                              .catch((error) => console.log(error));
+                          }
+                        }
+                        op("trois");
+                      })
+                      .catch((error) => console.log("errrr", error));
+                    console.log("Réponse de l'API:", response);
+                  } else {
+                    handleAlertwar(
+                      "le payment na pas pu etre effectuer veuiller ressayer !"
+                    );
+                    return;
                   }
-                  op("trois");
                 })
-                .catch((error) => console.log("errrr", error));
-              console.log("Réponse de l'API:", response);
+                .catch((error) => console.log(error));
             })
             .catch((error) => {
               console.log(

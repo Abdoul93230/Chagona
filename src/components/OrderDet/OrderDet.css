@@ -43,18 +43,33 @@
     justify-content: space-between;
     align-items: center;
 }
-
 .OrderDet .conteneur .carde{
     width: 320px;
     height: auto;
-    display: flex;
     box-shadow: 0px 0px 7px #515c6f60;
     align-items: center;
-    justify-content: space-between;
     border-radius:8px ;
     margin: 7px 0px;
 }
-.OrderDet .conteneur .carde img{
+.OrderDet .conteneur .carde p{
+    width: 100%;
+    background-color: #FF6969;
+    color: white;
+}
+.OrderDet .conteneur .carde p span{
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.OrderDet .conteneur .carde .t{
+    width: 320px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+.OrderDet .conteneur .carde .t img{
     width: 40%;
     height: 120px;
     background-color: white;
@@ -62,11 +77,12 @@
     
 }
 
-.OrderDet .conteneur .carde .det{
+.OrderDet .conteneur .carde .t .det{
     width: 55%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: left;
 }
 
 .OrderDet .conteneur .carde .det h6{

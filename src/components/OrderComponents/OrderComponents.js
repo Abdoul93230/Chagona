@@ -8,6 +8,7 @@ const BackendUrl = process.env.REACT_APP_Backend_Url;
 function OrderComponents() {
   const navigue = useNavigate();
   const [myAllComande, setMyAllCommandes] = useState(null);
+  const [allPayment, setAllPayment] = useState([]);
   const details = (index) => {
     navigue(`/Order/${index}`);
   };
@@ -20,7 +21,10 @@ function OrderComponents() {
       if (i === index) {
         if (!cls[i].classList.contains("d")) cls[i].classList.add("d");
       } else {
-        cls[i].classList.remove("d");
+        if (cls[i].classList.contains("d")) {
+          cls[i].classList.remove("d");
+        } else {
+        }
       }
     }
   };
@@ -51,6 +55,15 @@ function OrderComponents() {
       .catch((error) => console.log(error));
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${BackendUrl}/payments/`)
+      .then((res) => {
+        setAllPayment(res.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   // Variables pour compter le nombre de commandes correspondantes pour chaque option
   const nbrCommandesEnCours = myAllComande?.filter(
     (param) => param.statusLivraison === "en cours"
@@ -76,6 +89,15 @@ function OrderComponents() {
         >
           En cours ({nbrCommandesEnCours})
         </li>
+        {/* <li
+          className={`op ${options === "traitement" ? "d" : ""}`}
+          onClick={() => {
+            setoptions("traitement");
+            changeOption(1);
+          }}
+        >
+          taitement(0)
+        </li> */}
         <li
           className={`op ${options === "Recu" ? "d" : ""}`}
           onClick={() => {
@@ -85,6 +107,7 @@ function OrderComponents() {
         >
           Recu ({nbrCommandesRecues})
         </li>
+
         {/* Ajoutez ici le contenu pour les autres options */}
       </ul>
       <div className="conteneur">
