@@ -196,18 +196,6 @@ function App() {
     height: "100vh", // Centre le spinner verticalement sur la page
   };
 
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setMessage(
-        "Veuillez patienter un instant, la connexion est en cours d'établissement..."
-      );
-    }, 3000);
-
-    return () => clearTimeout(timeoutId);
-  }, [verificationComplete]); // Run the effect only when loading state changes
-
   return (
     <Provider store={store}>
       <div className="App">
@@ -471,11 +459,7 @@ function App() {
           ) : (
             <div style={spinnerContainerStyle}>
               <div style={spinnerStyle}></div>
-              {message && (
-                <p style={{ position: "absolute", top: "60%", left: "46%" }}>
-                  {message}
-                </p>
-              )}
+              {/* <p>En cours de vérification...</p> */}
             </div>
           )}
         </BrowserRouter>
