@@ -471,7 +471,11 @@ function App() {
           ) : (
             <div style={spinnerContainerStyle}>
               <div style={spinnerStyle}></div>
-              {message && <p>{message}</p>}
+              {message && (
+                <p style={{ position: "absolute", top: "60%", left: "46%" }}>
+                  {message}
+                </p>
+              )}
             </div>
           )}
         </BrowserRouter>
