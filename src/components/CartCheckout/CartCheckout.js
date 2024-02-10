@@ -239,10 +239,11 @@ function CartCheckout({ op }) {
                   setAllPayment(res.data.data);
 
                   if (
-                    // res.data.data.find((item) => item.reference === ref)
-                    //   .status != "Failed" ||
                     res.data.data.find((item) => item.reference === ref)
-                      .status != "Initiated"
+                      .status != "Failed"
+                    // ||
+                    // res.data.data.find((item) => item.reference === ref)
+                    //   .status != "Initiated"
                   ) {
                     axios
                       .post(`${BackendUrl}/createCommande`, data)
