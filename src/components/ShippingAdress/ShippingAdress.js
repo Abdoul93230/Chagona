@@ -15,6 +15,7 @@ function ShippingAdress() {
   const [region, setRegion] = useState("");
   const [Quartier, setQuartier] = useState("");
   const [plus, setPlus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigue = useNavigate();
   const location = useLocation();
   function goBack() {
@@ -39,7 +40,9 @@ function ShippingAdress() {
 
   const envoyer = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     if (nom.trim().length < 3) {
+      setIsSubmitting(false);
       alert("Votre nom doit etre superieur ou inferieur a 3 caracteres");
       return;
     }
@@ -48,14 +51,17 @@ function ShippingAdress() {
     //   return;
     // }
     if (!regexPhone.test(phone.toString())) {
+      setIsSubmitting(false);
       alert("forma du numero non valid!");
       return;
     }
     if (region.trim().length <= 0 || region.trim() === "choisir") {
+      setIsSubmitting(false);
       alert("Vous avez pas selectionner votre region.");
       return;
     }
     if (Quartier.trim().length <= 2) {
+      setIsSubmitting(false);
       alert("Vous avez pas bien fourni votre nom de quartier.");
       return;
     }
@@ -77,6 +83,7 @@ function ShippingAdress() {
     axios
       .post(`${BackendUrl}/createOrUpdateAddress`, obj)
       .then((shipping) => {
+        setIsSubmitting(false);
         handleAlert(shipping.data.message);
         const fromCartParam = new URLSearchParams(location.search).get(
           "fromCart"
@@ -101,6 +108,7 @@ function ShippingAdress() {
       })
       .catch((error) => {
         if (error.response.status === 400) {
+          setIsSubmitting(false);
           handleAlertwar(error.response.data.err);
         }
         console.log(error);
@@ -178,7 +186,15 @@ function ShippingAdress() {
           />
         </div>
       </form>
-      <button onClick={envoyer}>Submit</button>
+      <button
+        onClick={envoyer}
+        style={{
+          backgroundColor: isSubmitting ? "#ff69698a" : "#FF6969",
+          color: isSubmitting ? "#515C6F" : "#fff",
+        }}
+      >
+        Submit
+      </button>
     </div>
   );
 }

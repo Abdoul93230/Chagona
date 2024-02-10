@@ -201,21 +201,22 @@ function CartCheckout({ op }) {
           country: "NE",
           amount: total ? total : "",
           transaction_id: "payment001",
-          msisdn: choix === "master Card" || "Visa" ? numeroCard : phone,
+          msisdn:
+            choix === "master Card" || choix === "Visa" ? numeroCard : phone,
         };
         const authToken = "sk_ef56606cf6f3420bbf844fe60d06b6c0";
         const requestOptions = {
           method: "post",
-          url: "https://i-pay.money/api/v1/payments", // Remplacez par votre URL d'API
+          url: "https://i-pay.money/api/v1/payments",
           headers: {
-            "Content-Type": "application/json", // Spécifier le type de contenu du corps de la requête
-            Authorization: `Bearer ${authToken}`, // Inclure le jeton Bearer dans le header
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
             "Ipay-Payment-Type":
-              choix === "master Card" || "Visa" ? "card" : "mobile", // Ajouter des attributs au header au besoin
+              choix === "master Card" || choix === "Visa" ? "card" : "mobile",
             "Ipay-Target-Environment": "live",
             Accept: "*/*",
           },
-          data: dataToSend, // Les données à envoyer dans le corps de la requête
+          data: dataToSend,
         };
         if (
           choix === "Visa" ||

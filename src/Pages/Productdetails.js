@@ -19,7 +19,7 @@ function Productdetails() {
 
   return (
     <>
-      <LoadingIndicator time={2000}>
+      <LoadingIndicator time={1000}>
         <ProductDet product={product} />
       </LoadingIndicator>
     </>

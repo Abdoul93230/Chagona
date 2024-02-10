@@ -40,8 +40,6 @@ function Home() {
     return shuffledArray.slice(0, nbr);
   }
   useEffect(() => {
-    setAllTypes(DATA_Types);
-
     axios
       .get(`${BackendUrl}/getAllCategories`)
       .then((Categories) => {
@@ -61,6 +59,7 @@ function Home() {
     //     .catch((error) => {
     //       console.log(error.response.data.message);
     //     });
+    setAllTypes(DATA_Types);
   }, []);
   const clefElectronique = DATA_Categories
     ? DATA_Categories.find((item) => item.name === "électroniques")
