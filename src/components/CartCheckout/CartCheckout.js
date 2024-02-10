@@ -171,16 +171,21 @@ function CartCheckout({ op }) {
 
   const Plasser = () => {
     const local = localStorage.getItem("panier");
+    setLoading(true);
     if (JSON.parse(local).length === 0) {
       handleAlertwar("Aucun produit n'est selectionner.");
+      setLoading(false);
       return;
     }
     if (phone.length <= 0) {
+      setLoading(false);
       navigue("/More/shipping_address?fromCart=true");
       return;
     }
     if (choix.length <= 0) {
+      setLoading(false);
       navigue("/More/payment_method?fromCart=true");
+
       return;
     }
 
@@ -249,6 +254,7 @@ function CartCheckout({ op }) {
                       .post(`${BackendUrl}/createCommande`, data)
                       .then((resp) => {
                         // alert(resp.data.message);
+                        setLoading(false);
                         localStorage.removeItem("panier");
                         if (codeValide) {
                           if (codeValide.isValide) {
@@ -265,18 +271,26 @@ function CartCheckout({ op }) {
                         }
                         op("trois");
                       })
-                      .catch((error) => console.log("errrr", error));
+                      .catch((error) => {
+                        setLoading(false);
+                        console.log("errrr", error);
+                      });
                     console.log("Réponse de l'API:", response);
                   } else {
+                    setLoading(false);
                     handleAlertwar(
                       "le payment na pas pu etre effectuer veuiller ressayer !"
                     );
                     return;
                   }
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => {
+                  setLoading(false);
+                  console.log(error);
+                });
             })
             .catch((error) => {
+              setLoading(false);
               console.log(
                 "Erreur lors de la requête:",
                 error.response ? error.response.data : error.message,
@@ -288,6 +302,7 @@ function CartCheckout({ op }) {
             .post(`${BackendUrl}/createCommande`, data)
             .then((res) => {
               // alert(res.data.message);
+              setLoading(false);
               localStorage.removeItem("panier");
               if (codeValide) {
                 if (codeValide.isValide) {
@@ -297,17 +312,26 @@ function CartCheckout({ op }) {
                       isValide: false,
                     })
                     .then(() => {
+                      setLoading(false);
                       // console.log("fait")
                     })
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                      setLoading(false);
+                      console.log(error);
+                    });
                 }
               }
               op("trois");
             })
-            .catch((error) => console.log("errrr", error));
+            .catch((error) => {
+              setLoading(false);
+              console.log("errrr", error);
+            });
         }
       } else {
+        setLoading(false);
         alert("les infos du payment ne sont pas encore mis");
+        return;
       }
     }
   };
