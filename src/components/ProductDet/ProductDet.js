@@ -112,6 +112,52 @@ function ProductDet() {
     }
   };
 
+  const handleChatButtonClick = (productName, productLink, phoneNumber) => {
+    // Vérification des données du produit
+    // if (!productName || !productLink || !phoneNumber) {
+    //   console.error("Les informations du produit sont incomplètes.");
+    //   return;
+    // }
+
+    // Création du message avec les informations du produit
+    const message = `Bonjour, je suis intéressé(e) par le produit ${productName}. Voici le lien : ${productLink}`;
+
+    // Création de l'URL WhatsApp avec le numéro de téléphone et le message pré-remplis
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+
+    // Vérification si l'utilisateur est sur mobile
+    const isMobile =
+      /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
+        navigator.userAgent
+      );
+
+    if (isMobile) {
+      // Si sur mobile, vérifiez si l'application WhatsApp est installée
+      if (navigator.share) {
+        // Si l'application WhatsApp est installée, utilisez le partage natif
+        navigator
+          .share({
+            title: "Discuter via WhatsApp",
+            text: message,
+            url: productLink,
+          })
+          .catch((error) => {
+            console.error("Erreur lors du partage via WhatsApp :", error);
+            // Si une erreur se produit, ouvrez WhatsApp Web
+            window.open(whatsappURL, "_blank");
+          });
+      } else {
+        // Si l'application WhatsApp n'est pas installée, ouvrez WhatsApp Web
+        window.open(whatsappURL, "_blank");
+      }
+    } else {
+      // Si sur ordinateur portable ou de bureau, ouvrez WhatsApp Web
+      window.open(whatsappURL, "_blank");
+    }
+  };
+
   const [produitsL, setProduitsL] = useState(0);
   function goBack() {
     window.history.back();
@@ -379,6 +425,11 @@ function ProductDet() {
     const currentURL = window.location.href;
     // Utilisez la fonction de partage ici avec l'URL actuelle
     shareProductViaWhatsApp(VP?.name ?? "nom", currentURL, VP?.image1);
+  };
+  const Discuite = () => {
+    const currentURL = window.location.href;
+    // Utilisez la fonction de partage ici avec l'URL actuelle
+    handleChatButtonClick(VP?.name ?? "nom", currentURL, 87727501);
   };
 
   const setBorder = (index) => {
@@ -780,6 +831,12 @@ function ProductDet() {
               SHARE THIS{" "}
               <span>
                 <ChevronUp />
+              </span>
+            </button>
+            <button className="btn2" onClick={Discuite}>
+              discute{" "}
+              <span>
+                <ChevronRight />
               </span>
             </button>
             <button className="btn2" onClick={AddProduct}>
