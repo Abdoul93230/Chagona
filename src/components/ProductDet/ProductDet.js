@@ -112,9 +112,14 @@ function ProductDet() {
     }
   };
 
-  const handleChatButtonClick = (productName, productLink, phoneNumber) => {
+  const handleChatButtonClick = (
+    productName,
+    productLink,
+    phoneNumber,
+    productImageURL
+  ) => {
     // Vérification des données du produit
-    // if (!productName || !productLink || !phoneNumber) {
+    // if (!productName || !productLink || !phoneNumber || !productImageURL) {
     //   console.error("Les informations du produit sont incomplètes.");
     //   return;
     // }
@@ -122,10 +127,10 @@ function ProductDet() {
     // Création du message avec les informations du produit
     const message = `Bonjour, je suis intéressé(e) par le produit ${productName}. Voici le lien : ${productLink}`;
 
-    // Création de l'URL WhatsApp avec le numéro de téléphone et le message pré-remplis
+    // Création de l'URL WhatsApp avec le numéro de téléphone et le message pré-remplis, incluant l'image
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
-    )}`;
+    )}%0A%0A${encodeURIComponent(productImageURL)}`;
 
     // Vérification si l'utilisateur est sur mobile
     const isMobile =
@@ -139,21 +144,21 @@ function ProductDet() {
         // Si l'application WhatsApp est installée, utilisez le partage natif
         navigator
           .share({
-            title: "Discuter via WhatsApp",
+            title: "Partager via WhatsApp",
             text: message,
             url: productLink,
           })
           .catch((error) => {
             console.error("Erreur lors du partage via WhatsApp :", error);
-            // Si une erreur se produit, ouvrez WhatsApp Web
+            // Si une erreur se produit, ouvrez WhatsApp avec l'URL pré-remplie
             window.open(whatsappURL, "_blank");
           });
       } else {
-        // Si l'application WhatsApp n'est pas installée, ouvrez WhatsApp Web
+        // Si l'application WhatsApp n'est pas installée, ouvrez WhatsApp avec l'URL pré-remplie
         window.open(whatsappURL, "_blank");
       }
     } else {
-      // Si sur ordinateur portable ou de bureau, ouvrez WhatsApp Web
+      // Si sur ordinateur portable ou de bureau, ouvrez WhatsApp Web avec l'URL pré-remplie
       window.open(whatsappURL, "_blank");
     }
   };
@@ -429,7 +434,7 @@ function ProductDet() {
   const Discuite = () => {
     const currentURL = window.location.href;
     // Utilisez la fonction de partage ici avec l'URL actuelle
-    handleChatButtonClick(VP?.name ?? "nom", currentURL, 87727501);
+    handleChatButtonClick(VP?.name ?? "nom", currentURL, 87727501, VP?.image1);
   };
 
   const setBorder = (index) => {
