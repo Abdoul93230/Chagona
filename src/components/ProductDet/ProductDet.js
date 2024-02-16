@@ -118,49 +118,30 @@ function ProductDet() {
     phoneNumber,
     productImageURL
   ) => {
-    // Vérification des données du produit
-    // if (!productName || !productLink || !phoneNumber || !productImageURL) {
-    //   console.error("Les informations du produit sont incomplètes.");
-    //   return;
-    // }
-
-    // Création du message avec les informations du produit
-    const message = `Bonjour, je suis intéressé(e) par le produit ${productName}. Voici le lien : ${productLink}`;
-
-    // Création de l'URL WhatsApp avec le numéro de téléphone et le message pré-remplis, incluant l'image
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
-      message
-    )}%0A%0A${encodeURIComponent(productImageURL)}`;
-
-    // Vérification si l'utilisateur est sur mobile
-    const isMobile =
-      /(Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone)/i.test(
-        navigator.userAgent
+    // Vérification des données du produit et du numéro de téléphone
+    if (!productName || !productLink || !phoneNumber) {
+      console.error(
+        "Les informations du produit et le numéro de téléphone sont requis."
       );
-
-    if (isMobile) {
-      // Si sur mobile, vérifiez si l'application WhatsApp est installée
-      if (navigator.share) {
-        // Si l'application WhatsApp est installée, utilisez le partage natif
-        navigator
-          .share({
-            title: "Partager via WhatsApp",
-            text: message,
-            url: productLink,
-          })
-          .catch((error) => {
-            console.error("Erreur lors du partage via WhatsApp :", error);
-            // Si une erreur se produit, ouvrez WhatsApp avec l'URL pré-remplie
-            window.open(whatsappURL, "_blank");
-          });
-      } else {
-        // Si l'application WhatsApp n'est pas installée, ouvrez WhatsApp avec l'URL pré-remplie
-        window.open(whatsappURL, "_blank");
-      }
-    } else {
-      // Si sur ordinateur portable ou de bureau, ouvrez WhatsApp Web avec l'URL pré-remplie
-      window.open(whatsappURL, "_blank");
+      return;
     }
+
+    // Création du message pré-rempli avec les informations du produit
+    let message = `Bonjour, je suis intéressé(e) par le produit ${productName}. Voici le lien : ${productLink}`;
+
+    // Si une URL d'image est fournie, l'ajouter au message
+    if (productImageURL) {
+      message += `\n\n${productImageURL}`;
+    }
+
+    // Encodage du message pour l'URL
+    const encodedMessage = encodeURIComponent(message);
+
+    // Création de l'URL WhatsApp avec le numéro de téléphone et le message pré-rempli
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    // Ouvrir WhatsApp dans une nouvelle fenêtre ou un nouvel onglet
+    window.open(whatsappURL, "_blank");
   };
 
   const [produitsL, setProduitsL] = useState(0);
