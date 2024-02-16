@@ -415,7 +415,12 @@ function ProductDet() {
   const Discuite = () => {
     const currentURL = window.location.href;
     // Utilisez la fonction de partage ici avec l'URL actuelle
-    handleChatButtonClick(VP?.name ?? "nom", currentURL, 87727501, VP?.image1);
+    handleChatButtonClick(
+      VP?.name ?? "nom",
+      currentURL,
+      22787727501,
+      VP?.image1
+    );
   };
 
   const setBorder = (index) => {
