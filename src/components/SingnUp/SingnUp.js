@@ -39,6 +39,8 @@ function SingnUp({ chg }) {
   };
   const navigue = useNavigate();
   const [isloading, setIsloading] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [whatsapp, setWhatsapp] = useState(true);
   const regexPhone = /^[0-9]{8,}$/;
   const location = useLocation();
   //////////////// verification des information et creation de l'utilisateur  ///////////////////////////
@@ -87,6 +89,7 @@ function SingnUp({ chg }) {
           password: password,
           email: email,
           phoneNumber,
+          whatsapp,
         })
         .then((response) => {
           axios
@@ -253,7 +256,11 @@ function SingnUp({ chg }) {
                 </div>
                 <div className="right">
                   <label>Phone Number</label>
-                  <input type="number" placeholder="+227 87727501" />
+                  <input
+                    type="number"
+                    placeholder="+227 87727501"
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
                 </div>
               </li>
             </div>
@@ -267,6 +274,39 @@ function SingnUp({ chg }) {
                 <input type="password" placeholder="*******************" />
               </div>
             </li>
+            {phone.length === 8 || phone.length === 11 ? (
+              <label
+                style={{
+                  // border: "2px solid crimson",
+                  width: "100%",
+                  margin: "5px auto",
+                  fontWeight: "bold",
+                  color: "#515C6F",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                htmlFor="idW"
+              >
+                WhatsApp Groupe :{" "}
+                <input
+                  id="idW"
+                  type="checkbox"
+                  checked={whatsapp === true ? true : false}
+                  onChange={(e) => {
+                    setWhatsapp(!whatsapp);
+                  }}
+                  style={{
+                    cursor: "pointer",
+                    marginLeft: "10px",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+              </label>
+            ) : (
+              <></>
+            )}
           </ul>
 
           <button onClick={validateCredentials}>

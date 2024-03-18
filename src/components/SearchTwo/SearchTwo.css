@@ -127,11 +127,13 @@
 
 .SearchTwo .bottom .carde{
     width: 45%;
-    height: 220px;
+    height: auto;
+    padding-bottom:5px ;
     background-color: white;
     border-radius: 7px;
     margin: 10px 5px;
     position: relative;
+    border: 2px solid crimson;
     
 }
 .SearchTwo .bottom .carde img{

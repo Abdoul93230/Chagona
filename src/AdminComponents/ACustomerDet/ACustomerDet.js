@@ -121,6 +121,13 @@ function ACustomerDet() {
         />
         <h3>{allAddress?.find((item) => item.clefUser === params.id)?.name}</h3>
         <h3>Profession Du client</h3>
+        <h3>
+          WhatsApp :{" "}
+          {allUsers?.find((item) => item._id === params.id)?.whatsapp
+            ? "oui"
+            : "non"}
+          {/* {console.log(allUsers)} */}
+        </h3>
         <div className="bon">
           <form id="add" onSubmit={ajoutter}>
             <h3>Ajouter un bons </h3>

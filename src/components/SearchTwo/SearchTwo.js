@@ -203,9 +203,9 @@ function SearchTwo({ op, allCategories, allProducts }) {
           <div className="right">
             <ul>
               {DATA_Categories?.map((param, index) => {
-                // if (index > 3) {
-                //   return null;
-                // }
+                if (index > 6 || param.name === "tous") {
+                  return null;
+                }
                 return (
                   <li
                     key={index}

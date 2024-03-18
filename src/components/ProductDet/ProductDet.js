@@ -824,12 +824,12 @@ function ProductDet() {
                 <ChevronUp />
               </span>
             </button>
-            <button className="btn2" onClick={Discuite}>
+            {/* <button className="btn2" onClick={Discuite}>
               discute{" "}
               <span>
                 <ChevronRight />
               </span>
-            </button>
+            </button> */}
             <button className="btn2" onClick={AddProduct}>
               ADD TO CART{" "}
               <span>

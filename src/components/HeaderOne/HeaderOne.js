@@ -10,7 +10,7 @@ function HeaderOne({ categories }) {
         <div className="cardeCont">
           {categories && categories.length > 0 ? (
             categories.map((param, index) => {
-              if (index < 6) {
+              if (index < 6 && param.name !== "tous") {
                 return (
                   <Link
                     key={index}
