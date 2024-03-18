@@ -242,7 +242,9 @@ function SearchTwo({ op, allCategories, allProducts }) {
                     >
                       <img src={param.image1} alt="loading" />
 
-                      <h6 style={{ fontSize: 12 }}>{param.name}</h6>
+                      <h6 style={{ fontSize: 12 }}>
+                        {param.name.slice(0, 10)}...
+                      </h6>
                       <h5>
                         f {param.prixPromo ? param.prixPromo : param.prix}
                       </h5>
@@ -262,7 +264,9 @@ function SearchTwo({ op, allCategories, allProducts }) {
                     >
                       <img src={param.image1} alt="loading" />
 
-                      <h6 style={{ fontSize: 12 }}>{param.name}</h6>
+                      <h6 style={{ fontSize: 12 }}>
+                        {param.name.slice(0, 10)}...
+                      </h6>
                       <h5>
                         f {param.prixPromo ? param.prixPromo : param.prix}
                       </h5>
