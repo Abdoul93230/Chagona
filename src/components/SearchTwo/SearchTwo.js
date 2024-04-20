@@ -53,7 +53,6 @@ function SearchTwo({ op, allCategories, allProducts }) {
   // Gestionnaire d'effet pour contrôler l'affichage du bouton en fonction du défilement de la page
   // Gestionnaire d'effet pour contrôler l'affichage du bouton en fonction du défilement de la page
   useEffect(() => {
-    console.log("oui");
     const handleScroll = () => {
       // Afficher le bouton lorsque l'utilisateur a fait défiler plus de 50 pixels
       const { current } = divRef;
@@ -247,7 +246,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
         <LoadingIndicator loading={loading1}>
           <div className="bottom" ref={divRef}>
             {erreur && !products ? (
-              <h2 style={{ fontSize: 10, width: "100%", marginTop: -15 }}>
+              <h2 style={{ fontSize: 10, width: "100%", marginTop: 3 }}>
                 {erreur}
               </h2>
             ) : (
