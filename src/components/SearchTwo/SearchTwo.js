@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./SearchTwo.css";
 import {
   ChevronLeft,
@@ -41,25 +41,44 @@ function SearchTwo({ op, allCategories, allProducts }) {
     });
   };
 
+  const divRef = useRef(null);
+
+  const scrollToTop2 = () => {
+    const { current } = divRef;
+    if (current) {
+      current.scrollTop = 0;
+    }
+  };
+
+  // Gestionnaire d'effet pour contrôler l'affichage du bouton en fonction du défilement de la page
   // Gestionnaire d'effet pour contrôler l'affichage du bouton en fonction du défilement de la page
   useEffect(() => {
+    console.log("oui");
     const handleScroll = () => {
       // Afficher le bouton lorsque l'utilisateur a fait défiler plus de 50 pixels
-      if (window.scrollY > 50) {
-        setShowButton(true);
-      } else {
-        setShowButton(false);
+      const { current } = divRef;
+      if (current) {
+        if (current.scrollTop > 40) {
+          setShowButton(true);
+        } else {
+          setShowButton(false);
+        }
       }
     };
 
-    // Ajouter un écouteur d'événement de défilement
-    window.addEventListener("scroll", handleScroll);
+    // Ajouter un écouteur d'événement de défilement à la div si elle existe
+    const { current } = divRef;
+    if (current) {
+      current.addEventListener("scroll", handleScroll);
+    }
 
     // Nettoyage de l'écouteur d'événement lorsque le composant est démonté
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (current) {
+        current.removeEventListener("scroll", handleScroll);
+      }
     };
-  }, []);
+  });
 
   const searchProductByName = () => {
     if (searchName.length <= 1) {
@@ -183,6 +202,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
               onSubmit={(e) => {
                 e.preventDefault();
                 searchProductByName();
+                scrollToTop2();
               }}
             >
               <input
@@ -213,6 +233,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
                       setShow(param);
                       setSh(true);
                       setErreur(null);
+                      scrollToTop2();
                     }}
                   >
                     {param.name}
@@ -224,7 +245,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
         </div>
 
         <LoadingIndicator loading={loading1}>
-          <div className="bottom">
+          <div className="bottom" ref={divRef}>
             {erreur && !products ? (
               <h2 style={{ fontSize: 10, width: "100%", marginTop: -15 }}>
                 {erreur}
@@ -278,6 +299,9 @@ function SearchTwo({ op, allCategories, allProducts }) {
                   );
                 })}
           </div>
+          {/* <button onClick={scrollToTop2} style={{ marginTop: "-50px" }}>
+            Remonter en haut
+          </button> */}
         </LoadingIndicator>
 
         {/* filtre */}
@@ -340,7 +364,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
         )}
 
         {showButton && (
-          <button onClick={scrollToTop} className="scroll-to-top-button">
+          <button onClick={scrollToTop2} className="scroll-to-top-button">
             <ChevronUp className="i" />
           </button>
         )}
