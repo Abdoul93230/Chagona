@@ -131,7 +131,7 @@ function ProductDet() {
 
     // Si une URL d'image est fournie, l'ajouter au message
     if (productImageURL) {
-      message += `Voici le lien vers l'image : \n\n${productImageURL} \n`;
+      message += `Voici le lien vers l'image : \n\n ${productImageURL} \n`;
     }
     if (productLink) {
       message += `et le lien vers details du produit\n\n${productLink}`;
@@ -420,9 +420,9 @@ function ProductDet() {
     // Utilisez la fonction de partage ici avec l'URL actuelle
     handleChatButtonClick(
       VP?.name ?? "nom",
+      currentURL,
       22787727501,
-      VP?.image1,
-      currentURL
+      VP?.image1
     );
   };
 
