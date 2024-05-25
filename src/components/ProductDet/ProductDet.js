@@ -127,11 +127,14 @@ function ProductDet() {
     }
 
     // Création du message pré-rempli avec les informations du produit
-    let message = `Bonjour, je suis intéressé(e) par le produit ${productName}. Voici le lien : ${productLink}`;
+    let message = `Bonjour, je suis intéressé(e) par le produit ${productName}.\n`;
 
     // Si une URL d'image est fournie, l'ajouter au message
     if (productImageURL) {
-      message += `\n\n${productImageURL}`;
+      message += `Voici le lien vers l'image : \n\n${productImageURL} \n`;
+    }
+    if (productLink) {
+      message += `et le lien vers details du produit\n\n${productLink}`;
     }
 
     // Encodage du message pour l'URL
