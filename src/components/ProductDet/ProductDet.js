@@ -417,9 +417,9 @@ function ProductDet() {
     // Utilisez la fonction de partage ici avec l'URL actuelle
     handleChatButtonClick(
       VP?.name ?? "nom",
-      currentURL,
       22787727501,
-      VP?.image1
+      VP?.image1,
+      currentURL
     );
   };
 
