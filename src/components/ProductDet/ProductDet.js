@@ -134,7 +134,7 @@ function ProductDet() {
       message += `Voici le lien vers l'image : \n\n ${productImageURL} \n`;
     }
     if (productLink) {
-      message += `et le lien vers details du produit\n\n${productLink}`;
+      message += `et lE lien vers details du produit\n\n${productLink}`;
     }
 
     // Encodage du message pour l'URL
