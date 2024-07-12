@@ -6,7 +6,7 @@ function HeaderOne({ categories }) {
   return (
     <div className="HeaderOne">
       <div className="two">
-        <h2>Categories</h2>
+        <h2>Categories2</h2>
         <div className="cardeCont">
           {categories && categories.length > 0 ? (
             categories.map((param, index) => {
