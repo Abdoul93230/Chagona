@@ -9,7 +9,7 @@ import {
   User,
 } from "react-feather";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 
@@ -39,67 +39,61 @@ function SingnUp({ chg }) {
   };
   const navigue = useNavigate();
   const [isloading, setIsloading] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [whatsapp, setWhatsapp] = useState(true);
   const regexPhone = /^[0-9]{8,}$/;
   const location = useLocation();
   //////////////// verification des information et creation de l'utilisateur  ///////////////////////////
 
   const validateCredentials = () => {
-    const nameInput = document.querySelector(
-      ".SingnUp .right input[type='text']"
-    );
-    const emailInput = document.querySelector(
-      ".SingnUp .right input[type='email']"
-    );
-    const passwordInput = document.querySelector(
-      ".SingnUp .right input[type='password']"
-    );
-    const phoneNumberInput = document.querySelector(
-      ".SingnUp .right input[type='number']"
-    );
 
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-    const phoneNumber = phoneNumberInput.value.trim();
+    const nameV = name.trim();
+    const emailV = email.trim();
+    const passwordV = password.trim();
+    const phoneNumberV = phoneNumber.trim();
+    // console.log(nameV,emailV,passwordV,phoneNumberV)
 
-    if (name === "" || name.length < 3) {
+    if (nameV === "" || name.length < 3) {
       handleAlertwar("Veuillez entrer un nom valide au moins 3 string.");
       return false;
-    } else if (email.length !== 0 && !validateEmail(email)) {
+    } else if (emailV.length !== 0 && !validateEmail(emailV)) {
       handleAlertwar("Veuillez entrer une adresse e-mail valide.");
       return false;
-    } else if (password === "" || password.length < 6) {
+    } else if (passwordV === "" || passwordV.length < 6) {
       handleAlertwar(
         "Veuillez entrer un mot de passe valide au moins 6 carracters."
       );
       return false;
     } else if (
-      (phoneNumber.length > 0 && !regexPhone.test(phoneNumber)) ||
-      phoneNumber.length > 11
+      (phoneNumberV.length > 0 && !regexPhone.test(phoneNumber)) ||
+      phoneNumberV.length > 11
     ) {
       handleAlertwar("Veuillez entrer un numero fonctionnel");
       return false;
     } else {
+      console.log(passwordV,phoneNumberV,emailV)
       setIsloading(true);
       axios
         .post(`${BackendUrl}/user`, {
-          name: name,
-          password: password,
-          email: email,
-          phoneNumber,
+          name: nameV,
+          password: passwordV,
+          email: emailV,
+          phoneNumber:phoneNumberV,
           whatsapp,
         })
         .then((response) => {
+          console.log(passwordV,phoneNumberV,emailV,2)
           axios
             .post(
               `${BackendUrl}/login`,
 
               {
-                email: email.length > 0 ? email : null, // Utilisez l'email si il est saisi
-                phoneNumber: phoneNumber.length > 0 ? phoneNumber : null, // Utilisez le numéro de téléphone si il est saisi
-                password: password,
+                email: emailV.length > 0 ? emailV : null, // Utilisez l'email si il est saisi
+                phoneNumber: phoneNumberV.length > 0 ? phoneNumberV : null, // Utilisez le numéro de téléphone si il est saisi
+                password: passwordV,
               },
               {
                 withCredentials: true,
@@ -124,8 +118,8 @@ function SingnUp({ chg }) {
                 <p>Cher(e)Habou227,</p>
                 <p>Nous avons le plaisir de vous informer qu'un nouvel utilisateur s'est inscrit sur Habou227. Voici les détails de l'utilisateur :</p>
                 <ul>
-                    <li>Nom : ${name}</li>
-                    <li>Adresse e-mail : ${email}</li>
+                    <li>Nom : ${nameV}</li>
+                    <li>Adresse e-mail : ${emailV}</li>
                     <li>Date d'inscription : ${dateInscription}</li>
                 </ul>
                 <p>Vous pouvez vérifier ces informations dans notre base de données pour assurer le suivi approprié. N'hésitez pas à contacter l'utilisateur pour le saluer et l'orienter dans son expérience de magasinage en ligne.</p>
@@ -134,7 +128,7 @@ function SingnUp({ chg }) {
                 <p>Cordialement,</p>
                 <p>Abdoul Razak<br>L'équipe Habou227</p>`;
                 const emailData = {
-                  senderEmail: email,
+                  senderEmail: emailV,
                   subject: "Nouveau utilisateur",
                   message: `<div>${message}</div`,
                   titel: `<br/><br/><h3>Nouveau utilisateur sur Habou227</h3>`,
@@ -180,9 +174,14 @@ function SingnUp({ chg }) {
             })
             .catch((error) => {
               setIsloading(false);
-              if (error.response.status === 400)
+              if (error.response.status === 400){
+
                 handleAlertwar(error.response.data.message);
-              else console.log(error.response);
+                console.log('non1')
+              }
+              else{ console.log(error.response);
+                console.log('non1')
+              }
             });
         })
         .catch((error) => {
@@ -236,7 +235,7 @@ function SingnUp({ chg }) {
               </div>
               <div className="right">
                 <label>UserName</label>
-                <input type="text" placeholder="janedoe12345" />
+                <input type="text" defaultValue={name} onChange={(e)=>setName(e.target.value)} placeholder="janedoe12345" />
               </div>
             </li>
             <div className="gMP">
@@ -246,7 +245,7 @@ function SingnUp({ chg }) {
                 </div>
                 <div className="right">
                   <label>Email</label>
-                  <input type="email" placeholder="janedoe123@email.com" />
+                  <input type="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} placeholder="janedoe123@email.com" />
                 </div>
               </li>
               or
@@ -259,7 +258,9 @@ function SingnUp({ chg }) {
                   <input
                     type="number"
                     placeholder="+227 87727501"
-                    onChange={(e) => setPhone(e.target.value)}
+                    defaultValue={phoneNumber}
+                    // onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e)=>setPhoneNumber(e.target.value)}
                   />
                 </div>
               </li>
@@ -271,10 +272,12 @@ function SingnUp({ chg }) {
               </div>
               <div className="right">
                 <label>Password</label>
-                <input type="password" placeholder="*******************" />
+                <input type="password" defaultValue={password} onChange={(e)=>setPassword(e.target.value)} placeholder="*******************" />
               </div>
             </li>
-            {phone.length === 8 || phone.length === 11 ? (
+            {/* {phoneNumber.length === 8 || phoneNumber.length === 11 ? ( */}
+            {phoneNumber.length >= 8 ? (
+              <>
               <label
                 style={{
                   // border: "2px solid crimson",
@@ -304,6 +307,7 @@ function SingnUp({ chg }) {
                   }}
                 />
               </label>
+              <h6>Acceptez-vous de faire partie de notre communauté WhatsApp ?</h6></>
             ) : (
               <></>
             )}
@@ -322,7 +326,7 @@ function SingnUp({ chg }) {
           <div></div>
         </div>
       )}
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 }
