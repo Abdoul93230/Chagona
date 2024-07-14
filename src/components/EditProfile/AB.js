@@ -62,7 +62,7 @@ function EditProfile() {
         })
         .then((response) => {
           const data = response.data.user;
-          // console.log(a);
+          console.log(a);
           setNom(data.name);
           setPhone(data?.phoneNumber ? data?.phoneNumber : "");
           setEmail(data.email);
@@ -116,79 +116,73 @@ function EditProfile() {
       "image/gif",
       "image/webp",
     ];
-    if(photo){
-      onChangeImg()
-      setPhoto(null)
-    }else{
-      const a = JSON.parse(localStorage.getItem(`userEcomme`));
-      const formData = new FormData();
-      formData.append("name", nom);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      if (photo !== null && allowedImageTypes.includes(photo.type)) {
-        formData.append("image", photo);
-      }
-      formData.append("id", a.id);
-
-      setLoading(true);
-      axios
-        .post(`${BackendUrl}/createProfile`, formData)
-        .then((Profile) => {
-          if (Profile.status === 200) {
-            handleAlert(Profile.data.message);
-            setEditingPhoto(false);
-            setPhoto(null);
-            axios
-              .get(`${BackendUrl}/getUserProfile`, {
-                params: {
-                  id: a.id,
-                },
-              })
-              .then((Profiler) => {
-                // console.log(Profiler);
-                setLoading(false);
-                if (
-                  Profiler.data.data.image !==
-                  `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
-                ) {
-                  setImageP(Profiler.data.data.image);
-                }
-                if (Profiler.data.data.numero) {
-                  if (phone.length <= 0) {
-                    setPhone(Profiler.data.data.numero);
-                  }
-                }
-              })
-              .catch((erro) => {
-                setLoading(false);
-                if (erro.response.status === 404)
-                  setMessageEr(erro.response.data.message);
-                console.log(erro.response);
-              });
-          } else {
-            console.log({ err: Profile.data });
-          }
-        })
-        .catch((error) => {
-          setLoading(false);
-          if (error.response.status === 402) {
-            handleAlertwar(error.response.data.message);
-          }
-          if (error.response.data.data?.keyPattern?.email) {
-            handleAlertwar("Un utilisateur avec le même email existe déjà ");
-          }
-          if (error.response.data.data?.keyPattern?.phoneNumber) {
-            handleAlertwar("Un utilisateur avec le même Numero existe déjà ");
-          }
-          console.log(error.response);
-        });
+    const a = JSON.parse(localStorage.getItem(`userEcomme`));
+    const formData = new FormData();
+    formData.append("name", nom);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    if (photo !== null && allowedImageTypes.includes(photo.type)) {
+      formData.append("image", photo);
     }
+    formData.append("id", a.id);
 
+    setLoading(true);
+    axios
+      .post(`${BackendUrl}/createProfile`, formData)
+      .then((Profile) => {
+        if (Profile.status === 200) {
+          handleAlert(Profile.data.message);
+          setEditingPhoto(false);
+          setPhoto(null);
+          axios
+            .get(`${BackendUrl}/getUserProfile`, {
+              params: {
+                id: a.id,
+              },
+            })
+            .then((Profiler) => {
+              // console.log(Profiler);
+              setLoading(false);
+              if (
+                Profiler.data.data.image !==
+                `https://chagona.onrender.com/images/image-1688253105925-0.jpeg`
+              ) {
+                setImageP(Profiler.data.data.image);
+              }
+              if (Profiler.data.data.numero) {
+                if (phone.length <= 0) {
+                  setPhone(Profiler.data.data.numero);
+                }
+              }
+            })
+            .catch((erro) => {
+              setLoading(false);
+              if (erro.response.status === 404)
+                setMessageEr(erro.response.data.message);
+              console.log(erro.response);
+            });
+        } else {
+          console.log({ err: Profile.data });
+        }
+      })
+      .catch((error) => {
+        setLoading(false);
+        if (error.response.status === 402) {
+          handleAlertwar(error.response.data.message);
+        }
+        if (error.response.data.data?.keyPattern?.email) {
+          handleAlertwar("Un utilisateur avec le même email existe déjà ");
+        }
+        if (error.response.data.data?.keyPattern?.phoneNumber) {
+          handleAlertwar("Un utilisateur avec le même Numero existe déjà ");
+        }
+        console.log(error.response);
+      });
   };
 
   const handleFileInputChange = (param) => {
     const selectedFile = param;
-    const maxSizeInBytes = 6 * 1024 * 1024; // 6MB
+
     if (selectedFile) {
       const allowedImageTypes = [
         "image/jpeg",
@@ -196,13 +190,8 @@ function EditProfile() {
         "image/gif",
         "image/webp",
       ];
-      // console.log(param.size/1024/1024)
+
       if (allowedImageTypes.includes(selectedFile.type)) {
-        if(param.size>maxSizeInBytes){
-          handleAlertwar(`La taille de l'image ne doit pas dépasser 6MB ${param.size/1024/1024}`)
-          setPhoto(null);
-        return false;
-        }
         setPhoto(selectedFile);
         return true;
       } else {
@@ -235,11 +224,7 @@ function EditProfile() {
     }
 
     editedCanvas.toBlob((blob) => {
-      const maxSizeInBytes = 4 * 1024 * 1024;
-      if (blob.size > maxSizeInBytes) {
-        handleAlertwar("La taille de l'image ne doit pas dépasser 4MB");
-        return;
-      }      const editedFile = new File([blob], "edited_image.png", {
+      const editedFile = new File([blob], "edited_image.png", {
         type: "image/png",
       });
 
@@ -308,7 +293,7 @@ function EditProfile() {
         <div className="img" style={{ marginBottom: 66 }}>
           <label htmlFor="image" onClick={() => setEditingPhoto(true)}>
             <img src={imageP} alt="loading" />
-            <h6 style={{ margin: "10px auto" }}>Click me to select image(MAX 4MB)</h6>
+            <h6 style={{ margin: "10px auto" }}>Click me to select image</h6>
           </label>
         </div>
         <h6></h6>
@@ -475,33 +460,20 @@ function EditProfile() {
                   margin: "0px auto",
                 }}
               >
-                <div style={{
-                   width: '130px',
-                   height: '130px',
-
-                   margin:'10px auto',
-                   marginBottom:60,
-                }}>
-
                 <AvatarEditor
                   ref={editorRef}
                   image={photo}
-                  // width={130}
-                  // height={130}
-                  border={1}
+                  width={130}
+                  height={130}
+                  border={10}
                   borderRadius={50}
                   scale={scale}
                   style={{
-                    width: "130px",
-                    height: "130px",
-                    borderRadius:'50%',
-                    // border:'5px solid crimson',
-                    boxShadow: "0px 0px 6px #ff6969",
-                    // margin: "10px auto",
+                    width: "80%",
+                    height: "230px",
+                    margin: "10px auto",
                   }}
                 />
-                </div>
-                <h6 style={{color:'white'}}>La taille de l'image ne doit pas dépasser 4MB</h6>
                 <input
                   type="range"
                   min="1"

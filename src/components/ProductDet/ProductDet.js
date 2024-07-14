@@ -10,7 +10,7 @@ import { Helmet } from "react-helmet";
 import image from "../../Images/sac2.png";
 import LoadingIndicator from "../../Pages/LoadingIndicator ";
 import whatsapp from "../../Images/whatsapp.png";
-import { ArrowDownRight } from "react-feather";
+import { ArrowDownRight, Copy, Phone, Share } from "react-feather";
 import {
   ChevronLeft,
   ShoppingCart,
@@ -744,6 +744,8 @@ function ProductDet() {
                     alignItems: "center",
                     justifyContent: "center",
                     color: "#ff9696", // Couleur du texte, ajustez selon vos besoins
+                    // border:'2px solid crimson',
+                    borderRadius:'20px'
                   }}
                 ></div>
                 {/* <img src={VP?.image1} alt="loading" /> */}
@@ -762,6 +764,7 @@ function ProductDet() {
                     alignItems: "center",
                     justifyContent: "center",
                     color: "#ff9696", // Couleur du texte, ajustez selon vos besoins
+                    borderRadius:'20px'
                   }}
                 ></div>
               </div>
@@ -779,6 +782,7 @@ function ProductDet() {
                     alignItems: "center",
                     justifyContent: "center",
                     color: "#ff9696", // Couleur du texte, ajustez selon vos besoins
+                    borderRadius:'20px'
                   }}
                 ></div>
               </div>
@@ -824,19 +828,20 @@ function ProductDet() {
             >
               SHARE THIS{" "}
               <span>
-                <ChevronUp />
+                <Share />
               </span>
             </button>
             <button className="btn2" onClick={Discuite}>
-              discutez en{" "}
+              DISCUTEZ EN{" "}
               <span>
-                <ChevronRight />
+                {/* <Phone /> */}
+                <img src={whatsapp} alt="loading"/>
               </span>
             </button>
             <button className="btn2" onClick={AddProduct}>
               ADD TO CART{" "}
               <span>
-                <ChevronRight />
+                <ShoppingCart />
               </span>
             </button>
           </div>
@@ -953,13 +958,13 @@ function ProductDet() {
               <div className="top">
                 <h3>Partagez ce Lien</h3>
                 <span>
-                  <X onClick={() => setPoppup2(!poppup2)} />
+                  <X style={{color:'#515c6f'}} onClick={() => setPoppup2(!poppup2)} />
                 </span>
               </div>
               <div className="CodeClef">
                 <div className="group">
-                  <span onClick={handleCopyClick}>Copier :</span>
-                  <input type="text" defaultValue={window.location.href} />
+                  <span onClick={handleCopyClick}><Copy/> Copier :</span>
+                  <input type="text" value={window.location.href} />
                 </div>
                 <div className="group">
                   <span>Via whatsapp :</span>

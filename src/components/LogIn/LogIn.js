@@ -40,23 +40,23 @@ function LogIn({ chg, creer }) {
   const regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const regexPhone = /^[0-9]{8,}$/;
 
-  const chargeEmail = () => {
-    const a = document.querySelector(".LogIn .right input[type='email']").value;
-    setEmail(a);
-  };
+  // const chargeEmail = () => {
+  //   const a = document.querySelector(".LogIn .right input[type='email']").value;
+  //   setEmail(a);
+  // };
 
-  const chargePassword = () => {
-    const a = document.querySelector(
-      ".LogIn .right input[type='password']"
-    ).value;
-    setPassword(a);
-  };
-  const chargePhoneNumber = () => {
-    const a = document.querySelector(
-      ".LogIn .right input[type='number']"
-    ).value;
-    setPhoneNumber(a);
-  };
+  // const chargePassword = () => {
+  //   const a = document.querySelector(
+  //     ".LogIn .right input[type='password']"
+  //   ).value;
+  //   setPassword(a);
+  // };
+  // const chargePhoneNumber = () => {
+  //   const a = document.querySelector(
+  //     ".LogIn .right input[type='number']"
+  //   ).value;
+  //   setPhoneNumber(a);
+  // };
 
   const navigue = new useNavigate();
   const connect = async () => {
@@ -96,7 +96,7 @@ function LogIn({ chg, creer }) {
       password: password,
     };
 
-    // console.log(loginData);
+    console.log(loginData);
 
     try {
       const response = await axios.post(`${BackendUrl}/login`, loginData, {
@@ -108,6 +108,10 @@ function LogIn({ chg, creer }) {
         handleAlert(response.data.message);
         setIsloading(false);
         chg("oui");
+        setEmail('')
+        setPassword('')
+        setPhoneNumber('')
+        console.log(response.data)
         const fromCartParam = new URLSearchParams(location.search).get(
           "fromCart"
         );
@@ -176,7 +180,7 @@ function LogIn({ chg, creer }) {
                   <input
                     type="email"
                     value={email}
-                    onChange={chargeEmail}
+                    onChange={(e)=>setEmail(e.target.value)}
                     placeholder="janedoe123@email.com"
                   />
                 </div>
@@ -190,8 +194,9 @@ function LogIn({ chg, creer }) {
                   <label>Phone Number</label>
                   <input
                     type="number"
-                    placeholder="+227 87727501"
-                    onChange={chargePhoneNumber}
+                    placeholder="+227 87701000"
+                    defaultValue={phoneNumber}
+                    onChange={(e)=>setPhoneNumber(e.target.value)}
                   />
                 </div>
               </li>
@@ -203,7 +208,7 @@ function LogIn({ chg, creer }) {
               <div className="right">
                 <label>Password</label>
                 <input
-                  onChange={chargePassword}
+                  onChange={(e)=>setPassword(e.target.value)}
                   value={password}
                   type="password"
                   placeholder="*******************"
@@ -231,7 +236,7 @@ function LogIn({ chg, creer }) {
           <div></div>
         </div>
       )}
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 }

@@ -30,13 +30,19 @@ function CartCheckout({ op }) {
   const [allProducts, setAllProduits] = useState(null);
 
   const [produits, setProduits] = useState(null);
-
+  const navigue2 = useNavigate();
   // console.log("rdraaa", a);
   useEffect(() => {
     const local = localStorage.getItem("panier");
 
     if (local) {
       setProduits(JSON.parse(local));
+    }
+    if (local=== null || JSON.parse(local)?.length === 0) {
+
+
+      navigue2('/home')
+      return;
     }
   }, []);
 
@@ -171,18 +177,20 @@ function CartCheckout({ op }) {
 
   const Plasser = () => {
     const local = localStorage.getItem("panier");
+
     setLoading(true);
-    if (JSON.parse(local).length === 0) {
+    if (local=== null || JSON.parse(local)?.length === 0) {
       handleAlertwar("Aucun produit n'est selectionner.");
       setLoading(false);
+      navigue('/home')
       return;
     }
-    if (phone.length <= 0) {
+    if (phone?.length <= 0) {
       setLoading(false);
       navigue("/More/shipping_address?fromCart=true");
       return;
     }
-    if (choix.length <= 0) {
+    if (choix?.length <= 0) {
       setLoading(false);
       navigue("/More/payment_method?fromCart=true");
 

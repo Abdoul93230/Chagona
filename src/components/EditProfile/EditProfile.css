@@ -7,9 +7,11 @@
 .EditProfile .img{
     width: 130px;
     height: 130px;
-    margin: 10px auto;
+    margin-bottom: 0px;
+    margin-left: 10%;
     border-radius: 50%;
     margin-top: 20px;
+
 }
 
 .EditProfile .img img{
@@ -24,6 +26,12 @@
     width: 100%;
     height: auto;
     padding-bottom: 80px;
+    margin-top: 70px;
+    padding-top: 50px;
+    border-radius: 20px;
+    border-top: 2px solid #515C6F;
+    border-bottom: 2px solid #515C6F;
+
 }
 
 .EditProfile form label{
@@ -36,6 +44,7 @@
     font-family: serif;
     color: #515C6F;
     margin: 5px auto;
+    margin-bottom: 10px;
 
 }
 .EditProfile form label span{
@@ -64,7 +73,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 
