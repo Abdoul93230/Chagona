@@ -30,6 +30,7 @@
     color: #515C6F;
     text-align: left;
     margin-bottom: 38px;
+    margin-top: 20px;
 }
 
 
@@ -40,14 +41,14 @@
     padding: 8px 10px;
     background-color: white;
     list-style-type: none;
-    margin-top: 15px;
+    margin-top: 30px;
     border-radius: 8px;
 }
 .Mores ul .li{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 20px 10px;
     color: #515C6F;
     text-decoration: none;
     text-transform: capitalize;

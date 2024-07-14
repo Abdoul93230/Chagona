@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MessageCircle, Menu, ChevronRight, ShoppingCart } from "react-feather";
+import { MessageCircle, Menu, ChevronRight, ShoppingCart,UserPlus,Home,DollarSign,Bell, CreditCard, Lock, HelpCircle, Info } from "react-feather";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./Mores.css";
@@ -66,24 +66,24 @@ function Mores({ chg }) {
 
       <ul>
         {[
-          { name: "shipping address", link: "/More/shipping_address" },
-          { name: "payment method", link: "/More/payment_method" },
+          { name: "shipping address", link: "/More/shipping_address",icon:<Home/> },
+          { name: "payment method", link: "/More/payment_method",icon:<CreditCard/> },
           {
             name: "Notification settings",
             // link: "/More/Notification_settings",
-            link: "/PageNotRady",
+            link: "/PageNotRady",icon:<Bell/>
           },
-          { name: "privacy notice", link: "/More/privacy_notice" },
+          { name: "privacy notice", link: "/More/privacy_notice",icon:<Lock/> },
           {
             name: "frequently asked questions",
-            link: "/More/frequently_asked_questions",
+            link: "/More/frequently_asked_questions",icon:<HelpCircle/>
           },
-          { name: "legal infomation", link: "/More/legal_infomation" },
+          { name: "legal infomation", link: "/More/legal_infomation",icon:<Info/> },
         ].map((param, index) => {
           return (
             <Link to={param.link} className="li" key={index}>
               <span>
-                <Menu />
+              {param.icon}
               </span>
               <ol>
                 {param.name}{" "}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import axios from "axios";
-import { ChevronRight, Menu, MessageCircle, ShoppingCart } from "react-feather";
+import { ChevronRight, Menu, MessageCircle, Plus, ShoppingCart, UserPlus,HelpCircle,ShoppingBag,PlusSquare,Smartphone } from "react-feather";
 import image1 from "../../Images/icon_user.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -136,20 +136,20 @@ function Profile() {
 
         <ul>
           {[
-            { name: "Invite Friends", link: "/Profile/Invite_Friends" },
-            { name: "customer suport", link: "/Profile/customer_suport" },
-            { name: "My Orders", link: "/Order" },
-            { name: "make suggestion", link: "/Profile/make_suggestion" },
+            { name: "Invite Friends", link: "/Profile/Invite_Friends",icon:<UserPlus/> },
+            { name: "customer suport", link: "/Profile/customer_suport",icon:<HelpCircle/>  },
+            { name: "My Orders", link: "/Order",icon:<ShoppingBag/>  },
+            { name: "make suggestion", link: "/Profile/make_suggestion",icon:<PlusSquare/>  },
           ].map((param, index) => {
             return (
               <Link to={`${param.link}`} className="li" key={index}>
                 <span>
-                  <Menu />
+                  {param.icon}
                 </span>
                 <ol>
                   {param.name}{" "}
                   <span>
-                    <ChevronRight />
+                    <ChevronRight  />
                   </span>
                 </ol>
               </Link>
@@ -159,10 +159,10 @@ function Profile() {
 
         <ul>
           {[
-            { name: "Invite Friends", link: "Invite_Friends" },
-            { name: "customer suport", link: "customer_suport" },
-            { name: "rate our app", link: "rate_our_app" },
-            { name: "make suggestion", link: "make_suggestion" },
+            { name: "Invite Friends", link: "Invite_Friends",icon:<UserPlus/> },
+            { name: "customer suport", link: "customer_suport",icon:<HelpCircle/> },
+            { name: "rate our app", link: "rate_our_app",icon:<Smartphone/> },
+            { name: "make suggestion", link: "make_suggestion",icon:<PlusSquare/> },
           ].map((param, index) => {
             return (
               <Link
@@ -175,12 +175,12 @@ function Profile() {
                 key={index}
               >
                 <span>
-                  <Menu />
+                {param.icon}
                 </span>
                 <ol>
                   {param.name}{" "}
                   <span>
-                    <ChevronRight />
+                    <ChevronRight  />
                   </span>
                 </ol>
               </Link>
