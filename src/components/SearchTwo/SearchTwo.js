@@ -222,7 +222,7 @@ function SearchTwo({ op, allCategories, allProducts }) {
           <div className="right">
             <ul>
               {DATA_Categories?.map((param, index) => {
-                if (index > 6 || param.name === "tous") {
+                if (index > 6 || param.name === "all") {
                   return null;
                 }
                 return (

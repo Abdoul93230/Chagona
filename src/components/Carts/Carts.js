@@ -156,7 +156,7 @@ function Carts({ op }) {
                 />
                 <div className="det">
                   <h3>
-                    {allProducts?.find((item) => item._id === param.id)?.name}
+                    {allProducts?.find((item) => item._id === param.id)?.name.slice(0, 20)}...
                   </h3>
                   {allProducts?.find((item) => item._id === param.id)
                     ?.prixPromo > 0 ? (
@@ -215,7 +215,7 @@ function Carts({ op }) {
             <div className="left">
               <h2>Total</h2>
               <h3>cfa {total}</h3>
-              <h4>Free Bomestic shipping</h4>
+              <h4>{total>1000?'shipping : 1000 Niamey':total>20000?"shipping : 1500 Niamey":"Free Bomestic shipping"}</h4>
             </div>
             <div className="right">
               <button

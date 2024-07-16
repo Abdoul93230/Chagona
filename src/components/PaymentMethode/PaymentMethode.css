@@ -134,7 +134,7 @@
     border: 2px solid #515C6F;
     border-radius: 4px;
     background-color: transparent;
-    
+
 }
 
 .PaymentMethode .carte form input[type="submit"]{
@@ -162,7 +162,7 @@
     border-radius: 50%;
     background-color: #FF6969;
     margin: 10px auto;
-    
+
 }
 
 .PaymentMethode .domicile button{
@@ -178,12 +178,14 @@
     width: 100%;
     height: auto;
     margin-top: 20px;
+    /* border: 2px solid blue; */
+    margin-top: 50px;
 }
 
 .PaymentMethode .mobile h3{
     color: #515C6F;
     font-weight: bolder;
-    margin: 15px auto;    
+    margin: 15px auto;
 }
 
 .PaymentMethode .mobile  form{
@@ -213,20 +215,66 @@
     border-radius: 4px;
 }
 
-.PaymentMethode .mobile  form select{
+.PaymentMethode .mobile  form .num{
     border: 2px solid #515C6F;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 2px;
+    margin: 10px auto;
+    margin-top: 20px;
+}
+.PaymentMethode .mobile .MC{
+    /* border: 2px solid crimson; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 5px;
+    margin-bottom: 20px;
+}
+.PaymentMethode .mobile .MC h3{
+    text-align: left;
+    /* border: 2px solid blue; */
+    display: block;
+    margin-left: 0px;
+}
+.PaymentMethode .mobile .MC .img{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid blue; */
+    width: 150px;
+
+}
+.PaymentMethode .mobile .MC .img img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.PaymentMethode .mobile  form .num select{
+    border: none;
     border-radius: 4px;
     background-color: transparent;
+    width: 20%;
+}
+.PaymentMethode .mobile  form .num input{
+    width: 80%;
+    border: none;
+    border-left: 2px solid #515C6F;
+    border-radius: 0px;
+    outline: none;
 }
 
 
 .PaymentMethode .mobile  form .btn{
+    display: block;
     width: 100%;
     height: auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-top: 25px;
+
 }
 
 .PaymentMethode .mobile  form .btn input{
@@ -235,4 +283,5 @@
     color: white;
     border: none;
     border-radius: 5px;
+    width: 100%;
 }

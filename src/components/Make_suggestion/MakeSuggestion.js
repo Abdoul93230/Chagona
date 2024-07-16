@@ -82,8 +82,8 @@ function MakeSuggestion() {
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
+      <button onClick={() => envoyer()}>Envoyer !</button>
       </form>
-      <button onClick={() => envoyer()}>Submit</button>
       <ToastContainer />
     </div>
   );

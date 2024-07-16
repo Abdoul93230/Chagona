@@ -15,7 +15,8 @@ function CustomerSuport() {
           87727501
         </h5>
       </div>
-      <h1>Tutoriel Sur l'utilisation du site</h1>
+      {/* <h1>Tutoriel Sur l'utilisation du site</h1> */}
+      <h2>Seras Bientot Disponible !</h2>
     </div>
   );
 }

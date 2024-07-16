@@ -48,6 +48,8 @@ function OrderDet({ allProducts }) {
 
   return (
     <div className="OrderDet">
+      <div className="Top">
+
       <span className="ret">
         <ChevronLeft onClick={() => navigue("/Order")} className="i" />
       </span>
@@ -58,6 +60,7 @@ function OrderDet({ allProducts }) {
       <h2>
         Total <span>{details?.prix}</span> fcfa
       </h2>
+      </div>
       <div style={{ marginBottom: "60px" }} className="conteneur">
         {produits?.map((param, index) => {
           return (
@@ -77,8 +80,8 @@ function OrderDet({ allProducts }) {
                     <span>
                       {
                         allProducts?.find((item) => item._id === param.produit)
-                          ?.name
-                      }
+                          ?.name.slice(0, 20)
+                      } ...
                     </span>
                   </h6>
                   <h6>
@@ -113,13 +116,20 @@ function OrderDet({ allProducts }) {
                           (item) =>
                             item.external_reference === details.reference
                         ).status
-                      : "None"}
+                      : "En cours"}
                   </span>
                 </p>
               )}
             </div>
           );
         })}
+      </div>
+      <div className="Status">
+       {
+        allPayment.find(
+          (item) => item.external_reference === details.reference
+        )?.status ==='Failed'?<div className="btnS">Ressayer le Payment</div>:<></>
+       }
       </div>
       {details?.statusLivraison === "recu" ? (
         <button

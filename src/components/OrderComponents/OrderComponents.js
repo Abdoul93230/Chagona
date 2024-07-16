@@ -9,6 +9,7 @@ function OrderComponents() {
   const navigue = useNavigate();
   const [myAllComande, setMyAllCommandes] = useState(null);
   const [allPayment, setAllPayment] = useState([]);
+  const [rond, setRond] = useState(false);
   const details = (index) => {
     navigue(`/Order/${index}`);
   };
@@ -47,12 +48,16 @@ function OrderComponents() {
   }
 
   useEffect(() => {
+    setRond(true)
     axios
       .get(`${BackendUrl}/getCommandesByClefUser/${a.id}`)
       .then((res) => {
+        setRond(false)
         setMyAllCommandes(res.data.commandes);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {console.log(error)
+        setRond(false)
+      });
   }, []);
 
   useEffect(() => {
@@ -72,6 +77,16 @@ function OrderComponents() {
     (param) => param.statusLivraison === "recu"
   )?.length;
   // ... (ajoutez des variables pour les autres options ici, si nécessaire)
+
+  const spinnerStyle = {
+    border: "4px solid rgba(0, 0, 0, 0.1)",
+    borderTop: "4px solid #FFF",
+    borderRadius: "50%",
+    width: "30px",
+    height: "30px",
+    animation: "spin 1s linear infinite",
+    margin: "auto",
+  };
 
   return (
     <div className="OrderComponents">
@@ -112,7 +127,7 @@ function OrderComponents() {
       </ul>
       <div className="conteneur">
         {/* Affichage de l'option "En cours" */}
-        {options === "En cours" ? (
+        {options === "En cours" && rond === false ? (
           <div className="Encours">
             {nbrCommandesEnCours === 0 ? (
               <div className="vide">Aucune Commande En cours!</div>
@@ -148,7 +163,7 @@ function OrderComponents() {
                 ))
             )}
           </div>
-        ) : options === "Recu" ? (
+        ) : options === "Recu" && rond === false ? (
           <div className="Recu">
             {nbrCommandesRecues === 0 ? (
               <div className="vide">Aucune Commande Recue!</div>
@@ -185,7 +200,11 @@ function OrderComponents() {
             )}
           </div>
         ) : (
-          <></>
+          <>
+          {
+                    rond?<div style={spinnerStyle}></div>:<></>
+                  }
+          </>
         )}
         {/* Ajoutez ici le contenu pour les autres options */}
       </div>

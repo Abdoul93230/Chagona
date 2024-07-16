@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./PaymentMethode.css";
-import { ChevronLeft, Home, PhoneOutgoing } from "react-feather";
+import { ChevronLeft, Home, } from "react-feather";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { handleAlert, handleAlertwar } from "../../App";
 import Visa from "../../Images/visalogo-removebg-preview.png";
 import Master from "../../Images/logo-master-card-removebg-preview.png";
 import Phone from "../../Images/Phone1-removebg-preview.png";
+import Airtel from "../../Images/Airtel_logo-01.png"
+import Moov from "../../Images/Moov2.png"
+import Zamani from "../../Images/Zamani1.png"
+import Mtn from "../../Images/Mtn1.png"
 const BackendUrl = process.env.REACT_APP_Backend_Url;
 function PaymentMethode() {
   const [choix, setChoix] = useState("");
@@ -15,6 +19,8 @@ function PaymentMethode() {
   const [expiredCard, setExpiredCard] = useState("");
   const [operateur, setOperateur] = useState("");
   const [cvc, setCvc] = useState("");
+  const [onSubmit, setOnSubmit] = useState(false);
+  const [rond, setRond] = useState(false);
   const regexPhone = /^[0-9]{8,}$/;
   const location = useLocation();
   const navigue = useNavigate();
@@ -24,6 +30,7 @@ function PaymentMethode() {
     axios
       .get(`${BackendUrl}/getMoyentPaymentByClefUser/${a.id}`)
       .then((res) => {
+        // console.log(res.data.paymentMethod)
         if (res.data.paymentMethod.type) {
           setChoix(res.data.paymentMethod.type);
         }
@@ -37,7 +44,17 @@ function PaymentMethode() {
           setNumero(res.data.paymentMethod.phone);
         }
         if (res.data.paymentMethod.operateur) {
-          setOperateur(res.data.paymentMethod.operateur);
+          if(res.data.paymentMethod.operateur==='Airtel')
+            setOperateur('227');
+          if(res.data.paymentMethod.operateur==='Orange')
+            setOperateur('227');
+          if(res.data.paymentMethod.operateur==='Moov')
+            setOperateur('227');
+          if(res.data.paymentMethod.operateur==='227')
+            setOperateur('227');
+          if(res.data.paymentMethod.operateur==='229')
+            setOperateur('229');
+
         }
         if (res.data.paymentMethod.expire) {
           setExpiredCard(res.data.paymentMethod.expire);
@@ -46,6 +63,16 @@ function PaymentMethode() {
       .catch((error) => {});
   }, []);
 
+  const spinnerStyle = {
+    border: "4px solid rgba(0, 0, 0, 0.1)",
+    borderTop: "4px solid #FFF",
+    borderRadius: "50%",
+    width: "30px",
+    height: "30px",
+    animation: "spin 1s linear infinite",
+    margin: "auto",
+  };
+
   function goBack() {
     window.history.back();
   }
@@ -53,7 +80,7 @@ function PaymentMethode() {
   const envoyer = (e) => {
     e.preventDefault();
     const data = { clefUser: a.id };
-
+    setOnSubmit(true)
     if (!choix) {
       handleAlertwar("veuiller choisir un moyen de payment.");
       return;
@@ -100,60 +127,63 @@ function PaymentMethode() {
       data.option = option;
       if (!regexPhone.test(numero.toString())) {
         return handleAlertwar("forma du numero non valid!");
-      } else if (numero.length < 8) {
+      } else if (numero.length < 8 && operateur==="227") {
+
         handleAlertwar(
-          "Le numéro de l'utilisateur doit contenir au moins 8 chiffres"
+          "Le numéro de l'utilisateur doit contenir au moins 8 chiffres Niger"
         );
         return;
-      } else if (numero.length === 8) {
+      }else if (numero.length < 8 && operateur==="229") {
+        console.log(2)
+        handleAlertwar(
+          "Le numéro de l'utilisateur doit contenir au moins 8 chiffres Benin"
+        );
+        return;
+      }
+       else if (numero.length === 8) {
+
         // Ajouter le préfixe "227" au début du numéro
-        const userNumber = "227" + numero;
+        const userNumber = operateur==="227"? "227" + numero :"229" + numero;
         setNumero(userNumber);
         data.numero = userNumber;
       } else if (numero.length === 11) {
+        data.numero = operateur + numero.substring(3, numero.length);
         // Vérifier si le préfixe est "227"
-        if (numero.substring(0, 3) !== "227") {
+        if (numero.substring(0, 3) !== "227" && numero.substring(0, 3) !== "229") {
           handleAlertwar(
-            "Le préfixe du numéro de l'utilisateur doit être '227'"
+            "Le préfixe du numéro de l'utilisateur doit être '227 ou 229'"
           );
           return;
         }
       } else if (numero.length > 11) {
+
         handleAlertwar(
           "Le numéro doit contenir 8, ou 11 chiffres avec l'identifiant"
         );
         return;
       } else if (numero.length > 8 && numero.length < 11) {
+
         handleAlertwar(
           "Le numéro doit contenir 8, ou 11 chiffres avec l'identifiant"
         );
         return;
-      } else {
+      }else{
+
         data.numero = numero;
       }
 
-      if (
-        operateur === null ||
-        operateur === "choisir" ||
-        operateur.length <= 0
-      ) {
-        handleAlertwar("veuiller choisir votre operateur.");
-        return;
-      }
-      data.operateur = operateur;
+      data.operateur = operateur==="227"? '227' : '229';
     } else if (choix === "Payment a domicile") {
       const option = "Payment a domicile";
       data.option = option;
     } else {
     }
 
-    // const option = "Payment a domicile";
-    // data.option = option;
-
     axios
       .post(`${BackendUrl}/createMoyentPayment`, data)
       .then((res) => {
         handleAlert(res.data.message);
+        setOnSubmit(false)
         const fromCartParam = new URLSearchParams(location.search).get(
           "fromCart"
         );
@@ -163,10 +193,26 @@ function PaymentMethode() {
         } else {
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setOnSubmit(false)
+        console.log(error)});
 
     // console.log(data);
   };
+
+  const optionS = operateur === "227"
+    ? [
+        { value: "227", label: "227" },
+        { value: "229", label: "229" }
+      ]
+    : [
+        { value: "229", label: "229" },
+        { value: "227", label: "227" }
+      ];
+
+      const handleChange = (e) => {
+        setOperateur(e.target.value);
+      };
 
   const options =
     choix === "master Card" ? (
@@ -211,7 +257,10 @@ function PaymentMethode() {
               />
             </div>
           </div>
-          <input type="submit" onSubmit={envoyer} value="Submit" />
+          {
+                    onSubmit?<div style={spinnerStyle}></div>:<input type="submit" onSubmit={envoyer} value="Submit" />
+                  }
+
         </form>
       </div>
     ) : choix === "Visa" ? (
@@ -257,19 +306,35 @@ function PaymentMethode() {
               />
             </div>
           </div>
-          <input type="submit" onSubmit={envoyer} value="Submit" />
+          {
+                    onSubmit?<div style={spinnerStyle}></div>:<input type="submit" onSubmit={envoyer} value="Submit" />
+                  }
+
         </form>
       </div>
     ) : choix === "Payment a domicile" ? (
       <div className="domicile">
         <h3>Payment a domicile</h3>
-        <button onClick={envoyer}>Valide</button>
+        {
+                    onSubmit?<div style={spinnerStyle}></div>:<button onClick={envoyer}>Valide</button>
+                  }
+
       </div>
     ) : choix === "Mobile Money" ? (
       <div className="mobile">
+        <div className="MC">
+
         <h3>Mobile Money</h3>
+
+<div className="img">
+<img src={Airtel} alt="loading"/>
+<img src={Moov} alt="loading"/>
+<img src={Zamani} alt="loading"/>
+<img src={Mtn} alt="loading"/>
+</div>
+</div>
         <form onSubmit={envoyer}>
-          <label htmlFor="operateur">
+          {/* <label htmlFor="operateur">
             Operateur Mobile:{operateur ? operateur : ""}
           </label>
           <select
@@ -282,25 +347,49 @@ function PaymentMethode() {
             <option>Airtel</option>
             <option>Orange</option>
             <option>Moov</option>
+          </select> */}
+
+
+          <label htmlFor="number">Compte Mobile Money</label>
+
+          <div className="num">
+          <select
+
+              onChange={handleChange}
+
+            id="operateur"
+          >
+            {optionS.map(option => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+
           </select>
-          <label htmlFor="number">Phone Number</label>
+
           <input
             type="number"
-            value={numero}
+            value={numero.length>8&&(numero.substring(0, 3)==='227' || numero.substring(0, 3)==='229')?numero.substring(3, numero.length):numero}
             onChange={(e) => {
               setNumero(e.target.value);
             }}
             placeholder="Tape Here"
             id="number"
           />
+          </div>
           <div className="btn">
-            <input type="submit" onSubmit={envoyer} value="Submit" />
+          {
+                    onSubmit?<div style={spinnerStyle}></div>:<input type="submit" onSubmit={envoyer} value="Submit" />
+                  }
+
           </div>
         </form>
       </div>
     ) : (
       <></>
     );
+
+
 
   return (
     <div className="PaymentMethode">

@@ -17,6 +17,7 @@ function ShippingAdress() {
   const [plus, setPlus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigue = useNavigate();
+  const [rond, setRond] = useState(false);
   const location = useLocation();
   function goBack() {
     window.history.back();
@@ -79,10 +80,11 @@ function ShippingAdress() {
     if (plus.length !== 0) {
       obj.description = plus;
     }
-
+    setRond(true)
     axios
       .post(`${BackendUrl}/createOrUpdateAddress`, obj)
       .then((shipping) => {
+        setRond(false)
         setIsSubmitting(false);
         handleAlert(shipping.data.message);
         const fromCartParam = new URLSearchParams(location.search).get(
@@ -107,12 +109,22 @@ function ShippingAdress() {
           });
       })
       .catch((error) => {
+        setRond(false)
         if (error.response.status === 400) {
           setIsSubmitting(false);
           handleAlertwar(error.response.data.err);
         }
         console.log(error);
       });
+  };
+  const spinnerStyle = {
+    border: "4px solid rgba(0, 0, 0, 0.1)",
+    borderTop: "4px solid #FFF",
+    borderRadius: "50%",
+    width: "30px",
+    height: "30px",
+    animation: "spin 1s linear infinite",
+    margin: "auto",
   };
   return (
     <div className="ShippingAdress">
@@ -193,7 +205,10 @@ function ShippingAdress() {
           color: isSubmitting ? "#515C6F" : "#fff",
         }}
       >
-        Submit
+        {
+                    rond?<div style={spinnerStyle}></div>:'Submit'
+                  }
+
       </button>
     </div>
   );

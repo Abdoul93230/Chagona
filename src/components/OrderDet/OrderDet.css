@@ -6,6 +6,17 @@
     position: relative;
 
 }
+.OrderDet .Top{
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+    top: 0px;
+    left: 0px;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 
 .OrderDet .ret{
     width: 100%;
@@ -13,6 +24,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
 }
 
 .OrderDet .ret .i{
@@ -31,7 +43,7 @@
     text-align: right;
     color: #515C6F;
     text-transform: capitalize;
-    
+
 }
 
 .OrderDet .conteneur{
@@ -42,6 +54,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    /* border: 2px solid crimson; */
+    margin-top: 130px;
 }
 .OrderDet .conteneur .carde{
     width: 320px;
@@ -67,14 +81,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+
 }
 .OrderDet .conteneur .carde .t img{
     width: 40%;
     height: 120px;
     background-color: white;
     border-radius:8px ;
-    
+
 }
 
 .OrderDet .conteneur .carde .t .det{

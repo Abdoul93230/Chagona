@@ -153,7 +153,7 @@ function InviteFriends() {
             setMessage(e.target.value);
           }}
         />
-        <label htmlFor="email">Email de votre ami</label>
+        <label htmlFor="email">Email de votre amie :</label>
         <input
           required
           type="email"
@@ -173,9 +173,10 @@ function InviteFriends() {
             setNumber(e.target.value);
           }}
         /> */}
-      </form>
       <button onClick={envoyer}>Submit</button>
+      </form>
       <div className="whatsapp">
+        <span>Via whatsapp</span>
         <img alt="loadin" src={whatsapp} onClick={shareURL} />
       </div>
       <ToastContainer />
