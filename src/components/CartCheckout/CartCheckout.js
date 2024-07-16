@@ -10,6 +10,7 @@ const BackendUrl = process.env.REACT_APP_Backend_Url;
 function CartCheckout({ op }) {
   const [choix, setChoix] = useState("");
   const [numero, setNumero] = useState("");
+  const [rond, setRond] = useState(false);
   const [numeroCard, setNumeroCard] = useState("");
   const [expiredCard, setExpiredCard] = useState("");
   const [operateur, setOperateur] = useState("");
@@ -114,6 +115,7 @@ function CartCheckout({ op }) {
       alert("code invalide.");
       return;
     }
+    setRond(true)
     // const encodedHashedCode = encodeURIComponent(codePro);
     axios
       .get(`${BackendUrl}/getCodePromoByHashedCode`, {
@@ -123,6 +125,7 @@ function CartCheckout({ op }) {
       })
       .then((code) => {
         // console.log(code);
+        setRond(false)
         if (code.data.data.isValide) {
           setCodeValide(code.data.data);
           // console.log(code.data.data);
@@ -136,7 +139,17 @@ function CartCheckout({ op }) {
       .catch((error) => {
         handleAlertwar("ce code de promo n'exite pas");
         setPoppup(!poppup);
+        setRond(false)
       });
+  };
+  const spinnerStyle = {
+    border: "4px solid rgba(0, 0, 0, 0.1)",
+    borderTop: "4px solid #FFF",
+    borderRadius: "50%",
+    width: "30px",
+    height: "30px",
+    animation: "spin 1s linear infinite",
+    margin: "auto",
   };
 
   const calculateTotalPrice = () => {
@@ -473,7 +486,8 @@ function CartCheckout({ op }) {
             ) : (
               ""
             )}
-            <h5>Free Domestic Shipping</h5>
+            {/* <h5>Free Domestic Shipping</h5> */}
+            <h5>{total>1000?'shipping : 1000 Niamey':total>20000?"shipping : 1500 Niamey":"Free Bomestic shipping"}</h5>
           </div>
           <button
             onClick={() => {
@@ -503,7 +517,11 @@ function CartCheckout({ op }) {
                   value={codePro}
                   onChange={(e) => setCodPro(e.target.value)}
                 />
-                <button onClick={ValidCode}>Valider</button>
+                <button onClick={ValidCode}>
+                  {
+                    rond?<div style={spinnerStyle}></div>:'Valider'
+                  }
+                  </button>
               </div>
             </div>
           </div>

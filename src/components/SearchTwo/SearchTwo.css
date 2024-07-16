@@ -12,6 +12,8 @@
     padding: 10px;
     padding-top: 30px;
     display: flex;
+    position: fixed;
+    top: 0px;
     justify-content: space-between;
     flex-direction: column;
     box-shadow: 0px 10px 10px #63676e42;
@@ -27,7 +29,7 @@
     justify-content: space-between;
     align-items: center;
     /* border: 1px solid crimson; */
-    
+
 }
 .SearchTwo .top .left .l{
     color: #FF6969;
@@ -126,7 +128,7 @@
 
 .SearchTwo .bottom{
     width: 100%;
-    height: 460px;
+    height: auto;
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
@@ -134,8 +136,8 @@
     margin-top: 5px;
     padding: 2px;
     padding-bottom: 8px;
-    /* margin-top: 50px; */
-    /* margin-bottom: 50px; */
+    margin-top: 140px;
+    margin-bottom: 55px;
     /* border: 2px solid blue; */
     overflow: auto;
 }
@@ -147,12 +149,16 @@
     border-radius: 7px;
     margin: 6px 5px;
     position: relative;
-    
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
 }
 .SearchTwo .bottom .carde img{
     width: 100%;
     height: 74%;
     margin-top: 3px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .SearchTwo .bottom .carde h6{
@@ -223,7 +229,7 @@
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    
+
     position: absolute;
     bottom: 10%;
     left: 5%;
@@ -258,7 +264,7 @@
 .SearchTwo .fil .conteneur ul{
     width: 100%;
     height: auto;
-    
+
 }
 
 .SearchTwo .fil .conteneur ul li{
@@ -369,13 +375,26 @@
     background-color: #ff69694d;
     z-index: -100;
     width: 100%;
-    
+
 }
 
 
 
 
+@media screen and (min-width:410px){
+    .SearchTwo .top .left input[type="search"]{
+        width: 300px;
+        margin-left: 30%;
+    }
 
+}
+@media screen and (min-width:668px){
+    .SearchTwo .top .left input[type="search"]{
+        width: 320px;
+        margin-left: 30%;
+    }
+
+}
 
 @media screen and (min-width:700px) {
     /* .SearchTwo .top .left{
@@ -395,7 +414,7 @@
         width: 30%;
         margin-left: 70%;
     }
-    
+
 }
 
 @media screen and (min-width:900px){
