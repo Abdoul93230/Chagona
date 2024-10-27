@@ -119,7 +119,7 @@ function Home() {
         {/* <ProductOne allProducts={allProducts} /> */}
         <ConteProduits
           products={getRandomElementsSix(
-            DATA_Products.filter((item) =>
+            DATA_Products?.filter((item) =>
               DATA_Types.some(
                 (type) =>
                   type.clefCategories === clefElectronique?._id &&
