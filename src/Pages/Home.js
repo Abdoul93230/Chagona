@@ -144,7 +144,7 @@ function Home() {
 
         <Galeries products={DATA_Products} />
 
-        {DATA_Categories.map((param, index) => {
+        {DATA_Categories?.map((param, index) => {
           if (
             getRandomElements(
               DATA_Products.filter(
