@@ -179,7 +179,7 @@ function App() {
   }, []);
 
   const spinnerStyle = {
-    border: "4px solid rgba(0, 0, 0, 0.1)",
+    border: "4px solid rgba(0, 0, 0, 0.15)",
     borderTop: "4px solid #FF6969",
     borderRadius: "50%",
     width: "30px",
